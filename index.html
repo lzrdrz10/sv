@@ -1,0 +1,508 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HOME</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+ 
+  <link rel="stylesheet" href="HOME/style.css">
+
+
+
+</head>
+<body class="text-white min-h-screen overflow-x-hidden">
+
+<section id="dynamicHero" class="relative w-full overflow-hidden h-[60vh] md:h-[70vh]">
+ 
+</section>
+
+<header class="fixed top-0 left-0 w-full z-30 px-4 py-3 bg-gradient-to-b from-black/60 to-transparent backdrop-blur-sm flex items-center justify-between">
+
+  <div id="menuButtonContainer" class="relative z-50 w-8 h-8">
+<button id="btnUsuario" aria-label="Perfil Usuario" 
+  style="
+    position: fixed; top: 1rem; left: 1rem; 
+    width: 48px; height: 48px; border-radius: 50%; 
+    overflow: hidden; border: 2px solid #e50914; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    padding: 0; background: transparent; cursor: pointer;"
+>
+  <img id="iconoImg" alt="Icono usuario" style="width:100%; height:100%; object-fit: cover;" />
+</button>
+  </div>
+
+  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3dK3-XAKrEia-lWmiUqAYRfFQ1lR9eJX6ZZH8e_vHf576qf9GJjIWBW9Jg5LsilXX7WO2MOEkg5gzc4pESziaPeMJ9ws9mwtCDdp3p_17D0e0Uop_ZxavwwJeNLBvoyZJ0cxTKQpjzrJIR6LjJslB24tj-77AYrRCacQ3F2S2VPoXpPzPhM1zndxyd1Rg/s3307/B64D5386-DCA4-410B-A0A6-6ACB19D0A06F.png" alt="Logo" class="h-10 object-contain" />
+<a href="https://zinecia.github.io/Buscador/" aria-label="Buscar" class="text-white bg-blue-500 hover:bg-pink-600 text-xl px-3 py-2 rounded transition">
+  <i class="fas fa-search"></i>
+</a>
+
+
+</header>
+
+
+<!-- Modal info -->
+<div id="infoModal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden">
+  <div class="bg-white text-black max-w-md w-full rounded-lg shadow-lg p-6 relative mx-4">
+    <button id="closeModal" class="absolute top-2 right-2 text-black hover:text-red-500 text-xl">&times;</button>
+    <h3 class="text-lg font-semibold mb-2">Sinopsis</h3>
+    <p id="modalDescription" class="text-sm leading-relaxed"></p>
+  </div>
+</div>
+
+<section class="mt-2 px-2">
+  <div
+    class="flex space-x-2 overflow-x-auto py-2 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900"
+    aria-label="Logos de servicios de streaming"
+  >
+    <a href="https://cuentaappcreator.github.io/primevideo/" target="_blank" class="flex-shrink-0">
+      <img
+        class="rounded w-24 h-14 object-cover"
+        src="https://images.bhaskarassets.com/web2images/521/2023/06/16/ezgifcom-video-to-gif-2023-06-16t155541854_1686911269.gif"
+        alt="Prime Video"
+      />
+    </a>
+    <a href="https://cuentaappcreator.github.io/HBOMAX/" target="_blank" class="flex-shrink-0">
+      <img
+        class="rounded w-24 h-14 object-cover"
+        src="https://images.squarespace-cdn.com/content/v1/5796c205d1758ee6066cd901/c143c8ab-3880-4b97-9680-cc3b03ecb196/RETEN_01_1.gif"
+        alt="HBO Max"
+      />
+    </a>
+    <a href="https://cuentaappcreator.github.io/Disney/" target="_blank" class="flex-shrink-0">
+      <img
+        class="rounded w-24 h-14 object-cover"
+        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgizRAvGnsoGXK72OI_Wb1T9HmBC0C37WlLVSClOEsEM4_U_3NnlvWqDyR6i0cBbwShnV_lhQNACtZ_5LdHPF84M7DI5R-RRMFL2qkMvREEfFUIH1xMeQErphyqqOqYl7jZ4fwMZC4Q1axr/s1600/disney+plus.gif"
+        alt="Disney Plus"
+      />
+    </a>
+    <a href="https://cuentaappcreator.github.io/netflix/" target="_blank" class="flex-shrink-0">
+      <img
+        class="rounded w-24 h-14 object-cover"
+        src="https://i.pinimg.com/originals/bb/74/04/bb74046420c4c992b8cabc6e667abe40.gif"
+        alt="Netflix"
+      />
+    </a>
+    <a href="https://cuentaappcreator.github.io/20centuryfox/" target="_blank" class="flex-shrink-0">
+      <img
+        class="rounded w-24 h-14 object-cover"
+        src="https://i.pinimg.com/originals/9a/c0/19/9ac019146e0b15bf27de7f1958da9261.gif"
+        alt="FOX"
+      />
+    </a>
+	    <a href="https://cuentaappcreator.github.io/appletv/" target="_blank" class="flex-shrink-0">
+      <img
+        class="rounded w-24 h-14 object-cover"
+        src="https://mir-s3-cdn-cf.behance.net/project_modules/source/d3845d97642939.5eca1ef43a850.gif"
+        alt=""
+      />
+    </a>
+	    <a href="https://cuentaappcreator.github.io/paramount/" target="_blank" class="flex-shrink-0">
+      <img
+        class="rounded w-24 h-14 object-cover"
+        src="https://media.licdn.com/dms/image/v2/C4D22AQFBNFVeKlYsiA/feedshare-shrink_800/feedshare-shrink_800/0/1611065443140?e=2147483647&v=beta&t=tRlK2WhtakgEKPT4UrLUfLmGRatckocXjH3mI6Ob8_Y"
+        alt=""
+      />
+    </a>
+	    <a href="https://cuentaappcreator.github.io/sony/" target="_blank" class="flex-shrink-0">
+      <img
+        class="rounded w-24 h-14 object-cover"
+        src="https://i.makeagif.com/media/9-16-2015/fHWxPA.gif"
+        alt=""
+      />
+    </a>
+	  <a href="https://cuentaappcreator.github.io/universal/" target="_blank" class="flex-shrink-0">
+      <img
+        class="rounded w-24 h-14 object-cover"
+        src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/142139c3-1676-4373-ba59-a07246d6da00/dfwbvkq-65215b76-05ec-436d-b88d-3e76d690300c.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzE0MjEzOWMzLTE2NzYtNDM3My1iYTU5LWEwNzI0NmQ2ZGEwMFwvZGZ3YnZrcS02NTIxNWI3Ni0wNWVjLTQzNmQtYjg4ZC0zZTc2ZDY5MDMwMGMuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.MfOSv-kzDQeooxD68gvcp1bahu9TlOCwpwEknrnNSVI"
+        alt=""
+      />
+    </a>
+	  <a href="https://cuentaappcreator.github.io/warnerbros/" target="_blank" class="flex-shrink-0">
+      <img
+        class="rounded w-24 h-14 object-cover"
+        src="https://i.makeagif.com/media/3-15-2016/Oo51Jl.gif"
+        alt=""
+      />
+    </a>
+  </div>
+</section>
+
+
+
+  <!-- Main content -->
+  <main class="px-4 pt-6 space-y-8">
+<section class="mt-6">
+ <div class="flex justify-between items-center mb-2">
+    <h2 class="text-white text-base font-normal">Peliculas Populares</h2>
+    <a href="https://zinecia.github.io/movie/" class="text-blue-500 text-sm font-semibold hover:underline">
+      Ver más
+    </a>
+  </div>
+  
+  <div class="flex overflow-x-auto space-x-2 scrollbar-hide pb-2 mx-0 px-0">
+    <div class="flex-shrink-0 flex flex-col items-center w-28 relative">
+      <a href="https://lzwebvideo.github.io/contenido478/index.html" target="_blank" class="relative overflow-hidden w-full">
+        <img
+          class="h-40 w-full object-cover"
+          src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/lfMKNOaaS2jGT3QKUaiFA8cO7DC.jpg"
+          alt=""
+        />
+        <div class="absolute top-2 right-2 flex items-center space-x-1 select-none">
+          <div class="w-0.5 h-5 bg-pink-500 rounded"></div>
+          <span class="text-white text-xs font-semibold">2025</span>
+        </div>
+      </a>
+      <span class="mt-1 text-white text-center text-sm font-semibold leading-tight truncate w-full">
+    Superman 
+      </span>
+    </div>
+
+    <div class="flex-shrink-0 flex flex-col items-center w-28 relative">
+      <a href="https://zinecia.github.io/contenido296/index.html" target="_blank" class="relative overflow-hidden w-full">
+        <img
+          class="h-40 w-full object-cover"
+          src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/oekamLQrwlJjRNmfaBE4llIvkir.jpg"
+          alt=""
+        />
+        <div class="absolute top-2 right-2 flex items-center space-x-1 select-none">
+          <div class="w-0.5 h-5 bg-pink-500 rounded"></div>
+          <span class="text-white text-xs font-semibold">2025</span>
+        </div>
+      </a>
+      <span class="mt-1 text-white text-center text-sm font-semibold leading-tight truncate w-full">
+        M3GAN 2.0
+      </span>
+    </div>
+
+    <div class="flex-shrink-0 flex flex-col items-center w-28 relative">
+      <a href="https://zinecia.github.io/contenido2/index.html" target="_blank" class="relative overflow-hidden w-full">
+        <img
+          class="h-40 w-full object-cover"
+          src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/bwNAjGUsHt35eqT0Aj8NHU02WPl.jpg"
+          alt=""
+        />
+        <div class="absolute top-2 right-2 flex items-center space-x-1 select-none">
+          <div class="w-0.5 h-5 bg-pink-500 rounded"></div>
+          <span class="text-white text-xs font-semibold">2025</span>
+        </div>
+      </a>
+      <span class="mt-1 text-white text-center text-sm font-semibold leading-tight truncate w-full">
+        Karate Kid: Legends
+      </span>
+    </div>
+
+    <div class="flex-shrink-0 flex flex-col items-center w-28 relative">
+      <a href="https://zinecia.github.io/contenido300/index.html" target="_blank" class="relative overflow-hidden w-full">
+        <img
+          class="h-40 w-full object-cover"
+          src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/gQCrYmvCK7JCLXjCGTMRF5Lzr5c.jpg"
+          alt="Lilo y Stitch"
+        />
+        <div class="absolute top-2 right-2 flex items-center space-x-1 select-none">
+          <div class="w-0.5 h-5 bg-pink-500 rounded"></div>
+          <span class="text-white text-xs font-semibold">2025</span>
+        </div>
+      </a>
+      <span class="mt-1 text-white text-center text-sm font-semibold leading-tight truncate w-full">
+      Bailarina
+      </span>
+    </div>
+
+  </div>
+</section>
+
+    <div id="movies">
+            <h2 class="text-white text-base font-normal">Categorias</h2>
+        <div class="flex overflow-x-auto space-x-3 scrollbar-hide whitespace-nowrap">
+
+<a href="https://zinecia.github.io/actionyaventure/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+  <div class="relative w-full h-[110px] md:h-[130px]">
+    <img src="https://i.blogs.es/e06f17/esperados-accionaventura-2023/1366_2000.png" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+
+    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+
+    <div class="absolute inset-0 flex items-center justify-center">
+      <p class="text-white text-sm font-extrabold text-center px-2">Action & Adventure</p>
+    </div>
+  </div>
+</a>
+
+<a href="https://zinecia.github.io/label-aventura/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+  <div class="relative w-full h-[110px] md:h-[130px]">
+    <img src="https://aventurateaviajar.com/library/mod_noticias/images/razones-para-elegir-un-viaje-de-aventura.jpg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+
+    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+
+    <div class="absolute inset-0 flex items-center justify-center">
+      <p class="text-white text-sm font-extrabold text-center px-2">Aventura</p>
+    </div>
+  </div>
+</a>
+
+		  <a href="https://zinecia.github.io/label-belica/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+  <div class="relative w-full h-[110px] md:h-[130px]">
+    <img src="https://eternacadencia.com.ar/files/tmp/compressed/normal/ieahai2yxhu6id1ywvma.png" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+
+    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+
+    <div class="absolute inset-0 flex items-center justify-center">
+      <p class="text-white text-sm font-extrabold text-center px-2">Belica</p>
+    </div>
+  </div>
+</a>
+
+		  <a href="https://zinecia.github.io/cienciaficcion/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+  <div class="relative w-full h-[110px] md:h-[130px]">
+    <img src="https://pe-media.hptiendaenlinea.com/magefan_blog/ciencia_ficcion.jpg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+
+    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+
+    <div class="absolute inset-0 flex items-center justify-center">
+      <p class="text-white text-sm font-extrabold text-center px-2">Ciencia Ficcion</p>
+    </div>
+  </div>
+</a>
+
+		  <a href="https://zinecia.github.io/label-comedia/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+  <div class="relative w-full h-[110px] md:h-[130px]">
+    <img src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2019/04/scary-movie.jpg?tf=3840x" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+
+    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+
+    <div class="absolute inset-0 flex items-center justify-center">
+      <p class="text-white text-sm font-extrabold text-center px-2">Comedia</p>
+    </div>
+  </div>
+</a>
+
+		  <a href="https://zinecia.github.io/crimen/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+  <div class="relative w-full h-[110px] md:h-[130px]">
+    <img src="https://cdn.avpasion.com/wp-content/uploads/2025/02/acaba-llegar-prime-video-pelicula-crimen-y-accion-2024-01.jpg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+
+    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+
+    <div class="absolute inset-0 flex items-center justify-center">
+      <p class="text-white text-sm font-extrabold text-center px-2">Crimen</p>
+    </div>
+  </div>
+</a>
+
+		  <a href="https://zinecia.github.io/documental/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+  <div class="relative w-full h-[110px] md:h-[130px]">
+    <img src="https://images.squarespace-cdn.com/content/v1/5de6b88b8ec727201d648eaa/1584187813706-MFE899VDZD8ZKUK0ZZZ9/image-asset.jpeg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+
+    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+
+    <div class="absolute inset-0 flex items-center justify-center">
+      <p class="text-white text-sm font-extrabold text-center px-2">Documental</p>
+    </div>
+  </div>
+</a>
+
+		  <a href="https://zinecia.github.io/drama/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+  <div class="relative w-full h-[110px] md:h-[130px]">
+    <img src="https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2023/12/pelicula-ver-tdt-hoy-drama-romantico-madre-dragones-3253702.jpg?tf=3840x" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+
+    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+
+    <div class="absolute inset-0 flex items-center justify-center">
+      <p class="text-white text-sm font-extrabold text-center px-2">Drama</p>
+    </div>
+  </div>
+</a>
+
+		  <a href="https://zinecia.github.io/familia/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+  <div class="relative w-full h-[110px] md:h-[130px]">
+    <img src="https://imparcialoaxaca.mx/wp-content/uploads/2023/09/Peli-en-familia.jpg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+
+    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+
+    <div class="absolute inset-0 flex items-center justify-center">
+      <p class="text-white text-sm font-extrabold text-center px-2">Familia</p>
+    </div>
+  </div>
+</a>
+
+		  <a href="https://zinecia.github.io/fantasia/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+  <div class="relative w-full h-[110px] md:h-[130px]">
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhHiBEt6vppEmoSlDCp_-Fuwy-WY-sXekkUkz6XMs6E_d8i_YjESJQxmrV9Om11XXMwfFRxrp1K6P9yGz-Z1Xvd0tN2djasrNn5kPSwnxAMBqtZ2nXKCszLArWlqv-1fwkuWVq2Wuo3bOMGrsBKTIFeZzPNBwmseZpub1ngkX73KLKE18LOUwZbvsb-BOEz/s1200/mejores-peliculas-fantasi.jpeg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+
+    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+
+    <div class="absolute inset-0 flex items-center justify-center">
+      <p class="text-white text-sm font-extrabold text-center px-2">Fantasia</p>
+    </div>
+  </div>
+</a>
+
+		  <a href="https://zinecia.github.io/misterio/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+  <div class="relative w-full h-[110px] md:h-[130px]">
+    <img src="https://img.freepik.com/fotos-premium/agente-informa-detectives-sobre-hallazgos-analisis-forense-investigacion-curso-concepto-analisis-forense-hallazgos-investigacion-actualizaciones-detective-briefing-escena-crimen-evidencia-progreso-caso_918839-61709.jpg?semt=ais_items_boosted&w=740" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+
+    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+
+    <div class="absolute inset-0 flex items-center justify-center">
+      <p class="text-white text-sm font-extrabold text-center px-2">Misterio</p>
+    </div>
+  </div>
+</a>
+
+		  <a href="https://zinecia.github.io/musical/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+  <div class="relative w-full h-[110px] md:h-[130px]">
+    <img src="https://yucatancultura.com/wp-content/uploads/2018/01/gran-showman_5-1024x478.jpg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+
+    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+
+    <div class="absolute inset-0 flex items-center justify-center">
+      <p class="text-white text-sm font-extrabold text-center px-2">Musical</p>
+    </div>
+  </div>
+</a>
+
+		  <a href="https://zinecia.github.io/SciFiFantasy/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+  <div class="relative w-full h-[110px] md:h-[130px]">
+    <img src="https://static1.colliderimages.com/wordpress/wp-content/uploads/2022/07/Sci-Fi--Fantasy-Films-2.jpg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+
+    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+
+    <div class="absolute inset-0 flex items-center justify-center">
+      <p class="text-white text-sm font-extrabold text-center px-2">Sci-Fi & Fantasy</p>
+    </div>
+  </div>
+</a>
+
+		  <a href="https://zinecia.github.io/suspenso/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+  <div class="relative w-full h-[110px] md:h-[130px]">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnzjYHpEnsn88-T15cy9jnW0ayVVaYqpetKg&s" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+
+    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+
+    <div class="absolute inset-0 flex items-center justify-center">
+      <p class="text-white text-sm font-extrabold text-center px-2">Suspenso</p>
+    </div>
+  </div>
+</a>
+
+        </div>
+      </div>
+	
+
+	<section class="mt-6">
+ <div class="flex justify-between items-center mb-2">
+    <h2 class="text-white text-base font-normal">Peliculas Populares</h2>
+    <a href="../Peliculas/" class="text-blue-500 text-sm font-semibold hover:underline">
+      Ver más
+    </a>
+  </div>
+  
+  <div class="flex overflow-x-auto space-x-2 scrollbar-hide pb-2 mx-0 px-0">
+   <div id="poster-display" class="flex-shrink-0 flex flex-col items-center w-28 relative">
+  <a href="__URL__" target="_blank" class="relative overflow-hidden w-full">
+    <img class="h-40 w-full object-cover" src="__poster__" alt="" />
+    <div class="absolute top-2 right-2 flex items-center space-x-1 select-none">
+      <div class="w-0.5 h-5 bg-pink-500 rounded"></div>
+      <span class="text-white text-xs font-semibold">__año__</span>
+    </div>
+  </a>
+  <span class="mt-1 text-white text-center text-sm font-semibold leading-tight truncate w-full">
+    __titulo__ 
+  </span>
+</div>
+
+<div class="flex overflow-x-auto space-x-2 scrollbar-hide pb-2 mx-0 px-0">
+   <div id="poster-display" class="flex-shrink-0 flex flex-col items-center w-28 relative">
+  <a href="__URL__" target="_blank" class="relative overflow-hidden w-full">
+    <img class="h-40 w-full object-cover" src="__poster__" alt="" />
+    <div class="absolute top-2 right-2 flex items-center space-x-1 select-none">
+      <div class="w-0.5 h-5 bg-pink-500 rounded"></div>
+      <span class="text-white text-xs font-semibold">__año__</span>
+    </div>
+  </a>
+  <span class="mt-1 text-white text-center text-sm font-semibold leading-tight truncate w-full">
+    __titulo__ 
+  </span>
+</div>
+
+<div class="flex overflow-x-auto space-x-2 scrollbar-hide pb-2 mx-0 px-0">
+   <div id="poster-display" class="flex-shrink-0 flex flex-col items-center w-28 relative">
+  <a href="__URL__" target="_blank" class="relative overflow-hidden w-full">
+    <img class="h-40 w-full object-cover" src="__poster__" alt="" />
+    <div class="absolute top-2 right-2 flex items-center space-x-1 select-none">
+      <div class="w-0.5 h-5 bg-pink-500 rounded"></div>
+      <span class="text-white text-xs font-semibold">__año__</span>
+    </div>
+  </a>
+  <span class="mt-1 text-white text-center text-sm font-semibold leading-tight truncate w-full">
+    __titulo__ 
+  </span>
+</div>
+
+<div class="flex overflow-x-auto space-x-2 scrollbar-hide pb-2 mx-0 px-0">
+   <div id="poster-display" class="flex-shrink-0 flex flex-col items-center w-28 relative">
+  <a href="__URL__" target="_blank" class="relative overflow-hidden w-full">
+    <img class="h-40 w-full object-cover" src="__poster__" alt="" />
+    <div class="absolute top-2 right-2 flex items-center space-x-1 select-none">
+      <div class="w-0.5 h-5 bg-pink-500 rounded"></div>
+      <span class="text-white text-xs font-semibold">__año__</span>
+    </div>
+  </a>
+  <span class="mt-1 text-white text-center text-sm font-semibold leading-tight truncate w-full">
+    __titulo__ 
+  </span>
+</div>
+    
+
+  </div>
+</section>
+	  
+
+<script src="HOME/script.js"></script>
+
+<div id="posters-container" class="flex flex-wrap gap-4">
+  <!-- Aquí se generarán automáticamente los 10 bloques -->
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const bloques = document.querySelectorAll('#poster-display');
+
+    function actualizarPosters() {
+        const posters = JSON.parse(localStorage.getItem('posters')) || [];
+        if (!posters.length) return;
+
+        // Elegimos aleatoriamente posters para cada bloque
+        const usados = [];
+        bloques.forEach(bloque => {
+            let poster;
+            do {
+                poster = posters[Math.floor(Math.random() * posters.length)];
+            } while (usados.includes(poster) && usados.length < posters.length);
+            usados.push(poster);
+
+            const a = bloque.querySelector('a');
+            const img = bloque.querySelector('img');
+            const anioSpan = bloque.querySelector('span.text-xs');
+            const tituloSpan = bloque.querySelector('span.mt-1');
+
+            a.href = poster.enlace;
+            img.src = poster.poster;
+            anioSpan.textContent = poster.anio;
+            tituloSpan.textContent = poster.titulo;
+        });
+    }
+
+    // Actualizamos inmediatamente al cargar la página
+    actualizarPosters();
+
+    // Luego actualizamos cada 6 horas
+    setInterval(actualizarPosters, 21600000); // 21,600,000 ms = 6 horas
+});
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+   body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: rgb(0, 8, 20); /* Fondo azul oscuro */
+}
+
+  
+    .scrollbar-thin::-webkit-scrollbar {
+      height: 6px;
+    }
+    .scrollbar-thin::-webkit-scrollbar-track {
+      background: #1a1a1a;
+    }
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+      background-color: #555;
+      border-radius: 3px;
+    }
+
+    /* Animación hamburguesa a X */
+    #menuToggle.open span:nth-child(1) {
+      transform: translateY(10px) rotate(45deg);
+    }
+    #menuToggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+    #menuToggle.open span:nth-child(3) {
+      transform: translateY(-10px) rotate(-45deg);
+    }
+
+    #menuButtonContainer.move-right {
+      transform: translateX(16rem);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    /* Mejor control acordeón con clases y transición */
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .accordion-content.open {
+      max-height: 500px; /* suficiente para contenido */
+    }
+    .accordion-header i {
+      transition: transform 0.3s ease;
+    }
+    .accordion-header i.rotated {
+      transform: rotate(180deg);
+    }
+	
+	html, body {
+  height: 100%;
+  background-color: rgb(0, 8, 20);
+  overflow-y: scroll;
+  scrollbar-width: none;         
+  -ms-overflow-style: none;     
+}
+
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;                
+}
+
+.scrollbar-hide {
+  scrollbar-width: none;            
+  -ms-overflow-style: none;        
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;                   
+}
