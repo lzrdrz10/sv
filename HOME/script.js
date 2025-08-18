@@ -76,5 +76,6 @@ if(iconoGuardado){
 // Redireccionar al dar clic en el botón
 var btnUsuario = document.getElementById('btnUsuario');
 btnUsuario.addEventListener('click', function(){
-  window.location.href = 'ajustes.html';
+  window.location.href = 'HOME/ajustes.html';
 });
+
