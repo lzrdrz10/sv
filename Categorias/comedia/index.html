@@ -2,7 +2,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>comedia</title>
+  <title>Comedia</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link
     rel="stylesheet"
@@ -30,7 +30,7 @@
         />
       </div>
      
-      <a href="../../SEARCH/index.html" 
+      <a href="../../SEARCH/" 
          id="btnBuscar" 
          aria-label="Buscar"
          class="md:hidden flex items-center justify-center w-10 h-10 rounded-full border-2 border-white shadow-md">
@@ -48,53 +48,35 @@
         <i class="fas fa-home"></i>
         <span>Inicio</span>
       </a>
-      <a href="../movie" class="hover:text-[#4A7FFF]">Peliculas</a>
+       <a href="../movie" class="hover:text-[#4A7FFF]">Peliculas</a>
       <a href="../serie" class="hover:text-[#4A7FFF]">Series</a>
     </nav>
-  
-    <a href="#" 
-       id="btnBuscarDesktop" 
-       aria-label="Buscar"
-       class="hidden md:flex items-center justify-center w-12 h-12 rounded-full border-2 border-white shadow-md ml-4">
-      <svg xmlns="http://www.w3.org/2000/svg" 
-           width="24" height="24" 
-           fill="none" stroke="#ffffff" 
-           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="8"></circle>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-      </svg>
-    </a>
-  </header>
-
-  <main class="max-w-[1280px] mx-auto px-4 mt-6">
-    <div class="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-3 mb-6">
-      <button
-        onclick="history.back()"
-        class="bg-[#0D1B4C] rounded-full px-4 py-1.5 text-sm font-semibold text-[#4A7FFF] flex items-center space-x-1 focus:outline-none focus:ring-2 focus:ring-[#4A7FFF]"
-      >
-        <i class="fas fa-arrow-left"></i>
-        <span>Atras</span>
-      </button>
-
-      <h1 class="text-3xl font-extrabold text-[#4A7FFF] select-none">comedia</h1>
-    </div>
-
-    <section class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+<a href="../../SEARCH/index.html" 
+id="btnBuscarDesktop" 
+aria-label="Buscar"
+class="hidden md:flex items-center justify-center w-12 h-12 rounded-full border-2 border-white shadow-md ml-4">
+<svg xmlns="http://www.w3.org/2000/svg" 
+width="24" height="24" 
+fill="none" stroke="#ffffff" 
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="11" cy="11" r="8"></circle>
+<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+</svg>
+</a>
+</header>
+<main class="max-w-[1280px] mx-auto px-4 mt-6">
+<div class="flex flex-row items-center space-x-3 mb-6">
+<button
+onclick="history.back()"
+class="bg-[#0D1B4C] rounded-full px-4 py-1.5 text-sm font-semibold text-[#4A7FFF] flex items-center space-x-1 focus:outline-none focus:ring-2 focus:ring-[#4A7FFF]">
+<i class="fas fa-arrow-left"></i>
+<span>Atras</span>
+</button>
+<h1 class="text-3xl font-extrabold text-[#4A7FFF] select-none">Comedia</h1>
+</div>
+<section class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
 <!--PEGAR CONTENIDO AQUI ABAJO-->
-<!-- Happy Gilmore 2 -->
-<article class="relative rounded-lg overflow-hidden cursor-pointer select-none">
-  <a href="../../Peliculas/pelicula2.html">
-    <img src="https://image.tmdb.org/t/p/original/utIg6Vghn65A7rz8tH9ItHUuCzU.jpg" alt="Happy Gilmore 2" class="w-full h-auto rounded-lg object-cover transition-transform duration-300 hover:scale-105"/>
-    <div class="absolute top-2 right-2 bg-white/90 text-black text-xs font-semibold rounded-full px-2 py-0.5">
-      Movie
-    </div>
-  </a>
-  <div class="mt-2 font-semibold text-sm leading-tight truncate">Happy Gilmore 2</div>
-  <div class="text-xs text-white/70">2025</div>
-</article>
-
-
-    </section>
+</section>
   </main>
 </body>
 </html>
