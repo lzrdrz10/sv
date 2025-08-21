@@ -51,8 +51,13 @@
       let encontrados = 0;
 
       li.forEach(el => {
-        const texto = normalizarTexto(el.textContent || "");
+        // 🔹 Capturamos TODO el texto del li, incluyendo los <span class="hidden">
+        const spans = Array.from(el.querySelectorAll("span.hidden")).map(s => s.textContent);
+        const texto = normalizarTexto((el.textContent || "") + " " + spans.join(" "));
+
+        // 🔹 Verificamos que TODAS las palabras escritas estén en el texto
         const coincide = palabrasFiltro.every(palabra => texto.includes(palabra));
+
         el.style.display = coincide ? "" : "none";
         if (coincide) encontrados++;
       });
