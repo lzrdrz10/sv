@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Merlina</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+<style>
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+body, html { margin: 0; padding: 0; height: 100%; }
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: url('https://image.tmdb.org/t/p/original/qg8Gv2w0dDL8cMsG2QO2hWp58wy.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+}
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: -1;
+}
+#iframe-principal { width: 100%; height: 220px; border: none; background: black; }
+#contenedor-video { position: fixed; top: 0; left: 0; width: 100%; z-index: 10; }
+.capitulo-seleccionado { background-color: #FF0000 !important; color: #fff !important; font-weight: bold; border-bottom: none !important; }
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-622CWCXV7F"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-622CWCXV7F');
+</script>
+<script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+</head>
+<body class="text-white font-sans leading-relaxed">
+<div id="contenedor-video" class="relative">
+  <iframe id="iframe-principal" allow="fullscreen" allowfullscreen></iframe>
+  <a href="https://lzrdrz10.github.io/sv/" aria-label="Volver" class="absolute top-3 left-3 text-white text-2xl z-20">
+    <i class="fas fa-arrow-left"></i>
+  </a>
+  <div class="absolute top-0 left-0 w-full h-full z-10" style="pointer-events: none;"></div>
+</div>
+<div class="px-4 pt-60 pb-4 space-y-4">
+  <div class="flex items-center justify-between">
+    <h1 class="text-xl sm:text-2xl font-bold">Merlina T<span id="temp-titulo">1</span></h1>
+    <button aria-label="Favorito" class="bg-[#1f1f1f] px-3 py-1 rounded text-sm flex items-center gap-2">
+      <i class="far fa-heart"></i> Favorito
+    </button>
+  </div>
+  <div class="flex flex-wrap items-center gap-3 text-sm text-gray-400">
+    <span><strong class="text-[#FF7F00]">8.4</strong> / 10</span>
+    <span class="text-white">•</span>
+    <span>Sci-Fi & Fantasy,Misterio,Comedia</span>
+    <span class="text-white">•</span>
+    <span>2022</span>
+  </div>
+  <div class="flex items-center gap-3">
+    <label for="temporada" class="text-sm text-gray-300">Temporada:</label>
+    <select id="temporada" class="bg-[#1f1f1f] text-white px-3 py-1 rounded text-sm">
+      <option value="1">Temporada 1</option><option value="2">Temporada 2</option>
+    </select>
+  </div>
+  <div class="flex space-x-2 overflow-x-auto scrollbar-hide pb-1" id="lista-capitulos"></div>
+  <div class="bg-[#1e1e1e] rounded-lg p-4 text-sm text-gray-300 leading-relaxed">
+    <p><span class="font-semibold text-white">Sinopsis:</span> Inteligente, sarcástica y un poco muerta por dentro, Merlina Addams investiga una ola de asesinatos mientras hace nuevos amigos (y enemigos) en la Academia Nunca Más.</p>
+  </div>
+</div>
+<script>
+var serieId = "119051";
+var temporadaSelect = document.getElementById('temporada');
+var listaCapitulos = document.getElementById('lista-capitulos');
+var tempTitulo = document.getElementById('temp-titulo');
+var btnFavorito = document.querySelector('button[aria-label="Favorito"]');
+var iconoCorazon = btnFavorito.querySelector('i');
+var iframePrincipal = document.getElementById('iframe-principal');
+
+var serieActual = {
+  id: serieId,
+  titulo: "Merlina",
+  temporada: temporadaSelect.value,
+  poster: "https://image.tmdb.org/t/p/original/bNKwoYqkCXfIhhr5Jz8slrsw32r.jpg"
+};
+
+var videosPorCapitulo = {"1":{"1":"Hola bro!!","2":"Hola bro!!","3":"Hola bro!!","4":"Hola bro!!","5":"Hola bro!!","6":"Hola bro!!","7":"Hola bro!!","8":"Hola bro!!"},"2":{"1":"Hola bro!!","2":"Hola bro!!","3":"Hola bro!!","4":"Hola bro!!","5":"Hola bro!!","6":"Hola bro!!","7":"Hola bro!!","8":"Hola bro!!"}};
+
+function cargarFavoritos() {
+  var favs = localStorage.getItem('seriesFavoritas');
+  return favs ? JSON.parse(favs) : [];
+}
+
+function guardarFavoritos(favoritos) {
+  localStorage.setItem('seriesFavoritas', JSON.stringify(favoritos));
+}
+
+function esFavorito(serie, favoritos) {
+  return favoritos.some(function(fav) {
+    return fav.id === serie.id && fav.temporada === serie.temporada;
+  });
+}
+
+function actualizarBotonFavorito() {
+  var favoritos = cargarFavoritos();
+  if (esFavorito(serieActual, favoritos)) {
+    btnFavorito.classList.add('bg-[#FF7F00]');
+    iconoCorazon.classList.add('fas');
+    iconoCorazon.classList.remove('far');
+  } else {
+    btnFavorito.classList.remove('bg-[#FF7F00]');
+    iconoCorazon.classList.remove('fas');
+    iconoCorazon.classList.add('far');
+  }
+}
+
+btnFavorito.addEventListener('click', function() {
+  var favoritos = cargarFavoritos();
+  if (esFavorito(serieActual, favoritos)) {
+    favoritos = favoritos.filter(function(fav) {
+      return !(fav.id === serieActual.id && fav.temporada === serieActual.temporada);
+    });
+  } else {
+    favoritos.push(Object.assign({}, serieActual));
+  }
+  guardarFavoritos(favoritos);
+  actualizarBotonFavorito();
+});
+
+function guardarTemporada(temporada) {
+  localStorage.setItem("temporadaSeleccionada_" + serieId, temporada);
+}
+
+function cargarTemporadaGuardada() {
+  var temp = localStorage.getItem("temporadaSeleccionada_" + serieId);
+  return temp ? temp : "1";
+}
+
+function guardarCapitulo(capitulo) {
+  var key = "ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada;
+  localStorage.setItem(key, capitulo);
+}
+
+function cargarCapituloGuardado() {
+  var key = "ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada;
+  var capituloGuardado = localStorage.getItem(key);
+  var botones = listaCapitulos.getElementsByClassName('capitulo-btn');
+  var encontrado = false;
+
+  for (var i = 0; i < botones.length; i++) {
+    botones[i].className = botones[i].className.replace(' capitulo-seleccionado', '');
+    if (botones[i].getAttribute('data-capitulo') === capituloGuardado) {
+      botones[i].className += ' capitulo-seleccionado';
+      botones[i].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+      cambiarVideo(capituloGuardado);
+      encontrado = true;
+    }
+  }
+  if (!encontrado) {
+    cambiarVideo("1");
+  }
+}
+
+function cambiarVideo(capitulo) {
+  var temp = serieActual.temporada;
+  var url = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
+  if (url) {
+    iframePrincipal.src = url;
+    guardarCapitulo(capitulo);
+  }
+}
+
+function generarCapitulos(temporada) {
+  listaCapitulos.innerHTML = '';
+  var capitulosObj = videosPorCapitulo[temporada] || {};
+  var total = Object.keys(capitulosObj).length;
+
+  for (var i = 1; i <= total; i++) {
+    var btn = document.createElement('button');
+    btn.className = 'capitulo-btn px-4 py-2 rounded bg-[#2a2a2a] text-white';
+    btn.setAttribute('data-capitulo', i.toString());
+    btn.textContent = i;
+    listaCapitulos.appendChild(btn);
+  }
+  agregarEventosCapitulos();
+  cargarCapituloGuardado();
+}
+
+function agregarEventosCapitulos() {
+  var botones = listaCapitulos.getElementsByClassName('capitulo-btn');
+  for (var i = 0; i < botones.length; i++) {
+    (function(index) {
+      botones[index].onclick = function() {
+        for (var j = 0; j < botones.length; j++) {
+          botones[j].className = botones[j].className.replace(' capitulo-seleccionado', '');
+        }
+        if (botones[index].className.indexOf('capitulo-seleccionado') === -1) {
+          botones[index].className += ' capitulo-seleccionado';
+        }
+        botones[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+        cambiarVideo(botones[index].getAttribute('data-capitulo'));
+      };
+    })(i);
+  }
+}
+
+temporadaSelect.onchange = function() {
+  var temp = temporadaSelect.value;
+  serieActual.temporada = temp;
+  tempTitulo.textContent = temp;
+  guardarTemporada(temp);
+  generarCapitulos(temp);
+  actualizarBotonFavorito();
+};
+
+window.onload = function() {
+  var tempGuardada = cargarTemporadaGuardada();
+  temporadaSelect.value = tempGuardada;
+  serieActual.temporada = tempGuardada;
+  tempTitulo.textContent = tempGuardada;
+  generarCapitulos(tempGuardada);
+  actualizarBotonFavorito();
+};
+</script>
+</body>
+</html>
