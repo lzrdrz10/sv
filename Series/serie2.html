@@ -53,7 +53,6 @@ gtag('config', 'G-622CWCXV7F');
   <div class="flex items-center justify-between">
     <h1 class="text-xl sm:text-2xl font-bold">Merlina T<span id="temp-titulo">1</span></h1>
     <button aria-label="Favorito" class="bg-[#1f1f1f] px-3 py-1 rounded text-sm flex items-center gap-2">
-      <i class="far fa-heart"></i> Favorito
     </button>
   </div>
   <div class="flex flex-wrap items-center gap-3 text-sm text-gray-400">
@@ -66,7 +65,8 @@ gtag('config', 'G-622CWCXV7F');
   <div class="flex items-center gap-3">
     <label for="temporada" class="text-sm text-gray-300">Temporada:</label>
     <select id="temporada" class="bg-[#1f1f1f] text-white px-3 py-1 rounded text-sm">
-      <option value="1">Temporada 1</option><option value="2">Temporada 2</option>
+      <option value="1">Temporada 1</option>
+      <option value="2">Temporada 2</option>
     </select>
   </div>
   <div class="flex space-x-2 overflow-x-auto scrollbar-hide pb-1" id="lista-capitulos"></div>
@@ -90,7 +90,23 @@ var serieActual = {
   poster: "https://image.tmdb.org/t/p/original/bNKwoYqkCXfIhhr5Jz8slrsw32r.jpg"
 };
 
-var videosPorCapitulo = {"1":{"1":"Hola bro!!","2":"Hola bro!!","3":"Hola bro!!","4":"Hola bro!!","5":"Hola bro!!","6":"Hola bro!!","7":"Hola bro!!","8":"Hola bro!!"},"2":{"1":"Hola bro!!","2":"Hola bro!!","3":"Hola bro!!","4":"Hola bro!!","5":"Hola bro!!","6":"Hola bro!!","7":"Hola bro!!","8":"Hola bro!!"}};
+var videosPorCapitulo = {
+  "1":{
+    "1":"https://streemkeflixserv.blogspot.com/?titulo=LzPlay: 1x1&link=https%3A%2F%2F1a-1791.com%2Fvideo%2Fs8%2F2%2F9%2FT%2Fu%2FY%2F9TuYl.aaa.mp4",
+       "2":"https://streemkeflixserv.blogspot.com/?titulo=LzPlay: 1x2&link=https%3A%2F%2Fhugh.cdn.rumble.cloud%2Fvideo%2Fs8%2F2%2Fh%2FI%2Fw%2FY%2FhIwYl.aaa.mp4",
+       "3":"https://streemkeflixserv.blogspot.com/?titulo=LzPlay: 1x3&link=https%3A%2F%2F1a-1791.com%2Fvideo%2Fs8%2F2%2F3%2FA%2Fy%2FY%2F3AyYl.aaa.mp4",
+       "4":"https://streemkeflixserv.blogspot.com/?titulo=LzPlay: 1x4&link=https%3A%2F%2Fhugh.cdn.rumble.cloud%2Fvideo%2Fs8%2F2%2F_%2F0%2Fz%2FY%2F_0zYl.aaa.mp4",
+       "5":"https://streemkeflixserv.blogspot.com/?titulo=LzPlay: 1x5&link=https%3A%2F%2Fhugh.cdn.rumble.cloud%2Fvideo%2Fs8%2F2%2Fz%2FV%2FA%2FY%2FzVAYl.aaa.mp4",
+       "6":"https://streemkeflixserv.blogspot.com/?titulo=LzPlay: 1x6&link=https%3A%2F%2Fhugh.cdn.rumble.cloud%2Fvideo%2Fs8%2F2%2Fd%2FV%2FB%2FY%2FdVBYl.aaa.mp4",
+       "7":"https://streemkeflixserv.blogspot.com/?titulo=LzPlay: 1x7&link=https%3A%2F%2F1a-1791.com%2Fvideo%2Fs8%2F2%2FR%2FP%2FC%2FY%2FRPCYl.aaa.mp4",
+       "8":"https://streemkeflixserv.blogspot.com/?titulo=LzPlay: 1x8&link=https%3A%2F%2Fhugh.cdn.rumble.cloud%2Fvideo%2Fs8%2F2%2Ft%2Fn%2FF%2FY%2FtnFYl.aaa.mp4"},
+  "2":{
+    "1":"https://streemkeflixserv.blogspot.com/?titulo=LzPlay: 2x1&link=https%3A%2F%2F1a-1791.com%2Fvideo%2Ffww1%2F38%2Fs8%2F2%2FW%2F9%2F4%2F8%2FW948y.aaa.mp4",
+       "2":"https://streemkeflixserv.blogspot.com/?titulo=LzPlay: 2x2&link=https%3A%2F%2F1a-1791.com%2Fvideo%2Ffww1%2F1c%2Fs8%2F2%2FS%2FS%2Fg%2F9%2FSSg9y.aaa.mp4",
+       "3":"https://streemkeflixserv.blogspot.com/?titulo=LzPlay: 2x3&link=https%3A%2F%2Fhugh.cdn.rumble.cloud%2Fvideo%2Ffww1%2F0c%2Fs8%2F2%2F8%2FS%2Fg%2F9%2F8Sg9y.aaa.mp4",
+       "4":"https://streemkeflixserv.blogspot.com/?titulo=LzPlay: 2x4&link=https%3A%2F%2F1a-1791.com%2Fvideo%2Ffww1%2Fb4%2Fs8%2F2%2FY%2FT%2Fg%2F9%2FYTg9y.aaa.mp4",
+       }
+                        };
 
 function cargarFavoritos() {
   var favs = localStorage.getItem('seriesFavoritas');
