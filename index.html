@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,397 +7,623 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
- <link rel="stylesheet" href="HOME/style.css">
-	<meta name="monetag" content="d7bc29e0889c5427e856865ebcaa0093">
-
-  <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+  <link rel="stylesheet" href="HOME/style.css">
+  <meta name="monetag" content="d7bc29e0889c5427e856865ebcaa0093">
 </head>
 <body class="text-white min-h-screen overflow-x-hidden">
-
-<section id="dynamicHero" class="relative w-full overflow-hidden h-[60vh] md:h-[70vh]">
- 
-</section>
-
-<header class="fixed top-0 left-0 w-full z-30 px-4 py-3 bg-gradient-to-b from-black/60 to-transparent backdrop-blur-sm flex items-center justify-between">
-
-  <div id="menuButtonContainer" class="relative z-50 w-8 h-8">
-<button id="btnUsuario" aria-label="Perfil Usuario" 
-  style="
-    position: fixed; top: 1rem; left: 1rem; 
-    width: 48px; height: 48px; border-radius: 50%; 
-    overflow: hidden; border: 2px solid #e50914; 
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    padding: 0; background: transparent; cursor: pointer;"
->
-  <img id="iconoImg" alt="Icono usuario" style="width:100%; height:100%; object-fit: cover;" />
-</button>
+  <section id="dynamicHero" class="relative w-full overflow-hidden h-[60vh] md:h-[70vh]"></section>
+  <header class="fixed top-0 left-0 w-full z-30 px-4 py-3 bg-gradient-to-b from-black/60 to-transparent backdrop-blur-sm flex items-center justify-between">
+    <div id="menuButtonContainer" class="relative z-50 w-8 h-8">
+      <button id="btnUsuario" aria-label="Perfil Usuario" style="position: fixed; top: 1rem; left: 1rem; width: 48px; height: 48px; border-radius: 50%; overflow: hidden; border: 2px solid #e50914; box-shadow: 0 4px 10px rgba(0,0,0,0.5); padding: 0; background: transparent; cursor: pointer;">
+        <img id="iconoImg" alt="Icono usuario" style="width:100%; height:100%; object-fit: cover;" />
+      </button>
+    </div>
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3dK3-XAKrEia-lWmiUqAYRfFQ1lR9eJX6ZZH8e_vHf576qf9GJjIWBW9Jg5LsilXX7WO2MOEkg5gzc4pESziaPeMJ9ws9mwtCDdp3p_17D0e0Uop_ZxavwwJeNLBvoyZJ0cxTKQpjzrJIR6LjJslB24tj-77AYrRCacQ3F2S2VPoXpPzPhM1zndxyd1Rg/s3307/B64D5386-DCA4-410B-A0A6-6ACB19D0A06F.png" alt="Logo" class="h-10 object-contain" />
+    <a href="SEARCH/index.html" aria-label="Buscar" class="text-white bg-blue-500 hover:bg-pink-600 text-xl px-3 py-2 rounded transition">
+      <i class="fas fa-search"></i>
+    </a>
+  </header>
+  <div id="infoModal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden">
+    <div class="bg-white text-black max-w-md w-full rounded-lg shadow-lg p-6 relative mx-4">
+      <button id="closeModal" class="absolute top-2 right-2 text-black hover:text-red-500 text-xl">&times;</button>
+      <h3 class="text-lg font-semibold mb-2">Sinopsis</h3>
+      <p id="modalDescription" class="text-sm leading-relaxed"></p>
+    </div>
   </div>
-
-  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3dK3-XAKrEia-lWmiUqAYRfFQ1lR9eJX6ZZH8e_vHf576qf9GJjIWBW9Jg5LsilXX7WO2MOEkg5gzc4pESziaPeMJ9ws9mwtCDdp3p_17D0e0Uop_ZxavwwJeNLBvoyZJ0cxTKQpjzrJIR6LjJslB24tj-77AYrRCacQ3F2S2VPoXpPzPhM1zndxyd1Rg/s3307/B64D5386-DCA4-410B-A0A6-6ACB19D0A06F.png" alt="Logo" class="h-10 object-contain" />
-<a href="SEARCH/index.html" aria-label="Buscar" class="text-white bg-blue-500 hover:bg-pink-600 text-xl px-3 py-2 rounded transition">
-  <i class="fas fa-search"></i>
-</a>
-
-
-</header>
-
-
-<!-- Modal info -->
-<div id="infoModal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden">
-  <div class="bg-white text-black max-w-md w-full rounded-lg shadow-lg p-6 relative mx-4">
-    <button id="closeModal" class="absolute top-2 right-2 text-black hover:text-red-500 text-xl">&times;</button>
-    <h3 class="text-lg font-semibold mb-2">Sinopsis</h3>
-    <p id="modalDescription" class="text-sm leading-relaxed"></p>
+  <div class="px-4 md:px-8 lg:px-12 mb-2">
+    <h1 class="flex flex-col md:flex-row items-start md:items-center ml-2 md:ml-0">
+      <div class="flex">
+        <span class="text-6xl md:text-8xl font-bold text-blue-500 leading-none">T</span>
+        <span class="text-6xl md:text-8xl font-bold text-blue-500 leading-none ml-1">O</span>
+        <span class="text-6xl md:text-8xl font-bold text-blue-500 leading-none ml-1">P</span>
+      </div>
+      <div class="text-white uppercase tracking-wider font-medium ml-1 md:ml-4 text-sm md:text-base">
+        <div>PELÍCULAS</div>
+        <div>HOY</div>
+      </div>
+    </h1>
   </div>
-</div>
-
-<section class="mt-2 px-2">
-  <div
-    class="flex space-x-2 overflow-x-auto py-2 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900"
-    aria-label="Logos de servicios de streaming"
-  >
-    <a href="https://cuentaappcreator.github.io/primevideo/" target="_blank" class="flex-shrink-0">
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://images.bhaskarassets.com/web2images/521/2023/06/16/ezgifcom-video-to-gif-2023-06-16t155541854_1686911269.gif"
-        alt="Prime Video"
-      />
-    </a>
-    <a href="https://cuentaappcreator.github.io/HBOMAX/" target="_blank" class="flex-shrink-0">
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://images.squarespace-cdn.com/content/v1/5796c205d1758ee6066cd901/c143c8ab-3880-4b97-9680-cc3b03ecb196/RETEN_01_1.gif"
-        alt="HBO Max"
-      />
-    </a>
-    <a href="https://cuentaappcreator.github.io/Disney/" target="_blank" class="flex-shrink-0">
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgizRAvGnsoGXK72OI_Wb1T9HmBC0C37WlLVSClOEsEM4_U_3NnlvWqDyR6i0cBbwShnV_lhQNACtZ_5LdHPF84M7DI5R-RRMFL2qkMvREEfFUIH1xMeQErphyqqOqYl7jZ4fwMZC4Q1axr/s1600/disney+plus.gif"
-        alt="Disney Plus"
-      />
-    </a>
-    <a href="https://cuentaappcreator.github.io/netflix/" target="_blank" class="flex-shrink-0">
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://i.pinimg.com/originals/bb/74/04/bb74046420c4c992b8cabc6e667abe40.gif"
-        alt="Netflix"
-      />
-    </a>
-    <a href="https://cuentaappcreator.github.io/20centuryfox/" target="_blank" class="flex-shrink-0">
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://i.pinimg.com/originals/9a/c0/19/9ac019146e0b15bf27de7f1958da9261.gif"
-        alt="FOX"
-      />
-    </a>
-	    <a href="https://cuentaappcreator.github.io/appletv/" target="_blank" class="flex-shrink-0">
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://mir-s3-cdn-cf.behance.net/project_modules/source/d3845d97642939.5eca1ef43a850.gif"
-        alt=""
-      />
-    </a>
-	    <a href="https://cuentaappcreator.github.io/paramount/" target="_blank" class="flex-shrink-0">
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://media.licdn.com/dms/image/v2/C4D22AQFBNFVeKlYsiA/feedshare-shrink_800/feedshare-shrink_800/0/1611065443140?e=2147483647&v=beta&t=tRlK2WhtakgEKPT4UrLUfLmGRatckocXjH3mI6Ob8_Y"
-        alt=""
-      />
-    </a>
-	    <a href="https://cuentaappcreator.github.io/sony/" target="_blank" class="flex-shrink-0">
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://i.makeagif.com/media/9-16-2015/fHWxPA.gif"
-        alt=""
-      />
-    </a>
-	  <a href="https://cuentaappcreator.github.io/universal/" target="_blank" class="flex-shrink-0">
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/142139c3-1676-4373-ba59-a07246d6da00/dfwbvkq-65215b76-05ec-436d-b88d-3e76d690300c.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzE0MjEzOWMzLTE2NzYtNDM3My1iYTU5LWEwNzI0NmQ2ZGEwMFwvZGZ3YnZrcS02NTIxNWI3Ni0wNWVjLTQzNmQtYjg4ZC0zZTc2ZDY5MDMwMGMuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.MfOSv-kzDQeooxD68gvcp1bahu9TlOCwpwEknrnNSVI"
-        alt=""
-      />
-    </a>
-	  <a href="https://cuentaappcreator.github.io/warnerbros/" target="_blank" class="flex-shrink-0">
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://i.makeagif.com/media/3-15-2016/Oo51Jl.gif"
-        alt=""
-      />
-    </a>
+  <div class="pt-0 pb-3">
+    <div class="space-y-0 pl-1 sm:pl-2 md:pl-4 mb-2">
+      <div class="group/row relative mt-1 overflow-visible">
+        <div id="top-slider-container" class="flex items-center pl-12 sm:pl-14 md:pl-16 space-x-8 md:space-x-10 overflow-x-scroll scrollbar-hide py-6 select-none will-change-scroll cursor-grab" style="scroll-behavior: smooth;">
+          <button onclick="window.location.href='/watch/?type=movie&amp;id=911430';" class="cursor-pointer min-w-[140px] sm:min-w-[180px] md:min-w-[200px] relative group/item p-0 bg-transparent border-none text-left rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-75 transition-all duration-200">
+            <div class="relative">
+              <div class="absolute -left-10 sm:-left-12 md:-left-14 top-2/3 -translate-y-1/2 z-30 transition-all duration-300 group-hover/item:scale-110 group-hover/item:-translate-x-1">
+                <span class="text-[80px] sm:text-[100px] md:text-[120px] font-bold text-transparent group-hover/item:text-blue-500 drop-shadow-lg select-none pointer-events-none transition-all duration-300" style="-webkit-text-stroke: 2px rgb(59, 130, 246);font-family:sans-serif;">1</span>
+              </div>
+              <div class="overflow-hidden rounded-lg relative z-20 transition-all duration-300 group-hover/item:shadow-[0_0_15px_rgba(59,130,246,0.7)]">
+                <img src="https://image.tmdb.org/t/p/w500/yKIG63pXN89EfbTA7yKpwxAU1rf.jpg" alt="F1 la película" class="aspect-[2/3] object-cover w-full h-full transition-transform duration-300 group-hover/item:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                <div class="absolute inset-0 border-2 border-blue-500 rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
+              </div>
+            </div>
+          </button>
+          <button onclick="window.location.href='/watch/?type=movie&amp;id=575265';" class="cursor-pointer min-w-[140px] sm:min-w-[180px] md:min-w-[200px] relative group/item p-0 bg-transparent border-none text-left rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-75 transition-all duration-200">
+            <div class="relative">
+              <div class="absolute -left-10 sm:-left-12 md:-left-14 top-2/3 -translate-y-1/2 z-30 transition-all duration-300 group-hover/item:scale-110 group-hover/item:-translate-x-1">
+                <span class="text-[80px] sm:text-[100px] md:text-[120px] font-bold text-transparent group-hover/item:text-blue-500 drop-shadow-lg select-none pointer-events-none transition-all duration-300" style="-webkit-text-stroke: 2px rgb(59, 130, 246);font-family:sans-serif;">2</span>
+              </div>
+              <div class="overflow-hidden rounded-lg relative z-20 transition-all duration-300 group-hover/item:shadow-[0_0_15px_rgba(59,130,246,0.7)]">
+                <img src="https://image.tmdb.org/t/p/w500/haOjJGUV00dKlZaJWgjM1UD1cJV.jpg" alt="Misión: Imposible - La sentencia final" class="aspect-[2/3] object-cover w-full h-full transition-transform duration-300 group-hover/item:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                <div class="absolute inset-0 border-2 border-blue-500 rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
+              </div>
+            </div>
+          </button>
+          <button onclick="window.location.href='/watch/?type=movie&amp;id=1312946';" class="cursor-pointer min-w-[140px] sm:min-w-[180px] md:min-w-[200px] relative group/item p-0 bg-transparent border-none text-left rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-75 transition-all duration-200">
+            <div class="relative">
+              <div class="absolute -left-10 sm:-left-12 md:-left-14 top-2/3 -translate-y-1/2 z-30 transition-all duration-300 group-hover/item:scale-110 group-hover/item:-translate-x-1">
+                <span class="text-[80px] sm:text-[100px] md:text-[120px] font-bold text-transparent group-hover/item:text-blue-500 drop-shadow-lg select-none pointer-events-none transition-all duration-300" style="-webkit-text-stroke: 2px rgb(59, 130, 246);font-family:sans-serif;">3</span>
+              </div>
+              <div class="overflow-hidden rounded-lg relative z-20 transition-all duration-300 group-hover/item:shadow-[0_0_15px_rgba(59,130,246,0.7)]">
+                <img src="https://image.tmdb.org/t/p/w500/8gzmyWZX6C29aKNLr5ol17n03nN.jpg" alt="El mapa que me lleva a ti" class="aspect-[2/3] object-cover w-full h-full transition-transform duration-300 group-hover/item:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                <div class="absolute inset-0 border-2 border-blue-500 rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
+              </div>
+            </div>
+          </button>
+          <button onclick="window.location.href='/watch/?type=movie&amp;id=1300116';" class="cursor-pointer min-w-[140px] sm:min-w-[180px] md:min-w-[200px] relative group/item p-0 bg-transparent border-none text-left rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-75 transition-all duration-200">
+            <div class="relative">
+              <div class="absolute -left-10 sm:-left-12 md:-left-14 top-2/3 -translate-y-1/2 z-30 transition-all duration-300 group-hover/item:scale-110 group-hover/item:-translate-x-1">
+                <span class="text-[80px] sm:text-[100px] md:text-[120px] font-bold text-transparent group-hover/item:text-blue-500 drop-shadow-lg select-none pointer-events-none transition-all duration-300" style="-webkit-text-stroke: 2px rgb(59, 130, 246);font-family:sans-serif;">4</span>
+              </div>
+              <div class="overflow-hidden rounded-lg relative z-20 transition-all duration-300 group-hover/item:shadow-[0_0_15px_rgba(59,130,246,0.7)]">
+                <img src="https://image.tmdb.org/t/p/w500/wytZFBYpkEgxsALpg5l2euGeVQz.jpg" alt="Caerás" class="aspect-[2/3] object-cover w-full h-full transition-transform duration-300 group-hover/item:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                <div class="absolute inset-0 border-2 border-blue-500 rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
+              </div>
+            </div>
+          </button>
+          <button onclick="window.location.href='/watch/?type=movie&amp;id=1175942';" class="cursor-pointer min-w-[140px] sm:min-w-[180px] md:min-w-[200px] relative group/item p-0 bg-transparent border-none text-left rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-75 transition-all duration-200">
+            <div class="relative">
+              <div class="absolute -left-10 sm:-left-12 md:-left-14 top-2/3 -translate-y-1/2 z-30 transition-all duration-300 group-hover/item:scale-110 group-hover/item:-translate-x-1">
+                <span class="text-[80px] sm:text-[100px] md:text-[120px] font-bold text-transparent group-hover/item:text-blue-500 drop-shadow-lg select-none pointer-events-none transition-all duration-300" style="-webkit-text-stroke: 2px rgb(59, 130, 246);font-family:sans-serif;">5</span>
+              </div>
+              <div class="overflow-hidden rounded-lg relative z-20 transition-all duration-300 group-hover/item:shadow-[0_0_15px_rgba(59,130,246,0.7)]">
+                <img src="https://image.tmdb.org/t/p/w500/j0moebdCWDjjwS6bz1ohrsRp1Vp.jpg" alt="Los tipos malos 2" class="aspect-[2/3] object-cover w-full h-full transition-transform duration-300 group-hover/item:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                <div class="absolute inset-0 border-2 border-blue-500 rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
+              </div>
+            </div>
+          </button>
+          <button onclick="window.location.href='/watch/?type=movie&amp;id=1061474';" class="cursor-pointer min-w-[140px] sm:min-w-[180px] md:min-w-[200px] relative group/item p-0 bg-transparent border-none text-left rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-75 transition-all duration-200">
+            <div class="relative">
+              <div class="absolute -left-10 sm:-left-12 md:-left-14 top-2/3 -translate-y-1/2 z-30 transition-all duration-300 group-hover/item:scale-110 group-hover/item:-translate-x-1">
+                <span class="text-[80px] sm:text-[100px] md:text-[120px] font-bold text-transparent group-hover/item:text-blue-500 drop-shadow-lg select-none pointer-events-none transition-all duration-300" style="-webkit-text-stroke: 2px rgb(59, 130, 246);font-family:sans-serif;">6</span>
+              </div>
+              <div class="overflow-hidden rounded-lg relative z-20 transition-all duration-300 group-hover/item:shadow-[0_0_15px_rgba(59,130,246,0.7)]">
+                <img src="https://image.tmdb.org/t/p/w500/fvUJb08yatV2b3NUSwuYdQKYoFd.jpg" alt="Superman" class="aspect-[2/3] object-cover w-full h-full transition-transform duration-300 group-hover/item:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                <div class="absolute inset-0 border-2 border-blue-500 rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
+              </div>
+            </div>
+          </button>
+          <button onclick="window.location.href='/watch/?type=movie&amp;id=1022787';" class="cursor-pointer min-w-[140px] sm:min-w-[180px] md:min-w-[200px] relative group/item p-0 bg-transparent border-none text-left rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-75 transition-all duration-200">
+            <div class="relative">
+              <div class="absolute -left-10 sm:-left-12 md:-left-14 top-2/3 -translate-y-1/2 z-30 transition-all duration-300 group-hover/item:scale-110 group-hover/item:-translate-x-1">
+                <span class="text-[80px] sm:text-[100px] md:text-[120px] font-bold text-transparent group-hover/item:text-blue-500 drop-shadow-lg select-none pointer-events-none transition-all duration-300" style="-webkit-text-stroke: 2px rgb(59, 130, 246);font-family:sans-serif;">7</span>
+              </div>
+              <div class="overflow-hidden rounded-lg relative z-20 transition-all duration-300 group-hover/item:shadow-[0_0_15px_rgba(59,130,246,0.7)]">
+                <img src="https://image.tmdb.org/t/p/w500/fGjwHlv8bCjZypi2bHbbSmyIGMV.jpg" alt="Elio" class="aspect-[2/3] object-cover w-full h-full transition-transform duration-300 group-hover/item:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                <div class="absolute inset-0 border-2 border-blue-500 rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
+              </div>
+            </div>
+          </button>
+          <button onclick="window.location.href='/watch/?type=movie&amp;id=436969';" class="cursor-pointer min-w-[140px] sm:min-w-[180px] md:min-w-[200px] relative group/item p-0 bg-transparent border-none text-left rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-75 transition-all duration-200">
+            <div class="relative">
+              <div class="absolute -left-10 sm:-left-12 md:-left-14 top-2/3 -translate-y-1/2 z-30 transition-all duration-300 group-hover/item:scale-110 group-hover/item:-translate-x-1">
+                <span class="text-[80px] sm:text-[100px] md:text-[120px] font-bold text-transparent group-hover/item:text-blue-500 drop-shadow-lg select-none pointer-events-none transition-all duration-300" style="-webkit-text-stroke: 2px rgb(59, 130, 246);font-family:sans-serif;">8</span>
+              </div>
+              <div class="overflow-hidden rounded-lg relative z-20 transition-all duration-300 group-hover/item:shadow-[0_0_15px_rgba(59,130,246,0.7)]">
+                <img src="https://image.tmdb.org/t/p/w500/fPJWlhXA2VXf4MlQ3JenVsz1iba.jpg" alt="El Escuadrón Suicida" class="aspect-[2/3] object-cover w-full h-full transition-transform duration-300 group-hover/item:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                <div class="absolute inset-0 border-2 border-blue-500 rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
+              </div>
+            </div>
+          </button>
+          <button onclick="window.location.href='/watch/?type=movie&amp;id=7451';" class="cursor-pointer min-w-[140px] sm:min-w-[180px] md:min-w-[200px] relative group/item p-0 bg-transparent border-none text-left rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-75 transition-all duration-200">
+            <div class="relative">
+              <div class="absolute -left-10 sm:-left-12 md:-left-14 top-2/3 -translate-y-1/2 z-30 transition-all duration-300 group-hover/item:scale-110 group-hover/item:-translate-x-1">
+                <span class="text-[80px] sm:text-[100px] md:text-[120px] font-bold text-transparent group-hover/item:text-blue-500 drop-shadow-lg select-none pointer-events-none transition-all duration-300" style="-webkit-text-stroke: 2px rgb(59, 130, 246);font-family:sans-serif;">9</span>
+              </div>
+              <div class="overflow-hidden rounded-lg relative z-20 transition-all duration-300 group-hover/item:shadow-[0_0_15px_rgba(59,130,246,0.7)]">
+                <img src="https://image.tmdb.org/t/p/w500/gd4hRY3pFXRY7YVbMdVBpnKV7wC.jpg" alt="xXx - Triple X" class="aspect-[2/3] object-cover w-full h-full transition-transform duration-300 group-hover/item:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                <div class="absolute inset-0 border-2 border-blue-500 rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
+              </div>
+            </div>
+          </button>
+          <button onclick="window.location.href='/watch/?type=movie&amp;id=1078605';" class="cursor-pointer min-w-[140px] sm:min-w-[180px] md:min-w-[200px] relative group/item p-0 bg-transparent border-none text-left rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-75 transition-all duration-200">
+            <div class="relative">
+              <div class="absolute -left-10 sm:-left-12 md:-left-14 top-2/3 -translate-y-1/2 z-30 transition-all duration-300 group-hover/item:scale-110 group-hover/item:-translate-x-1">
+                <span class="text-[80px] sm:text-[100px] md:text-[120px] font-bold text-transparent group-hover/item:text-blue-500 drop-shadow-lg select-none pointer-events-none transition-all duration-300" style="-webkit-text-stroke: 2px rgb(59, 130, 246);font-family:sans-serif;">10</span>
+              </div>
+              <div class="overflow-hidden rounded-lg relative z-20 transition-all duration-300 group-hover/item:shadow-[0_0_15px_rgba(59,130,246,0.7)]">
+                <img src="https://image.tmdb.org/t/p/w500/cwjNSLj5FCkwFsTx7g57ybWQDcp.jpg" alt="La hora de la desaparición" class="aspect-[2/3] object-cover w-full h-full transition-transform duration-300 group-hover/item:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                <div class="absolute inset-0 border-2 border-blue-500 rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
+              </div>
+            </div>
+          </button>
+        </div>
+        <svg id="top-slider-left-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="absolute top-0 bottom-0 left-2 z-40 m-auto h-6 w-6 md:h-9 md:w-9 cursor-pointer opacity-0 transition hover:scale-125 group-hover/row:opacity-100 hidden">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+        </svg>
+        <svg id="top-slider-right-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="absolute top-0 bottom-0 right-2 z-40 m-auto h-6 w-6 md:h-9 md:w-9 cursor-pointer opacity-0 transition hover:scale-125 group-hover/row:opacity-100">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+        </svg>
+      </div>
+    </div>
   </div>
-</section>
-
-
-
-  <!-- Main content -->
   <main class="px-4 pt-6 space-y-8">
-<section class="mt-6">
- <div class="flex justify-between items-center mb-2">
-    <h2 class="text-white text-base font-normal">Peliculas Populares</h2>
-    <a href="Categorias/movie/index.html" class="text-blue-500 text-sm font-semibold hover:underline">
-      Ver más
-    </a>
-  </div>
-  
-  <div class="flex overflow-x-auto space-x-2 scrollbar-hide pb-2 mx-0 px-0">
-    <div class="flex-shrink-0 flex flex-col items-center w-28 relative">
-      <a href="https://lzwebvideo.github.io/contenido478/index.html" target="_blank" class="relative overflow-hidden w-full">
-        <img
-          class="h-40 w-full object-cover"
-          src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/lfMKNOaaS2jGT3QKUaiFA8cO7DC.jpg"
-          alt=""
-        />
-        <div class="absolute top-2 right-2 flex items-center space-x-1 select-none">
-          <div class="w-0.5 h-5 bg-pink-500 rounded"></div>
-          <span class="text-white text-xs font-semibold">2025</span>
-        </div>
-      </a>
-      <span class="mt-1 text-white text-center text-sm font-semibold leading-tight truncate w-full">
-    Superman 
-      </span>
-    </div>
-
-    <div class="flex-shrink-0 flex flex-col items-center w-28 relative">
-      <a href="https://zinecia.github.io/contenido296/index.html" target="_blank" class="relative overflow-hidden w-full">
-        <img
-          class="h-40 w-full object-cover"
-          src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/oekamLQrwlJjRNmfaBE4llIvkir.jpg"
-          alt=""
-        />
-        <div class="absolute top-2 right-2 flex items-center space-x-1 select-none">
-          <div class="w-0.5 h-5 bg-pink-500 rounded"></div>
-          <span class="text-white text-xs font-semibold">2025</span>
-        </div>
-      </a>
-      <span class="mt-1 text-white text-center text-sm font-semibold leading-tight truncate w-full">
-        M3GAN 2.0
-      </span>
-    </div>
-
-    <div class="flex-shrink-0 flex flex-col items-center w-28 relative">
-      <a href="https://zinecia.github.io/contenido2/index.html" target="_blank" class="relative overflow-hidden w-full">
-        <img
-          class="h-40 w-full object-cover"
-          src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/bwNAjGUsHt35eqT0Aj8NHU02WPl.jpg"
-          alt=""
-        />
-        <div class="absolute top-2 right-2 flex items-center space-x-1 select-none">
-          <div class="w-0.5 h-5 bg-pink-500 rounded"></div>
-          <span class="text-white text-xs font-semibold">2025</span>
-        </div>
-      </a>
-      <span class="mt-1 text-white text-center text-sm font-semibold leading-tight truncate w-full">
-        Karate Kid: Legends
-      </span>
-    </div>
-
-    <div class="flex-shrink-0 flex flex-col items-center w-28 relative">
-      <a href="https://zinecia.github.io/contenido300/index.html" target="_blank" class="relative overflow-hidden w-full">
-        <img
-          class="h-40 w-full object-cover"
-          src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/gQCrYmvCK7JCLXjCGTMRF5Lzr5c.jpg"
-          alt="Lilo y Stitch"
-        />
-        <div class="absolute top-2 right-2 flex items-center space-x-1 select-none">
-          <div class="w-0.5 h-5 bg-pink-500 rounded"></div>
-          <span class="text-white text-xs font-semibold">2025</span>
-        </div>
-      </a>
-      <span class="mt-1 text-white text-center text-sm font-semibold leading-tight truncate w-full">
-      Bailarina
-      </span>
-    </div>
-
-  </div>
-</section>
-
+    <section class="mt-6">
+      <div class="flex justify-between items-center mb-2">
+        <h2 class="text-white text-base font-normal">Películas Populares</h2>
+        <a href="Categorias/movie/index.html" class="text-blue-500 text-sm font-semibold hover:underline">Ver más</a>
+      </div>
+      <div id="popularMovies" class="flex overflow-x-auto space-x-2 scrollbar-hide pb-2 mx-0 px-0">
+        <!-- Películas populares serán insertadas dinámicamente aquí -->
+      </div>
+    </section>
     <div id="movies">
-            <h2 class="text-white text-base font-normal">Categorias</h2>
-        <div class="flex overflow-x-auto space-x-3 scrollbar-hide whitespace-nowrap">
-
-<a href="https://zinecia.github.io/actionyaventure/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
-  <div class="relative w-full h-[110px] md:h-[130px]">
-    <img src="https://i.blogs.es/e06f17/esperados-accionaventura-2023/1366_2000.png" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
-
-    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
-
-    <div class="absolute inset-0 flex items-center justify-center">
-      <p class="text-white text-sm font-extrabold text-center px-2">Action & Adventure</p>
+      <h2 class="text-white text-base font-normal">Categorías</h2>
+      <div class="flex overflow-x-auto space-x-3 scrollbar-hide whitespace-nowrap">
+        <a href="https://zinecia.github.io/actionyaventure/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+          <div class="relative w-full h-[110px] md:h-[130px]">
+            <img src="https://i.blogs.es/e06f17/esperados-accionaventura-2023/1366_2000.png" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+            <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <p class="text-white text-sm font-extrabold text-center px-2">Action & Adventure</p>
+            </div>
+          </div>
+        </a>
+        <a href="Categorias/aventura/index.html" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+          <div class="relative w-full h-[110px] md:h-[130px]">
+            <img src="https://aventurateaviajar.com/library/mod_noticias/images/razones-para-elegir-un-viaje-de-aventura.jpg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+            <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <p class="text-white text-sm font-extrabold text-center px-2">Aventura</p>
+            </div>
+          </div>
+        </a>
+        <a href="https://zinecia.github.io/label-belica/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+          <div class="relative w-full h-[110px] md:h-[130px]">
+            <img src="https://eternacadencia.com.ar/files/tmp/compressed/normal/ieahai2yxhu6id1ywvma.png" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+            <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <p class="text-white text-sm font-extrabold text-center px-2">Bélica</p>
+            </div>
+          </div>
+        </a>
+        <a href="https://zinecia.github.io/cienciaficcion/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+          <div class="relative w-full h-[110px] md:h-[130px]">
+            <img src="https://pe-media.hptiendaenlinea.com/magefan_blog/ciencia_ficcion.jpg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+            <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <p class="text-white text-sm font-extrabold text-center px-2">Ciencia Ficción</p>
+            </div>
+          </div>
+        </a>
+        <a href="Categorias/comedia/index.html" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+          <div class="relative w-full h-[110px] md:h-[130px]">
+            <img src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2019/04/scary-movie.jpg?tf=3840x" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+            <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <p class="text-white text-sm font-extrabold text-center px-2">Comedia</p>
+            </div>
+          </div>
+        </a>
+        <a href="https://zinecia.github.io/crimen/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+          <div class="relative w-full h-[110px] md:h-[130px]">
+            <img src="https://cdn.avpasion.com/wp-content/uploads/2025/02/acaba-llegar-prime-video-pelicula-crimen-y-accion-2024-01.jpg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+            <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <p class="text-white text-sm font-extrabold text-center px-2">Crimen</p>
+            </div>
+          </div>
+        </a>
+        <a href="https://zinecia.github.io/documental/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+          <div class="relative w-full h-[110px] md:h-[130px]">
+            <img src="https://images.squarespace-cdn.com/content/v1/5de6b88b8ec727201d648eaa/1584187813706-MFE899VDZD8ZKUK0ZZZ9/image-asset.jpeg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+            <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <p class="text-white text-sm font-extrabold text-center px-2">Documental</p>
+            </div>
+          </div>
+        </a>
+        <a href="https://zinecia.github.io/drama/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+          <div class="relative w-full h-[110px] md:h-[130px]">
+            <img src="https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2023/12/pelicula-ver-tdt-hoy-drama-romantico-madre-dragones-3253702.jpg?tf=3840x" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+            <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <p class="text-white text-sm font-extrabold text-center px-2">Drama</p>
+            </div>
+          </div>
+        </a>
+        <a href="https://zinecia.github.io/familia/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+          <div class="relative w-full h-[110px] md:h-[130px]">
+            <img src="https://imparcialoaxaca.mx/wp-content/uploads/2023/09/Peli-en-familia.jpg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+            <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <p class="text-white text-sm font-extrabold text-center px-2">Familia</p>
+            </div>
+          </div>
+        </a>
+        <a href="https://zinecia.github.io/fantasia/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+          <div class="relative w-full h-[110px] md:h-[130px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhHiBEt6vppEmoSlDCp_-Fuwy-WY-sXekkUkz6XMs6E_d8i_YjESJQxmrV9Om11XXMwfFRxrp1K6P9yGz-Z1Xvd0tN2djasrNn5kPSwnxAMBqtZ2nXKCszLArWlqv-1fwkuWVq2Wuo3bOMGrsBKTIFeZzPNBwmseZpub1ngkX73KLKE18LOUwZbvsb-BOEz/s1200/mejores-peliculas-fantasi.jpeg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+            <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <p class="text-white text-sm font-extrabold text-center px-2">Fantasía</p>
+            </div>
+          </div>
+        </a>
+        <a href="https://zinecia.github.io/misterio/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+          <div class="relative w-full h-[110px] md:h-[130px]">
+            <img src="https://img.freepik.com/fotos-premium/agente-informa-detectives-sobre-hallazgos-analisis-forense-investigacion-curso-concepto-analisis-forense-hallazgos-investigacion-actualizaciones-detective-briefing-escena-crimen-evidencia-progreso-caso_918839-61709.jpg?semt=ais_items_boosted&w=740" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+            <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <p class="text-white text-sm font-extrabold text-center px-2">Misterio</p>
+            </div>
+          </div>
+        </a>
+        <a href="https://zinecia.github.io/musical/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+          <div class="relative w-full h-[110px] md:h-[130px]">
+            <img src="https://yucatancultura.com/wp-content/uploads/2018/01/gran-showman_5-1024x478.jpg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+            <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <p class="text-white text-sm font-extrabold text-center px-2">Musical</p>
+            </div>
+          </div>
+        </a>
+        <a href="https://zinecia.github.io/SciFiFantasy/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+          <div class="relative w-full h-[110px] md:h-[130px]">
+            <img src="https://static1.colliderimages.com/wordpress/wp-content/uploads/2022/07/Sci-Fi--Fantasy-Films-2.jpg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+            <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <p class="text-white text-sm font-extrabold text-center px-2">Sci-Fi & Fantasy</p>
+            </div>
+          </div>
+        </a>
+        <a href="https://zinecia.github.io/suspenso/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
+          <div class="relative w-full h-[110px] md:h-[130px]">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnzjYHpEnsn88-T15cy9jnW0ayVVaYqpetKg&s" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
+            <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <p class="text-white text-sm font-extrabold text-center px-2">Suspenso</p>
+            </div>
+          </div>
+        </a>
+      </div>
     </div>
-  </div>
-</a>
-
-<a href="Categorias/aventura/index.html" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
-  <div class="relative w-full h-[110px] md:h-[130px]">
-    <img src="https://aventurateaviajar.com/library/mod_noticias/images/razones-para-elegir-un-viaje-de-aventura.jpg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
-
-    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
-
-    <div class="absolute inset-0 flex items-center justify-center">
-      <p class="text-white text-sm font-extrabold text-center px-2">Aventura</p>
-    </div>
-  </div>
-</a>
-
-		  <a href="https://zinecia.github.io/label-belica/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
-  <div class="relative w-full h-[110px] md:h-[130px]">
-    <img src="https://eternacadencia.com.ar/files/tmp/compressed/normal/ieahai2yxhu6id1ywvma.png" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
-
-    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
-
-    <div class="absolute inset-0 flex items-center justify-center">
-      <p class="text-white text-sm font-extrabold text-center px-2">Belica</p>
-    </div>
-  </div>
-</a>
-
-		  <a href="https://zinecia.github.io/cienciaficcion/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
-  <div class="relative w-full h-[110px] md:h-[130px]">
-    <img src="https://pe-media.hptiendaenlinea.com/magefan_blog/ciencia_ficcion.jpg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
-
-    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
-
-    <div class="absolute inset-0 flex items-center justify-center">
-      <p class="text-white text-sm font-extrabold text-center px-2">Ciencia Ficcion</p>
-    </div>
-  </div>
-</a>
-
-		  <a href="Categorias/comedia/index.html" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
-  <div class="relative w-full h-[110px] md:h-[130px]">
-    <img src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2019/04/scary-movie.jpg?tf=3840x" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
-
-    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
-
-    <div class="absolute inset-0 flex items-center justify-center">
-      <p class="text-white text-sm font-extrabold text-center px-2">Comedia</p>
-    </div>
-  </div>
-</a>
-
-		  <a href="https://zinecia.github.io/crimen/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
-  <div class="relative w-full h-[110px] md:h-[130px]">
-    <img src="https://cdn.avpasion.com/wp-content/uploads/2025/02/acaba-llegar-prime-video-pelicula-crimen-y-accion-2024-01.jpg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
-
-    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
-
-    <div class="absolute inset-0 flex items-center justify-center">
-      <p class="text-white text-sm font-extrabold text-center px-2">Crimen</p>
-    </div>
-  </div>
-</a>
-
-		  <a href="https://zinecia.github.io/documental/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
-  <div class="relative w-full h-[110px] md:h-[130px]">
-    <img src="https://images.squarespace-cdn.com/content/v1/5de6b88b8ec727201d648eaa/1584187813706-MFE899VDZD8ZKUK0ZZZ9/image-asset.jpeg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
-
-    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
-
-    <div class="absolute inset-0 flex items-center justify-center">
-      <p class="text-white text-sm font-extrabold text-center px-2">Documental</p>
-    </div>
-  </div>
-</a>
-
-		  <a href="https://zinecia.github.io/drama/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
-  <div class="relative w-full h-[110px] md:h-[130px]">
-    <img src="https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2023/12/pelicula-ver-tdt-hoy-drama-romantico-madre-dragones-3253702.jpg?tf=3840x" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
-
-    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
-
-    <div class="absolute inset-0 flex items-center justify-center">
-      <p class="text-white text-sm font-extrabold text-center px-2">Drama</p>
-    </div>
-  </div>
-</a>
-
-		  <a href="https://zinecia.github.io/familia/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
-  <div class="relative w-full h-[110px] md:h-[130px]">
-    <img src="https://imparcialoaxaca.mx/wp-content/uploads/2023/09/Peli-en-familia.jpg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
-
-    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
-
-    <div class="absolute inset-0 flex items-center justify-center">
-      <p class="text-white text-sm font-extrabold text-center px-2">Familia</p>
-    </div>
-  </div>
-</a>
-
-		  <a href="https://zinecia.github.io/fantasia/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
-  <div class="relative w-full h-[110px] md:h-[130px]">
-    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhHiBEt6vppEmoSlDCp_-Fuwy-WY-sXekkUkz6XMs6E_d8i_YjESJQxmrV9Om11XXMwfFRxrp1K6P9yGz-Z1Xvd0tN2djasrNn5kPSwnxAMBqtZ2nXKCszLArWlqv-1fwkuWVq2Wuo3bOMGrsBKTIFeZzPNBwmseZpub1ngkX73KLKE18LOUwZbvsb-BOEz/s1200/mejores-peliculas-fantasi.jpeg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
-
-    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
-
-    <div class="absolute inset-0 flex items-center justify-center">
-      <p class="text-white text-sm font-extrabold text-center px-2">Fantasia</p>
-    </div>
-  </div>
-</a>
-
-		  <a href="https://zinecia.github.io/misterio/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
-  <div class="relative w-full h-[110px] md:h-[130px]">
-    <img src="https://img.freepik.com/fotos-premium/agente-informa-detectives-sobre-hallazgos-analisis-forense-investigacion-curso-concepto-analisis-forense-hallazgos-investigacion-actualizaciones-detective-briefing-escena-crimen-evidencia-progreso-caso_918839-61709.jpg?semt=ais_items_boosted&w=740" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
-
-    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
-
-    <div class="absolute inset-0 flex items-center justify-center">
-      <p class="text-white text-sm font-extrabold text-center px-2">Misterio</p>
-    </div>
-  </div>
-</a>
-
-		  <a href="https://zinecia.github.io/musical/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
-  <div class="relative w-full h-[110px] md:h-[130px]">
-    <img src="https://yucatancultura.com/wp-content/uploads/2018/01/gran-showman_5-1024x478.jpg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
-
-    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
-
-    <div class="absolute inset-0 flex items-center justify-center">
-      <p class="text-white text-sm font-extrabold text-center px-2">Musical</p>
-    </div>
-  </div>
-</a>
-
-		  <a href="https://zinecia.github.io/SciFiFantasy/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
-  <div class="relative w-full h-[110px] md:h-[130px]">
-    <img src="https://static1.colliderimages.com/wordpress/wp-content/uploads/2022/07/Sci-Fi--Fantasy-Films-2.jpg" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
-
-    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
-
-    <div class="absolute inset-0 flex items-center justify-center">
-      <p class="text-white text-sm font-extrabold text-center px-2">Sci-Fi & Fantasy</p>
-    </div>
-  </div>
-</a>
-
-		  <a href="https://zinecia.github.io/suspenso/" class="flex-shrink-0 w-[180px] relative overflow-hidden rounded-lg">
-  <div class="relative w-full h-[110px] md:h-[130px]">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnzjYHpEnsn88-T15cy9jnW0ayVVaYqpetKg&s" alt="Movie 1" class="w-full h-full object-cover rounded-lg"/>
-
-    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
-
-    <div class="absolute inset-0 flex items-center justify-center">
-      <p class="text-white text-sm font-extrabold text-center px-2">Suspenso</p>
-    </div>
-  </div>
-</a>
-
+    <div class="px-4 md:px-8">
+      <div class="relative w-full h-[280px] sm:h-[320px] md:h-[420px] bg-black/30 rounded-xl overflow-hidden border border-gray-800/30 shadow-lg shadow-black/10 mb-8 mt-2">
+        <div class="absolute inset-0">
+          <img alt="Alien: Earth" class="object-cover" src="https://image.tmdb.org/t/p/original//25g7mthXoJFcNZhAKz0evk17Bsx.jpg" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
+          <div class="absolute inset-0 bg-gradient-to-r from-black/95 via-transparent to-black/95"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/50"></div>
+          <div class="absolute left-0 top-0 bottom-0 w-[10%] bg-gradient-to-r from-[#00081a]/30 to-transparent"></div>
+          <div class="absolute right-0 top-0 bottom-0 w-[10%] bg-gradient-to-l from-[#00081a]/30 to-transparent"></div>
+        </div>
+        <div class="relative h-full flex flex-col md:flex-row items-center md:gap-12 px-5 md:px-10 py-6 md:py-0">
+          <div class="hidden md:block flex-shrink-0 w-[200px] h-[300px] relative rounded-lg overflow-hidden shadow-xl shadow-[#00081a]/40 border border-[#00081a]/30 transform hover:scale-105 transition-all duration-300">
+            <div class="absolute -inset-1 bg-[#00081a]/20 blur-md rounded-xl"></div>
+            <div class="relative rounded-lg overflow-hidden h-full w-full">
+              <img alt="Alien: Earth" class="object-cover" src="https://image.tmdb.org/t/p/w500//8IIPZe4V2xNYFWY7lBY6GpN2L8O.jpg" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-40"></div>
+              <div class="absolute top-3 left-3 w-10 h-10 bg-black/80 rounded-full flex items-center justify-center backdrop-blur-sm border border-[#00081a]/40">
+                <div class="relative w-full h-full flex items-center justify-center">
+                  <svg class="absolute inset-0 w-full h-full" viewBox="0 0 36 36">
+                    <circle cx="18" cy="18" r="15.9" fill="none" stroke="#3b82f6" stroke-width="1.2" stroke-dasharray="73, 100" stroke-linecap="round" transform="rotate(-90 18 18)"></circle>
+                  </svg>
+                  <span class="text-white text-xs font-medium">7.9</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex-1 max-w-3xl space-y-3 md:space-y-4 md:ml-3 pt-2">
+            <h2 class="text-xl sm:text-3xl md:text-5xl font-bold text-white tracking-wide drop-shadow-md">Alien: Earth</h2>
+            <div class="flex items-center gap-3 text-xs md:text-sm">
+              <span class="bg-blue-600 text-white text-xs px-3 py-0.5 rounded-md font-medium">SERIE</span>
+              <div class="flex items-center gap-1 text-yellow-400">
+                <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-star w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771 .56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53 .53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53 .53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                <span>7.9</span>
+              </div>
+              <span class="text-white/70">2025</span>
+            </div>
+            <p class="text-white/80 text-sm md:text-base line-clamp-2 md:line-clamp-3 max-w-2xl leading-relaxed">Cuando una misteriosa nave espacial se estrella en la Tierra, una joven y un grupo heterogéneo de soldados tácticos hacen un descubrimiento fatídico que los pone cara a cara con la mayor amenaza del planeta.</p>
+            <div class="flex items-center gap-3 md:gap-4 pt-3 md:pt-4">
+              <a href="/watch/?type=tv&amp;id=157239&amp;season=1&amp;episode=1" class="flex items-center gap-2 bg-blue-600 text-white px-4 md:px-6 py-2 rounded-md hover:bg-blue-700 transition-all duration-200 text-sm md:text-base font-medium">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-play w-4 h-4 md:w-5 md:h-5"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+                Ver ahora
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-	
+    </div>
+  </main>
+  <footer class="text-white pt-0 pb-12 md:pb-12 transition-colors duration-500" style="background-color: rgb(0, 8, 20);">
+    <div class="border-t border-white/10 max-w-5xl mx-auto pt-6 md:pt-10 text-center">
+      <p class="text-gray-400 text-xs md:text-sm">© 2025 CINE HAX. Reservados todos los derechos.</p>
+      <p class="text-gray-500 text-xs mt-1 md:mt-2 mb-16 md:mb-0">Este sitio no almacena ningún archivo en su servidor. Todo el contenido es proporcionado por terceros no afiliados.</p>
+    </div>
+  </footer>
+  <script>
+ async function fetchPeliculas() {
+  const apiUrl = 'https://api.github.com/repos/lzrdrz10/sv/contents/Peliculas';
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) throw new Error(`Error al obtener archivos de GitHub: ${response.status}`);
+    const data = await response.json();
 
+    const peliculasPromises = data
+      .filter(item => item.type === 'file' && item.name.endsWith('.html'))
+      .map(async (item) => {
+        try {
+          const htmlResponse = await fetch(item.download_url);
+          if (!htmlResponse.ok) throw new Error(`Error al obtener ${item.download_url}: ${htmlResponse.status}`);
+          const html = await htmlResponse.text();
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
 
-<script src="HOME/script.js"></script>
+          // Extraer título
+          const titulo = doc.querySelector('title') ? doc.querySelector('title').textContent.trim() : 'Título desconocido';
+
+          // Extraer imagen de fondo del CSS para hero
+          let backgroundImage = '';
+          const styleElement = doc.querySelector('style');
+          if (styleElement) {
+            const cssText = styleElement.textContent;
+            const bgMatch = cssText.match(/body\s*{\s*background:\s*url\(['"]([^'"]+)['"]\)/i);
+            if (bgMatch && bgMatch[1]) {
+              backgroundImage = bgMatch[1];
+            }
+          }
+
+          // Extraer poster para populares
+          let posterImage = '';
+          const posterDiv = doc.querySelector('.flex.items-center.justify-center.w-\\\[110px\\\].h-\\\[160px\\\]');
+          if (posterDiv) {
+            const img = posterDiv.querySelector('img');
+            if (img) {
+              posterImage = img.src;
+            }
+          } else {
+            const fallbackImg = doc.querySelector('img[src^="https://image.tmdb.org"]');
+            if (fallbackImg) {
+              posterImage = fallbackImg.src;
+            }
+          }
+
+          // Extraer sinopsis
+          let sinopsis = '';
+          const sinopsisElement = doc.querySelector('#sinopsis p.text-gray-300.text-sm.leading-relaxed');
+          if (sinopsisElement) {
+            sinopsis = sinopsisElement.textContent.trim();
+            console.log(`Sinopsis encontrada para ${item.name}: ${sinopsis.substring(0, 50)}...`);
+          } else {
+            sinopsis = 'Sinopsis no disponible.';
+            console.warn(`No se encontró sinopsis en ${item.download_url}`);
+          }
+
+          // Construir URL
+          const url = `https://lzrdrz10.github.io/sv/Peliculas/${item.name}`;
+
+          // Extraer año
+          let year = '2025';
+          const yearElement = doc.querySelector('.year, [class*="year"], [data-year], .flex.flex-wrap.items-center.space-x-2.text-xs.text-gray-400 span:last-child');
+          if (yearElement) {
+            year = yearElement.textContent.trim() || '2025';
+          }
+
+          return { titulo, heroImage: backgroundImage, posterImage, sinopsis, url, year };
+        } catch (error) {
+          console.error(`Error procesando ${item.name}:`, error);
+          return null;
+        }
+      });
+
+    let peliculas = (await Promise.all(peliculasPromises)).filter(p => p !== null);
+
+    if (peliculas.length === 0) {
+      console.warn('No se encontraron películas, usando datos de respaldo.');
+      peliculas = [
+        {
+          titulo: "Cómo entrenar a tu dragón (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
+          sinopsis: "En la escarpada isla de Mema, donde vikingos y dragones han sido enemigos acérrimos durante generaciones, Hipo se desmarca desafiando siglos de tradición cuando entabla amistad con Desdentao, un temido dragón Furia Nocturna...",
+          url: "https://zinecia.github.io/peli73/index.html",
+          year: "2025"
+        },
+        {
+          titulo: "Happy Gilmore 2 (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
+          sinopsis: "Happy, ya retirado del golf profesional, regresa al circuito no por gloria sino para financiar la escuela de danza de su hija, Viena.",
+          url: "https://tvacount.github.io/contenido206/index.html",
+          year: "2025"
+        },
+        {
+          titulo: "Lilo y Stitch (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
+          sinopsis: "Una solitaria niña hawaiana y un extraterrestre fugitivo crean un vínculo inquebrantable en esta aventura llena de emociones.",
+          url: "https://zinecia.github.io/peli96/index.html",
+          year: "2025"
+        },
+        {
+          titulo: "Los Cuatro Fantásticos (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
+          sinopsis: "La Primera Familia de Marvel enfrenta a Galactus y su heraldo Estela Plateada, mientras tratan de proteger el mundo y su unión familiar.",
+          url: "https://tvacount.github.io/contenido190/index.html",
+          year: "2025"
+        }
+      ];
+    }
+
+    return peliculas;
+  } catch (error) {
+    console.error('Error al cargar películas:', error);
+    return [];
+  }
+}
+
+async function loadPeliculas() {
+  const cacheKey = 'cachedPeliculas';
+  const timestampKey = 'peliculasTimestamp';
+  const cacheDuration = 24 * 60 * 60 * 1000;
+
+  // Limpiar caché para pruebas (puedes eliminar esto después de verificar que funciona)
+  localStorage.removeItem('cachedPeliculas');
+  localStorage.removeItem('peliculasTimestamp');
+
+  const cachedData = localStorage.getItem(cacheKey);
+  const cachedTimestamp = localStorage.getItem(timestampKey);
+
+  let peliculas;
+  const now = Date.now();
+
+  if (cachedData && cachedTimestamp && (now - parseInt(cachedTimestamp, 10) < cacheDuration)) {
+    peliculas = JSON.parse(cachedData);
+    console.log('Cargando películas desde caché');
+  } else {
+    peliculas = await fetchPeliculas();
+    if (peliculas.length > 0) {
+      localStorage.setItem(cacheKey, JSON.stringify(peliculas));
+      localStorage.setItem(timestampKey, now.toString());
+      console.log('Películas cargadas desde API y guardadas en caché');
+    } else {
+      console.warn('No se cargaron películas, usando datos de respaldo');
+      peliculas = [
+        {
+          titulo: "Cómo entrenar a tu dragón (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
+          sinopsis: "En la escarpada isla de Mema, donde vikingos y dragones han sido enemigos acérrimos durante generaciones, Hipo se desmarca desafiando siglos de tradición cuando entabla amistad con Desdentao, un temido dragón Furia Nocturna...",
+          url: "https://zinecia.github.io/peli73/index.html",
+          year: "2025"
+        },
+        {
+          titulo: "Happy Gilmore 2 (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
+          sinopsis: "Happy, ya retirado del golf profesional, regresa al circuito no por gloria sino para financiar la escuela de danza de su hija, Viena.",
+          url: "https://tvacount.github.io/contenido206/index.html",
+          year: "2025"
+        },
+        {
+          titulo: "Lilo y Stitch (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
+          sinopsis: "Una solitaria niña hawaiana y un extraterrestre fugitivo crean un vínculo inquebrantable en esta aventura llena de emociones.",
+          url: "https://zinecia.github.io/peli96/index.html",
+          year: "2025"
+        },
+        {
+          titulo: "Los Cuatro Fantásticos (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
+          sinopsis: "La Primera Familia de Marvel enfrenta a Galactus y su heraldo Estela Plateada, mientras tratan de proteger el mundo y su unión familiar.",
+          url: "https://tvacount.github.io/contenido190/index.html",
+          year: "2025"
+        }
+      ];
+    }
+  }
+
+  const elegida = peliculas[Math.floor(Math.random() * peliculas.length)];
+
+  document.getElementById('dynamicHero').innerHTML = `
+    <img src="${elegida.heroImage || 'https://image.tmdb.org/t/p/original/zsgdVbuEwqZbnUN9qLGEMBYf2Zo.jpg'}" alt="${elegida.titulo}" class="w-full h-full object-cover" />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
+      <h2 class="text-white text-3xl md:text-4xl font-extrabold mb-6 drop-shadow-lg">${elegida.titulo}</h2>
+      <div class="flex space-x-5">
+        <a href="${elegida.url}" target="_blank" 
+           class="flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full shadow-lg transition duration-300 ease-in-out">
+          <i class="fas fa-play mr-3 text-lg"></i>Play
+        </a>
+        <button id="openModal" 
+           class="flex items-center bg-transparent border-2 border-white hover:border-blue-600 hover:text-blue-600 text-white font-semibold px-6 py-3 rounded-full shadow-md transition duration-300 ease-in-out">
+          <i class="fas fa-info-circle mr-3 text-lg"></i> Info
+        </button>
+      </div>
+    </div>
+  `;
+
+  const modal = document.getElementById('infoModal');
+  const modalText = document.getElementById('modalDescription');
+  const openModalBtn = document.getElementById('openModal');
+  const closeModalBtn = document.getElementById('closeModal');
+
+  openModalBtn.addEventListener('click', function() {
+    modal.classList.remove('hidden');
+    modalText.textContent = elegida.sinopsis || 'Sinopsis no disponible.';
+    console.log(`Mostrando sinopsis para ${elegida.titulo}: ${elegida.sinopsis.substring(0, 50)}...`);
+  });
+
+  closeModalBtn.addEventListener('click', function() {
+    modal.classList.add('hidden');
+  });
+
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) modal.classList.add('hidden');
+  });
+
+  const popularMoviesContainer = document.getElementById('popularMovies');
+  popularMoviesContainer.innerHTML = peliculas.slice(0, 4).map(pelicula => `
+    <div class="flex-shrink-0 flex flex-col items-center w-28 relative">
+      <a href="${pelicula.url}" target="_blank" class="relative overflow-hidden w-full">
+        <img class="h-40 w-full object-cover" src="${pelicula.posterImage}" alt="${pelicula.titulo}" />
+        <div class="absolute top-2 right-2 flex items-center space-x-1 select-none">
+          <div class="w-0.5 h-5 bg-pink-500 rounded"></div>
+          <span class="text-white text-xs font-semibold">${pelicula.year}</span>
+        </div>
+      </a>
+      <span class="mt-1 text-white text-center text-sm font-semibold leading-tight truncate w-full">
+        ${pelicula.titulo}
+      </span>
+    </div>
+  `).join('');
+}
+
+loadPeliculas();
+
+var iconoGuardado = localStorage.getItem('iconoUsuario');
+if(iconoGuardado){
+  document.getElementById('iconoImg').src = iconoGuardado;
+} else {
+  document.getElementById('iconoImg').src = 'https://i.pinimg.com/736x/91/86/1b/91861b749841221d52122f0c2933d8a6.jpg';
+}
+
+var btnUsuario = document.getElementById('btnUsuario');
+btnUsuario.addEventListener('click', function(){
+  window.location.href = 'HOME/ajustes.html';
+});
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
