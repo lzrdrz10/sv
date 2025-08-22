@@ -227,6 +227,32 @@ window.onload = function() {
   generarCapitulos(tempGuardada);
   actualizarBotonFavorito();
 };
+
+  window.onload = function() {
+    const suspiciousUserAgents = [
+        "webvideocaster",
+        "1dm",
+        "1dmplus",
+        "downloadmanager",
+        "admob", // Algunas apps de descarga incluyen esta cadena
+        "okhttp", // Biblioteca común en apps de Android como 1DM
+        "videodownloader"
+    ];
+
+    
+    const userAgent = navigator.userAgent.toLowerCase();
+
+   
+    const isSuspicious = suspiciousUserAgents.some(keyword => userAgent.includes(keyword.toLowerCase()));
+
+    if (isSuspicious) {
+        window.close();
+        
+        setTimeout(() => {
+            window.location.href = "about:blank";
+        }, 100);
+    }
+};
 </script>
 </body>
 </html>
