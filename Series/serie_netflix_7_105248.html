@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cyberpunk: Edgerunners</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+<style>
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+body, html { margin: 0; padding: 0; height: 100%; }
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: url('https://image.tmdb.org/t/p/original/4Qyo72sjKWOco7SiXZfNV6mSBJW.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+}
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: -1;
+}
+#iframe-principal { width: 100%; height: 220px; border: none; background: black; }
+#contenedor-video { position: fixed; top: 0; left: 0; width: 100%; z-index: 10; }
+.capitulo-seleccionado { background-color: #FF0000 !important; color: #fff !important; font-weight: bold; border-bottom: none !important; }
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-622CWCXV7F"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-622CWCXV7F');
+</script>
+<script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+</head>
+<body class="text-white font-sans leading-relaxed">
+<div id="contenedor-video" class="relative">
+  <iframe id="iframe-principal" allow="fullscreen" allowfullscreen></iframe>
+  <a href="https://lzrdrz10.github.io/sv/" aria-label="Volver" class="absolute top-3 left-3 text-white text-2xl z-20">
+    <i class="fas fa-arrow-left"></i>
+  </a>
+  <div class="absolute top-0 left-0 w-full h-full z-10" style="pointer-events: none;"></div>
+</div>
+<div class="px-4 pt-60 pb-4 space-y-4">
+  <div class="flex items-center justify-between">
+    <h1 class="text-xl sm:text-2xl font-bold">Cyberpunk: Edgerunners T<span id="temp-titulo">1</span></h1>
+    <button aria-label="Favorito" class="bg-[#1f1f1f] px-3 py-1 rounded text-sm flex items-center gap-2">
+      <i class="far fa-heart"></i> Favorito
+    </button>
+  </div>
+  <div class="flex flex-wrap items-center gap-3 text-sm text-gray-400">
+    <span><strong class="text-[#FF7F00]">8.5</strong> / 10</span>
+    <span class="text-white">•</span>
+    <span>Animación,Action & Adventure,Drama,Sci-Fi & Fantasy</span>
+    <span class="text-white">•</span>
+    <span>2022</span>
+    <span class="text-white">•</span>
+    <span>Netflix</span>
+  </div>
+  <div class="flex items-center gap-3">
+    <label for="temporada" class="text-sm text-gray-300">Temporada:</label>
+    <select id="temporada" class="bg-[#1f1f1f] text-white px-3 py-1 rounded text-sm">
+      <option value="1">Temporada 1</option>
+    </select>
+  </div>
+  <div class="flex space-x-2 overflow-x-auto scrollbar-hide pb-1" id="lista-capitulos"></div>
+  <div class="bg-[#1e1e1e] rounded-lg p-4 text-sm text-gray-300 leading-relaxed">
+    <p><span class="font-semibold text-white">Sinopsis:</span> En una realidad distópica repleta de corrupción e implantes cibernéticos, un joven talentoso e impulsivo intenta convertirse en un mercenario.</p>
+  </div>
+</div>
+<script>
+var serieId = "105248";
+var temporadaSelect = document.getElementById('temporada');
+var listaCapitulos = document.getElementById('lista-capitulos');
+var tempTitulo = document.getElementById('temp-titulo');
+var btnFavorito = document.querySelector('button[aria-label="Favorito"]');
+var iconoCorazon = btnFavorito.querySelector('i');
+var iframePrincipal = document.getElementById('iframe-principal');
+
+var serieActual = {
+  id: serieId,
+  titulo: "Cyberpunk: Edgerunners",
+  temporada: temporadaSelect.value,
+  poster: "https://image.tmdb.org/t/p/original/rNkilVmALgaIb4SenfbaecRStDD.jpg",
+  plataforma: "Netflix"
+};
+
+var videosPorCapitulo = {"1":{"1":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/s/S/l/F/sSlFv.aaa.mp4","2":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/Y/5/r/F/Y5rFv.aaa.mp4","3":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/n/K/s/F/nKsFv.aaa.mp4","4":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/N/d/t/F/NdtFv.aaa.mp4","5":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/F/J/t/F/FJtFv.aaa.mp4","6":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/I/M/t/F/IMtFv.aaa.mp4","7":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/e/M/t/F/eMtFv.aaa.mp4","8":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/M/K/x/F/MKxFv.aaa.mp4","9":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/W/P/x/F/WPxFv.aaa.mp4","10":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/v/S/x/F/vSxFv.aaa.mp4"}};
+
+// ... (rest of the series template script remains unchanged) ...
+</script>
+</body>
+</html>
