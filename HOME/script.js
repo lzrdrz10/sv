@@ -190,7 +190,7 @@ async function loadPeliculas() {
     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
       <h2 class="text-white text-3xl md:text-4xl font-extrabold mb-6 drop-shadow-lg">${elegida.titulo}</h2>
       <div class="flex space-x-5">
-        <a href="${elegida.url}" target="_blank" 
+        <a href="${elegida.url}"  
            class="flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full shadow-lg transition duration-300 ease-in-out">
           <i class="fas fa-play mr-3 text-lg"></i>Play
         </a>
@@ -224,7 +224,7 @@ async function loadPeliculas() {
   const popularMoviesContainer = document.getElementById('popularMovies');
   popularMoviesContainer.innerHTML = peliculas.slice(0, 4).map(pelicula => `
     <div class="flex-shrink-0 flex flex-col items-center w-28 relative">
-      <a href="${pelicula.url}" target="_blank" class="relative overflow-hidden w-full">
+      <a href="${pelicula.url}"  class="relative overflow-hidden w-full">
         <img class="h-40 w-full object-cover" src="${pelicula.posterImage}" alt="${pelicula.titulo}" />
         <div class="absolute top-2 right-2 flex items-center space-x-1 select-none">
           <div class="w-0.5 h-5 bg-pink-500 rounded"></div>
