@@ -1,4 +1,5 @@
-async function fetchPeliculas() {
+
+ async function fetchPeliculas() {
   const apiUrl = 'https://api.github.com/repos/lzrdrz10/sv/contents/Peliculas';
   try {
     const response = await fetch(apiUrl);
@@ -82,7 +83,7 @@ async function fetchPeliculas() {
           heroImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
           sinopsis: "En la escarpada isla de Mema, donde vikingos y dragones han sido enemigos acérrimos durante generaciones, Hipo se desmarca desafiando siglos de tradición cuando entabla amistad con Desdentao, un temido dragón Furia Nocturna...",
-          url: "https://lz.blogdepelis.lat/Peliculas/pelicula2/index.html",
+          url: "https://zinecia.github.io/peli73/index.html",
           year: "2025"
         },
         {
@@ -90,17 +91,25 @@ async function fetchPeliculas() {
           heroImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
           sinopsis: "Happy, ya retirado del golf profesional, regresa al circuito no por gloria sino para financiar la escuela de danza de su hija, Viena.",
-          url: "https://lz.blogdepelis.lat/Peliculas/pelicula6/index.html",
+          url: "https://tvacount.github.io/contenido206/index.html",
           year: "2025"
         },
         {
-          titulo: "Happy Gilmore 2 (2025)",
-          heroImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
-          posterImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
-          sinopsis: "Happy, ya retirado del golf profesional, regresa al circuito no por gloria sino para financiar la escuela de danza de su hija, Viena.",
-          url: "https://lz.blogdepelis.lat/Peliculas/pelicula6/index.html",
+          titulo: "Lilo y Stitch (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
+          sinopsis: "Una solitaria niña hawaiana y un extraterrestre fugitivo crean un vínculo inquebrantable en esta aventura llena de emociones.",
+          url: "https://zinecia.github.io/peli96/index.html",
           year: "2025"
         },
+        {
+          titulo: "Los Cuatro Fantásticos (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
+          sinopsis: "La Primera Familia de Marvel enfrenta a Galactus y su heraldo Estela Plateada, mientras tratan de proteger el mundo y su unión familiar.",
+          url: "https://tvacount.github.io/contenido190/index.html",
+          year: "2025"
+        }
       ];
     }
 
@@ -114,7 +123,7 @@ async function fetchPeliculas() {
 async function loadPeliculas() {
   const cacheKey = 'cachedPeliculas';
   const timestampKey = 'peliculasTimestamp';
-  const cacheDuration = 6 * 60 * 60 * 1000;
+  const cacheDuration = 24 * 60 * 60 * 1000;
   const cachedData = localStorage.getItem(cacheKey);
   const cachedTimestamp = localStorage.getItem(timestampKey);
 
@@ -138,7 +147,7 @@ async function loadPeliculas() {
           heroImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
           sinopsis: "En la escarpada isla de Mema, donde vikingos y dragones han sido enemigos acérrimos durante generaciones, Hipo se desmarca desafiando siglos de tradición cuando entabla amistad con Desdentao, un temido dragón Furia Nocturna...",
-          url: "https://lz.blogdepelis.lat/Peliculas/pelicula2/index.html",
+          url: "https://zinecia.github.io/peli73/index.html",
           year: "2025"
         },
         {
@@ -146,9 +155,25 @@ async function loadPeliculas() {
           heroImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
           sinopsis: "Happy, ya retirado del golf profesional, regresa al circuito no por gloria sino para financiar la escuela de danza de su hija, Viena.",
-          url: "https://lz.blogdepelis.lat/Peliculas/pelicula6/index.html",
+          url: "https://tvacount.github.io/contenido206/index.html",
           year: "2025"
         },
+        {
+          titulo: "Lilo y Stitch (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
+          sinopsis: "Una solitaria niña hawaiana y un extraterrestre fugitivo crean un vínculo inquebrantable en esta aventura llena de emociones.",
+          url: "https://zinecia.github.io/peli96/index.html",
+          year: "2025"
+        },
+        {
+          titulo: "Los Cuatro Fantásticos (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
+          sinopsis: "La Primera Familia de Marvel enfrenta a Galactus y su heraldo Estela Plateada, mientras tratan de proteger el mundo y su unión familiar.",
+          url: "https://tvacount.github.io/contenido190/index.html",
+          year: "2025"
+        }
       ];
     }
   }
@@ -156,7 +181,7 @@ async function loadPeliculas() {
   const elegida = peliculas[Math.floor(Math.random() * peliculas.length)];
 
   document.getElementById('dynamicHero').innerHTML = `
-    <img src="${elegida.heroImage || 'https://image.tmdb.org/t/p/original/zsgdVbuEwqZbnUN9qLGEMBYf2Zo.jpg'}" alt="${elegida.titulo}" class="w-full h-full object-cover" loading="lazy" />
+    <img src="${elegida.heroImage || 'https://image.tmdb.org/t/p/original/zsgdVbuEwqZbnUN9qLGEMBYf2Zo.jpg'}" alt="${elegida.titulo}" class="w-full h-full object-cover" />
     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
       <h2 class="text-white text-3xl md:text-4xl font-extrabold mb-6 drop-shadow-lg">${elegida.titulo}</h2>
       <div class="flex space-x-5">
@@ -194,8 +219,8 @@ async function loadPeliculas() {
   const popularMoviesContainer = document.getElementById('popularMovies');
   popularMoviesContainer.innerHTML = peliculas.slice(0, 4).map(pelicula => `
     <div class="flex-shrink-0 flex flex-col items-center w-28 relative">
-      <a href="${pelicula.url}" class="relative overflow-hidden w-full">
-        <img class="h-40 w-full object-cover" src="${pelicula.posterImage}" alt="${pelicula.titulo}" loading="lazy" />
+      <a href="${pelicula.url}"  class="relative overflow-hidden w-full">
+        <img class="h-40 w-full object-cover" src="${pelicula.posterImage}" alt="${pelicula.titulo}" />
         <div class="absolute top-2 right-2 flex items-center space-x-1 select-none">
           <div class="w-0.5 h-5 bg-pink-500 rounded"></div>
           <span class="text-white text-xs font-semibold">${pelicula.year}</span>
@@ -211,13 +236,13 @@ async function loadPeliculas() {
 loadPeliculas();
 
 var iconoGuardado = localStorage.getItem('iconoUsuario');
-if (iconoGuardado) {
+if(iconoGuardado){
   document.getElementById('iconoImg').src = iconoGuardado;
 } else {
   document.getElementById('iconoImg').src = 'https://i.pinimg.com/736x/91/86/1b/91861b749841221d52122f0c2933d8a6.jpg';
 }
 
 var btnUsuario = document.getElementById('btnUsuario');
-btnUsuario.addEventListener('click', function() {
+btnUsuario.addEventListener('click', function(){
   window.location.href = 'HOME/ajustes.html';
 });
