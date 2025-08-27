@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bajoterra</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+<style>
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+body, html { margin: 0; padding: 0; height: 100%; }
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: url('https://image.tmdb.org/t/p/original/jb2GmlAALi4t8ugNFDuz12HF89w.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+}
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: -1;
+}
+#iframe-principal { width: 100%; height: 220px; border: none; background: black; }
+#contenedor-video { position: fixed; top: 0; left: 0; width: 100%; z-index: 10; }
+.capitulo-seleccionado { background-color: #FF0000 !important; color: #fff !important; font-weight: bold; border-bottom: none !important; }
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-622CWCXV7F"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-622CWCXV7F');
+</script>
+<script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+</head>
+<body class="text-white font-sans leading-relaxed">
+<div id="contenedor-video" class="relative">
+  <iframe id="iframe-principal" allow="fullscreen" allowfullscreen></iframe>
+  <a href="https://lzrdrz10.github.io/sv/" aria-label="Volver" class="absolute top-3 left-3 text-white text-2xl z-20">
+    <i class="fas fa-arrow-left"></i>
+  </a>
+  <div class="absolute top-0 left-0 w-full h-full z-10" style="pointer-events: none;"></div>
+</div>
+<div class="px-4 pt-60 pb-4 space-y-4">
+  <div class="flex items-center justify-between">
+    <h1 class="text-xl sm:text-2xl font-bold">Bajoterra T<span id="temp-titulo">1</span></h1>
+  </div>
+  <div class="flex flex-wrap items-center gap-3 text-sm text-gray-400">
+    <span><strong class="text-[#FF7F00]">8.4</strong> / 10</span>
+    <span class="text-white">•</span>
+    <span>Action & Adventure,Animación,Comedia,Sci-Fi & Fantasy,Familia</span>
+    <span class="text-white">•</span>
+    <span>2012</span>
+  </div>
+  <div class="flex items-center gap-3">
+    <label for="temporada" class="text-sm text-gray-300">Temporada:</label>
+    <select id="temporada" class="bg-[#1f1f1f] text-white px-3 py-1 rounded text-sm">
+      <option value="1">Temporada 1</option><option value="2">Temporada 2</option><option value="3">Temporada 3</option><option value="4">Temporada 4</option>
+    </select>
+  </div>
+  <div class="flex space-x-2 overflow-x-auto scrollbar-hide pb-1" id="lista-capitulos"></div>
+  <div class="bg-[#1e1e1e] rounded-lg p-4 text-sm text-gray-300 leading-relaxed">
+    <p><span class="font-semibold text-white">Sinopsis:</span> Aventura épica subterránea, en donde cada caverna guarda nuevas batallas y nuevas babosas por descubrir, recoger y entrenar.</p>
+  </div>
+</div>
+<script>
+var serieId = "46994";
+var temporadaSelect = document.getElementById('temporada');
+var listaCapitulos = document.getElementById('lista-capitulos');
+var tempTitulo = document.getElementById('temp-titulo');
+var iframePrincipal = document.getElementById('iframe-principal');
+
+var serieActual = {
+  id: serieId,
+  titulo: "Bajoterra",
+  temporada: temporadaSelect.value,
+  poster: "https://image.tmdb.org/t/p/original/bnzDkQ4tDLct88di9qml0oX877g.jpg"
+};
+
+var videosPorCapitulo = {"1":{"1":"https://unlimplay.com/embed/?TmlNKytBOGxuTEhDQWptcVkyWVE1S3ROYlFIRDZBSUlvZWtreUlJNHU3UmpXcng0QXNNaGQ2cWdHRFlXajBROE5ieHpRYy9ZaVBrcXZlNnJzMmNiU0lrYW0yNEwya3k3U3JRWFJSZVJCaUI4Y2EvM2JiR2kva2dJTCtUWWkyTlE,","2":"https://unlimplay.com/embed/?Qk5OS3ZST0srWHNOZEMyT3hybE16dTEvMnN4VDhmbXF6QWcvdGRBZDNvcGM5TVVIS01WeEFwOWF1aWYrKzEwQXZBN29RTmNLMDRCenlxMFgzMVBIT2FaYllYaFAwY3BBczVXSUxBNEFpZGFGZDE2bjZxM2xzMUZlTVh3MndSejA,","3":"https://unlimplay.com/embed/?WGpuZ045NFpXRElyakhHLzlFMXNCWkxJVXZzS2JEZkljUVhibWE1Qk5kYjk3d1ZmTk1nTWRSdi8zZlZ4NXVGTHo2QVIxbmJDZWF6MUxYYzRSWW5UQjFSYTZRLzRVbEMxSHdLbWUrQlQ5MkROZVd2clVyT0RJN2hEdm1Wb3ZTUnI,","4":"https://unlimplay.com/embed/?S0NJSTZGdUE3ZEZsS09ob25JWmtFejc0eTNiMnhkYUpnenhWUkJGSVBnZXZtcTgxTElaU0VjRjhKMi80eE13TGxsbkM5cTRTOXp2RnorSDlXT3Y4eVBneFJKUzZZZWFCZmwyT0tKTHNHcU5pWDlCcnZqcTZUMmNXdTNZSHoyTUY,","5":"https://unlimplay.com/embed/?UTVLcm1wbitSZnN2aTkraDRiWmwzR2tienJlZFBqbUpUQjQxSkE3OGgvakNSbDZ6Q1ZqckRpb3JaZHpDNlJTaWluU2hsaUI1eGJTUVdhMVlJcmN3L1JjVkg2dTJISGVmaEp1QVk0NWRNWkQ5NzE5K0d4TFZUN1pacjNvM2syMDg,","6":"https://unlimplay.com/embed/?ejNvSzZpbjBqTWVYWFhEL0ZmRHB5RlZHMmhudHM0NHlDRlpVaVZiclE4YWtQallJSlRXQVZRWHRpN3BBQUxxNTlJbWsrWWRHTUhkTGFVdVlwSi8vSXZSdHdjc2ZXVk8wellOOE5rMG1zL2E2c0RqQU5sOHBER0ZuL3VQMThUU0c,","7":"https://unlimplay.com/embed/?bm1NTmVDS2ZPNVRHZnlTYlcwZUozTnE2Q1ZNRTdtQTF4aXNtUmhQQ05CcHFSZ1Ztb1BmYmtLd1o2REtXK0xLS0JuY1YwZ2NMRUp0T3VYc2VScStUczdURU1ISFlFTTdWM3ZNajhXWmVYeDhML2JLaVpVc0NxVzZTcGFKM0VkR2Y,","8":"https://unlimplay.com/embed/?WHovTUg0TFlnN3dOR0IwUFdBZEVKaU5qT2NzZE9VUTVRaFVFRjNjbUc3MUlpNStYTXRabmp4STQ4Vm90Tk1jOEhlMGlBT2VpWENjUHkxeDk5Rjc3VmpYMkxhZ3RCaWtEMFFhSUs0N1lmTENUU3paZ0dZbU4rczlTOGRvbVBIL3U,","9":"https://unlimplay.com/embed/?UVo4WlR2NEVmVnpLc2VCelpudDJFT3hUYWdrV1FRU1FUdk90aElFUDlYckhvdmhaOWZ4VEE0b3JsVEN5bS9vRGxvVzIvQ1RBOTVZL3hoR1RCMU0xT0xLOTkwdWVSMXI1Q01JaitZZFgrZHZER1NGbDdkRDRsU2MrQUNmdDAxRlY,","10":"https://unlimplay.com/embed/?V1pzRmNIeHNTNHR3TkUvdTRLZldYM2hPWldKYlNhamIwN2FMTWVkQ0hHYXc4N25oNXZLQTByNWl1NENGckVMUThpd214OWl2dFNtTGpUTkRERU1qcEZsem42TGlHSTVKZ2EvNCtPMHUvcEhWTEdHbkozRndvWDg0TFg3TWZmbWQ,","11":"https://unlimplay.com/embed/?VmlsQWQ3L1o4RmpWN2hUTXR5OVBDc0FzcmRKeVRoTWJpWC9Vekt6OWorQ3BMWUx0eWF2Qkc0YVNON3didDZ4K25DWXlYTjArUFlzdGNOUjNCMjlmYVpVbHBPbFZPZEpXL2dQd1k1djBYZnFzQ01VdE9UYTNsNjEwQ3VERzZBNS8,","12":"https://unlimplay.com/embed/?QnpGRWh3bWFsbWZBcGJzc1hGWDd2alNTZ3c0VEkzRnloVTN1dmt0aWZJUnR5MEdlV01SNmQ1RjVLa2s3VHJTVUUzWHBPZ0Npd0xIK2tRTUs1bWVTMi9IS2ZtZHJCeDV4TGplOU56NnlVS28xOUpzVWxNYlBpYUlIYk0vQWFyZ0c,","13":"https://unlimplay.com/embed/?dFdWVnlmNnRBWXI1MUNrdTA3MFpJNTJaUy82Z3QvL3lsOCtNN1JQOVlvcmhERXVsMUpsM0syTzhnSmttaXFDSUZLZm9Qc1JZV0dpcGMvM25DeUtLTnc4Y0ZjcW5vM2wwdFVhSVo5V1FVeGFSV0F1aW9UT2c2dUZhK3BJNTFCM3E,","14":"https://unlimplay.com/embed/?Z29mdWxYT3ZaNDFaVXMrZmdRNy9kRHo3MDgrT1J6ZkNqaDcrWXlVZFZRKzNZeHRvaXBYTnd5T0NqWUZ5QXpjRmlRQ29JT0pxenhSTVlweGRieE8wZGZuT2Zxcy9zWHNBdmhnby9ENmxXK290cUFkRW82RmhneWVZYWJjMlJSanM,","15":"https://unlimplay.com/embed/?Ni9GZW1UaWN3d3F0LzRqUU1DODV0K0wvVGxIRDQ1YVduZUlWREszSUVCSHViQVNocE5kdWFXaUpVZWVSR0lPa3Q1RTBWbjV5VUpLOGp3dEVXOHlMTEJvMWN6YTZEV212M1Y0aGUrZ2gwMk1LNFJmYUx6RjJTL0QwYlF4L2Z3ems,","16":"https://unlimplay.com/embed/?b3RiZlVwYmd2OGVEK2JFajFzam44RlcyMGJUaEVSQjltQlJnVlFySEwwYVg0UlFTdFZ3NkxYUTVwd1U2N3lteWVCTW5uOExuMGxtZk82MEZ5YXBmN2VQNFFBZ3djK3FFWVBjRkFaWHNreFFsOFBsQXA4RDdGN1BSQWdJRTlHejM,","17":"https://unlimplay.com/embed/?Z3Uwek55NzVYd050SG9rRzlGVjdiRDFxQ3B5cmJVUVlUU2h3UXhjVHd5b0hLT29PNzEreURJYjRDNVZ1ekE1bEdZYUlvcUtvN1NOR1k2bXlWbUtDbEVwWklYS0J1TnpsZ0drYXBkd1o1QnVQNStZTnBmMUV4QlZPWEQ1dW0rdy8,","18":"https://unlimplay.com/embed/?TDFhMGlGMUk3alBlVlpNb0dmclNzTUd5N0htbmoxd1F5bGwyS3FieG5QNVZYZHBHQ1VKaGNrNGZwbFh0ZkhUWHZvM0JMVXhCVmhMY0N5cU1na0JLN1F0Y2J6NFlSS2lTYnJuaUEvaEY3VWRWRDhVWXIxSG00RmJBS2pkUkFwVXM,","19":"https://unlimplay.com/embed/?YitoT1RIdmpzdHR1ZWtxc1RPWDl3MVRmL2xidVMzOElHTnhnSmZsR2JYRjlKRml5SXF6QkV6ODUwRVg5NFdDbkRVN1Z1ZmF1ajRIOEphK1hqeEdjeWJTbGtLRGJhL1JXQ0MrbmJCamdpRVBiZGZGbkdXTU5YN0VSUVFJTnBYanM,","20":"https://unlimplay.com/embed/?QzR1QkZTY25qMWxHdjAvMWdYL0F5WFVFNGVtZUhmcnFFL0hERGNnU3FIMHVPbzhWQjIvU0JzYXcyMjI4bm1kZVFhenI0SlRPNEthWEZNN3MvUmdXRFpGTVV5OXdIL1c4azYwQUtkQmlJVDlYQnQzWVUxeWIwTVV5Z0dqYUF5clc,","21":"https://unlimplay.com/embed/?SkFmQXNDWDFhTjFmMFcrUWppOFJoaGhTNU5KRmU4YUlvOTdLcFdUc3R5cGhBZjZ1a2dhbzhuakhKUEVtRGc0ZHJwY2VnQ0V2Y01Ka3JyZWVVY3l1Z3RFQ1cvU1RtRkVDNjZLby9wZzA5LzBvWDFUVlZqZnpYcFdNN3B1cVVSYTQ,","22":"https://unlimplay.com/embed/?OHdhUm40cVVPTXpwQU1RbU85d1B0blFBaFBTbmI2dUVDU25tWXNTemR2STYwSEo3N1BQR0hYOXdpdWFOODkwWDJtNjhtMlYxeEk0MkNkT1BMUER1RnI1WFgzUlBBNVdBMlZFTndEaUlLam5kWi9JZTdXS1ZvM09Za2Y4dXVjR1Y,","23":"https://unlimplay.com/embed/?cUJjWlluYkd5YmplU2FOSloxZ3JZNVM4d1RDbUtqRUNVS2hmMnVZSGdxMURCWGNXVWNsZ1RxdmVRTFB5NktEQnhHUTAwL3VTeDMxUjlSSTNwYkZEWGpXa0xuL3I5QUFmOHR3aElCT0NvbWFDWUNKQUlXN0N1L2pEWTdsU3Jkclo,","24":"https://unlimplay.com/embed/?aFJVWWRoek9kRFVxMzNGQ0luR3pzeFZvVXFYZXYyN204SlpyM0Vjd3ZwOFdDWjFRbHBJTDBkRUhibXlURmxPNWxCRHJGV2NmTjhDOU5uMGJvQkJSMW1OLzY5ekRaNXJZajlmdGhVSERLM3g2VUl6cUtCM2VwTHlKZFhTRk5vN1A,","25":"https://unlimplay.com/embed/?R3E1SlZydEVyeGgvK3FrUlo3TkxhTGl2Tm8zMnY2YlhneWtHQzc5alZvMzJqQmQ5aDFxclk5M2N0dEFSMXgzSXF6bWt4dUF2cUpuM211b1NSTzUraWduZFNGYldUTEU2eFpBa0ZoRU5KQVI3dUd4UmtkNTBkeXppZWx1RUExMlY,","26":"https://unlimplay.com/embed/?UDJKL3NPaHNIYW1KRElYWDdXRzhEdytRME5ObkhjT1R4bHlXUUhDVUl6QmNRL1FCejFtRG0veXk5SGRRcktIRUh2UkNWVUsrcjZDTzBtcFRibUFwY0JlOHV0aU92dU00cHh3WHFLUEhiMHBBUGhZRVB6cXNuK0loOXpXTk42Q3g,","27":"https://unlimplay.com/embed/?QUhyQ0dLZi9PZTgvSXc2cnpYVlRaaEJkbW5Qd3VVMGtveUlBbTJXbFVCekhQbUprbTQxaFJ0RTBpOFRhdnNCNXd4K04vRnJqNllaYXMrU1pKRVpzWkFRR3ZPYmdFbnhCOVhnR1hMN2ZRcnRmQk1TNlkzQTJxbW9RSmJpbkdQQ1Q,","28":"https://unlimplay.com/embed/?b0ZHZ2phM09DeW56ZzBxcWVhcC9UNFJvTW10RkxvRmdRL1h3OWVhaDlHNXRkSURweDhXRWNnWi8zdEduVnI3dTcxS0lKUk1nbE1RVlJRVXE0TDREWmpyMitRWTAwRGZzUnl3MW5RbUJHK2hEc2hqdmRucFUyckppNm5HeWZ4ZHQ,","29":"https://unlimplay.com/embed/?WmdseW1PNjVUWTRvbWVYbkx2RmlpQURYY2pjSFZZemZCV2ZnNEtkRG0zWldJZHFtbkRsWHlIci8vRi8yb29TTzhTcUZHa3NvQWZ3RERFUUJJcmdBdHQ4a1U0UFh5cUxKcldOd1JMMEVlZU14d1h2M2hyYUsrK0tHWHVMME8xejM,","30":"https://unlimplay.com/embed/?b1kvN0hNQU15b1FXTUNQWFV4VThhdS9hMVI3VXdFaUdNbHFJZlNjc0k3NUhBRStiS0ZRVFo4YmkwbDRETTdaeWQ3R1VOWXc0dHhKVkl5bE5CNlhnWHZPOGVXZTR0ZEpoUHBhSXFQYVMzS1hWUk5ZYmIxaUY5MG84dkVraTNWR0k,","31":"https://unlimplay.com/embed/?WE9rTW9OVlVmWE1lbEtabnlYTmNvSUhMQVk3M0V2YU1ndnhSM3NSS24xY3libHJvcXdDV3d3SWhQaFNGcDd6cUJXVDlLZU9OQVo1ZjVWVHRnTGxZWWlyamI0VElqRmw1M3RRUkdKejBOMlpERk9LWW9raDRwTkFSbUxCbDRLdko,","32":"https://unlimplay.com/embed/?RHdNN2RiaStIQnp3eVJoL3FuQnN3QlZIRGdRR1dJbUhWdVZ3KysyY29qbnVWQjJJWXBXU0did3ViQyt2NGpoYzBWNC9hQnlNVWFtcUc4cURRVC94enE0MUtqS3V4TGR6a3BqNHpHZkRFdi80OEVGaTFXUjUwUEJmSTh0Nk5aN1g,","33":"https://unlimplay.com/embed/?Mzk0TEEvTUs2VkxSZTB6aTBnbUszOWxxZlI4RE14UTRCaUFzQ2h5R3U4TjZZYXpsSWE3aXMvZjlIT2NhempIK2hyQldXQjVYdC9xMDB5YWNRWmtZL3BNMzFxN3lDenZNeCsrSEZFWG9ab1pNcEVKcUV2bjhUb0ZvTndqTVFkTUs,","34":"https://unlimplay.com/embed/?amFxOFJyNU9rUWppLzNOS0FkQy9JbFg2NDJ1UlZrK3Y4djR4WndKTVlsQWkvNHdNclpmZlVTbFRwN2w4RVBYbXZ0Z1NaVE9VZXB6QlEzbmNnNGpXNUJUUHJORS91Q2padDg1QzYwTnVFZGlPaWJ3WlZXTTBGejd5dVZKM0pmckg,","35":"https://unlimplay.com/embed/?TnNDSk13L3FyajV1WE9mRkNlMC94Y2xvcDFaeFpxMHRHRGNyM2Z6WGgrdUd0TnBuYUhSNzFBT0xMaXphYXJ4dXM3UjNIZElDTVo5V0svM2x5eDYzeWdMR29MYmNEZEFaTStDT0pTOUVMVXNJM0dCVVlBaG0raGJIZ1MrL1hwRzg,","36":"https://unlimplay.com/embed/?bjVGdExJTmZ1V3pmd0QraEJzV0JzbWt4czVqdjNZYVk5R3NPbE5UV3pvdW5nanNCci9IUnRtUkxHMkN5dVM2THhBK05SK2dVYWpZMlZtL3lEZlpqeXc0OGpwV3BZWjV0aWIvS0ZZRytkaUJwZXNwV0F1VDdKcHpkMExreVlWUkI,","37":"https://unlimplay.com/embed/?Y2dIeEdNQnRRM1JaM0lvUlM2NWorNEZjM0JNV0xTaXhnNjEwMWF5MEhqci9SaENNZFZEaFVab2I0MUgrbldGVjkrY3NqSG4yYVlxQnhBZjMwSkJmK283SlUwU3ZCajVjYWhxTkVpaHZkNDFXVDdYT1BicnBjcGtzVTVyTmx2a0c,","38":"https://unlimplay.com/embed/?UTUySC9ZTnp3R2NUQURvOVFkMHlLU2tYYWQ4azdxQXF2RS9hYThhdWZ6VWVrN0tEd05vOGhxZC96M25aVW9yR3h0WDdlakRsMVFBK3JNVFBucjBrS2M2eDg4WFQ4MEVVdm9LT1Z2aC92NXlvWlJiaGQvbk5vcVlodkJ2RmxMRU0,","39":"https://unlimplay.com/embed/?RUlyeUZLbEd6WVJLcjVFSTZESmdvYlRpbnBJRVREaVZvTDB6d2JtMlB2RTQzZjJYVFAwQmM4dHlxZFY5TlNrY0N5cmtRcFkyS3ovbkU2anBXUjFtK0FscW1meWdqOEZFREdaYVc2Z2JqeUdXVy9rK3phQ0R1Q1c1Q3l3WUZRVm8,"},"2":{"1":"__LZURL__","2":"__LZURL__","3":"__LZURL__"},"3":{"1":"https://unlimplay.com/embed/?SDk4cWREZU9YQld2eG9ieHk2RDhpRjFxdW1wWDR2MEQwV1VEYVo3cjQ5OTJSYjZ5SjYwVUl2Um1nb0liMDkybUJOeklzeXNOYXI0enZySXFBejJ1eXF2WGtyN0xtbXZrblVJRGdwS0t2Y3lLOGZYN2UySEFITFFKeHF5Y0h4WFE,","2":"https://unlimplay.com/embed/?UGFiWkNwSk1RSS8zejVvUDArRG5hNSthWmdEL3hjY05YaklCYmZFc3RUS3NneEp1bHQ0MWFtM1B2UjBZUHJyZ1VWSVJVY2tFU2lRNDA2eDdEOUN5RGdIZWZqM3J4c2VsbWNaK1J4QXlnV3UzRWEzeDcxYTdMZDFOZGVkVmFxc20,","3":"https://unlimplay.com/embed/?TUV5cHdjV01SZU11aTcxWXk2ZkJQQmRUamxDVFF6SGNoK3U2MHROOHFDQkZrSllYRHJPMEZ5eE4rN2F6L200dHV5d1FiV3V2VXdFYzFIdVptZU1SQVNRNm85NzUvS204bHBaRDZkZVU5VVA3S0VmckJFRkVHeHo3K0U2Qk5NKzE,","4":"https://unlimplay.com/embed/?cjJMWmVBSVIvTlpqaEtTNENiMVZXNDR0dTlYelEzRVhPa0x3R3JWekhBdzJBMDE2T3JyVzJhaHJ4cEc0RGw2d3hUQWlpOHpqYmpWUUFFcHZEVUtTZ0JkVlc5TUdWWnJDNDNrOHRFVi9yaW9RU0dqK1NDMUxpZytNV0dGcHJPNng,","5":"https://unlimplay.com/embed/?QnZJUW9vWklVajczUVdhaElVU2xZNm1VdmZyRU9zblFGb0xyMVFsKzVDNGtPdk5haksweFNKeEh0M2g2SzkrNTBXVndqeUsrY1lGVzVmL1dIUzArNTJNTnIwckxlNkVXYjZmbDRDVUZXTVBWNWtUeWUwaGFSaDRQTW0wOTU3REE,","6":"https://unlimplay.com/embed/?TDhaeGNvblZaaGZTL0U2RzNCclVuODFXbXYvb1VUK3BLVjNCYVpRTnYwcXVGdWxOS0pROTluTXM5ZVNFRmt5MzhIbUlpUjFuMnIvQXErL3YvTjhwS0hvNUxBQ0laWjBDWUkwTUtYemtDMFJlUkF5WUU3RUxrVmpaTUo2OWJZTzE,","7":"https://unlimplay.com/embed/?QnlORWxpcXcxZ0lkTWltOVlFZVg4b3VCRURMNXZSanR5UURBWkRGVHErUW43S3BBV214QmZwU2phT3hCd1dIVS9Yeml1OGRIY0NsUFg4ays0OFRqWThHeXRZRW0wa2VVdjB1VG11Y3pESjdHVWY5b3FkZkRwN2lXcFdsZDdsVmE,","8":"https://unlimplay.com/embed/?eXMvZ2F4bmp0K1FXWWpNT1NaVkNUU0dHRHROMXNWQ3dxczkxelhtblcwYmxQRUM1V2lxeVRKWjRyZ3NIQVhqbTljNUE2OUJtS2twYXhrZkpTNVROa2E1bFV5aHEya0h4ZkczOFlCazU2a2N4Nm1oUlRMWkpsemVDMWo0QllKQ3g,","9":"https://unlimplay.com/embed/?WktUQkFpbHV6cDR4Tm4rS0lVSzBPUVMxcmtjaWxjSnBVL095M3NtMUUrK0M5TFRoWTh6U2h0MWs5TnRUeHozTFdFclNhVlBsYzlySWxsQlBxb2hmZ21FRGlIRFYyT0FCQ09SeUhSVm15VEZ5UTU5NCtjcUU3SVhCRlFuTkRTNVU,","10":"https://unlimplay.com/embed/?cm5ReVlNbVpSVkJsanVKc0xyQWd6cFhHMWEzR3ovUVM5aEQrTkxxWWlMSnZQaWVQVCtrZFZ5YS8xd2pDRXcrZGhud2R6UUY2cXFLN2d2d3RmOHBJc3UzZlhJRm9FeUhHeHM2bVYzYkhEZEUyRklwYjdFd0lhcVYvL3BvdFZ2MUs,","11":"https://unlimplay.com/embed/?NEJiRkh0TndHcUFmMWxSbVFMZW9zSDFvVEp4YVYycXVWR2twM0JKVE9kYUs2NGpmS2FRc1BnTU1mSEVFeFNOU0UwM21vZk5najNBcXNHTkNlcExmRGtaOFQ2ZnpOcGxUU0pPZjdpVGZNK2lRdnNZb2g0d2kxclJTR2hSZ0g2Qm8,","12":"https://unlimplay.com/embed/?eUc4Um5Rc2VWNmRoeWt3b3pMZnZEQ3d1NUxpcmI3OW9INUExME9vSSt5ay9Fa1l0SDBoU1BSSGNWWG1mSVowUytXQVhQV1VLd1U1ZjVvcjRPVFovcXA5L0ZITHpLVjluL0hpSzNOdnRwTUphUDJhUmVXQzVpVDhWby8xYVhlRlo,","13":"https://unlimplay.com/embed/?RXJ5czlxaEswVDhnL0ZWemk4dTg0NW00d3Z6RC93aWxRNm9hY2xCWUFkZzRTdjVrTWY0L0p3OC91MTZLQzNWb1p1RkZGVUdSaXl1VjFUQTh0ek13TVJsTmlmUEgzRmwzWHdHbEFsbmhxbTdGSE0yZWpBZTg1RlVZemd3TmJtMUE,"},"4":{"1":"__LZURL__","2":"__LZURL__","3":"__LZURL__","4":"__LZURL__"}};
+
+function guardarTemporada(temporada) {
+  localStorage.setItem("temporadaSeleccionada_" + serieId, temporada);
+}
+
+function cargarTemporadaGuardada() {
+  var temp = localStorage.getItem("temporadaSeleccionada_" + serieId);
+  return temp ? temp : "1";
+}
+
+function guardarCapitulo(capitulo) {
+  var key = "ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada;
+  localStorage.setItem(key, capitulo);
+}
+
+function cargarCapituloGuardado() {
+  var key = "ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada;
+  var capituloGuardado = localStorage.getItem(key);
+  var botones = listaCapitulos.getElementsByClassName('capitulo-btn');
+  var encontrado = false;
+
+  for (var i = 0; i < botones.length; i++) {
+    botones[i].className = botones[i].className.replace(' capitulo-seleccionado', '');
+    if (botones[i].getAttribute('data-capitulo') === capituloGuardado) {
+      botones[i].className += ' capitulo-seleccionado';
+      botones[i].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+      cambiarVideo(capituloGuardado);
+      encontrado = true;
+    }
+  }
+  if (!encontrado) {
+    cambiarVideo("1");
+  }
+}
+
+function cambiarVideo(capitulo) {
+  var temp = serieActual.temporada;
+  var url = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
+  if (url) {
+    iframePrincipal.src = url;
+    guardarCapitulo(capitulo);
+  }
+}
+
+function generarCapitulos(temporada) {
+  listaCapitulos.innerHTML = '';
+  var capitulosObj = videosPorCapitulo[temporada] || {};
+  var total = Object.keys(capitulosObj).length;
+
+  for (var i = 1; i <= total; i++) {
+    var btn = document.createElement('button');
+    btn.className = 'capitulo-btn px-4 py-2 rounded bg-[#2a2a2a] text-white';
+    btn.setAttribute('data-capitulo', i.toString());
+    btn.textContent = i;
+    listaCapitulos.appendChild(btn);
+  }
+  agregarEventosCapitulos();
+  cargarCapituloGuardado();
+}
+
+function agregarEventosCapitulos() {
+  var botones = listaCapitulos.getElementsByClassName('capitulo-btn');
+  for (var i = 0; i < botones.length; i++) {
+    (function(index) {
+      botones[index].onclick = function() {
+        for (var j = 0; j < botones.length; j++) {
+          botones[j].className = botones[j].className.replace(' capitulo-seleccionado', '');
+        }
+        if (botones[index].className.indexOf('capitulo-seleccionado') === -1) {
+          botones[index].className += ' capitulo-seleccionado';
+        }
+        botones[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+        cambiarVideo(botones[index].getAttribute('data-capitulo'));
+      };
+    })(i);
+  }
+}
+
+temporadaSelect.onchange = function() {
+  var temp = temporadaSelect.value;
+  serieActual.temporada = temp;
+  tempTitulo.textContent = temp;
+  guardarTemporada(temp);
+  generarCapitulos(temp);
+};
+
+window.onload = function() {
+  var tempGuardada = cargarTemporadaGuardada();
+  temporadaSelect.value = tempGuardada;
+  serieActual.temporada = tempGuardada;
+  tempTitulo.textContent = tempGuardada;
+  generarCapitulos(tempGuardada);
+};
+</script>
+</body>
+</html>
