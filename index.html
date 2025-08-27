@@ -23,23 +23,7 @@
       <i class="fas fa-search"></i>
     </a>
   </header>
-	<div id="preloader">
-  <div class="preloader-content">
-    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhbbrZgYcUnWYtCZDybhk8kOSPMvqc1Ha5de1zyfzI-hu2zO8Q7ukeqFIrbAb9YMzgXrMLWYSvDwMr1eLHVtOGwX_tzyb4ETu4xudjOpFIi5_tXcWo_cn-IW0XgdxlsRbeHRu6EcvGOI9JTflDeJdLBBR5sYYFaI0gFUbsd9BSWzDWzOM-ImHNCMcGm08Sz/s1202/WhatsApp%20Image%202025-08-27%20at%2011.35.16%20AM.jpeg" alt="Logo Preloader" />
-    
-    <div class="prog-bar-wrapper">
-      <div class="prog-bar-bg"></div>
-      <div class="prog-bar"></div>
-    </div>
-    
-    <div class="preloader-extra">
-      <div class="spinner"><div></div></div>
-      <p>Espere, cargando nuestro contenido</p>
-    </div>
-  </div>
-</div>
-
-  <div id="infoModal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden">
+	  <div id="infoModal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden">
     <div class="bg-white text-black max-w-md w-full rounded-lg shadow-lg p-6 relative mx-4">
       <button id="closeModal" class="absolute top-2 right-2 text-black hover:text-red-500 text-xl">&times;</button>
       <h3 class="text-lg font-semibold mb-2">Sinopsis</h3>
@@ -483,15 +467,132 @@
       <p class="text-gray-500 text-xs mt-1 md:mt-2 mb-16 md:mb-0">Este sitio no almacena ningún archivo en su servidor. Todo el contenido es proporcionado por terceros no afiliados.</p>
     </div>
   </footer>
-  <script src="HOME/script.js"></script>
+	<div id="preloader">
+  <div class="preloader-content">
+    <img src="https://blogdepelis.lat/wp-content/uploads/2025/08/BlogdePelis-info-VERANO-1.png" alt="Logo Preloader" />
+    
+    <div class="prog-bar-wrapper">
+      <div class="prog-bar-bg"></div>
+      <div class="prog-bar"></div>
+    </div>
+    
+    <div class="preloader-extra">
+      <div class="spinner"><div></div></div>
+      <p>Espere, cargando nuestro contenido</p>
+    </div>
+  </div>
+</div>
+
+<style>
+/* ======= AJUSTA ESTE VALOR ======= */
+:root {
+  --preloader-time: 3s;  /* Cambia aquí el tiempo total (ejemplo: 3s, 5s, 10s) */
+}
+
+/* Preloader cubre toda la pantalla */
+#preloader {
+  position: fixed;
+  inset: 0;
+  background: #141414;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  transition: opacity 0.8s ease;
+}
+
+/* Al ocultarse */
+#preloader.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Contenido */
+.preloader-content {
+  text-align: center;
+  color: #65615F;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Imagen */
+.preloader-content img {
+  width: 220px;
+  max-width: 80vw;
+  filter: drop-shadow(0px -2px 9px #303030);
+}
+
+/* Barra de progreso */
+.prog-bar-wrapper {
+  width: 205px;
+  height: 6px;
+  position: relative;
+  border-radius: 50px;
+  overflow: hidden;
+}
+.prog-bar-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #919191;
+  border-radius: 50px;
+}
+.prog-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(to right,#e300ff,#007cf0);
+  border-radius: 50px;
+  animation: loadbar var(--preloader-time) forwards;
+}
+@keyframes loadbar {
+  to { width: 100%; }
+}
+
+/* Texto + spinner */
+.preloader-extra {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  font-size: 12px;
+  gap: 8px;
+}
+
+/* Spinner */
+.spinner div {
+  width: 20px;
+  height: 20px;
+  border: 4px solid #65615F;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+</style>
 
 <script>
-window.addEventListener("load", () => {
-  document.getElementById("preloader").classList.add("hide");
+document.addEventListener("DOMContentLoaded", () => {
+  const preloader = document.getElementById("preloader");
+  const duration = getComputedStyle(document.documentElement)
+                    .getPropertyValue("--preloader-time")
+                    .trim();
+
+  // Convierte el valor de CSS (ej: "4s") a milisegundos
+  const ms = parseFloat(duration) * (duration.includes("ms") ? 1 : 1000);
+
+  setTimeout(() => {
+    preloader.classList.add("hide");
+  }, ms);
 });
 </script>
+  <script src="HOME/script.js"></script>
 </body>
 </html>
-
-
-
