@@ -57,7 +57,7 @@
           }
 
           // Construir URL
-          const url = `https://lzrdrz10.github.io/sv/Peliculas/${item.name}`;
+          const url = `Peliculas/${item.name}`;
 
           // Extraer año
           let year = '2025';
