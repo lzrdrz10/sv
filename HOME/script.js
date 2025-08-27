@@ -1,5 +1,4 @@
-
- async function fetchPeliculas() {
+async function fetchPeliculas() {
   const apiUrl = 'https://api.github.com/repos/lzrdrz10/sv/contents/Peliculas';
   try {
     const response = await fetch(apiUrl);
@@ -158,7 +157,7 @@ async function loadPeliculas() {
   const elegida = peliculas[Math.floor(Math.random() * peliculas.length)];
 
   document.getElementById('dynamicHero').innerHTML = `
-    <img src="${elegida.heroImage || 'https://image.tmdb.org/t/p/original/zsgdVbuEwqZbnUN9qLGEMBYf2Zo.jpg'}" alt="${elegida.titulo}" loading="lazy class="w-full h-full object-cover" />
+    <img src="${elegida.heroImage || 'https://image.tmdb.org/t/p/original/zsgdVbuEwqZbnUN9qLGEMBYf2Zo.jpg'}" alt="${elegida.titulo}" class="w-full h-full object-cover" />
     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
       <h2 class="text-white text-3xl md:text-4xl font-extrabold mb-6 drop-shadow-lg">${elegida.titulo}</h2>
       <div class="flex space-x-5">
