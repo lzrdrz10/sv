@@ -67,4 +67,28 @@ body::-webkit-scrollbar {
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none;                   
+
+}
+
+#dynamicHero {
+  position: relative;
+  width: 100%;
+  height: 60vh; /* Mantener altura relativa */
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  #dynamicHero {
+    height: 70vh;
+  }
+}
+
+#dynamicHero img {
+  display: block; /* Asegura que la imagen sea un bloque */
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cubre el contenedor manteniendo la proporción */
+  position: absolute; /* Posiciona la imagen absolutamente dentro del contenedor */
+  top: 0;
+  left: 0;
 }
