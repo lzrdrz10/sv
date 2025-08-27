@@ -102,30 +102,6 @@
           url: "https://lz.blogdepelis.lat/Peliculas/pelicula6/index.html",
           year: "2025"
         },
-       {
-          titulo: "Happy Gilmore 2 (2025)",
-          heroImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
-          posterImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
-          sinopsis: "Happy, ya retirado del golf profesional, regresa al circuito no por gloria sino para financiar la escuela de danza de su hija, Viena.",
-          url: "https://lz.blogdepelis.lat/Peliculas/pelicula6/index.html",
-          year: "2025"
-        },
-       {
-          titulo: "Happy Gilmore 2 (2025)",
-          heroImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
-          posterImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
-          sinopsis: "Happy, ya retirado del golf profesional, regresa al circuito no por gloria sino para financiar la escuela de danza de su hija, Viena.",
-          url: "https://lz.blogdepelis.lat/Peliculas/pelicula6/index.html",
-          year: "2025"
-        },
-       {
-          titulo: "Happy Gilmore 2 (2025)",
-          heroImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
-          posterImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
-          sinopsis: "Happy, ya retirado del golf profesional, regresa al circuito no por gloria sino para financiar la escuela de danza de su hija, Viena.",
-          url: "https://lz.blogdepelis.lat/Peliculas/pelicula6/index.html",
-          year: "2025"
-        },
       ];
     }
 
@@ -182,7 +158,7 @@ async function loadPeliculas() {
   const elegida = peliculas[Math.floor(Math.random() * peliculas.length)];
 
   document.getElementById('dynamicHero').innerHTML = `
-    <img src="${elegida.heroImage || 'https://image.tmdb.org/t/p/original/zsgdVbuEwqZbnUN9qLGEMBYf2Zo.jpg'}" alt="${elegida.titulo}" class="w-full h-full object-cover" />
+    <img src="${elegida.heroImage || 'https://image.tmdb.org/t/p/original/zsgdVbuEwqZbnUN9qLGEMBYf2Zo.jpg'}" alt="${elegida.titulo}" loading="lazy class="w-full h-full object-cover" />
     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
       <h2 class="text-white text-3xl md:text-4xl font-extrabold mb-6 drop-shadow-lg">${elegida.titulo}</h2>
       <div class="flex space-x-5">
