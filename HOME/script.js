@@ -83,7 +83,7 @@
           heroImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
           sinopsis: "En la escarpada isla de Mema, donde vikingos y dragones han sido enemigos acérrimos durante generaciones, Hipo se desmarca desafiando siglos de tradición cuando entabla amistad con Desdentao, un temido dragón Furia Nocturna...",
-          url: "https://zinecia.github.io/peli73/index.html",
+          url: "https://lz.blogdepelis.lat/Peliculas/pelicula2/index.html",
           year: "2025"
         },
         {
@@ -91,25 +91,41 @@
           heroImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
           sinopsis: "Happy, ya retirado del golf profesional, regresa al circuito no por gloria sino para financiar la escuela de danza de su hija, Viena.",
-          url: "https://tvacount.github.io/contenido206/index.html",
+          url: "https://lz.blogdepelis.lat/Peliculas/pelicula6/index.html",
           year: "2025"
         },
-        {
-          titulo: "Lilo y Stitch (2025)",
-          heroImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
-          posterImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
-          sinopsis: "Una solitaria niña hawaiana y un extraterrestre fugitivo crean un vínculo inquebrantable en esta aventura llena de emociones.",
-          url: "https://zinecia.github.io/peli96/index.html",
+       {
+          titulo: "Happy Gilmore 2 (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
+          sinopsis: "Happy, ya retirado del golf profesional, regresa al circuito no por gloria sino para financiar la escuela de danza de su hija, Viena.",
+          url: "https://lz.blogdepelis.lat/Peliculas/pelicula6/index.html",
           year: "2025"
         },
-        {
-          titulo: "Los Cuatro Fantásticos (2025)",
-          heroImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
-          posterImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
-          sinopsis: "La Primera Familia de Marvel enfrenta a Galactus y su heraldo Estela Plateada, mientras tratan de proteger el mundo y su unión familiar.",
-          url: "https://tvacount.github.io/contenido190/index.html",
+       {
+          titulo: "Happy Gilmore 2 (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
+          sinopsis: "Happy, ya retirado del golf profesional, regresa al circuito no por gloria sino para financiar la escuela de danza de su hija, Viena.",
+          url: "https://lz.blogdepelis.lat/Peliculas/pelicula6/index.html",
           year: "2025"
-        }
+        },
+       {
+          titulo: "Happy Gilmore 2 (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
+          sinopsis: "Happy, ya retirado del golf profesional, regresa al circuito no por gloria sino para financiar la escuela de danza de su hija, Viena.",
+          url: "https://lz.blogdepelis.lat/Peliculas/pelicula6/index.html",
+          year: "2025"
+        },
+       {
+          titulo: "Happy Gilmore 2 (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
+          sinopsis: "Happy, ya retirado del golf profesional, regresa al circuito no por gloria sino para financiar la escuela de danza de su hija, Viena.",
+          url: "https://lz.blogdepelis.lat/Peliculas/pelicula6/index.html",
+          year: "2025"
+        },
       ];
     }
 
@@ -123,12 +139,7 @@
 async function loadPeliculas() {
   const cacheKey = 'cachedPeliculas';
   const timestampKey = 'peliculasTimestamp';
-  const cacheDuration = 24 * 60 * 60 * 1000;
-
-  // Limpiar caché para pruebas (puedes eliminar esto después de verificar que funciona)
-  localStorage.removeItem('cachedPeliculas');
-  localStorage.removeItem('peliculasTimestamp');
-
+  const cacheDuration = 6 * 60 * 60 * 1000;
   const cachedData = localStorage.getItem(cacheKey);
   const cachedTimestamp = localStorage.getItem(timestampKey);
 
@@ -152,7 +163,7 @@ async function loadPeliculas() {
           heroImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
           sinopsis: "En la escarpada isla de Mema, donde vikingos y dragones han sido enemigos acérrimos durante generaciones, Hipo se desmarca desafiando siglos de tradición cuando entabla amistad con Desdentao, un temido dragón Furia Nocturna...",
-          url: "https://zinecia.github.io/peli73/index.html",
+          url: "https://lz.blogdepelis.lat/Peliculas/pelicula2/index.html",
           year: "2025"
         },
         {
@@ -160,25 +171,10 @@ async function loadPeliculas() {
           heroImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
           sinopsis: "Happy, ya retirado del golf profesional, regresa al circuito no por gloria sino para financiar la escuela de danza de su hija, Viena.",
-          url: "https://tvacount.github.io/contenido206/index.html",
+          url: "https://lz.blogdepelis.lat/Peliculas/pelicula6/index.html",
           year: "2025"
         },
-        {
-          titulo: "Lilo y Stitch (2025)",
-          heroImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
-          posterImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
-          sinopsis: "Una solitaria niña hawaiana y un extraterrestre fugitivo crean un vínculo inquebrantable en esta aventura llena de emociones.",
-          url: "https://zinecia.github.io/peli96/index.html",
-          year: "2025"
-        },
-        {
-          titulo: "Los Cuatro Fantásticos (2025)",
-          heroImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
-          posterImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
-          sinopsis: "La Primera Familia de Marvel enfrenta a Galactus y su heraldo Estela Plateada, mientras tratan de proteger el mundo y su unión familiar.",
-          url: "https://tvacount.github.io/contenido190/index.html",
-          year: "2025"
-        }
+     
       ];
     }
   }
