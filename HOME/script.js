@@ -93,7 +93,7 @@ async function fetchPeliculas() {
           url: "https://lz.blogdepelis.lat/Peliculas/pelicula6/index.html",
           year: "2025"
         },
-       {
+        {
           titulo: "Happy Gilmore 2 (2025)",
           heroImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
@@ -149,7 +149,6 @@ async function loadPeliculas() {
           url: "https://lz.blogdepelis.lat/Peliculas/pelicula6/index.html",
           year: "2025"
         },
-     
       ];
     }
   }
@@ -157,7 +156,7 @@ async function loadPeliculas() {
   const elegida = peliculas[Math.floor(Math.random() * peliculas.length)];
 
   document.getElementById('dynamicHero').innerHTML = `
-    <img src="${elegida.heroImage || 'https://image.tmdb.org/t/p/original/zsgdVbuEwqZbnUN9qLGEMBYf2Zo.jpg'}" alt="${elegida.titulo}" class="w-full h-full object-cover" />
+    <img src="${elegida.heroImage || 'https://image.tmdb.org/t/p/original/zsgdVbuEwqZbnUN9qLGEMBYf2Zo.jpg'}" alt="${elegida.titulo}" class="w-full h-full object-cover" loading="lazy" />
     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
       <h2 class="text-white text-3xl md:text-4xl font-extrabold mb-6 drop-shadow-lg">${elegida.titulo}</h2>
       <div class="flex space-x-5">
@@ -195,8 +194,8 @@ async function loadPeliculas() {
   const popularMoviesContainer = document.getElementById('popularMovies');
   popularMoviesContainer.innerHTML = peliculas.slice(0, 4).map(pelicula => `
     <div class="flex-shrink-0 flex flex-col items-center w-28 relative">
-      <a href="${pelicula.url}"  class="relative overflow-hidden w-full">
-        <img class="h-40 w-full object-cover" src="${pelicula.posterImage}" alt="${pelicula.titulo}" />
+      <a href="${pelicula.url}" class="relative overflow-hidden w-full">
+        <img class="h-40 w-full object-cover" src="${pelicula.posterImage}" alt="${pelicula.titulo}" loading="lazy" />
         <div class="absolute top-2 right-2 flex items-center space-x-1 select-none">
           <div class="w-0.5 h-5 bg-pink-500 rounded"></div>
           <span class="text-white text-xs font-semibold">${pelicula.year}</span>
@@ -212,13 +211,13 @@ async function loadPeliculas() {
 loadPeliculas();
 
 var iconoGuardado = localStorage.getItem('iconoUsuario');
-if(iconoGuardado){
+if (iconoGuardado) {
   document.getElementById('iconoImg').src = iconoGuardado;
 } else {
   document.getElementById('iconoImg').src = 'https://i.pinimg.com/736x/91/86/1b/91861b749841221d52122f0c2933d8a6.jpg';
 }
 
 var btnUsuario = document.getElementById('btnUsuario');
-btnUsuario.addEventListener('click', function(){
+btnUsuario.addEventListener('click', function() {
   window.location.href = 'HOME/ajustes.html';
 });
