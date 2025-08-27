@@ -1,5 +1,4 @@
-
- async function fetchPeliculas() {
+async function fetchPeliculas() {
   const apiUrl = 'https://api.github.com/repos/lzrdrz10/sv/contents/Peliculas';
   try {
     const response = await fetch(apiUrl);
@@ -56,7 +55,7 @@
             console.warn(`No se encontró sinopsis en ${item.download_url}`);
           }
 
-          // Construir URL
+          // Construir URL (ya está en el formato correcto: Peliculas/nombre_archivo.html)
           const url = `Peliculas/${item.name}`;
 
           // Extraer año
@@ -83,7 +82,7 @@
           heroImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
           sinopsis: "En la escarpada isla de Mema, donde vikingos y dragones han sido enemigos acérrimos durante generaciones, Hipo se desmarca desafiando siglos de tradición cuando entabla amistad con Desdentao, un temido dragón Furia Nocturna...",
-          url: "https://zinecia.github.io/peli73/index.html",
+          url: "Peliculas/pelicula1.html", // Cambiado a URL relativa
           year: "2025"
         },
         {
@@ -91,7 +90,7 @@
           heroImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
           sinopsis: "Happy, ya retirado del golf profesional, regresa al circuito no por gloria sino para financiar la escuela de danza de su hija, Viena.",
-          url: "https://tvacount.github.io/contenido206/index.html",
+          url: "Peliculas/pelicula2.html", // Cambiado a URL relativa
           year: "2025"
         },
         {
@@ -99,7 +98,7 @@
           heroImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
           sinopsis: "Una solitaria niña hawaiana y un extraterrestre fugitivo crean un vínculo inquebrantable en esta aventura llena de emociones.",
-          url: "https://zinecia.github.io/peli96/index.html",
+          url: "Peliculas/pelicula3.html", // Cambiado a URL relativa
           year: "2025"
         },
         {
@@ -107,7 +106,7 @@
           heroImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
           sinopsis: "La Primera Familia de Marvel enfrenta a Galactus y su heraldo Estela Plateada, mientras tratan de proteger el mundo y su unión familiar.",
-          url: "https://tvacount.github.io/contenido190/index.html",
+          url: "Peliculas/pelicula4.html", // Cambiado a URL relativa
           year: "2025"
         }
       ];
@@ -147,7 +146,7 @@ async function loadPeliculas() {
           heroImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
           sinopsis: "En la escarpada isla de Mema, donde vikingos y dragones han sido enemigos acérrimos durante generaciones, Hipo se desmarca desafiando siglos de tradición cuando entabla amistad con Desdentao, un temido dragón Furia Nocturna...",
-          url: "https://zinecia.github.io/peli73/index.html",
+          url: "Peliculas/pelicula1.html", // Cambiado a URL relativa
           year: "2025"
         },
         {
@@ -155,7 +154,7 @@ async function loadPeliculas() {
           heroImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
           sinopsis: "Happy, ya retirado del golf profesional, regresa al circuito no por gloria sino para financiar la escuela de danza de su hija, Viena.",
-          url: "https://tvacount.github.io/contenido206/index.html",
+          url: "Peliculas/pelicula2.html", // Cambiado a URL relativa
           year: "2025"
         },
         {
@@ -163,7 +162,7 @@ async function loadPeliculas() {
           heroImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
           sinopsis: "Una solitaria niña hawaiana y un extraterrestre fugitivo crean un vínculo inquebrantable en esta aventura llena de emociones.",
-          url: "https://zinecia.github.io/peli96/index.html",
+          url: "Peliculas/pelicula3.html", // Cambiado a URL relativa
           year: "2025"
         },
         {
@@ -171,7 +170,7 @@ async function loadPeliculas() {
           heroImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
           sinopsis: "La Primera Familia de Marvel enfrenta a Galactus y su heraldo Estela Plateada, mientras tratan de proteger el mundo y su unión familiar.",
-          url: "https://tvacount.github.io/contenido190/index.html",
+          url: "Peliculas/pelicula4.html", // Cambiado a URL relativa
           year: "2025"
         }
       ];
@@ -219,7 +218,7 @@ async function loadPeliculas() {
   const popularMoviesContainer = document.getElementById('popularMovies');
   popularMoviesContainer.innerHTML = peliculas.slice(0, 4).map(pelicula => `
     <div class="flex-shrink-0 flex flex-col items-center w-28 relative">
-      <a href="${pelicula.url}"  class="relative overflow-hidden w-full">
+      <a href="${pelicula.url}" class="relative overflow-hidden w-full">
         <img class="h-40 w-full object-cover" src="${pelicula.posterImage}" alt="${pelicula.titulo}" />
         <div class="absolute top-2 right-2 flex items-center space-x-1 select-none">
           <div class="w-0.5 h-5 bg-pink-500 rounded"></div>
