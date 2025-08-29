@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Peaky Blinders</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+<style>
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+body, html { margin: 0; padding: 0; height: 100%; }
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: url('https://image.tmdb.org/t/p/original/l8v3gJDlASN0lNn51gR8zQJsu5O.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+}
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: -1;
+}
+#iframe-principal { width: 100%; height: 220px; border: none; background: black; }
+#contenedor-video { position: fixed; top: 0; left: 0; width: 100%; z-index: 10; }
+.capitulo-seleccionado { background-color: #FF0000 !important; color: #fff !important; font-weight: bold; border-bottom: none !important; }
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-622CWCXV7F"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-622CWCXV7F');
+</script>
+<script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+</head>
+<body class="text-white font-sans leading-relaxed">
+<div id="contenedor-video" class="relative">
+  <iframe id="iframe-principal" allow="fullscreen" allowfullscreen></iframe>
+  <a href="https://lzrdrz10.github.io/sv/" aria-label="Volver" class="absolute top-3 left-3 text-white text-2xl z-20">
+    <i class="fas fa-arrow-left"></i>
+  </a>
+  <div class="absolute top-0 left-0 w-full h-full z-10" style="pointer-events: none;"></div>
+</div>
+<div class="px-4 pt-60 pb-4 space-y-4">
+  <div class="flex items-center justify-between">
+    <h1 class="text-xl sm:text-2xl font-bold">Peaky Blinders T<span id="temp-titulo">1</span></h1>
+  </div>
+  <div class="flex flex-wrap items-center gap-3 text-sm text-gray-400">
+    <span><strong class="text-[#FF7F00]">8.5</strong> / 10</span>
+    <span class="text-white">•</span>
+    <span>Drama,Crimen</span>
+    <span class="text-white">•</span>
+    <span>2013</span>
+  </div>
+  <div class="flex items-center gap-3">
+    <label for="temporada" class="text-sm text-gray-300">Temporada:</label>
+    <select id="temporada" class="bg-[#1f1f1f] text-white px-3 py-1 rounded text-sm">
+      <option value="1">Temporada 1</option><option value="2">Temporada 2</option><option value="3">Temporada 3</option><option value="4">Temporada 4</option><option value="5">Temporada 5</option><option value="6">Temporada 6</option>
+    </select>
+  </div>
+  <div class="flex space-x-2 overflow-x-auto scrollbar-hide pb-1" id="lista-capitulos"></div>
+  <div class="bg-[#1e1e1e] rounded-lg p-4 text-sm text-gray-300 leading-relaxed">
+    <p><span class="font-semibold text-white">Sinopsis:</span> En Gran Bretaña, Reino Unido se recuperan de la desesperación de la Gran Guerra, las personas sobreviven a como pueden, y las bandas criminales proliferan en una nación sacudida económicamente.
+
+Es justamente aquí donde una familia de gánsteres irlandeses de origen nómada (a veces llamados gitanos o chatarreros) asentada en Birmingham (los Peaky Blinders) justo después de la Primera Guerra Mundial, dirigen un local de apuestas hípicas en la ciudad.  Las acciones del ambicioso, respetado, temerario y peligroso jefe de la banda, Thomas Shelby, llaman la atención del Inspector jefe Chester Campbell, un detective de la Real Policía Irlandesa que es enviado por el mismo Winston Churchill desde Belfast donde había sido enviado a limpiar la ciudad del Ejército Republicano Irlandés (IRA), comunistas, pandillas y delincuentes comunes.</p>
+  </div>
+</div>
+<script>
+var serieId = "60574";
+var temporadaSelect = document.getElementById('temporada');
+var listaCapitulos = document.getElementById('lista-capitulos');
+var tempTitulo = document.getElementById('temp-titulo');
+var iframePrincipal = document.getElementById('iframe-principal');
+
+var serieActual = {
+  id: serieId,
+  titulo: "Peaky Blinders",
+  temporada: temporadaSelect.value,
+  poster: "https://image.tmdb.org/t/p/original/zUqNyXRfYkFAFXsqJJjKMZpjYus.jpg"
+};
+
+var videosPorCapitulo = {"1":{"1":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/Z/R/H/b/ZRHbu.aaa.mp4","2":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/u/6/x/K/u6xKv.aaa.mp4","3":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/U/7/x/K/U7xKv.aaa.mp4","4":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/K/C/d/L/KCdLv.aaa.mp4","5":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/o/A/d/L/oAdLv.aaa.mp4","6":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/E/H/e/L/EHeLv.aaa.mp4"},"2":{"1":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/d/K/e/L/dKeLv.aaa.mp4","2":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/w/9/f/L/w9fLv.aaa.mp4","3":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/0/9/f/L/09fLv.aaa.mp4","4":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/m/d/h/L/mdhLv.aaa.mp4","5":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/9/c/h/L/9chLv.aaa.mp4","6":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/Y/I/k/L/YIkLv.aaa.mp4"},"3":{"1":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/x/L/k/L/xLkLv.aaa.mp4","2":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/y/D/l/L/yDlLv.aaa.mp4","3":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/a/t/p/L/atpLv.aaa.mp4","4":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/f/c/s/L/fcsLv.aaa.mp4","5":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/T/0/s/L/T0sLv.aaa.mp4","6":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/A/4/v/L/A4vLv.aaa.mp4"},"4":{"1":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/a/V/M/L/aVMLv.aaa.mp4","2":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/w/X/M/L/wXMLv.aaa.mp4","3":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/a/R/N/L/aRNLv.aaa.mp4","4":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/Q/O/N/L/QONLv.aaa.mp4","5":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/O/o/O/L/OoOLv.aaa.mp4","6":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/9/f/O/L/9fOLv.aaa.mp4"},"5":{"1":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/d/5/O/L/d5OLv.aaa.mp4","2":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/7/L/X/L/7LXLv.aaa.mp4","3":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/Z/N/X/L/ZNXLv.aaa.mp4","4":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/w/X/1/L/wX1Lv.aaa.mp4","5":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/p/R/2/L/pR2Lv.aaa.mp4","6":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/o/9/6/L/o96Lv.aaa.mp4"},"6":{"1":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/N/B/l/N/NBlNv.aaa.mp4","2":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/Q/E/l/N/QElNv.aaa.mp4","3":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/e/R/m/N/eRmNv.aaa.mp4","4":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/Y/N/m/N/YNmNv.aaa.mp4","5":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/W/U/q/N/WUqNv.aaa.mp4","6":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/h/s/t/N/hstNv.aaa.mp4"}};
+
+function guardarTemporada(temporada) {
+  localStorage.setItem("temporadaSeleccionada_" + serieId, temporada);
+}
+
+function cargarTemporadaGuardada() {
+  var temp = localStorage.getItem("temporadaSeleccionada_" + serieId);
+  return temp ? temp : "1";
+}
+
+function guardarCapitulo(capitulo) {
+  var key = "ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada;
+  localStorage.setItem(key, capitulo);
+}
+
+function cargarCapituloGuardado() {
+  var key = "ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada;
+  var capituloGuardado = localStorage.getItem(key);
+  var botones = listaCapitulos.getElementsByClassName('capitulo-btn');
+  var encontrado = false;
+
+  for (var i = 0; i < botones.length; i++) {
+    botones[i].className = botones[i].className.replace(' capitulo-seleccionado', '');
+    if (botones[i].getAttribute('data-capitulo') === capituloGuardado) {
+      botones[i].className += ' capitulo-seleccionado';
+      botones[i].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+      cambiarVideo(capituloGuardado);
+      encontrado = true;
+    }
+  }
+  if (!encontrado) {
+    cambiarVideo("1");
+  }
+}
+
+function cambiarVideo(capitulo) {
+  var temp = serieActual.temporada;
+  var url = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
+  if (url) {
+    iframePrincipal.src = url;
+    guardarCapitulo(capitulo);
+  }
+}
+
+function generarCapitulos(temporada) {
+  listaCapitulos.innerHTML = '';
+  var capitulosObj = videosPorCapitulo[temporada] || {};
+  var total = Object.keys(capitulosObj).length;
+
+  for (var i = 1; i <= total; i++) {
+    var btn = document.createElement('button');
+    btn.className = 'capitulo-btn px-4 py-2 rounded bg-[#2a2a2a] text-white';
+    btn.setAttribute('data-capitulo', i.toString());
+    btn.textContent = i;
+    listaCapitulos.appendChild(btn);
+  }
+  agregarEventosCapitulos();
+  cargarCapituloGuardado();
+}
+
+function agregarEventosCapitulos() {
+  var botones = listaCapitulos.getElementsByClassName('capitulo-btn');
+  for (var i = 0; i < botones.length; i++) {
+    (function(index) {
+      botones[index].onclick = function() {
+        for (var j = 0; j < botones.length; j++) {
+          botones[j].className = botones[j].className.replace(' capitulo-seleccionado', '');
+        }
+        if (botones[index].className.indexOf('capitulo-seleccionado') === -1) {
+          botones[index].className += ' capitulo-seleccionado';
+        }
+        botones[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+        cambiarVideo(botones[index].getAttribute('data-capitulo'));
+      };
+    })(i);
+  }
+}
+
+temporadaSelect.onchange = function() {
+  var temp = temporadaSelect.value;
+  serieActual.temporada = temp;
+  tempTitulo.textContent = temp;
+  guardarTemporada(temp);
+  generarCapitulos(temp);
+};
+
+window.onload = function() {
+  var tempGuardada = cargarTemporadaGuardada();
+  temporadaSelect.value = tempGuardada;
+  serieActual.temporada = tempGuardada;
+  tempTitulo.textContent = tempGuardada;
+  generarCapitulos(tempGuardada);
+};
+</script>
+</body>
+</html>
