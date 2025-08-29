@@ -121,5 +121,39 @@
     <i class="fas fa-search text-xl"></i><span>Buscar</span>
   </a>
 </nav>
+  <div id="supportModal" 
+     class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50"
+     onclick="closeModal(event)">
+  
+  <!-- Contenedor del modal -->
+  <div class="bg-white text-gray-800 rounded-2xl shadow-xl p-6 w-80 relative"
+       onclick="event.stopPropagation()">
+    
+    <!--  cerrar -->
+    <button onclick="closeModal()" 
+            class="absolute top-2 right-2 text-gray-500 hover:text-gray-800">
+      cerrar
+    </button>
+    
+    <!-- Contenido -->
+    <h2 class="text-lg font-bold text-center mb-4">
+  Un Aporte de nuestro amigo: DANIEL MENDOZA  
+    </h2>
+<p>Tu tambien puedes ser parte de este proyecto como nuestro amigo!</p>
+  </div>
+</div>
+	<script>
+    function openModal() {
+  document.getElementById("supportModal").classList.remove("hidden");
+}
+function closeModal() {
+  document.getElementById("supportModal").classList.add("hidden");
+}
+
+
+window.onload = function() {
+  openModal();
+};
+    </script>
 </body>
 </html>
