@@ -81,7 +81,7 @@ async function fetchPeliculas() {
         },
         {
           titulo: "Happy Gilmore 2 (2025)",
-          heroImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
+          ParnImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
           sinopsis: "Happy, ya retirado del golf profesional, regresa al circuito no por gloria sino para financiar la escuela de danza de su hija, Viena.",
           url: "Peliculas/pelicula2.html",
@@ -220,7 +220,8 @@ async function loadContent() {
   const cacheDuration = 24 * 60 * 60 * 1000;
   const now = Date.now();
 
-  let peliculas, series;
+  let peliculas = [];
+  let series = [];
 
   const peliculasCachedData = localStorage.getItem(peliculasCacheKey);
   const peliculasCachedTimestamp = localStorage.getItem(peliculasTimestampKey);
@@ -233,6 +234,44 @@ async function loadContent() {
       localStorage.setItem(peliculasCacheKey, JSON.stringify(peliculas));
       localStorage.setItem(peliculasTimestampKey, now.toString());
       console.log('Películas cargadas desde API y guardadas en caché');
+    } else {
+      console.warn('No se cargaron películas, usando datos de respaldo');
+      peliculas = [
+        {
+          titulo: "Cómo entrenar a tu dragón (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
+          sinopsis: "En la escarpada isla de Mema, donde vikingos y dragones han sido enemigos acérrimos durante generaciones, Hipo se desmarca desafiando siglos de tradición cuando entabla amistad con Desdentao, un temido dragón Furia Nocturna...",
+          url: "Peliculas/pelicula1.html",
+          year: "2025"
+        },
+        {
+          titulo: "Happy Gilmore 2 (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
+          sinopsis: "Happy, ya retirado del golf profesional, regresa al circuito no por gloria sino para financiar la escuela de danza de su hija, Viena.",
+          url: "Peliculas/pelicula2.html",
+          year: "2025"
+        },
+        {
+          titulo: "Lilo y Stitch (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
+          sinopsis: "Una solitaria niña hawaiana y un extraterrestre fugitivo crean un vínculo inquebrantable en esta aventura llena de emociones.",
+          url: "Peliculas/pelicula3.html",
+          year: "2025"
+        },
+        {
+          titulo: "Los Cuatro Fantásticos (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
+          sinopsis: "La Primera Familia de Marvel enfrenta a Galactus y su heraldo Estela Plateada, mientras tratan de proteger el mundo y su unión familiar.",
+          url: "Peliculas/pelicula4.html",
+          year: "2025"
+        }
+      ];
+      localStorage.setItem(peliculasCacheKey, JSON.stringify(peliculas));
+      localStorage.setItem(peliculasTimestampKey, now.toString());
     }
   }
 
@@ -247,6 +286,28 @@ async function loadContent() {
       localStorage.setItem(seriesCacheKey, JSON.stringify(series));
       localStorage.setItem(seriesTimestampKey, now.toString());
       console.log('Series cargadas desde API y guardadas en caché');
+    } else {
+      console.warn('No se cargaron series, usando datos de respaldo');
+      series = [
+        {
+          titulo: "The Witcher: Sirens of the Deep (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/1234567890abcdef.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/1234567890abcdef.jpg",
+          sinopsis: "Geralt de Rivia enfrenta nuevas amenazas en un mundo submarino lleno de misterios y peligros.",
+          url: "Series/serie1.html",
+          year: "2025"
+        },
+        {
+          titulo: "Stranger Things 5 (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/0987654321fedcba.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/0987654321fedcba.jpg",
+          sinopsis: "El grupo de Hawkins enfrenta su batalla final contra el Upside Down.",
+          url: "Series/serie2.html",
+          year: "2025"
+        }
+      ];
+      localStorage.setItem(seriesCacheKey, JSON.stringify(series));
+      localStorage.setItem(seriesTimestampKey, now.toString());
     }
   }
 
