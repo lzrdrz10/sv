@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Walking Dead</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+<style>
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+body, html { margin: 0; padding: 0; height: 100%; }
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: url('https://image.tmdb.org/t/p/original/rAOjnEFTuNysY7bot8zonhImGMh.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+}
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: -1;
+}
+#iframe-principal { width: 100%; height: 220px; border: none; background: black; }
+#contenedor-video { position: fixed; top: 0; left: 0; width: 100%; z-index: 10; }
+.capitulo-seleccionado { background-color: #FF0000 !important; color: #fff !important; font-weight: bold; border-bottom: none !important; }
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-622CWCXV7F"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-622CWCXV7F');
+</script>
+<script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+</head>
+<body class="text-white font-sans leading-relaxed">
+<div id="contenedor-video" class="relative">
+  <iframe id="iframe-principal" allow="fullscreen" allowfullscreen></iframe>
+  <a href="https://lzrdrz10.github.io/sv/" aria-label="Volver" class="absolute top-3 left-3 text-white text-2xl z-20">
+    <i class="fas fa-arrow-left"></i>
+  </a>
+  <div class="absolute top-0 left-0 w-full h-full z-10" style="pointer-events: none;"></div>
+</div>
+<div class="px-4 pt-60 pb-4 space-y-4">
+  <div class="flex items-center justify-between">
+    <h1 class="text-xl sm:text-2xl font-bold">The Walking Dead T<span id="temp-titulo">1</span></h1>
+  </div>
+  <div class="flex flex-wrap items-center gap-3 text-sm text-gray-400">
+    <span><strong class="text-[#FF7F00]">8.1</strong> / 10</span>
+    <span class="text-white">•</span>
+    <span>Action & Adventure,Drama,Sci-Fi & Fantasy</span>
+    <span class="text-white">•</span>
+    <span>2010</span>
+  </div>
+  <div class="flex items-center gap-3">
+    <label for="temporada" class="text-sm text-gray-300">Temporada:</label>
+    <select id="temporada" class="bg-[#1f1f1f] text-white px-3 py-1 rounded text-sm">
+      <option value="1">Temporada 1</option><option value="2">Temporada 2</option><option value="3">Temporada 3</option><option value="4">Temporada 4</option><option value="5">Temporada 5</option><option value="6">Temporada 6</option><option value="7">Temporada 7</option><option value="8">Temporada 8</option><option value="9">Temporada 9</option><option value="10">Temporada 10</option><option value="11">Temporada 11</option>
+    </select>
+  </div>
+  <div class="flex space-x-2 overflow-x-auto scrollbar-hide pb-1" id="lista-capitulos"></div>
+  <div class="bg-[#1e1e1e] rounded-lg p-4 text-sm text-gray-300 leading-relaxed">
+    <p><span class="font-semibold text-white">Sinopsis:</span> El oficial Rick Grimes se despierta del coma para descubrir que el mundo está en ruinas y debe guiar a un grupo de sobrevivientes para permanecer con vida.</p>
+  </div>
+</div>
+<script>
+var serieId = "1402";
+var temporadaSelect = document.getElementById('temporada');
+var listaCapitulos = document.getElementById('lista-capitulos');
+var tempTitulo = document.getElementById('temp-titulo');
+var iframePrincipal = document.getElementById('iframe-principal');
+
+var serieActual = {
+  id: serieId,
+  titulo: "The Walking Dead",
+  temporada: temporadaSelect.value,
+  poster: "https://image.tmdb.org/t/p/original/hUblG1KZCTRpHc3wqqoU0DW98Q3.jpg"
+};
+
+var videosPorCapitulo = {"1":{"1":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/u/8/v/q/u8vqu.aaa.mp4","2":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/J/p/v/q/Jpvqu.aaa.mp4","3":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/q/q/v/q/qqvqu.aaa.mp4","4":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/t/E/w/q/tEwqu.aaa.mp4","5":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/1/D/w/q/1Dwqu.aaa.mp4","6":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/8/F/w/q/8Fwqu.aaa.mp4"},"2":{"1":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/E/w/Y/s/EwYsu.aaa.mp4","2":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/w/6/X/s/w6Xsu.aaa.mp4","3":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/b/d/Y/s/bdYsu.aaa.mp4","4":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/R/a/Y/s/RaYsu.aaa.mp4","5":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/Z/B/2/s/ZB2su.aaa.mp4","6":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/o/l/Y/s/olYsu.aaa.mp4","7":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/A/i/Y/s/AiYsu.aaa.mp4","8":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/W/k/Y/s/WkYsu.aaa.mp4","9":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/E/K/2/s/EK2su.aaa.mp4","10":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/p/K/2/s/pK2su.aaa.mp4","11":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/P/L/2/s/PL2su.aaa.mp4","12":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/4/L/2/s/4L2su.aaa.mp4","13":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/h/M/2/s/hM2su.aaa.mp4"},"3":{"1":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/k/D/a/v/kDavu.aaa.mp4","2":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/o/C/a/v/oCavu.aaa.mp4","3":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/9/v/w/w/9vwwu.aaa.mp4","4":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/T/z/w/w/Tzwwu.aaa.mp4","5":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/C/W/w/w/CWwwu.aaa.mp4","6":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/B/0/w/w/B0wwu.aaa.mp4","7":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/T/3/w/w/T3wwu.aaa.mp4","8":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/0/6/H/w/06Hwu.aaa.mp4","9":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/G/_/H/w/G_Hwu.aaa.mp4","10":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/B/e/I/w/BeIwu.aaa.mp4","11":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/x/f/I/w/xfIwu.aaa.mp4","12":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/t/g/I/w/tgIwu.aaa.mp4","13":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/o/w/J/w/owJwu.aaa.mp4","14":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/D/H/K/w/DHKwu.aaa.mp4","15":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/K/J/K/w/KJKwu.aaa.mp4","16":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/c/K/K/w/cKKwu.aaa.mp4"},"4":{"1":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/n/U/r/D/nUrDu.aaa.mp4","2":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/o/5/r/D/o5rDu.aaa.mp4","3":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/h/3/r/D/h3rDu.aaa.mp4","4":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/v/k/s/D/vksDu.aaa.mp4","5":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/x/r/s/D/xrsDu.aaa.mp4","6":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/H/v/w/D/HvwDu.aaa.mp4","7":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/I/r/w/D/IrwDu.aaa.mp4","8":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/_/v/w/D/_vwDu.aaa.mp4","9":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/x/w/R/D/xwRDu.aaa.mp4","10":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/M/q/w/D/MqwDu.aaa.mp4","11":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/O/x/w/D/OxwDu.aaa.mp4","12":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/F/r/z/D/FrzDu.aaa.mp4","13":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/b/r/z/D/brzDu.aaa.mp4","14":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/f/q/z/D/fqzDu.aaa.mp4","15":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/9/r/z/D/9rzDu.aaa.mp4","16":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/8/y/R/D/8yRDu.aaa.mp4"},"5":{"1":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/6/N/c/K/6NcKu.aaa.mp4","2":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/u/P/c/K/uPcKu.aaa.mp4","3":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/I/T/c/K/ITcKu.aaa.mp4","4":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/7/u/c/K/7ucKu.aaa.mp4","5":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/o/8/h/K/o8hKu.aaa.mp4","6":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/u/c/i/K/uciKu.aaa.mp4","7":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/f/c/i/K/fciKu.aaa.mp4","8":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/F/d/i/K/FdiKu.aaa.mp4","9":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/x/f/i/K/xfiKu.aaa.mp4","10":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/q/Z/l/K/qZlKu.aaa.mp4","11":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/C/_/l/K/C_lKu.aaa.mp4","12":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/J/b/m/K/JbmKu.aaa.mp4","13":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/-/n/m/K/-nmKu.aaa.mp4","14":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/C/o/m/K/ComKu.aaa.mp4","15":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/y/A/n/K/yAnKu.aaa.mp4","16":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/l/W/n/K/lWnKu.aaa.mp4"},"6":{"1":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/1/J/Q/q/1JQqv.aaa.mp4","2":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/j/Y/P/q/jYPqv.aaa.mp4","3":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/5/1/P/q/51Pqv.aaa.mp4","4":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/H/O/Q/q/HOQqv.aaa.mp4","5":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/u/c/Q/q/ucQqv.aaa.mp4","6":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/-/h/3/q/-h3qv.aaa.mp4","7":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/H/s/3/q/Hs3qv.aaa.mp4","8":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/b/A/3/q/bA3qv.aaa.mp4","9":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/u/z/3/q/uz3qv.aaa.mp4","10":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/C/x/3/q/Cx3qv.aaa.mp4","11":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/6/9/e/r/69erv.aaa.mp4","12":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/8/e/f/r/8efrv.aaa.mp4","13":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/7/i/f/r/7ifrv.aaa.mp4","14":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/s8/2/r/l/f/r/rlfrv.aaa.mp4","15":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/-/l/f/r/-lfrv.aaa.mp4","16":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/s8/2/k/l/m/r/klmrv.aaa.mp4"},"7":{"1":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe2/29/s8/2/H/O/U/O/HOUOw.aaa.mp4","2":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/63/s8/2/V/S/U/O/VSUOw.aaa.mp4","3":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/99/s8/2/0/y/U/O/0yUOw.aaa.mp4","4":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/8e/s8/2/t/V/V/O/tVVOw.aaa.mp4","5":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe1/f8/s8/2/k/Q/U/O/kQUOw.aaa.mp4","6":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe2/99/s8/2/c/c/p/P/ccpPw.aaa.mp4","7":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/6e/s8/2/x/a/R/Q/xaRQw.aaa.mp4","8":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/4d/s8/2/v/O/Y/Q/vOYQw.aaa.mp4","9":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/d1/s8/2/T/H/2/Q/TH2Qw.aaa.mp4","10":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe2/2a/s8/2/c/c/4/Q/cc4Qw.aaa.mp4","11":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe1/cf/s8/2/X/A/_/Q/XA_Qw.aaa.mp4","12":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/2f/s8/2/f/V/e/R/fVeRw.aaa.mp4","13":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe2/43/s8/2/Y/m/j/R/YmjRw.aaa.mp4","14":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe1/01/s8/2/A/i/t/R/AitRw.aaa.mp4","15":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe1/6b/s8/2/k/c/g/T/kcgTw.aaa.mp4","16":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe2/7c/s8/2/4/C/g/T/4CgTw.aaa.mp4"},"8":{"1":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/01/s8/2/Y/H/q/s/YHqsy.aaa.mp4","2":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/67/s8/2/k/j/s/s/kjssy.aaa.mp4","3":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/df/s8/2/m/j/s/s/mjssy.aaa.mp4","4":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/93/s8/2/G/n/s/s/Gnssy.aaa.mp4","5":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/d8/s8/2/-/w/s/s/-wssy.aaa.mp4","6":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/17/s8/2/c/t/s/s/ctssy.aaa.mp4","7":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/94/s8/2/S/s/s/s/Ssssy.aaa.mp4","8":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe2/43/s8/2/4/A/s/s/4Assy.aaa.mp4","9":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/84/s8/2/0/z/s/s/0zssy.aaa.mp4","10":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe2/78/s8/2/S/t/s/s/Stssy.aaa.mp4","11":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/b0/s8/2/y/t/s/s/ytssy.aaa.mp4","12":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe1/12/s8/2/K/u/s/s/Kussy.aaa.mp4","13":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/09/s8/2/U/L/t/s/ULtsy.aaa.mp4","14":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/fa/s8/2/K/R/t/s/KRtsy.aaa.mp4","15":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/55/s8/2/k/S/t/s/kStsy.aaa.mp4","16":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe2/6e/s8/2/e/R/t/s/eRtsy.aaa.mp4"},"9":{"1":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/91/s8/2/W/Q/x/s/WQxsy.aaa.mp4","2":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/e1/s8/2/A/D/x/s/ADxsy.aaa.mp4","3":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/3b/s8/2/6/E/x/s/6Exsy.aaa.mp4","4":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/9a/s8/2/o/D/x/s/oDxsy.aaa.mp4","5":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/b6/s8/2/G/F/x/s/GFxsy.aaa.mp4","6":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/8b/s8/2/8/P/x/s/8Pxsy.aaa.mp4","7":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/76/s8/2/8/E/x/s/8Exsy.aaa.mp4","8":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/ef/s8/2/I/F/x/s/IFxsy.aaa.mp4","9":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/a5/s8/2/-/O/x/s/-Oxsy.aaa.mp4","10":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/b4/s8/2/8/H/x/s/8Hxsy.aaa.mp4","11":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/b5/s8/2/6/C/x/s/6Cxsy.aaa.mp4","12":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/cf/s8/2/s/6/z/s/s6zsy.aaa.mp4","13":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/25/s8/2/A/5/z/s/A5zsy.aaa.mp4","14":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/ea/s8/2/U/8/z/s/U8zsy.aaa.mp4","15":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/1b/s8/2/C/_/z/s/C_zsy.aaa.mp4","16":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/5e/s8/2/G/9/z/s/G9zsy.aaa.mp4"},"10":{"1":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/90/s8/2/8/R/S/t/8RSty.aaa.mp4","2":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/14/s8/2/U/K/S/t/UKSty.aaa.mp4","3":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/ca/s8/2/c/R/S/t/cRSty.aaa.mp4","4":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/0a/s8/2/K/N/S/t/KNSty.aaa.mp4","5":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/4e/s8/2/K/P/S/t/KPSty.aaa.mp4","6":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/b2/s8/2/C/O/S/t/COSty.aaa.mp4","7":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/a5/s8/2/s/N/S/t/sNSty.aaa.mp4","8":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/39/s8/2/0/U/S/t/0USty.aaa.mp4","9":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/90/s8/2/y/P/S/t/yPSty.aaa.mp4","10":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/8c/s8/2/2/Q/S/t/2QSty.aaa.mp4","11":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/7b/s8/2/Y/3/V/t/Y3Vty.aaa.mp4","12":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/ac/s8/2/s/3/V/t/s3Vty.aaa.mp4","13":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/db/s8/2/a/6/V/t/a6Vty.aaa.mp4","14":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/1d/s8/2/8/3/V/t/83Vty.aaa.mp4","15":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/c8/s8/2/k/1/V/t/k1Vty.aaa.mp4","16":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/86/s8/2/0/4/V/t/04Vty.aaa.mp4","17":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/4c/s8/2/c/0/V/t/c0Vty.aaa.mp4","18":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/a6/s8/2/a/2/V/t/a2Vty.aaa.mp4","19":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/2b/s8/2/g/8/V/t/g8Vty.aaa.mp4","20":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/9f/s8/2/W/R/V/t/WRVty.aaa.mp4","21":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/05/s8/2/U/-/W/t/U-Wty.aaa.mp4","22":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/26/s8/2/E/g/X/t/EgXty.aaa.mp4"},"11":{"1":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/b1/s8/2/U/h/M/v/UhMvy.aaa.mp4","2":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/42/s8/2/k/j/M/v/kjMvy.aaa.mp4","3":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/df/s8/2/M/h/M/v/MhMvy.aaa.mp4","4":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/5c/s8/2/O/y/N/v/OyNvy.aaa.mp4","5":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/19/s8/2/W/A/N/v/WANvy.aaa.mp4","6":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/0f/s8/2/q/A/N/v/qANvy.aaa.mp4","7":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/1c/s8/2/E/A/N/v/EANvy.aaa.mp4","8":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/fe/s8/2/2/y/N/v/2yNvy.aaa.mp4","9":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/ad/s8/2/q/g/R/v/qgRvy.aaa.mp4","10":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/61/s8/2/C/k/R/v/CkRvy.aaa.mp4","11":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/97/s8/2/W/m/R/v/WmRvy.aaa.mp4","12":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/b9/s8/2/e/m/R/v/emRvy.aaa.mp4","13":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/1a/s8/2/E/k/R/v/EkRvy.aaa.mp4","14":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/72/s8/2/c/l/R/v/clRvy.aaa.mp4","15":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/b2/s8/2/i/n/R/v/inRvy.aaa.mp4","16":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/6c/s8/2/0/i/R/v/0iRvy.aaa.mp4","17":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/89/s8/2/o/n/R/v/onRvy.aaa.mp4","18":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://unlimplay.com/embed/?bnVOa0xoeDdwTW5KUTBMVm85T0c2MjBuUXBYS2QyZlFWcVdxdDd6VjYyMnZ4TkNzUjdPemVYVnJacmNGQzEyWW9HR0ppVWpoU08xaE5aL09MT2kyVFNHN2xYN3RQZ2M1YWNPbWpaVEVnUUtxWW54RHc1UjZadjBKSURTcWlQN3o,","19":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/3f/s8/2/N/B/b/P/NBbPy.aaa.mp4","20":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/a1/s8/2/u/m/R/v/umRvy.aaa.mp4","21":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://unlimplay.com/embed/?Y1JSVWtpOTJIR1I0bElqVWFnK0FFWmhDbnVTMmMzNDIzeTlmdlBIRThlUlNOUDNnS2g0SWh0SDNKeDkycGxFSVg1d2hVMWVSdFhacFJIWEVLSlcwQkNSMTJVYmVHZWRhQk5ZbVJQRmhVZGVlTVo3eURvdDZFTkNISy9NWldOTDA,","22":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/7f/s8/2/U/n/R/v/UnRvy.aaa.mp4","23":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/13/s8/2/8/m/R/v/8mRvy.aaa.mp4","24":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/1f/s8/2/v/v/Y/z/vvYzy.aaa.mp4"}};
+
+function guardarTemporada(temporada) {
+  localStorage.setItem("temporadaSeleccionada_" + serieId, temporada);
+}
+
+function cargarTemporadaGuardada() {
+  var temp = localStorage.getItem("temporadaSeleccionada_" + serieId);
+  return temp ? temp : "1";
+}
+
+function guardarCapitulo(capitulo) {
+  var key = "ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada;
+  localStorage.setItem(key, capitulo);
+}
+
+function cargarCapituloGuardado() {
+  var key = "ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada;
+  var capituloGuardado = localStorage.getItem(key);
+  var botones = listaCapitulos.getElementsByClassName('capitulo-btn');
+  var encontrado = false;
+
+  for (var i = 0; i < botones.length; i++) {
+    botones[i].className = botones[i].className.replace(' capitulo-seleccionado', '');
+    if (botones[i].getAttribute('data-capitulo') === capituloGuardado) {
+      botones[i].className += ' capitulo-seleccionado';
+      botones[i].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+      cambiarVideo(capituloGuardado);
+      encontrado = true;
+    }
+  }
+  if (!encontrado) {
+    cambiarVideo("1");
+  }
+}
+
+function cambiarVideo(capitulo) {
+  var temp = serieActual.temporada;
+  var url = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
+  if (url) {
+    iframePrincipal.src = url;
+    guardarCapitulo(capitulo);
+  }
+}
+
+function generarCapitulos(temporada) {
+  listaCapitulos.innerHTML = '';
+  var capitulosObj = videosPorCapitulo[temporada] || {};
+  var total = Object.keys(capitulosObj).length;
+
+  for (var i = 1; i <= total; i++) {
+    var btn = document.createElement('button');
+    btn.className = 'capitulo-btn px-4 py-2 rounded bg-[#2a2a2a] text-white';
+    btn.setAttribute('data-capitulo', i.toString());
+    btn.textContent = i;
+    listaCapitulos.appendChild(btn);
+  }
+  agregarEventosCapitulos();
+  cargarCapituloGuardado();
+}
+
+function agregarEventosCapitulos() {
+  var botones = listaCapitulos.getElementsByClassName('capitulo-btn');
+  for (var i = 0; i < botones.length; i++) {
+    (function(index) {
+      botones[index].onclick = function() {
+        for (var j = 0; j < botones.length; j++) {
+          botones[j].className = botones[j].className.replace(' capitulo-seleccionado', '');
+        }
+        if (botones[index].className.indexOf('capitulo-seleccionado') === -1) {
+          botones[index].className += ' capitulo-seleccionado';
+        }
+        botones[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+        cambiarVideo(botones[index].getAttribute('data-capitulo'));
+      };
+    })(i);
+  }
+}
+
+temporadaSelect.onchange = function() {
+  var temp = temporadaSelect.value;
+  serieActual.temporada = temp;
+  tempTitulo.textContent = temp;
+  guardarTemporada(temp);
+  generarCapitulos(temp);
+};
+
+window.onload = function() {
+  var tempGuardada = cargarTemporadaGuardada();
+  temporadaSelect.value = tempGuardada;
+  serieActual.temporada = tempGuardada;
+  tempTitulo.textContent = tempGuardada;
+  generarCapitulos(tempGuardada);
+};
+</script>
+</body>
+</html>
