@@ -9,6 +9,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="HOME/style.css">
   <meta name="monetag" content="d7bc29e0889c5427e856865ebcaa0093">
+	<script>
+  // Muestra el User Agent en la página
+  document.getElementById("ua").textContent = navigator.userAgent;
+
+  // También lo puedes ver en la consola
+  console.log("User Agent:", navigator.userAgent);
+</script>
 </head>
 <body class="text-white min-h-screen overflow-x-hidden">
   <section id="dynamicHero" class="relative w-full overflow-hidden h-[60vh] md:h-[70vh]"></section>
@@ -596,3 +603,4 @@ document.addEventListener("DOMContentLoaded", () => {
   <script src="HOME/script.js"></script>
 </body>
 </html>
+
