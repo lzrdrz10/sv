@@ -1,3 +1,4 @@
+
 async function fetchPeliculas() {
   const apiUrl = 'https://api.github.com/repos/lzrdrz10/sv/contents/Peliculas';
   try {
@@ -55,7 +56,7 @@ async function fetchPeliculas() {
             console.warn(`No se encontró sinopsis en ${item.download_url}`);
           }
 
-          // Construir URL (ya está en el formato correcto: Peliculas/nombre_archivo.html)
+          // Construir URL
           const url = `Peliculas/${item.name}`;
 
           // Extraer año
@@ -82,7 +83,7 @@ async function fetchPeliculas() {
           heroImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
           sinopsis: "En la escarpada isla de Mema, donde vikingos y dragones han sido enemigos acérrimos durante generaciones, Hipo se desmarca desafiando siglos de tradición cuando entabla amistad con Desdentao, un temido dragón Furia Nocturna...",
-          url: "Peliculas/pelicula1.html", // Cambiado a URL relativa
+          url: "Peliculas/pelicula1.html",
           year: "2025"
         },
         {
@@ -90,7 +91,7 @@ async function fetchPeliculas() {
           heroImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
           sinopsis: "Happy, ya retirado del golf profesional, regresa al circuito no por gloria sino para financiar la escuela de danza de su hija, Viena.",
-          url: "Peliculas/pelicula2.html", // Cambiado a URL relativa
+          url: "Peliculas/pelicula2.html",
           year: "2025"
         },
         {
@@ -98,7 +99,7 @@ async function fetchPeliculas() {
           heroImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
           sinopsis: "Una solitaria niña hawaiana y un extraterrestre fugitivo crean un vínculo inquebrantable en esta aventura llena de emociones.",
-          url: "Peliculas/pelicula3.html", // Cambiado a URL relativa
+          url: "Peliculas/pelicula3.html",
           year: "2025"
         },
         {
@@ -106,7 +107,7 @@ async function fetchPeliculas() {
           heroImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
           sinopsis: "La Primera Familia de Marvel enfrenta a Galactus y su heraldo Estela Plateada, mientras tratan de proteger el mundo y su unión familiar.",
-          url: "Peliculas/pelicula4.html", // Cambiado a URL relativa
+          url: "Peliculas/pelicula4.html",
           year: "2025"
         }
       ];
@@ -146,7 +147,7 @@ async function loadPeliculas() {
           heroImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
           sinopsis: "En la escarpada isla de Mema, donde vikingos y dragones han sido enemigos acérrimos durante generaciones, Hipo se desmarca desafiando siglos de tradición cuando entabla amistad con Desdentao, un temido dragón Furia Nocturna...",
-          url: "Peliculas/pelicula1.html", // Cambiado a URL relativa
+          url: "Peliculas/pelicula1.html",
           year: "2025"
         },
         {
@@ -154,7 +155,7 @@ async function loadPeliculas() {
           heroImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
           sinopsis: "Happy, ya retirado del golf profesional, regresa al circuito no por gloria sino para financiar la escuela de danza de su hija, Viena.",
-          url: "Peliculas/pelicula2.html", // Cambiado a URL relativa
+          url: "Peliculas/pelicula2.html",
           year: "2025"
         },
         {
@@ -162,7 +163,7 @@ async function loadPeliculas() {
           heroImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
           sinopsis: "Una solitaria niña hawaiana y un extraterrestre fugitivo crean un vínculo inquebrantable en esta aventura llena de emociones.",
-          url: "Peliculas/pelicula3.html", // Cambiado a URL relativa
+          url: "Peliculas/pelicula3.html",
           year: "2025"
         },
         {
@@ -170,78 +171,98 @@ async function loadPeliculas() {
           heroImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
           sinopsis: "La Primera Familia de Marvel enfrenta a Galactus y su heraldo Estela Plateada, mientras tratan de proteger el mundo y su unión familiar.",
-          url: "Peliculas/pelicula4.html", // Cambiado a URL relativa
+          url: "Peliculas/pelicula4.html",
           year: "2025"
         }
       ];
     }
   }
 
-  const elegida = peliculas[Math.floor(Math.random() * peliculas.length)];
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
 
-  document.getElementById('dynamicHero').innerHTML = `
-    <img src="${elegida.heroImage || 'https://image.tmdb.org/t/p/original/zsgdVbuEwqZbnUN9qLGEMBYf2Zo.jpg'}" alt="${elegida.titulo}" class="w-full h-full object-cover" />
-    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
-      <h2 class="text-white text-3xl md:text-4xl font-extrabold mb-6 drop-shadow-lg">${elegida.titulo}</h2>
-      <div class="flex space-x-5">
-        <a href="${elegida.url}"  
-           class="flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full shadow-lg transition duration-300 ease-in-out">
-          <i class="fas fa-play mr-3 text-lg"></i>Play
-        </a>
-        <button id="openModal" 
-           class="flex items-center bg-transparent border-2 border-white hover:border-blue-600 hover:text-blue-600 text-white font-semibold px-6 py-3 rounded-full shadow-md transition duration-300 ease-in-out">
-          <i class="fas fa-info-circle mr-3 text-lg"></i> Info
-        </button>
-      </div>
-    </div>
-  `;
+  function updateMovies() {
+    // Seleccionar una película aleatoria para el héroe
+    const elegida = peliculas[Math.floor(Math.random() * peliculas.length)];
 
-  const modal = document.getElementById('infoModal');
-  const modalText = document.getElementById('modalDescription');
-  const openModalBtn = document.getElementById('openModal');
-  const closeModalBtn = document.getElementById('closeModal');
-
-  openModalBtn.addEventListener('click', function() {
-    modal.classList.remove('hidden');
-    modalText.textContent = elegida.sinopsis || 'Sinopsis no disponible.';
-    console.log(`Mostrando sinopsis para ${elegida.titulo}: ${elegida.sinopsis.substring(0, 50)}...`);
-  });
-
-  closeModalBtn.addEventListener('click', function() {
-    modal.classList.add('hidden');
-  });
-
-  modal.addEventListener('click', function(e) {
-    if (e.target === modal) modal.classList.add('hidden');
-  });
-
-  const popularMoviesContainer = document.getElementById('popularMovies');
-  popularMoviesContainer.innerHTML = peliculas.slice(0, 4).map(pelicula => `
-    <div class="flex-shrink-0 flex flex-col items-center w-28 relative">
-      <a href="${pelicula.url}" class="relative overflow-hidden w-full">
-        <img class="h-40 w-full object-cover" src="${pelicula.posterImage}" alt="${pelicula.titulo}" />
-        <div class="absolute top-2 right-2 flex items-center space-x-1 select-none">
-          <div class="w-0.5 h-5 bg-pink-500 rounded"></div>
-          <span class="text-white text-xs font-semibold">${pelicula.year}</span>
+    document.getElementById('dynamicHero').innerHTML = `
+      <img src="${elegida.heroImage || 'https://image.tmdb.org/t/p/original/zsgdVbuEwqZbnUN9qLGEMBYf2Zo.jpg'}" alt="${elegida.titulo}" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
+        <h2 class="text-white text-3xl md:text-4xl font-extrabold mb-6 drop-shadow-lg">${elegida.titulo}</h2>
+        <div class="flex space-x-5">
+          <a href="${elegida.url}"  
+             class="flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full shadow-lg transition duration-300 ease-in-out">
+            <i class="fas fa-play mr-3 text-lg"></i>Play
+          </a>
+          <button id="openModal" 
+             class="flex items-center bg-transparent border-2 border-white hover:border-blue-600 hover:text-blue-600 text-white font-semibold px-6 py-3 rounded-full shadow-md transition duration-300 ease-in-out">
+            <i class="fas fa-info-circle mr-3 text-lg"></i> Info
+          </button>
         </div>
-      </a>
-      <span class="mt-1 text-white text-center text-sm font-semibold leading-tight truncate w-full">
-        ${pelicula.titulo}
-      </span>
-    </div>
-  `).join('');
-}
+      </div>
+    `;
 
+    const modal = document.getElementById('infoModal');
+    const modalText = document.getElementById('modalDescription');
+    const openModalBtn = document.getElementById('openModal');
+    const closeModalBtn = document.getElementById('closeModal');
+
+    openModalBtn.addEventListener('click', function() {
+      modal.classList.remove('hidden');
+      modalText.textContent = elegida.sinopsis || 'Sinopsis no disponible.';
+      console.log(`Mostrando sinopsis para ${elegida.titulo}: ${elegida.sinopsis.substring(0, 50)}...`);
+    });
+
+    closeModalBtn.addEventListener('click', function() {
+      modal.classList.add('hidden');
+    });
+
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) modal.classList.add('hidden');
+    });
+
+    // Seleccionar 10 películas aleatorias para la sección de populares
+    const shuffledPeliculas = shuffleArray([...peliculas]);
+    const selectedPeliculas = shuffledPeliculas.slice(0, 10);
+
+    const popularMoviesContainer = document.getElementById('popularMovies');
+    popularMoviesContainer.innerHTML = selectedPeliculas.map(pelicula => `
+      <div class="flex-shrink-0 flex flex-col items-center w-28 relative">
+        <a href="${pelicula.url}" class="relative overflow-hidden w-full">
+          <img class="h-40 w-full object-cover" src="${pelicula.posterImage}" alt="${pelicula.titulo}" />
+          <div class="absolute top-2 right-2 flex items-center space-x-1 select-none">
+            <div class="w-0.5 h-5 bg-pink-500 rounded"></div>
+            <span class="text-white text-xs font-semibold">${pelicula.year}</span>
+          </div>
+        </a>
+        <span class="mt-1 text-white text-center text-sm font-semibold leading-tight truncate w-full">
+          ${pelicula.titulo}
+        </span>
+      </div>
+    `).join('');
+  }
+
+  // Ejecutar la actualización inmediatamente
+  updateMovies();
+
+  // Actualizar cada 30 minutos (30 * 60 * 1000 = 1,800,000 milisegundos)
+  setInterval(updateMovies, 30 * 60 * 1000);
+
+  var iconoGuardado = localStorage.getItem('iconoUsuario');
+  if(iconoGuardado){
+    document.getElementById('iconoImg').src = iconoGuardado;
+  } else {
+    document.getElementById('iconoImg').src = 'https://i.pinimg.com/736x/91/86/1b/91861b749841221d52122f0c2933d8a6.jpg';
+  }
+
+  var btnUsuario = document.getElementById('btnUsuario');
+  btnUsuario.addEventListener('click', function(){
+    window.location.href = 'HOME/ajustes.html';
+  });
+}
 loadPeliculas();
-
-var iconoGuardado = localStorage.getItem('iconoUsuario');
-if(iconoGuardado){
-  document.getElementById('iconoImg').src = iconoGuardado;
-} else {
-  document.getElementById('iconoImg').src = 'https://i.pinimg.com/736x/91/86/1b/91861b749841221d52122f0c2933d8a6.jpg';
-}
-
-var btnUsuario = document.getElementById('btnUsuario');
-btnUsuario.addEventListener('click', function(){
-  window.location.href = 'HOME/ajustes.html';
-});
