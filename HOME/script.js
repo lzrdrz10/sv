@@ -1,4 +1,3 @@
-
 async function fetchPeliculas() {
   const apiUrl = 'https://api.github.com/repos/lzrdrz10/sv/contents/Peliculas';
   try {
@@ -16,10 +15,8 @@ async function fetchPeliculas() {
           const parser = new DOMParser();
           const doc = parser.parseFromString(html, 'text/html');
 
-          // Extraer título
           const titulo = doc.querySelector('title') ? doc.querySelector('title').textContent.trim() : 'Título desconocido';
 
-          // Extraer imagen de fondo del CSS para hero
           let backgroundImage = '';
           const styleElement = doc.querySelector('style');
           if (styleElement) {
@@ -30,7 +27,6 @@ async function fetchPeliculas() {
             }
           }
 
-          // Extraer poster para populares
           let posterImage = '';
           const posterDiv = doc.querySelector('.flex.items-center.justify-center.w-\\\[110px\\\].h-\\\[160px\\\]');
           if (posterDiv) {
@@ -45,7 +41,6 @@ async function fetchPeliculas() {
             }
           }
 
-          // Extraer sinopsis
           let sinopsis = '';
           const sinopsisElement = doc.querySelector('#sinopsis p.text-gray-300.text-sm.leading-relaxed');
           if (sinopsisElement) {
@@ -56,10 +51,8 @@ async function fetchPeliculas() {
             console.warn(`No se encontró sinopsis en ${item.download_url}`);
           }
 
-          // Construir URL
           const url = `Peliculas/${item.name}`;
 
-          // Extraer año
           let year = '2025';
           const yearElement = doc.querySelector('.year, [class*="year"], [data-year], .flex.flex-wrap.items-center.space-x-2.text-xs.text-gray-400 span:last-child');
           if (yearElement) {
@@ -120,61 +113,140 @@ async function fetchPeliculas() {
   }
 }
 
-async function loadPeliculas() {
-  const cacheKey = 'cachedPeliculas';
-  const timestampKey = 'peliculasTimestamp';
-  const cacheDuration = 24 * 60 * 60 * 1000;
-  const cachedData = localStorage.getItem(cacheKey);
-  const cachedTimestamp = localStorage.getItem(timestampKey);
+async function fetchSeries() {
+  const apiUrl = 'https://api.github.com/repos/lzrdrz10/sv/contents/Series';
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) throw new Error(`Error al obtener archivos de GitHub: ${response.status}`);
+    const data = await response.json();
 
-  let peliculas;
+    const seriesPromises = data
+      .filter(item => item.type === 'file' && item.name.endsWith('.html'))
+      .map(async (item) => {
+        try {
+          const htmlResponse = await fetch(item.download_url);
+          if (!htmlResponse.ok) throw new Error(`Error al obtener ${item.download_url}: ${htmlResponse.status}`);
+          const html = await htmlResponse.text();
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+
+          const titulo = doc.querySelector('title') ? doc.querySelector('title').textContent.trim() : 'Título desconocido';
+
+          let backgroundImage = '';
+          const styleElement = doc.querySelector('style');
+          if (styleElement) {
+            const cssText = styleElement.textContent;
+            const bgMatch = cssText.match(/body\s*{\s*background:\s*url\(['"]([^'"]+)['"]\)/i);
+            if (bgMatch && bgMatch[1]) {
+              backgroundImage = bgMatch[1];
+            }
+          }
+
+          let posterImage = '';
+          const posterDiv = doc.querySelector('.flex.items-center.justify-center.w-\\\[110px\\\].h-\\\[160px\\\]');
+          if (posterDiv) {
+            const img = posterDiv.querySelector('img');
+            if (img) {
+              posterImage = img.src;
+            }
+          } else {
+            const fallbackImg = doc.querySelector('img[src^="https://image.tmdb.org"]');
+            if (fallbackImg) {
+              posterImage = fallbackImg.src;
+            }
+          }
+
+          let sinopsis = '';
+          const sinopsisElement = doc.querySelector('#sinopsis p.text-gray-300.text-sm.leading-relaxed');
+          if (sinopsisElement) {
+            sinopsis = sinopsisElement.textContent.trim();
+            console.log(`Sinopsis encontrada para ${item.name}: ${sinopsis.substring(0, 50)}...`);
+          } else {
+            sinopsis = 'Sinopsis no disponible.';
+            console.warn(`No se encontró sinopsis en ${item.download_url}`);
+          }
+
+          const url = `Series/${item.name}`;
+
+          let year = '2025';
+          const yearElement = doc.querySelector('.year, [class*="year"], [data-year], .flex.flex-wrap.items-center.space-x-2.text-xs.text-gray-400 span:last-child');
+          if (yearElement) {
+            year = yearElement.textContent.trim() || '2025';
+          }
+
+          return { titulo, heroImage: backgroundImage, posterImage, sinopsis, url, year };
+        } catch (error) {
+          console.error(`Error procesando ${item.name}:`, error);
+          return null;
+        }
+      });
+
+    let series = (await Promise.all(seriesPromises)).filter(s => s !== null);
+
+    if (series.length === 0) {
+      console.warn('No se encontraron series, usando datos de respaldo.');
+      series = [
+        {
+          titulo: "The Witcher: Sirens of the Deep (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/1234567890abcdef.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/1234567890abcdef.jpg",
+          sinopsis: "Geralt de Rivia enfrenta nuevas amenazas en un mundo submarino lleno de misterios y peligros.",
+          url: "Series/serie1.html",
+          year: "2025"
+        },
+        {
+          titulo: "Stranger Things 5 (2025)",
+          heroImage: "https://image.tmdb.org/t/p/original/0987654321fedcba.jpg",
+          posterImage: "https://image.tmdb.org/t/p/original/0987654321fedcba.jpg",
+          sinopsis: "El grupo de Hawkins enfrenta su batalla final contra el Upside Down.",
+          url: "Series/serie2.html",
+          year: "2025"
+        }
+      ];
+    }
+
+    return series;
+  } catch (error) {
+    console.error('Error al cargar series:', error);
+    return [];
+  }
+}
+
+async function loadContent() {
+  const peliculasCacheKey = 'cachedPeliculas';
+  const peliculasTimestampKey = 'peliculasTimestamp';
+  const seriesCacheKey = 'cachedSeries';
+  const seriesTimestampKey = 'seriesTimestamp';
+  const cacheDuration = 24 * 60 * 60 * 1000;
   const now = Date.now();
 
-  if (cachedData && cachedTimestamp && (now - parseInt(cachedTimestamp, 10) < cacheDuration)) {
-    peliculas = JSON.parse(cachedData);
+  let peliculas, series;
+
+  const peliculasCachedData = localStorage.getItem(peliculasCacheKey);
+  const peliculasCachedTimestamp = localStorage.getItem(peliculasTimestampKey);
+  if (peliculasCachedData && peliculasCachedTimestamp && (now - parseInt(peliculasCachedTimestamp, 10) < cacheDuration)) {
+    peliculas = JSON.parse(peliculasCachedData);
     console.log('Cargando películas desde caché');
   } else {
     peliculas = await fetchPeliculas();
     if (peliculas.length > 0) {
-      localStorage.setItem(cacheKey, JSON.stringify(peliculas));
-      localStorage.setItem(timestampKey, now.toString());
+      localStorage.setItem(peliculasCacheKey, JSON.stringify(peliculas));
+      localStorage.setItem(peliculasTimestampKey, now.toString());
       console.log('Películas cargadas desde API y guardadas en caché');
-    } else {
-      console.warn('No se cargaron películas, usando datos de respaldo');
-      peliculas = [
-        {
-          titulo: "Cómo entrenar a tu dragón (2025)",
-          heroImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
-          posterImage: "https://image.tmdb.org/t/p/original/7HqLLVjdjhXS0Qoz1SgZofhkIpE.jpg",
-          sinopsis: "En la escarpada isla de Mema, donde vikingos y dragones han sido enemigos acérrimos durante generaciones, Hipo se desmarca desafiando siglos de tradición cuando entabla amistad con Desdentao, un temido dragón Furia Nocturna...",
-          url: "Peliculas/pelicula1.html",
-          year: "2025"
-        },
-        {
-          titulo: "Happy Gilmore 2 (2025)",
-          heroImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
-          posterImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
-          sinopsis: "Happy, ya retirado del golf profesional, regresa al circuito no por gloria sino para financiar la escuela de danza de su hija, Viena.",
-          url: "Peliculas/pelicula2.html",
-          year: "2025"
-        },
-        {
-          titulo: "Lilo y Stitch (2025)",
-          heroImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
-          posterImage: "https://image.tmdb.org/t/p/original/7Zx3wDG5bBtcfk8lcnCWDOLM4Y4.jpg",
-          sinopsis: "Una solitaria niña hawaiana y un extraterrestre fugitivo crean un vínculo inquebrantable en esta aventura llena de emociones.",
-          url: "Peliculas/pelicula3.html",
-          year: "2025"
-        },
-        {
-          titulo: "Los Cuatro Fantásticos (2025)",
-          heroImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
-          posterImage: "https://image.tmdb.org/t/p/original/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
-          sinopsis: "La Primera Familia de Marvel enfrenta a Galactus y su heraldo Estela Plateada, mientras tratan de proteger el mundo y su unión familiar.",
-          url: "Peliculas/pelicula4.html",
-          year: "2025"
-        }
-      ];
+    }
+  }
+
+  const seriesCachedData = localStorage.getItem(seriesCacheKey);
+  const seriesCachedTimestamp = localStorage.getItem(seriesTimestampKey);
+  if (seriesCachedData && seriesCachedTimestamp && (now - parseInt(seriesCachedTimestamp, 10) < cacheDuration)) {
+    series = JSON.parse(seriesCachedData);
+    console.log('Cargando series desde caché');
+  } else {
+    series = await fetchSeries();
+    if (series.length > 0) {
+      localStorage.setItem(seriesCacheKey, JSON.stringify(series));
+      localStorage.setItem(seriesTimestampKey, now.toString());
+      console.log('Series cargadas desde API y guardadas en caché');
     }
   }
 
@@ -186,8 +258,7 @@ async function loadPeliculas() {
     return array;
   }
 
-  function updateMovies() {
-    // Seleccionar una película aleatoria para el héroe
+  function updateContent() {
     const elegida = peliculas[Math.floor(Math.random() * peliculas.length)];
 
     document.getElementById('dynamicHero').innerHTML = `
@@ -226,10 +297,8 @@ async function loadPeliculas() {
       if (e.target === modal) modal.classList.add('hidden');
     });
 
-    // Seleccionar 10 películas aleatorias para la sección de populares
     const shuffledPeliculas = shuffleArray([...peliculas]);
     const selectedPeliculas = shuffledPeliculas.slice(0, 10);
-
     const popularMoviesContainer = document.getElementById('popularMovies');
     popularMoviesContainer.innerHTML = selectedPeliculas.map(pelicula => `
       <div class="flex-shrink-0 flex flex-col items-center w-28 relative">
@@ -245,13 +314,28 @@ async function loadPeliculas() {
         </span>
       </div>
     `).join('');
+
+    const shuffledSeries = shuffleArray([...series]);
+    const selectedSeries = shuffledSeries.slice(0, 10);
+    const popularSeriesContainer = document.getElementById('popularSeries');
+    popularSeriesContainer.innerHTML = selectedSeries.map(serie => `
+      <div class="flex-shrink-0 flex flex-col items-center w-28 relative">
+        <a href="${serie.url}" class="relative overflow-hidden w-full">
+          <img class="h-40 w-full object-cover" src="${serie.posterImage}" alt="${serie.titulo}" />
+          <div class="absolute top-2 right-2 flex items-center space-x-1 select-none">
+            <div class="w-0.5 h-5 bg-pink-500 rounded"></div>
+            <span class="text-white text-xs font-semibold">${serie.year}</span>
+          </div>
+        </a>
+        <span class="mt-1 text-white text-center text-sm font-semibold leading-tight truncate w-full">
+          ${serie.titulo}
+        </span>
+      </div>
+    `).join('');
   }
 
-  // Ejecutar la actualización inmediatamente
-  updateMovies();
-
-  // Actualizar cada 30 minutos (30 * 60 * 1000 = 1,800,000 milisegundos)
-  setInterval(updateMovies, 30 * 60 * 1000);
+  updateContent();
+  setInterval(updateContent, 30 * 60 * 1000);
 
   var iconoGuardado = localStorage.getItem('iconoUsuario');
   if(iconoGuardado){
@@ -265,4 +349,4 @@ async function loadPeliculas() {
     window.location.href = 'HOME/ajustes.html';
   });
 }
-loadPeliculas();
+loadContent();
