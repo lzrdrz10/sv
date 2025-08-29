@@ -45,7 +45,7 @@ async function fetchPeliculas() {
           const sinopsisElement = doc.querySelector('#sinopsis p.text-gray-300.text-sm.leading-relaxed');
           if (sinopsisElement) {
             sinopsis = sinopsisElement.textContent.trim();
-            console.log(`Sinopsis encontrada para ${item.name}: ${sinopsis.substring(0, 50)}...`);
+            console.log(`Sinopsis encontrada para película ${item.name}: ${sinopsis.substring(0, 50)}...`);
           } else {
             sinopsis = 'Sinopsis no disponible.';
             console.warn(`No se encontró sinopsis en ${item.download_url}`);
@@ -61,12 +61,13 @@ async function fetchPeliculas() {
 
           return { titulo, heroImage: backgroundImage, posterImage, sinopsis, url, year };
         } catch (error) {
-          console.error(`Error procesando ${item.name}:`, error);
+          console.error(`Error procesando película ${item.name}:`, error);
           return null;
         }
       });
 
     let peliculas = (await Promise.all(peliculasPromises)).filter(p => p !== null);
+    console.log(`Películas cargadas: ${peliculas.length}`, peliculas);
 
     if (peliculas.length === 0) {
       console.warn('No se encontraron películas, usando datos de respaldo.');
@@ -81,7 +82,7 @@ async function fetchPeliculas() {
         },
         {
           titulo: "Happy Gilmore 2 (2025)",
-          ParnImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
+          heroImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/88DDOXggxZLxobBolSRRLkaS8h7.jpg",
           sinopsis: "Happy, ya retirado del golf profesional, regresa al circuito no por gloria sino para financiar la escuela de danza de su hija, Viena.",
           url: "Peliculas/pelicula2.html",
@@ -114,11 +115,12 @@ async function fetchPeliculas() {
 }
 
 async function fetchSeries() {
-  const apiUrl = 'https://api.github.com/repos/lzrdrz10/sv/contents/Series';
+  const apiUrl = 'https://api.github.com/repos/lzrdrz10/sv/contents/Categorias/serie';
   try {
     const response = await fetch(apiUrl);
     if (!response.ok) throw new Error(`Error al obtener archivos de GitHub: ${response.status}`);
     const data = await response.json();
+    console.log('Datos de series obtenidos:', data);
 
     const seriesPromises = data
       .filter(item => item.type === 'file' && item.name.endsWith('.html'))
@@ -160,13 +162,13 @@ async function fetchSeries() {
           const sinopsisElement = doc.querySelector('#sinopsis p.text-gray-300.text-sm.leading-relaxed');
           if (sinopsisElement) {
             sinopsis = sinopsisElement.textContent.trim();
-            console.log(`Sinopsis encontrada para ${item.name}: ${sinopsis.substring(0, 50)}...`);
+            console.log(`Sinopsis encontrada para serie ${item.name}: ${sinopsis.substring(0, 50)}...`);
           } else {
             sinopsis = 'Sinopsis no disponible.';
             console.warn(`No se encontró sinopsis en ${item.download_url}`);
           }
 
-          const url = `Series/${item.name}`;
+          const url = `Categorias/serie/${item.name}`;
 
           let year = '2025';
           const yearElement = doc.querySelector('.year, [class*="year"], [data-year], .flex.flex-wrap.items-center.space-x-2.text-xs.text-gray-400 span:last-child');
@@ -176,12 +178,13 @@ async function fetchSeries() {
 
           return { titulo, heroImage: backgroundImage, posterImage, sinopsis, url, year };
         } catch (error) {
-          console.error(`Error procesando ${item.name}:`, error);
+          console.error(`Error procesando serie ${item.name}:`, error);
           return null;
         }
       });
 
     let series = (await Promise.all(seriesPromises)).filter(s => s !== null);
+    console.log(`Series cargadas: ${series.length}`, series);
 
     if (series.length === 0) {
       console.warn('No se encontraron series, usando datos de respaldo.');
@@ -191,7 +194,7 @@ async function fetchSeries() {
           heroImage: "https://image.tmdb.org/t/p/original/1234567890abcdef.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/1234567890abcdef.jpg",
           sinopsis: "Geralt de Rivia enfrenta nuevas amenazas en un mundo submarino lleno de misterios y peligros.",
-          url: "Series/serie1.html",
+          url: "Categorias/serie/serie1.html",
           year: "2025"
         },
         {
@@ -199,7 +202,7 @@ async function fetchSeries() {
           heroImage: "https://image.tmdb.org/t/p/original/0987654321fedcba.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/0987654321fedcba.jpg",
           sinopsis: "El grupo de Hawkins enfrenta su batalla final contra el Upside Down.",
-          url: "Series/serie2.html",
+          url: "Categorias/serie/serie2.html",
           year: "2025"
         }
       ];
@@ -227,13 +230,13 @@ async function loadContent() {
   const peliculasCachedTimestamp = localStorage.getItem(peliculasTimestampKey);
   if (peliculasCachedData && peliculasCachedTimestamp && (now - parseInt(peliculasCachedTimestamp, 10) < cacheDuration)) {
     peliculas = JSON.parse(peliculasCachedData);
-    console.log('Cargando películas desde caché');
+    console.log('Cargando películas desde caché:', peliculas.length);
   } else {
     peliculas = await fetchPeliculas();
     if (peliculas.length > 0) {
       localStorage.setItem(peliculasCacheKey, JSON.stringify(peliculas));
       localStorage.setItem(peliculasTimestampKey, now.toString());
-      console.log('Películas cargadas desde API y guardadas en caché');
+      console.log('Películas cargadas desde API y guardadas en caché:', peliculas.length);
     } else {
       console.warn('No se cargaron películas, usando datos de respaldo');
       peliculas = [
@@ -279,13 +282,13 @@ async function loadContent() {
   const seriesCachedTimestamp = localStorage.getItem(seriesTimestampKey);
   if (seriesCachedData && seriesCachedTimestamp && (now - parseInt(seriesCachedTimestamp, 10) < cacheDuration)) {
     series = JSON.parse(seriesCachedData);
-    console.log('Cargando series desde caché');
+    console.log('Cargando series desde caché:', series.length);
   } else {
     series = await fetchSeries();
     if (series.length > 0) {
       localStorage.setItem(seriesCacheKey, JSON.stringify(series));
       localStorage.setItem(seriesTimestampKey, now.toString());
-      console.log('Series cargadas desde API y guardadas en caché');
+      console.log('Series cargadas desde API y guardadas en caché:', series.length);
     } else {
       console.warn('No se cargaron series, usando datos de respaldo');
       series = [
@@ -294,7 +297,7 @@ async function loadContent() {
           heroImage: "https://image.tmdb.org/t/p/original/1234567890abcdef.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/1234567890abcdef.jpg",
           sinopsis: "Geralt de Rivia enfrenta nuevas amenazas en un mundo submarino lleno de misterios y peligros.",
-          url: "Series/serie1.html",
+          url: "Categorias/serie/serie1.html",
           year: "2025"
         },
         {
@@ -302,7 +305,7 @@ async function loadContent() {
           heroImage: "https://image.tmdb.org/t/p/original/0987654321fedcba.jpg",
           posterImage: "https://image.tmdb.org/t/p/original/0987654321fedcba.jpg",
           sinopsis: "El grupo de Hawkins enfrenta su batalla final contra el Upside Down.",
-          url: "Series/serie2.html",
+          url: "Categorias/serie/serie2.html",
           year: "2025"
         }
       ];
