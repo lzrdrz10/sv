@@ -5,7 +5,7 @@ async function fetchPeliculas() {
     if (!response.ok) throw new Error(`Error al obtener archivos de GitHub: ${response.status}`);
     const data = await response.json();
 
-    const peliculasPromises = data
+  const peliculasPromises = data
       .filter(item => item.type === 'file' && item.name.endsWith('.html'))
       .map(async (item) => {
         try {
@@ -16,8 +16,7 @@ async function fetchPeliculas() {
           const doc = parser.parseFromString(html, 'text/html');
 
           const titulo = doc.querySelector('title') ? doc.querySelector('title').textContent.trim() : 'Título desconocido';
-
-          let backgroundImage = '';
+let backgroundImage = '';
           const styleElement = doc.querySelector('style');
           if (styleElement) {
             const cssText = styleElement.textContent;
