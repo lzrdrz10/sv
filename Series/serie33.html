@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>El verano en que me enamoré</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+<style>
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+body, html { margin: 0; padding: 0; height: 100%; }
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: url('https://image.tmdb.org/t/p/original/jCcSS9iDpKgll8Kpp7qVhSn0l1f.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+}
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: -1;
+}
+#iframe-principal { width: 100%; height: 220px; border: none; background: black; }
+#contenedor-video { position: fixed; top: 0; left: 0; width: 100%; z-index: 10; }
+.capitulo-seleccionado { background-color: #FF0000 !important; color: #fff !important; font-weight: bold; border-bottom: none !important; }
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-622CWCXV7F"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-622CWCXV7F');
+</script>
+<script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+</head>
+<body class="text-white font-sans leading-relaxed">
+<div id="contenedor-video" class="relative">
+  <iframe id="iframe-principal" allow="fullscreen" allowfullscreen></iframe>
+  <a href="https://lzrdrz10.github.io/sv/" aria-label="Volver" class="absolute top-3 left-3 text-white text-2xl z-20">
+    <i class="fas fa-arrow-left"></i>
+  </a>
+  <div class="absolute top-0 left-0 w-full h-full z-10" style="pointer-events: none;"></div>
+</div>
+<div class="px-4 pt-60 pb-4 space-y-4">
+  <div class="flex items-center justify-between">
+    <h1 class="text-xl sm:text-2xl font-bold">El verano en que me enamoré T<span id="temp-titulo">1</span></h1>
+  </div>
+  <div class="flex flex-wrap items-center gap-3 text-sm text-gray-400">
+    <span><strong class="text-[#FF7F00]">8.2</strong> / 10</span>
+    <span class="text-white">•</span>
+    <span>Drama</span>
+    <span class="text-white">•</span>
+    <span>2022</span>
+  </div>
+  <div class="flex items-center gap-3">
+    <label for="temporada" class="text-sm text-gray-300">Temporada:</label>
+    <select id="temporada" class="bg-[#1f1f1f] text-white px-3 py-1 rounded text-sm">
+      <option value="1">Temporada 1</option><option value="2">Temporada 2</option><option value="3">Temporada 3</option>
+    </select>
+  </div>
+  <div class="flex space-x-2 overflow-x-auto scrollbar-hide pb-1" id="lista-capitulos"></div>
+  <div class="bg-[#1e1e1e] rounded-lg p-4 text-sm text-gray-300 leading-relaxed">
+    <p><span class="font-semibold text-white">Sinopsis:</span> Drama multigeneracional que gira en torno a un triángulo amoroso entre una chica y dos hermanos, las relaciones cambiantes entre madres e hijos, y el poder duradero de una fuerte amistad femenina. Es una historia de madurez sobre el primer amor, el primer desamor y la magia de un verano perfecto.</p>
+  </div>
+</div>
+<script>
+var serieId = "194766";
+var temporadaSelect = document.getElementById('temporada');
+var listaCapitulos = document.getElementById('lista-capitulos');
+var tempTitulo = document.getElementById('temp-titulo');
+var iframePrincipal = document.getElementById('iframe-principal');
+
+var serieActual = {
+  id: serieId,
+  titulo: "El verano en que me enamoré",
+  temporada: temporadaSelect.value,
+  poster: "https://image.tmdb.org/t/p/original/wDeFJIE5chr2P8iKW6HjyHKNm8x.jpg"
+};
+
+var videosPorCapitulo = {"1":{"1":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fw/s8/2/8/7/M/5/87M5r.aaa.mp4","2":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fw/s8/2/y/G/O/5/yGO5r.aaa.mp4","3":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fw/s8/2/J/d/P/5/JdP5r.aaa.mp4","4":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fw/s8/2/V/T/P/5/VTP5r.aaa.mp4","5":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fw/s8/2/Z/O/Q/5/ZOQ5r.aaa.mp4","6":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fw/s8/2/F/C/R/5/FCR5r.aaa.mp4","7":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fw/s8/2/M/_/S/5/M_S5r.aaa.mp4"},"2":{"1":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fw/s8/2/Q/C/T/5/QCT5r.aaa.mp4","2":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fw/s8/2/S/L/T/5/SLT5r.aaa.mp4","3":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fw/s8/2/y/W/T/5/yWT5r.aaa.mp4","4":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fw/s8/2/F/i/U/5/FiU5r.aaa.mp4","5":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fw/s8/2/S/s/U/5/SsU5r.aaa.mp4","6":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fw/s8/2/c/I/U/5/cIU5r.aaa.mp4","7":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fw/s8/2/t/V/U/5/tVU5r.aaa.mp4","8":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fw/s8/2/j/x/V/5/jxV5r.aaa.mp4"},"3":{"1":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/21/s8/2/k/g/j/3/kgj3y.aaa.mp4","2":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/d7/s8/2/u/g/j/3/ugj3y.aaa.mp4","3":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/bd/s8/2/i/W/e/5/iWe5y.aaa.mp4","4":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/ad/s8/2/k/U/d/7/kUd7y.aaa.mp4","5":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/13/s8/2/q/z/h/9/qzh9y.aaa.mp4","6":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/4b/s8/2/2/q/6/-/2q6-y.aaa.mp4","7":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fww1/21/s8/2/-/K/8/a/-K8az.aaa.mp4","8":"https://lzrdrz10.github.io/player?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fww1/cf/s8/2/I/L/6/c/IL6cz.aaa.mp4","9":"","10":"","11":""}};
+
+function guardarTemporada(temporada) {
+  localStorage.setItem("temporadaSeleccionada_" + serieId, temporada);
+}
+
+function cargarTemporadaGuardada() {
+  var temp = localStorage.getItem("temporadaSeleccionada_" + serieId);
+  return temp ? temp : "1";
+}
+
+function guardarCapitulo(capitulo) {
+  var key = "ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada;
+  localStorage.setItem(key, capitulo);
+}
+
+function cargarCapituloGuardado() {
+  var key = "ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada;
+  var capituloGuardado = localStorage.getItem(key);
+  var botones = listaCapitulos.getElementsByClassName('capitulo-btn');
+  var encontrado = false;
+
+  for (var i = 0; i < botones.length; i++) {
+    botones[i].className = botones[i].className.replace(' capitulo-seleccionado', '');
+    if (botones[i].getAttribute('data-capitulo') === capituloGuardado) {
+      botones[i].className += ' capitulo-seleccionado';
+      botones[i].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+      cambiarVideo(capituloGuardado);
+      encontrado = true;
+    }
+  }
+  if (!encontrado) {
+    cambiarVideo("1");
+  }
+}
+
+function cambiarVideo(capitulo) {
+  var temp = serieActual.temporada;
+  var url = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
+  if (url) {
+    iframePrincipal.src = url;
+    guardarCapitulo(capitulo);
+  }
+}
+
+function generarCapitulos(temporada) {
+  listaCapitulos.innerHTML = '';
+  var capitulosObj = videosPorCapitulo[temporada] || {};
+  var total = Object.keys(capitulosObj).length;
+
+  for (var i = 1; i <= total; i++) {
+    var btn = document.createElement('button');
+    btn.className = 'capitulo-btn px-4 py-2 rounded bg-[#2a2a2a] text-white';
+    btn.setAttribute('data-capitulo', i.toString());
+    btn.textContent = i;
+    listaCapitulos.appendChild(btn);
+  }
+  agregarEventosCapitulos();
+  cargarCapituloGuardado();
+}
+
+function agregarEventosCapitulos() {
+  var botones = listaCapitulos.getElementsByClassName('capitulo-btn');
+  for (var i = 0; i < botones.length; i++) {
+    (function(index) {
+      botones[index].onclick = function() {
+        for (var j = 0; j < botones.length; j++) {
+          botones[j].className = botones[j].className.replace(' capitulo-seleccionado', '');
+        }
+        if (botones[index].className.indexOf('capitulo-seleccionado') === -1) {
+          botones[index].className += ' capitulo-seleccionado';
+        }
+        botones[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+        cambiarVideo(botones[index].getAttribute('data-capitulo'));
+      };
+    })(i);
+  }
+}
+
+temporadaSelect.onchange = function() {
+  var temp = temporadaSelect.value;
+  serieActual.temporada = temp;
+  tempTitulo.textContent = temp;
+  guardarTemporada(temp);
+  generarCapitulos(temp);
+};
+
+window.onload = function() {
+  var tempGuardada = cargarTemporadaGuardada();
+  temporadaSelect.value = tempGuardada;
+  serieActual.temporada = tempGuardada;
+  tempTitulo.textContent = tempGuardada;
+  generarCapitulos(tempGuardada);
+};
+</script>
+</body>
+</html>
