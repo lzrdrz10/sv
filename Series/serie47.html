@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>iCarly</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+<style>
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+body, html { margin: 0; padding: 0; height: 100%; }
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: url('https://image.tmdb.org/t/p/original/jl1ie3pkBNv0T5dBQeK8CuQvxTM.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+}
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: -1;
+}
+#iframe-principal { width: 100%; height: 220px; border: none; background: black; }
+#contenedor-video { position: fixed; top: 0; left: 0; width: 100%; z-index: 10; }
+.capitulo-seleccionado { background-color: #FF0000 !important; color: #fff !important; font-weight: bold; border-bottom: none !important; }
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-622CWCXV7F"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-622CWCXV7F');
+</script>
+<script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+</head>
+<body class="text-white font-sans leading-relaxed">
+<div id="contenedor-video" class="relative">
+  <iframe id="iframe-principal" allow="fullscreen" allowfullscreen></iframe>
+  <a href="https://lzrdrz10.github.io/sv/" aria-label="Volver" class="absolute top-3 left-3 text-white text-2xl z-20">
+    <i class="fas fa-arrow-left"></i>
+  </a>
+  <div class="absolute top-0 left-0 w-full h-full z-10" style="pointer-events: none;"></div>
+</div>
+<div class="px-4 pt-60 pb-4 space-y-4">
+  <div class="flex items-center justify-between">
+    <h1 class="text-xl sm:text-2xl font-bold">iCarly T<span id="temp-titulo">1</span></h1>
+  </div>
+  <div class="flex flex-wrap items-center gap-3 text-sm text-gray-400">
+    <span><strong class="text-[#FF7F00]">7.7</strong> / 10</span>
+    <span class="text-white">•</span>
+    <span>Comedia,Familia</span>
+    <span class="text-white">•</span>
+    <span>2021</span>
+  </div>
+  <div class="flex items-center gap-3">
+    <label for="temporada" class="text-sm text-gray-300">Temporada:</label>
+    <select id="temporada" class="bg-[#1f1f1f] text-white px-3 py-1 rounded text-sm">
+      <option value="1">Temporada 1</option><option value="2">Temporada 2</option><option value="3">Temporada 3</option>
+    </select>
+  </div>
+  <div class="flex space-x-2 overflow-x-auto scrollbar-hide pb-1" id="lista-capitulos"></div>
+  <div class="bg-[#1e1e1e] rounded-lg p-4 text-sm text-gray-300 leading-relaxed">
+    <p><span class="font-semibold text-white">Sinopsis:</span> Una ex adolescente sensación de Internet y sus amigos afrontan los desafíos de la edad adulta. A veces lo hacen bien y, a veces, las cosas se ponen un poco locas.</p>
+  </div>
+</div>
+<script>
+var serieId = "119243";
+var temporadaSelect = document.getElementById('temporada');
+var listaCapitulos = document.getElementById('lista-capitulos');
+var tempTitulo = document.getElementById('temp-titulo');
+var iframePrincipal = document.getElementById('iframe-principal');
+
+var serieActual = {
+  id: serieId,
+  titulo: "iCarly",
+  temporada: temporadaSelect.value,
+  poster: "https://image.tmdb.org/t/p/original/tM4P2RNIIFzFJi7UngNVB80sRCp.jpg"
+};
+
+var videosPorCapitulo = {"1":{"1":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1SUSv0tifkQhw9i98QjdyVDJNHNmfnhX1","2":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1eHvMP_N8fQTlBJgjzCoyiSV9MVlycgyy","3":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1TsiqxBtyjuKo-6CKOAf3Cvw7bUlKhD8i","4":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1ZxACTRu0o38ljwExzB4wISIOdGknTrpe","5":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1RKpki-UWihN6ELjP4GvPxeOsWQRdXtzx","6":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1snM3hIBmcSTnR5PUo-vy38zL6eMjDNnk","7":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=18-qCmPXxLuuzVzNw9gYM-TX_snIPVJqN","8":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=18XsM56Ab11HMBPW_oOOg1VycdcnzKzb3","9":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1kvfnsLjzfUMgdWj3s6yReIQHPY3HF-V3","10":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1-CR4wz_l0-LsTWCzZcO6_kiyVqNA4HdK","11":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1FUS0VHdzNJyNeDf44qZFgg9fZ4wzqiNt","12":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1gijOGeTf00eT7jU32ahsAaZcobKScX3n","13":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1baes_1Ul8nz3M4loj39kgBZu0FfbK_ul"},"2":{"1":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1G2xbnLlqL34HpPkpkBO-T_oRthVLGkU6","2":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1TYuZO1Hp6vb1yLB4cGCdjxRHiKGa2zeK","3":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1JyG1jiMQ9LqG-YM3XqRbZxTPje9vgEx4","4":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1di_mM0PUjBU3AD_t2PtuDnry9ZntHixR","5":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1PeIgCrwGrqSJktr4_2Lr7joJOEndae2s","6":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=17LLl6RfhPs4EIXbWJhYNdUEQFtXV2FAf","7":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1nBYopaDIzIps4lhHolTvgsksSwhXRWkP","8":"","9":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1eUQVhmlZf6a1lyy6B3N8wdOAjE-Zm88D","10":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1eUQVhmlZf6a1lyy6B3N8wdOAjE-Zm88D"},"3":{"1":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1aLULvzxdhJpCbfDeFIW8gPV41-G-HVTU","2":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1kyTEv41Axpx-FoWh6YVqryuxRiOV3HsE","3":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1-FvQvghvqUIRFrR4q-_oCtmQwoBJVpGA","4":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1slt4_hf9iCeXDZ3WbS-iWSS-bwjTzAR_","5":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1WMk9vBPi7okPUHxTQS0Mb0kaQkWYzZ8L","6":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=19NFzvF3ZMJ_rd94nxXA9Dr5Ce8LmF9Hg","7":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1Ik3nHOCIM71ZWkoQLbZag3jeG1QlI_TJ","8":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=16dlCetOI0TtppsKb8u8c_ND8P38GKCay","9":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1KjX-eBpXCNvveR-mtioMVcGSKkDQGiDa","10":"https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1zXwxjFXDzZfyiFXTXm7FnP8nUTWEX3we"}};
+
+function guardarTemporada(temporada) {
+  localStorage.setItem("temporadaSeleccionada_" + serieId, temporada);
+}
+
+function cargarTemporadaGuardada() {
+  var temp = localStorage.getItem("temporadaSeleccionada_" + serieId);
+  return temp ? temp : "1";
+}
+
+function guardarCapitulo(capitulo) {
+  var key = "ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada;
+  localStorage.setItem(key, capitulo);
+}
+
+function cargarCapituloGuardado() {
+  var key = "ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada;
+  var capituloGuardado = localStorage.getItem(key);
+  var botones = listaCapitulos.getElementsByClassName('capitulo-btn');
+  var encontrado = false;
+
+  for (var i = 0; i < botones.length; i++) {
+    botones[i].className = botones[i].className.replace(' capitulo-seleccionado', '');
+    if (botones[i].getAttribute('data-capitulo') === capituloGuardado) {
+      botones[i].className += ' capitulo-seleccionado';
+      botones[i].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+      cambiarVideo(capituloGuardado);
+      encontrado = true;
+    }
+  }
+  if (!encontrado) {
+    cambiarVideo("1");
+  }
+}
+
+function cambiarVideo(capitulo) {
+  var temp = serieActual.temporada;
+  var url = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
+  if (url) {
+    iframePrincipal.src = url;
+    guardarCapitulo(capitulo);
+  }
+}
+
+function generarCapitulos(temporada) {
+  listaCapitulos.innerHTML = '';
+  var capitulosObj = videosPorCapitulo[temporada] || {};
+  var total = Object.keys(capitulosObj).length;
+
+  for (var i = 1; i <= total; i++) {
+    var btn = document.createElement('button');
+    btn.className = 'capitulo-btn px-4 py-2 rounded bg-[#2a2a2a] text-white';
+    btn.setAttribute('data-capitulo', i.toString());
+    btn.textContent = i;
+    listaCapitulos.appendChild(btn);
+  }
+  agregarEventosCapitulos();
+  cargarCapituloGuardado();
+}
+
+function agregarEventosCapitulos() {
+  var botones = listaCapitulos.getElementsByClassName('capitulo-btn');
+  for (var i = 0; i < botones.length; i++) {
+    (function(index) {
+      botones[index].onclick = function() {
+        for (var j = 0; j < botones.length; j++) {
+          botones[j].className = botones[j].className.replace(' capitulo-seleccionado', '');
+        }
+        if (botones[index].className.indexOf('capitulo-seleccionado') === -1) {
+          botones[index].className += ' capitulo-seleccionado';
+        }
+        botones[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+        cambiarVideo(botones[index].getAttribute('data-capitulo'));
+      };
+    })(i);
+  }
+}
+
+temporadaSelect.onchange = function() {
+  var temp = temporadaSelect.value;
+  serieActual.temporada = temp;
+  tempTitulo.textContent = temp;
+  guardarTemporada(temp);
+  generarCapitulos(temp);
+};
+
+window.onload = function() {
+  var tempGuardada = cargarTemporadaGuardada();
+  temporadaSelect.value = tempGuardada;
+  serieActual.temporada = tempGuardada;
+  tempTitulo.textContent = tempGuardada;
+  generarCapitulos(tempGuardada);
+};
+</script>
+</body>
+</html>
