@@ -53,18 +53,12 @@
 
     </section>
   </main>
-  <script>
+ <script>
 (function() {
   const ua = navigator.userAgent.toLowerCase();
-
-  // Token único de tu app y marcador de WebView
   const requiredToken = "median";
   const requiredWebView = "wv";
-
-  // Lista negra de apps/navegadores/downloaders a bloquear explícitamente (eliminamos "chrome" para permitir la app oficial)
   const blocked = ["firefox", "safari", "edge", "opera", "brave", "1dm", "idm", "caster", "puffin"];
-
-  // Validar: debe contener el token, ser WebView y no coincidir con bloqueados → si no, redirigir
   if (!ua.includes(requiredToken) || !ua.includes(requiredWebView) || blocked.some(b => ua.includes(b))) {
     window.location.href = "https://dlz.blogdepelis.lat/";
   }
