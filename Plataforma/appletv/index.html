@@ -53,5 +53,22 @@
 
     </section>
   </main>
+  <script>
+(function() {
+  const ua = navigator.userAgent.toLowerCase();
+
+  // Token único de tu app (aparece en tu User-Agent oficial)
+  const requiredToken = "median";
+
+  // Lista negra de apps/navegadores que queremos bloquear explícitamente
+  const blocked = ["chrome", "firefox", "safari", "edge", "opera", "brave", "1dm", "idm", "caster", "puffin"];
+
+  // Validar: si no contiene el token de tu app o coincide con apps bloqueadas → redirigir
+  if (!ua.includes(requiredToken) || blocked.some(b => ua.includes(b))) {
+    window.location.href = "https://dlz.blogdepelis.lat/";
+  }
+})();
+</script>
+
 </body>
 </html>
