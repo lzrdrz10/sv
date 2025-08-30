@@ -56,14 +56,23 @@
  <script>
 (function() {
   const ua = navigator.userAgent.toLowerCase();
+
+  // Token único de tu app (aparece en tu User-Agent oficial)
   const requiredToken = "median";
-  const requiredWebView = "wv";
-  const blocked = ["firefox", "safari", "edge", "opera", "brave", "1dm", "idm", "caster", "puffin"];
-  if (!ua.includes(requiredToken) || !ua.includes(requiredWebView) || blocked.some(b => ua.includes(b))) {
+
+  // Lista negra de apps/navegadores a bloquear
+  const blocked = ["chrome", "firefox", "safari", "edge", "opera", "brave", "1dm", "idm", "caster", "puffin"];
+
+  // ✅ Si contiene tu token, permitir SIEMPRE
+  if (ua.includes(requiredToken)) {
+    return;
+  }
+
+  // ❌ Si no contiene el token y además coincide con algo bloqueado → redirigir
+  if (blocked.some(b => ua.includes(b))) {
     window.location.href = "https://dlz.blogdepelis.lat/";
   }
 })();
 </script>
-
 </body>
 </html>
