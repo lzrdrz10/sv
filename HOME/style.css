@@ -187,7 +187,7 @@
     }
 
     :root {
-      --preloader-time: 1s;
+      --preloader-time: 3s;
     }
 
     .animate-pulse {
@@ -199,3 +199,4 @@
       50% { opacity: 0.5; }
       100% { opacity: 1; }
     }
+
