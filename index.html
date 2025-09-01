@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const TOKEN_CORRECTO = btoa('UserLzPlay');
 const tokenGuardado = localStorage.getItem('accessToken');
 if (tokenGuardado !== TOKEN_CORRECTO) {
-    alert('Acceso no permitido. Serás redirigido al login.');
+    alert('Acceso no permitido. Descarga la aplicacion oficial');
     window.location.href = 'https://dlz.blogdepelis.lat/'; 
   }
 });
@@ -519,6 +519,7 @@ async function loadContent() {
 
 </body>
 </html>
+
 
 
 
