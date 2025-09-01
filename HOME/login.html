@@ -60,25 +60,24 @@
   <div class="absolute inset-0 bg-gradient-to-b from-[#1f4e6d]/70 to-[#1a3447]/80"></div>
 </div>
 
-<!-- Contenido principal -->
+
 <div class="relative flex flex-col items-center pt-16 px-6 text-center z-10 space-y-6">
 
-  <!-- Avatar -->
+  
   <img id="avatarIcono" alt="Avatar"
        class="w-40 h-40 md:w-56 md:h-56 object-cover rounded-full border-4 border-white avatar-glow"
        src="https://via.placeholder.com/200" />
 
-  <!-- Nombre estilo Prime Video -->
+
   <h1 id="nombreUsuario" class="nombre-prime">Invitado</h1>
   <p class="subtitulo-prime">Bienvenido de nuevo! ¿Qué veremos hoy?</p>
 
   <div class="mt-6 flex flex-col gap-4 w-full max-w-md">
-  <!-- Botón Ingresar -->
+
   <button id="btnLogin" class="w-full bg-[#1f8a6d] hover:bg-[#167c5e] text-white font-semibold text-lg py-3 rounded-full shadow-lg transition transform hover:-translate-y-1">
     Ingresar
   </button>
 
-  <!-- Botón Compartir -->
   <button id="btnCompartir" class="w-full border border-[#b36a0a] hover:bg-[#b36a0a] hover:text-white text-[#b36a0a] font-semibold text-lg py-3 rounded-full shadow-lg transition transform hover:-translate-y-1">
     Compartir
   </button>
@@ -89,27 +88,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const nombreUsuario = document.getElementById('nombreUsuario');
   const avatar = document.getElementById('avatarIcono');
 
-  // Cargar nombre desde localStorage
+ 
   const nombreGuardado = localStorage.getItem('nombrePerfil');
   if (nombreGuardado) {
     nombreUsuario.textContent = nombreGuardado;
   }
 
-  // Cargar icono desde localStorage
   const iconoGuardado = localStorage.getItem('iconoUsuario');
   if (iconoGuardado) {
     avatar.src = iconoGuardado;
   } else {
-    // Icono por defecto si no hay uno guardado
     avatar.src = 'https://i.pinimg.com/736x/91/86/1b/91861b749841221d52122f0c2933d8a6.jpg';
   }
 
-  // Botón Login
+  const TOKEN = btoa('UserLzPlay');
+
   document.getElementById('btnLogin').addEventListener('click', () => {
+    localStorage.setItem('accessToken', TOKEN);
     window.location.href = 'https://lz.blogdepelis.lat/';
   });
 
-  // Botón Compartir
   document.getElementById('btnCompartir').addEventListener('click', async () => {
     const url = 'https://dlz.blogdepelis.lat/';
     if (navigator.share) {
@@ -123,15 +121,14 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Error compartiendo:', err);
       }
     } else {
-      // Fallback: copiar al portapapeles
       navigator.clipboard.writeText(url).then(() => {
         alert('Enlace copiado al portapapeles!');
       });
     }
   });
 });
-
 </script>
+
 
 </body>
 </html>
