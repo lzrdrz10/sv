@@ -9,11 +9,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="HOME/style.css">
   <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
-  <script>
-  document.getElementById("iconoImg").src = localStorage.getItem("iconoUsuario") || "https://i.pinimg.com/736x/91/86/1b/91861b749841221d52122f0c2933d8a6.jpg";
-  document.getElementById("btnUsuario").onclick = () => (window.location.href = "HOME/ajustes.html");
-}
-  </script>
 </head>
 <body class="text-white min-h-screen overflow-x-hidden">
   <section id="dynamicHero" class="relative w-full overflow-hidden h-[60vh] md:h-[70vh]"></section>
@@ -318,6 +313,10 @@ async function loadContent() {
   // Listas populares
   renderList("popularMovies", shuffle(peliculas).slice(0, 6));
 
+  document.getElementById("iconoImg").src = localStorage.getItem("iconoUsuario") || "https://i.pinimg.com/736x/91/86/1b/91861b749841221d52122f0c2933d8a6.jpg";
+  document.getElementById("btnUsuario").onclick = () => (window.location.href = "HOME/ajustes.html");
+}
   </script>
 </body>
 </html>
+
