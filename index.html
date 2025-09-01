@@ -11,6 +11,20 @@
   <meta name="monetag" content="d7bc29e0889c5427e856865ebcaa0093">
 </head>
 <body class="text-white min-h-screen overflow-x-hidden">
+  <div id="preloader">
+    <div class="preloader-content">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3dK3-XAKrEia-lWmiUqAYRfFQ1lR9eJX6ZZH8e_vHf576qf9GJjIWBW9Jg5LsilXX7WO2MOEkg5gzc4pESziaPeMJ9ws9mwtCDdp3p_17D0e0Uop_ZxavwwJeNLBvoyZJ0cxTKQpjzrJIR6LjJslB24tj-77AYrRCacQ3F2S2VPoXpPzPhM1zndxyd1Rg/s3307/B64D5386-DCA4-410B-A0A6-6ACB19D0A06F.png" alt="Logo Preloader" />
+      <div class="prog-bar-wrapper">
+        <div class="prog-bar-bg"></div>
+        <div class="prog-bar"></div>
+      </div>
+      <div class="preloader-extra">
+        <div class="spinner"><div></div></div>
+        <p>Espere, cargando nuestro contenido</p>
+      </div>
+    </div>
+  </div>
+
   <section id="dynamicHero" class="relative w-full overflow-hidden h-[60vh] md:h-[70vh]"></section>
   <header class="fixed top-0 left-0 w-full z-30 px-4 py-3 bg-gradient-to-b from-black/60 to-transparent backdrop-blur-sm flex items-center justify-between">
     <div id="menuButtonContainer" class="relative z-50 w-8 h-8">
@@ -20,10 +34,10 @@
     </div>
     <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3dK3-XAKrEia-lWmiUqAYRfFQ1lR9eJX6ZZH8e_vHf576qf9GJjIWBW9Jg5LsilXX7WO2MOEkg5gzc4pESziaPeMJ9ws9mwtCDdp3p_17D0e0Uop_ZxavwwJeNLBvoyZJ0cxTKQpjzrJIR6LjJslB24tj-77AYrRCacQ3F2S2VPoXpPzPhM1zndxyd1Rg/s3307/B64D5386-DCA4-410B-A0A6-6ACB19D0A06F.png" alt="Logo" class="h-10 object-contain" />
     <a href="SEARCH/index.html" aria-label="Buscar" class="text-white bg-blue-500 hover:bg-pink-600 text-xl px-3 py-2 rounded transition">
-      <i class="fas fa-search"></i>
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
     </a>
   </header>
-	  <div id="infoModal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden">
+  <div id="infoModal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden">
     <div class="bg-white text-black max-w-md w-full rounded-lg shadow-lg p-6 relative mx-4">
       <button id="closeModal" class="absolute top-2 right-2 text-black hover:text-red-500 text-xl">&times;</button>
       <h3 class="text-lg font-semibold mb-2">Sinopsis</h3>
@@ -31,586 +45,292 @@
     </div>
   </div>
 
-	 <section class="mt-2 px-2">
-  <div
-    class="flex space-x-2 overflow-x-auto py-2 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900"
-    aria-label="Logos de servicios de streaming"
-  >
-    <a href="Plataforma/primevideo/index.html"  class="flex-shrink-0">
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://images.bhaskarassets.com/web2images/521/2023/06/16/ezgifcom-video-to-gif-2023-06-16t155541854_1686911269.gif"
-        alt="Prime Video"
-      />
-    </a>
-    <a href="Plataforma/hbomax/index.html"  class="flex-shrink-0">
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://images.squarespace-cdn.com/content/v1/5796c205d1758ee6066cd901/c143c8ab-3880-4b97-9680-cc3b03ecb196/RETEN_01_1.gif"
-        alt="HBO Max"
-      />
-    </a>
-    <a href="Plataforma/disney/index.html"  class="flex-shrink-0">
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgizRAvGnsoGXK72OI_Wb1T9HmBC0C37WlLVSClOEsEM4_U_3NnlvWqDyR6i0cBbwShnV_lhQNACtZ_5LdHPF84M7DI5R-RRMFL2qkMvREEfFUIH1xMeQErphyqqOqYl7jZ4fwMZC4Q1axr/s1600/disney+plus.gif"
-        alt="Disney Plus"
-      />
-    </a>
-    <a href="Plataforma/netflix/index.html"  class="flex-shrink-0">
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://i.pinimg.com/originals/bb/74/04/bb74046420c4c992b8cabc6e667abe40.gif"
-        alt="Netflix"
-      />
-    </a>
-    <a href="Plataforma/fox/index.html"  class="flex-shrink-0">
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://i.pinimg.com/originals/9a/c0/19/9ac019146e0b15bf27de7f1958da9261.gif"
-        alt="FOX"
-      />
-    </a>
-	    <a href="Plataforma/appletv/index.html"  class="flex-shrink-0">
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://mir-s3-cdn-cf.behance.net/project_modules/source/d3845d97642939.5eca1ef43a850.gif"
-        alt="apple tv"
-      />
-    </a>
-	    <a href="Plataforma/paramount/index.html"  class="flex-shrink-0">
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjO_yaFE5DHSnyeInGtAQD3lAkNR_JlHvFfKH5GKv6xojfXC-rUdfL8Bltrqw6by_SRKuvcUEZTud3rUFP02A_XlbbUgt7kTYE-YFYtXnY4w6PFCiK50sMwLhQR_BaAnM_pHKcrRbf-dgcexbfqJQIPe0_kn87PWy3IDVAlqDNoWR6kwhY1GP_KZH1M6uFs/s800/1611065443140.gif"
-        alt="paramount"
-      />
-    </a>
-	    <a href="Plataforma/sony/index.html"  class="flex-shrink-0">
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://i.makeagif.com/media/9-16-2015/fHWxPA.gif"
-        alt="sony"
-      />
-    </a>
-	  <a href="Plataforma/universal/index.html"  class="flex-shrink-0">
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/142139c3-1676-4373-ba59-a07246d6da00/dfwbvkq-65215b76-05ec-436d-b88d-3e76d690300c.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzE0MjEzOWMzLTE2NzYtNDM3My1iYTU5LWEwNzI0NmQ2ZGEwMFwvZGZ3YnZrcS02NTIxNWI3Ni0wNWVjLTQzNmQtYjg4ZC0zZTc2ZDY5MDMwMGMuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.MfOSv-kzDQeooxD68gvcp1bahu9TlOCwpwEknrnNSVI"
-        alt="universal"
-      />
-    </a>
-	  <a href="Plataforma/warnerbros/index.html"  class="flex-shrink-0">
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://i.makeagif.com/media/3-15-2016/Oo51Jl.gif"
-        alt="warner bros"
-      />
-    </a>
-  </div>
-</section>
- <div class="px-4 md:px-8 lg:px-12 mb-2">
-  <h1 class="flex items-center">
-    <div class="flex">
-      <span class="text-6xl md:text-8xl font-bold text-blue-500 leading-none">T</span>
-      <span class="text-6xl md:text-8xl font-bold text-blue-500 leading-none ml-1">O</span>
-      <span class="text-6xl md:text-8xl font-bold text-blue-500 leading-none ml-1">P</span>
+  <section class="mt-2 px-2">
+    <div class="flex space-x-2 overflow-x-auto py-2 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900" aria-label="Logos de servicios de streaming">
+      <a href="Plataforma/primevideo/index.html" class="flex-shrink-0">
+        <img class="rounded w-24 h-14 object-cover" src="https://images.bhaskarassets.com/web2images/521/2023/06/16/ezgifcom-video-to-gif-2023-06-16t155541854_1686911269.gif" alt="Prime Video" loading="lazy" />
+      </a>
+      <a href="Plataforma/hbomax/index.html" class="flex-shrink-0">
+        <img class="rounded w-24 h-14 object-cover" src="https://images.squarespace-cdn.com/content/v1/5796c205d1758ee6066cd901/c143c8ab-3880-4b97-9680-cc3b03ecb196/RETEN_01_1.gif" alt="HBO Max" loading="lazy" />
+      </a>
+      <a href="Plataforma/disney/index.html" class="flex-shrink-0">
+        <img class="rounded w-24 h-14 object-cover" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgizRAvGnsoGXK72OI_Wb1T9HmBC0C37WlLVSClOEsEM4_U_3NnlvWqDyR6i0cBbwShnV_lhQNACtZ_5LdHPF84M7DI5R-RRMFL2qkMvREEfFUIH1xMeQErphyqqOqYl7jZ4fwMZC4Q1axr/s1600/disney+plus.gif" alt="Disney Plus" loading="lazy" />
+      </a>
+      <a href="Plataforma/netflix/index.html" class="flex-shrink-0">
+        <img class="rounded w-24 h-14 object-cover" src="https://i.pinimg.com/originals/bb/74/04/bb74046420c4c992b8cabc6e667abe40.gif" alt="Netflix" loading="lazy" />
+      </a>
+      <a href="Plataforma/fox/index.html" class="flex-shrink-0">
+        <img class="rounded w-24 h-14 object-cover" src="https://i.pinimg.com/originals/9a/c0/19/9ac019146e0b15bf27de7f1958da9261.gif" alt="FOX" loading="lazy" />
+      </a>
+      <a href="Plataforma/appletv/index.html" class="flex-shrink-0">
+        <img class="rounded w-24 h-14 object-cover" src="https://mir-s3-cdn-cf.behance.net/project_modules/source/d3845d97642939.5eca1ef43a850.gif" alt="apple tv" loading="lazy" />
+      </a>
+      <a href="Plataforma/paramount/index.html" class="flex-shrink-0">
+        <img class="rounded w-24 h-14 object-cover" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjO_yaFE5DHSnyeInGtAQD3lAkNR_JlHvFfKH5GKv6xojfXC-rUdfL8Bltrqw6by_SRKuvcUEZTud3rUFP02A_XlbbUgt7kTYE-YFYtXnY4w6PFCiK50sMwLhQR_BaAnM_pHKcrRbf-dgcexbfqJQIPe0_kn87PWy3IDVAlqDNoWR6kwhY1GP_KZH1M6uFs/s800/1611065443140.gif" alt="paramount" loading="lazy" />
+      </a>
+      <a href="Plataforma/sony/index.html" class="flex-shrink-0">
+        <img class="rounded w-24 h-14 object-cover" src="https://i.makeagif.com/media/9-16-2015/fHWxPA.gif" alt="sony" loading="lazy" />
+      </a>
+      <a href="Plataforma/universal/index.html" class="flex-shrink-0">
+        <img class="rounded w-24 h-14 object-cover" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/142139c3-1676-4373-ba59-a07246d6da00/dfwbvkq-65215b76-05ec-436d-b88d-3e76d690300c.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzE0MjEzOWMzLTE2NzYtNDM3My1iYTU5LWEwNzI0NmQ2ZGEwMFwvZGZ3YnZrcS02NTIxNWI3Ni0wNWVjLTQzNmQtYjg4ZC0zZTc2ZDY5MDMwMGMuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.MfOSv-kzDQeooxD68gvcp1bahu9TlOCwpwEknrnNSVI" alt="universal" loading="lazy" />
+      </a>
+      <a href="Plataforma/warnerbros/index.html" class="flex-shrink-0">
+        <img class="rounded w-24 h-14 object-cover" src="https://i.makeagif.com/media/3-15-2016/Oo51Jl.gif" alt="warner bros" loading="lazy" />
+      </a>
     </div>
-    <div class="text-white uppercase tracking-wider font-medium ml-2 md:ml-4 text-sm md:text-base">
-      <div>Populares del mes</div>
-    </div>
-  </h1>
-</div>
-  <div class="pt-0 pb-3">
-    <div class="space-y-0 pl-1 sm:pl-2 md:pl-4 mb-2">
-      <div class="group/row relative mt-1 overflow-visible">
-        <div id="top-slider-container" class="flex items-center pl-12 sm:pl-14 md:pl-16 space-x-8 md:space-x-10 overflow-x-scroll scrollbar-hide py-6 select-none will-change-scroll cursor-grab" style="scroll-behavior: smooth;">
-          
-		  <button onclick="window.location.href='Peliculas/pelicula4.html';" class="cursor-pointer min-w-[140px] sm:min-w-[180px] md:min-w-[200px] relative group/item p-0 bg-transparent border-none text-left rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-75 transition-all duration-200">
-            <div class="relative">
-              <div class="absolute -left-10 sm:-left-12 md:-left-14 top-2/3 -translate-y-1/2 z-30 transition-all duration-300 group-hover/item:scale-110 group-hover/item:-translate-x-1">
-                <span class="text-[80px] sm:text-[100px] md:text-[120px] font-bold text-transparent group-hover/item:text-blue-500 drop-shadow-lg select-none pointer-events-none transition-all duration-300" style="-webkit-text-stroke: 2px rgb(59, 130, 246);font-family:sans-serif;">1</span>
-              </div>
-              <div class="overflow-hidden rounded-lg relative z-20 transition-all duration-300 group-hover/item:shadow-[0_0_15px_rgba(59,130,246,0.7)]">
-                <img src="https://image.tmdb.org/t/p/w500/yKIG63pXN89EfbTA7yKpwxAU1rf.jpg" alt="F1 la película" loading="lazy" class="aspect-[2/3] object-cover w-full h-full transition-transform duration-300 group-hover/item:scale-105">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                <div class="absolute inset-0 border-2 border-blue-500 rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
-              </div>
-            </div>
-          </button>
-		  
-          <button onclick="window.location.href='Peliculas/pelicula3.html';" class="cursor-pointer min-w-[140px] sm:min-w-[180px] md:min-w-[200px] relative group/item p-0 bg-transparent border-none text-left rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-75 transition-all duration-200">
-            <div class="relative">
-              <div class="absolute -left-10 sm:-left-12 md:-left-14 top-2/3 -translate-y-1/2 z-30 transition-all duration-300 group-hover/item:scale-110 group-hover/item:-translate-x-1">
-                <span class="text-[80px] sm:text-[100px] md:text-[120px] font-bold text-transparent group-hover/item:text-blue-500 drop-shadow-lg select-none pointer-events-none transition-all duration-300" style="-webkit-text-stroke: 2px rgb(59, 130, 246);font-family:sans-serif;">2</span>
-              </div>
-              <div class="overflow-hidden rounded-lg relative z-20 transition-all duration-300 group-hover/item:shadow-[0_0_15px_rgba(59,130,246,0.7)]">
-                <img src="https://image.tmdb.org/t/p/w500/haOjJGUV00dKlZaJWgjM1UD1cJV.jpg" alt="Misión: Imposible - La sentencia final" loading="lazy" class="aspect-[2/3] object-cover w-full h-full transition-transform duration-300 group-hover/item:scale-105">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                <div class="absolute inset-0 border-2 border-blue-500 rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
-              </div>
-            </div>
-          </button>
-		  
-          <button onclick="window.location.href='Peliculas/pelicula2.html';" class="cursor-pointer min-w-[140px] sm:min-w-[180px] md:min-w-[200px] relative group/item p-0 bg-transparent border-none text-left rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-75 transition-all duration-200">
-            <div class="relative">
-              <div class="absolute -left-10 sm:-left-12 md:-left-14 top-2/3 -translate-y-1/2 z-30 transition-all duration-300 group-hover/item:scale-110 group-hover/item:-translate-x-1">
-                <span class="text-[80px] sm:text-[100px] md:text-[120px] font-bold text-transparent group-hover/item:text-blue-500 drop-shadow-lg select-none pointer-events-none transition-all duration-300" style="-webkit-text-stroke: 2px rgb(59, 130, 246);font-family:sans-serif;">3</span>
-              </div>
-              <div class="overflow-hidden rounded-lg relative z-20 transition-all duration-300 group-hover/item:shadow-[0_0_15px_rgba(59,130,246,0.7)]">
-                <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/kjQXYc2Abhy3TBgAZGzJRhN1JaV.jpg" alt="" loading="lazy" class="aspect-[2/3] object-cover w-full h-full transition-transform duration-300 group-hover/item:scale-105">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                <div class="absolute inset-0 border-2 border-blue-500 rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
-              </div>
-            </div>
-          </button>
-		  
-          <button onclick="window.location.href='Peliculas/__enlace__.html';';" class="cursor-pointer min-w-[140px] sm:min-w-[180px] md:min-w-[200px] relative group/item p-0 bg-transparent border-none text-left rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-75 transition-all duration-200">
-            <div class="relative">
-              <div class="absolute -left-10 sm:-left-12 md:-left-14 top-2/3 -translate-y-1/2 z-30 transition-all duration-300 group-hover/item:scale-110 group-hover/item:-translate-x-1">
-                <span class="text-[80px] sm:text-[100px] md:text-[120px] font-bold text-transparent group-hover/item:text-blue-500 drop-shadow-lg select-none pointer-events-none transition-all duration-300" style="-webkit-text-stroke: 2px rgb(59, 130, 246);font-family:sans-serif;">4</span>
-              </div>
-              <div class="overflow-hidden rounded-lg relative z-20 transition-all duration-300 group-hover/item:shadow-[0_0_15px_rgba(59,130,246,0.7)]">
-                <img src="https://image.tmdb.org/t/p/w500/wytZFBYpkEgxsALpg5l2euGeVQz.jpg" alt="Caerás" loading="lazy" class="aspect-[2/3] object-cover w-full h-full transition-transform duration-300 group-hover/item:scale-105">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                <div class="absolute inset-0 border-2 border-blue-500 rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
-              </div>
-            </div>
-          </button>
-		  
-          <button onclick="window.location.href='Peliculas/pelicula5.html';" class="cursor-pointer min-w-[140px] sm:min-w-[180px] md:min-w-[200px] relative group/item p-0 bg-transparent border-none text-left rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-75 transition-all duration-200">
-            <div class="relative">
-              <div class="absolute -left-10 sm:-left-12 md:-left-14 top-2/3 -translate-y-1/2 z-30 transition-all duration-300 group-hover/item:scale-110 group-hover/item:-translate-x-1">
-                <span class="text-[80px] sm:text-[100px] md:text-[120px] font-bold text-transparent group-hover/item:text-blue-500 drop-shadow-lg select-none pointer-events-none transition-all duration-300" style="-webkit-text-stroke: 2px rgb(59, 130, 246);font-family:sans-serif;">5</span>
-              </div>
-              <div class="overflow-hidden rounded-lg relative z-20 transition-all duration-300 group-hover/item:shadow-[0_0_15px_rgba(59,130,246,0.7)]">
-                <img src="https://image.tmdb.org/t/p/w500/j0moebdCWDjjwS6bz1ohrsRp1Vp.jpg" alt="Los tipos malos 2" loading="lazy" class="aspect-[2/3] object-cover w-full h-full transition-transform duration-300 group-hover/item:scale-105">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                <div class="absolute inset-0 border-2 border-blue-500 rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
-              </div>
-            </div>
-          </button>
-		  
-          <button onclick="window.location.href='Peliculas/pelicula28.html';" class="cursor-pointer min-w-[140px] sm:min-w-[180px] md:min-w-[200px] relative group/item p-0 bg-transparent border-none text-left rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-75 transition-all duration-200">
-            <div class="relative">
-              <div class="absolute -left-10 sm:-left-12 md:-left-14 top-2/3 -translate-y-1/2 z-30 transition-all duration-300 group-hover/item:scale-110 group-hover/item:-translate-x-1">
-                <span class="text-[80px] sm:text-[100px] md:text-[120px] font-bold text-transparent group-hover/item:text-blue-500 drop-shadow-lg select-none pointer-events-none transition-all duration-300" style="-webkit-text-stroke: 2px rgb(59, 130, 246);font-family:sans-serif;">6</span>
-              </div>
-              <div class="overflow-hidden rounded-lg relative z-20 transition-all duration-300 group-hover/item:shadow-[0_0_15px_rgba(59,130,246,0.7)]">
-                <img src="https://image.tmdb.org/t/p/w500/fvUJb08yatV2b3NUSwuYdQKYoFd.jpg" alt="Superman" loading="lazy" class="aspect-[2/3] object-cover w-full h-full transition-transform duration-300 group-hover/item:scale-105">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                <div class="absolute inset-0 border-2 border-blue-500 rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
-              </div>
-            </div>
-          </button>
-		  
-          <button onclick="window.location.href='Peliculas/pelicula29.html';" class="cursor-pointer min-w-[140px] sm:min-w-[180px] md:min-w-[200px] relative group/item p-0 bg-transparent border-none text-left rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-75 transition-all duration-200">
-            <div class="relative">
-              <div class="absolute -left-10 sm:-left-12 md:-left-14 top-2/3 -translate-y-1/2 z-30 transition-all duration-300 group-hover/item:scale-110 group-hover/item:-translate-x-1">
-                <span class="text-[80px] sm:text-[100px] md:text-[120px] font-bold text-transparent group-hover/item:text-blue-500 drop-shadow-lg select-none pointer-events-none transition-all duration-300" style="-webkit-text-stroke: 2px rgb(59, 130, 246);font-family:sans-serif;">7</span>
-              </div>
-              <div class="overflow-hidden rounded-lg relative z-20 transition-all duration-300 group-hover/item:shadow-[0_0_15px_rgba(59,130,246,0.7)]">
-                <img src="https://image.tmdb.org/t/p/w500/fGjwHlv8bCjZypi2bHbbSmyIGMV.jpg" alt="Elio" loading="lazy" class="aspect-[2/3] object-cover w-full h-full transition-transform duration-300 group-hover/item:scale-105">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                <div class="absolute inset-0 border-2 border-blue-500 rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
-              </div>
-            </div>
-          </button>
-		  
-          <button onclick="window.location.href='Peliculas/pelicula30.html';" class="cursor-pointer min-w-[140px] sm:min-w-[180px] md:min-w-[200px] relative group/item p-0 bg-transparent border-none text-left rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-75 transition-all duration-200">
-            <div class="relative">
-              <div class="absolute -left-10 sm:-left-12 md:-left-14 top-2/3 -translate-y-1/2 z-30 transition-all duration-300 group-hover/item:scale-110 group-hover/item:-translate-x-1">
-                <span class="text-[80px] sm:text-[100px] md:text-[120px] font-bold text-transparent group-hover/item:text-blue-500 drop-shadow-lg select-none pointer-events-none transition-all duration-300" style="-webkit-text-stroke: 2px rgb(59, 130, 246);font-family:sans-serif;">8</span>
-              </div>
-              <div class="overflow-hidden rounded-lg relative z-20 transition-all duration-300 group-hover/item:shadow-[0_0_15px_rgba(59,130,246,0.7)]">
-                <img src="https://image.tmdb.org/t/p/w500/fPJWlhXA2VXf4MlQ3JenVsz1iba.jpg" alt="El Escuadrón Suicida" loading="lazy" class="aspect-[2/3] object-cover w-full h-full transition-transform duration-300 group-hover/item:scale-105">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                <div class="absolute inset-0 border-2 border-blue-500 rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
-              </div>
-            </div>
-          </button>
-		  
-          <button onclick="window.location.href='Peliculas/pelicula108.html';" class="cursor-pointer min-w-[140px] sm:min-w-[180px] md:min-w-[200px] relative group/item p-0 bg-transparent border-none text-left rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-75 transition-all duration-200">
-            <div class="relative">
-              <div class="absolute -left-10 sm:-left-12 md:-left-14 top-2/3 -translate-y-1/2 z-30 transition-all duration-300 group-hover/item:scale-110 group-hover/item:-translate-x-1">
-                <span class="text-[80px] sm:text-[100px] md:text-[120px] font-bold text-transparent group-hover/item:text-blue-500 drop-shadow-lg select-none pointer-events-none transition-all duration-300" style="-webkit-text-stroke: 2px rgb(59, 130, 246);font-family:sans-serif;">9</span>
-              </div>
-              <div class="overflow-hidden rounded-lg relative z-20 transition-all duration-300 group-hover/item:shadow-[0_0_15px_rgba(59,130,246,0.7)]">
-                <img src="https://image.tmdb.org/t/p/w500/gd4hRY3pFXRY7YVbMdVBpnKV7wC.jpg" alt="xXx - Triple X" loading="lazy" class="aspect-[2/3] object-cover w-full h-full transition-transform duration-300 group-hover/item:scale-105">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                <div class="absolute inset-0 border-2 border-blue-500 rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
-              </div>
-            </div>
-          </button>
-		  
-          <button onclick="window.location.href='Peliculas/pelicula23.html';" class="cursor-pointer min-w-[140px] sm:min-w-[180px] md:min-w-[200px] relative group/item p-0 bg-transparent border-none text-left rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-75 transition-all duration-200">
-            <div class="relative">
-              <div class="absolute -left-10 sm:-left-12 md:-left-14 top-2/3 -translate-y-1/2 z-30 transition-all duration-300 group-hover/item:scale-110 group-hover/item:-translate-x-1">
-                <span class="text-[80px] sm:text-[100px] md:text-[120px] font-bold text-transparent group-hover/item:text-blue-500 drop-shadow-lg select-none pointer-events-none transition-all duration-300" style="-webkit-text-stroke: 2px rgb(59, 130, 246);font-family:sans-serif;">10</span>
-              </div>
-              <div class="overflow-hidden rounded-lg relative z-20 transition-all duration-300 group-hover/item:shadow-[0_0_15px_rgba(59,130,246,0.7)]">
-                <img src="https://image.tmdb.org/t/p/w500/cwjNSLj5FCkwFsTx7g57ybWQDcp.jpg" alt="La hora de la desaparición" loading="lazy" class="aspect-[2/3] object-cover w-full h-full transition-transform duration-300 group-hover/item:scale-105">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                <div class="absolute inset-0 border-2 border-blue-500 rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
-              </div>
-            </div>
-          </button>
-		  
-        </div>
-        <svg id="top-slider-left-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="absolute top-0 bottom-0 left-2 z-40 m-auto h-6 w-6 md:h-9 md:w-9 cursor-pointer opacity-0 transition hover:scale-125 group-hover/row:opacity-100 hidden">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"></path>
-        </svg>
-        <svg id="top-slider-right-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="absolute top-0 bottom-0 right-2 z-40 m-auto h-6 w-6 md:h-9 md:w-9 cursor-pointer opacity-0 transition hover:scale-125 group-hover/row:opacity-100">
-          <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
-        </svg>
+  </section>
+
+  <main class="px-4 pt-6 space-y-8">
+    <section class="mt-6">
+      <div class="flex justify-between items-center mb-2">
+        <h2 class="text-white text-base font-normal">Películas Populares</h2>
+        <a href="Categorias/movie/index.html" class="text-blue-500 text-sm font-semibold hover:underline">Ver más</a>
       </div>
-    </div>
-  </div>
-<section class="mt-2 px-2">
-  <div class="flex justify-between items-center mb-2">
-    <h2 class="text-white text-base font-normal">ENTRETENIMIENTO</h2>
-  </div>
-  <div
-    class="flex space-x-2 overflow-x-auto py-2 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900"
-    aria-label="Logos de servicios de streaming"
-  >
-    <a
-      href="Plataforma/marvel/index.html"
-      class="flex-shrink-0"
-    >
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://kreafolk.com/cdn/shop/articles/marvel-logo-design-history-and-evolution-kreafolk_50f7a4b8-dc53-495d-89bc-84c168382b61.jpg"
-        alt="marvel"
-        loading="lazy"
-      />
-    </a>
-    <a
-      href="Plataforma/dccomics/index.html"
-      class="flex-shrink-0"
-    >
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://images.fastcompany.com/image/upload/f_webp,c_fit,w_1920,q_auto/wp-cms-2/2024/07/p-1-91164367-dc-studios-logo.jpg"
-        alt="dc comics"
-        loading="lazy"
-      />
-    </a>
-
-    <a
-      href="Plataforma/dreamworks/index.html"
-      class="flex-shrink-0"
-    >
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://logomak.com/blog/wp-content/uploads/2023/10/DreamWorks-logo-main-min.png"
-        alt="DreamWorks"
-        loading="lazy"
-      />
-    </a>
-    <a
-      href="Plataforma/navidad/index.html"
-      class="flex-shrink-0"
-    >
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB2VlNwjL15rTmkSCS1nJwfvO7jxf1nfWKSg&s"
-        alt="navidad"
-        loading="lazy"
-      />
-    </a>
-    <a
-      href="Plataforma/cartoonnetworks/index.html"
-      class="flex-shrink-0"
-    >
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://logos-world.net/wp-content/uploads/2021/09/Cartoon-Network-Symbol.png"
-        alt="Cartooon Networks"
-        loading="lazy"
-      />
-    </a>
-    <a
-      href="Plataforma/nickelodeon/index.html"
-      class="flex-shrink-0"
-    >
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://www.poynter.org/wp-content/uploads/2024/03/shutterstock_2392489147.png"
-        alt="Nickelodeon"
-        loading="lazy"
-      />
-    </a>
-    <a
-      href="Plataforma/cinecristiano/index.html"
-      class="flex-shrink-0"
-    >
-      <img
-        class="rounded w-24 h-14 object-cover"
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIVXWJc6W-UqbtgHQFh_9_upoEIMEb3PcfMA&s"
-        alt="Cine Cristiano"
-        loading="lazy"
-      />
-    </a>
-  </div>
-</section>
-
-<main class="px-4 pt-6 space-y-8">
-  <section class="mt-6">
-    <div class="flex justify-between items-center mb-2">
-      <h2 class="text-white text-base font-normal">Películas Populares</h2>
-      <a
-        href="Categorias/movie/index.html"
-        class="text-blue-500 text-sm font-semibold hover:underline"
-        >Ver más</a
-      >
-    </div>
-    <div
-      id="popularMovies"
-      class="flex overflow-x-auto space-x-2 scrollbar-hide pb-2 mx-0 px-0"
-    >
-      <!-- Películas populares serán insertadas dinámicamente aquí -->
-    </div>
-  </section>
-  <section class="mt-6">
-    <div class="flex justify-between items-center mb-2">
-      <h2 class="text-white text-base font-normal">Series Populares</h2>
-      <a
-        href="Categorias/serie/index.html"
-        class="text-blue-500 text-sm font-semibold hover:underline"
-        >Ver más</a
-      >
-    </div>
-    <div
-      id="popularSeries"
-      class="flex overflow-x-auto space-x-2 scrollbar-hide pb-2 mx-0 px-0"
-    >
-      <!-- Series populares serán insertadas dinámicamente aquí -->
-    </div>
-  </section>
-</main>
-
-  
-<div id="movies">
-  <h2 class="text-white text-base font-normal mb-3">Categorías</h2>
-  <div class="flex overflow-x-auto space-x-3 scrollbar-hide whitespace-nowrap pb-2">
-
-    <a href="Categorias/accion/index.html" class="inline-block px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg shadow-md">Acción</a>
-
-    <a href="Categorias/action&adventure/index.html" class="inline-block px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-lg shadow-md">Action & Adventure</a>
-
-    <a href="Categorias/animacion/index.html" class="inline-block px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-bold rounded-lg shadow-md">Animación</a>
-
-    <a href="Categorias/aventura/index.html" class="inline-block px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-md">Aventura</a>
-
-    <a href="Categorias/belica/index.html" class="inline-block px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white font-bold rounded-lg shadow-md">Bélica</a>
-
-    <a href="Categorias/cienciaficcion/index.html" class="inline-block px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg shadow-md">Ciencia Ficción</a>
-
-    <a href="Categorias/comedia/index.html" class="inline-block px-4 py-2 bg-pink-600 hover:bg-pink-700 text-white font-bold rounded-lg shadow-md">Comedia</a>
-
-    <a href="Categorias/crimen/index.html" class="inline-block px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg shadow-md">Crimen</a>
-
-    <a href="Categorias/documental/index.html" class="inline-block px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg shadow-md">Documental</a>
-
-    <a href="Categorias/drama/index.html" class="inline-block px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-lg shadow-md">Drama</a>
-
-    <a href="Categorias/familia/index.html" class="inline-block px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-lg shadow-md">Familia</a>
-
-    <a href="Categorias/fantasia/index.html" class="inline-block px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded-lg shadow-md">Fantasía</a>
-
-    <a href="Categorias/misterio/index.html" class="inline-block px-4 py-2 bg-slate-600 hover:bg-slate-700 text-white font-bold rounded-lg shadow-md">Misterio</a>
-
-    <a href="Categorias/musica/index.html" class="inline-block px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-lg shadow-md">Musical</a>
-
-    <a href="Categorias/sci-fi&fantasy/index.html" class="inline-block px-4 py-2 bg-lime-600 hover:bg-lime-700 text-white font-bold rounded-lg shadow-md">Sci-Fi & Fantasy</a>
-
-    <a href="Categorias/suspense/index.html" class="inline-block px-4 py-2 bg-fuchsia-600 hover:bg-fuchsia-700 text-white font-bold rounded-lg shadow-md">Suspenso</a>
-
-    <a href="Categorias/terror/index.html" class="inline-block px-4 py-2 bg-black hover:bg-gray-900 text-white font-bold rounded-lg shadow-md">Terror</a>
-
-  </div>
-	</div>
+      <div id="popularMovies" class="flex overflow-x-auto space-x-2 scrollbar-hide pb-2 mx-0 px-0">
+        <div class="flex-shrink-0 w-28 h-40 bg-gray-800 animate-pulse"></div>
+        <div class="flex-shrink-0 w-28 h-40 bg-gray-800 animate-pulse"></div>
+        <div class="flex-shrink-0 w-28 h-40 bg-gray-800 animate-pulse"></div>
+        <div class="flex-shrink-0 w-28 h-40 bg-gray-800 animate-pulse"></div>
+      </div>
+    </section>
 	
-    <div class="px-4 md:px-8">
-      <div class="relative w-full h-[280px] sm:h-[320px] md:h-[420px] bg-black/30 rounded-xl overflow-hidden border border-gray-800/30 shadow-lg shadow-black/10 mb-8 mt-2">
-        <div class="absolute inset-0">
-          <img alt="Alien: Earth" class="object-cover" src="https://image.tmdb.org/t/p/original//25g7mthXoJFcNZhAKz0evk17Bsx.jpg" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
-          <div class="absolute inset-0 bg-gradient-to-r from-black/95 via-transparent to-black/95"></div>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/50"></div>
-          <div class="absolute left-0 top-0 bottom-0 w-[10%] bg-gradient-to-r from-[#00081a]/30 to-transparent"></div>
-          <div class="absolute right-0 top-0 bottom-0 w-[10%] bg-gradient-to-l from-[#00081a]/30 to-transparent"></div>
-        </div>
-        <div class="relative h-full flex flex-col md:flex-row items-center md:gap-12 px-5 md:px-10 py-6 md:py-0">
-          <div class="hidden md:block flex-shrink-0 w-[200px] h-[300px] relative rounded-lg overflow-hidden shadow-xl shadow-[#00081a]/40 border border-[#00081a]/30 transform hover:scale-105 transition-all duration-300">
-            <div class="absolute -inset-1 bg-[#00081a]/20 blur-md rounded-xl"></div>
-            <div class="relative rounded-lg overflow-hidden h-full w-full">
-              <img alt="Alien: Earth" class="object-cover" src="https://image.tmdb.org/t/p/w500//8IIPZe4V2xNYFWY7lBY6GpN2L8O.jpg" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-40"></div>
-              <div class="absolute top-3 left-3 w-10 h-10 bg-black/80 rounded-full flex items-center justify-center backdrop-blur-sm border border-[#00081a]/40">
-                <div class="relative w-full h-full flex items-center justify-center">
-                  <svg class="absolute inset-0 w-full h-full" viewBox="0 0 36 36">
-                    <circle cx="18" cy="18" r="15.9" fill="none" stroke="#3b82f6" stroke-width="1.2" stroke-dasharray="73, 100" stroke-linecap="round" transform="rotate(-90 18 18)"></circle>
-                  </svg>
-                  <span class="text-white text-xs font-medium">7.9</span>
-                </div>
+  <section class="mt-2 px-2">
+    <div class="flex justify-between items-center mb-2">
+      <h2 class="text-white text-base font-normal">ENTRETENIMIENTO</h2>
+    </div>
+    <div class="flex space-x-2 overflow-x-auto py-2 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900" aria-label="Logos de servicios de streaming">
+      <a href="Plataforma/marvel/index.html" class="flex-shrink-0">
+        <img class="rounded w-24 h-14 object-cover" src="https://kreafolk.com/cdn/shop/articles/marvel-logo-design-history-and-evolution-kreafolk_50f7a4b8-dc53-495d-89bc-84c168382b61.jpg" alt="marvel" loading="lazy" />
+      </a>
+      <a href="Plataforma/dccomics/index.html" class="flex-shrink-0">
+        <img class="rounded w-24 h-14 object-cover" src="https://images.fastcompany.com/image/upload/f_webp,c_fit,w_1920,q_auto/wp-cms-2/2024/07/p-1-91164367-dc-studios-logo.jpg" alt="dc comics" loading="lazy" />
+      </a>
+      <a href="Plataforma/dreamworks/index.html" class="flex-shrink-0">
+        <img class="rounded w-24 h-14 object-cover" src="https://logomak.com/blog/wp-content/uploads/2023/10/DreamWorks-logo-main-min.png" alt="DreamWorks" loading="lazy" />
+      </a>
+      <a href="Plataforma/navidad/index.html" class="flex-shrink-0">
+        <img class="rounded w-24 h-14 object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB2VlNwjL15rTmkSCS1nJwfvO7jxf1nfWKSg&s" alt="navidad" loading="lazy" />
+      </a>
+      <a href="Plataforma/cartoonnetworks/index.html" class="flex-shrink-0">
+        <img class="rounded w-24 h-14 object-cover" src="https://logos-world.net/wp-content/uploads/2021/09/Cartoon-Network-Symbol.png" alt="Cartoon Networks" loading="lazy" />
+      </a>
+      <a href="Plataforma/nickelodeon/index.html" class="flex-shrink-0">
+        <img class="rounded w-24 h-14 object-cover" src="https://www.poynter.org/wp-content/uploads/2024/03/shutterstock_2392489147.png" alt="Nickelodeon" loading="lazy" />
+      </a>
+      <a href="Plataforma/cinecristiano/index.html" class="flex-shrink-0">
+        <img class="rounded w-24 h-14 object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIVXWJc6W-UqbtgHQFh_9_upoEIMEb3PcfMA&s" alt="Cine Cristiano" loading="lazy" />
+      </a>
+    </div>
+  </section>
+ 
+  </main>
+  <div id="movies">
+    <h2 class="text-white text-base font-normal mb-3">Categorías</h2>
+    <div class="flex overflow-x-auto space-x-3 scrollbar-hide whitespace-nowrap pb-2">
+      <a href="Categorias/accion/index.html" class="inline-block px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg shadow-md">Acción</a>
+      <a href="Categorias/action&adventure/index.html" class="inline-block px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-lg shadow-md">Action & Adventure</a>
+      <a href="Categorias/animacion/index.html" class="inline-block px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-bold rounded-lg shadow-md">Animación</a>
+      <a href="Categorias/aventura/index.html" class="inline-block px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-md">Aventura</a>
+      <a href="Categorias/belica/index.html" class="inline-block px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white font-bold rounded-lg shadow-md">Bélica</a>
+      <a href="Categorias/cienciaficcion/index.html" class="inline-block px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg shadow-md">Ciencia Ficción</a>
+      <a href="Categorias/comedia/index.html" class="inline-block px-4 py-2 bg-pink-600 hover:bg-pink-700 text-white font-bold rounded-lg shadow-md">Comedia</a>
+      <a href="Categorias/crimen/index.html" class="inline-block px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg shadow-md">Crimen</a>
+      <a href="Categorias/documental/index.html" class="inline-block px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg shadow-md">Documental</a>
+      <a href="Categorias/drama/index.html" class="inline-block px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-lg shadow-md">Drama</a>
+      <a href="Categorias/familia/index.html" class="inline-block px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-lg shadow-md">Familia</a>
+      <a href="Categorias/fantasia/index.html" class="inline-block px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded-lg shadow-md">Fantasía</a>
+      <a href="Categorias/misterio/index.html" class="inline-block px-4 py-2 bg-slate-600 hover:bg-slate-700 text-white font-bold rounded-lg shadow-md">Misterio</a>
+      <a href="Categorias/musica/index.html" class="inline-block px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-lg shadow-md">Musical</a>
+      <a href="Categorias/sci-fi&fantasy/index.html" class="inline-block px-4 py-2 bg-lime-600 hover:bg-lime-700 text-white font-bold rounded-lg shadow-md">Sci-Fi & Fantasy</a>
+      <a href="Categorias/suspense/index.html" class="inline-block px-4 py-2 bg-fuchsia-600 hover:bg-fuchsia-700 text-white font-bold rounded-lg shadow-md">Suspenso</a>
+      <a href="Categorias/terror/index.html" class="inline-block px-4 py-2 bg-black hover:bg-gray-900 text-white font-bold rounded-lg shadow-md">Terror</a>
+    </div>
+  </div>
+  <div class="px-4 md:px-8">
+    <div class="relative w-full h-[280px] sm:h-[320px] md:h-[420px] bg-black/30 rounded-xl overflow-hidden border border-gray-800/30 shadow-lg shadow-black/10 mb-8 mt-2">
+      <div class="absolute inset-0">
+        <img alt="Alien: Earth" class="object-cover" src="https://image.tmdb.org/t/p/w780/25g7mthXoJFcNZhAKz0evk17Bsx.jpg" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/95 via-transparent to-black/95"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/50"></div>
+        <div class="absolute left-0 top-0 bottom-0 w-[10%] bg-gradient-to-r from-[#00081a]/30 to-transparent"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-[10%] bg-gradient-to-l from-[#00081a]/30 to-transparent"></div>
+      </div>
+      <div class="relative h-full flex flex-col md:flex-row items-center md:gap-12 px-5 md:px-10 py-6 md:py-0">
+        <div class="hidden md:block flex-shrink-0 w-[200px] h-[300px] relative rounded-lg overflow-hidden shadow-xl shadow-[#00081a]/40 border border-[#00081a]/30 transform hover:scale-105 transition-all duration-300">
+          <div class="absolute -inset-1 bg-[#00081a]/20 blur-md rounded-xl"></div>
+          <div class="relative rounded-lg overflow-hidden h-full w-full">
+            <img alt="Alien: Earth" class="object-cover" src="https://image.tmdb.org/t/p/w500/8IIPZe4V2xNYFWY7lBY6GpN2L8O.jpg" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-40"></div>
+            <div class="absolute top-3 left-3 w-10 h-10 bg-black/80 rounded-full flex items-center justify-center backdrop-blur-sm border border-[#00081a]/40">
+              <div class="relative w-full h-full flex items-center justify-center">
+                <svg class="absolute inset-0 w-full h-full" viewBox="0 0 36 36">
+                  <circle cx="18" cy="18" r="15.9" fill="none" stroke="#3b82f6" stroke-width="1.2" stroke-dasharray="73, 100" stroke-linecap="round" transform="rotate(-90 18 18)"></circle>
+                </svg>
+                <span class="text-white text-xs font-medium">7.9</span>
               </div>
             </div>
           </div>
-          <div class="flex-1 max-w-3xl space-y-3 md:space-y-4 md:ml-3 pt-2">
-            <h2 class="text-xl sm:text-3xl md:text-5xl font-bold text-white tracking-wide drop-shadow-md">Alien: Earth</h2>
-            <div class="flex items-center gap-3 text-xs md:text-sm">
-              <span class="bg-blue-600 text-white text-xs px-3 py-0.5 rounded-md font-medium">SERIE</span>
-              <div class="flex items-center gap-1 text-yellow-400">
-                <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-star w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771 .56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53 .53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53 .53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
-                <span>7.9</span>
-              </div>
-              <span class="text-white/70">2025</span>
+        </div>
+        <div class="flex-1 max-w-3xl space-y-3 md:space-y-4 md:ml-3 pt-2">
+          <h2 class="text-xl sm:text-3xl md:text-5xl font-bold text-white tracking-wide drop-shadow-md">Alien: Earth</h2>
+          <div class="flex items-center gap-3 text-xs md:text-sm">
+            <span class="bg-blue-600 text-white text-xs px-3 py-0.5 rounded-md font-medium">SERIE</span>
+            <div class="flex items-center gap-1 text-yellow-400">
+              <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-star w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294 .904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771 .56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53 .53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53 .53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+              <span>7.9</span>
             </div>
-            <p class="text-white/80 text-sm md:text-base line-clamp-2 md:line-clamp-3 max-w-2xl leading-relaxed">Cuando una misteriosa nave espacial se estrella en la Tierra, una joven y un grupo heterogéneo de soldados tácticos hacen un descubrimiento fatídico que los pone cara a cara con la mayor amenaza del planeta.</p>
-            <div class="flex items-center gap-3 md:gap-4 pt-3 md:pt-4">
-              <a href="Series/serie4.html" class="flex items-center gap-2 bg-blue-600 text-white px-4 md:px-6 py-2 rounded-md hover:bg-blue-700 transition-all duration-200 text-sm md:text-base font-medium">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-play w-4 h-4 md:w-5 md:h-5"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
-                Ver ahora
-              </a>
-            </div>
+            <span class="text-white/70">2025</span>
+          </div>
+          <p class="text-white/80 text-sm md:text-base line-clamp-2 md:line-clamp-3 max-w-2xl leading-relaxed">Cuando una misteriosa nave espacial se estrella en la Tierra, una joven y un grupo heterogéneo de soldados tácticos hacen un descubrimiento fatídico que los pone cara a cara con la mayor amenaza del planeta.</p>
+          <div class="flex items-center gap-3 md:gap-4 pt-3 md:pt-4">
+            <a href="Series/serie4.html" class="flex items-center gap-2 bg-blue-600 text-white px-4 md:px-6 py-2 rounded-md hover:bg-blue-700 transition-all duration-200 text-sm md:text-base font-medium">
+              <svg class="w-4 h-4 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+              Ver ahora
+            </a>
           </div>
         </div>
       </div>
     </div>
-  </main>
+  </div>
   <footer class="text-white pt-0 pb-12 md:pb-12 transition-colors duration-500" style="background-color: rgb(0, 8, 20);">
     <div class="border-t border-white/10 max-w-5xl mx-auto pt-6 md:pt-10 text-center">
       <p class="text-gray-400 text-xs md:text-sm">© 2025 LZPLAY. Reservados todos los derechos.</p>
       <p class="text-gray-500 text-xs mt-1 md:mt-2 mb-16 md:mb-0">Este sitio no almacena ningún archivo en su servidor. Todo el contenido es proporcionado por terceros no afiliados.</p>
     </div>
   </footer>
-	<div id="preloader">
-  <div class="preloader-content">
-    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3dK3-XAKrEia-lWmiUqAYRfFQ1lR9eJX6ZZH8e_vHf576qf9GJjIWBW9Jg5LsilXX7WO2MOEkg5gzc4pESziaPeMJ9ws9mwtCDdp3p_17D0e0Uop_ZxavwwJeNLBvoyZJ0cxTKQpjzrJIR6LjJslB24tj-77AYrRCacQ3F2S2VPoXpPzPhM1zndxyd1Rg/s3307/B64D5386-DCA4-410B-A0A6-6ACB19D0A06F.png" alt="Logo Preloader" />
-    
-    <div class="prog-bar-wrapper">
-      <div class="prog-bar-bg"></div>
-      <div class="prog-bar"></div>
-    </div>
-    
-    <div class="preloader-extra">
-      <div class="spinner"><div></div></div>
-      <p>Espere, cargando nuestro contenido</p>
-    </div>
-  </div>
-</div>
-
-<style>
-/* ======= AJUSTA ESTE VALOR ======= */
-:root {
-  --preloader-time: 3s;  /* Cambia aquí el tiempo total (ejemplo: 3s, 5s, 10s) */
-}
-
-/* Preloader cubre toda la pantalla */
-#preloader {
-  position: fixed;
-  inset: 0;
-  background: #141414;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 99999;
-  transition: opacity 0.8s ease;
-}
-
-/* Al ocultarse */
-#preloader.hide {
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* Contenido */
-.preloader-content {
-  text-align: center;
-  color: #65615F;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-}
-
-/* Imagen */
-.preloader-content img {
-  width: 220px;
-  max-width: 80vw;
-  filter: drop-shadow(0px -2px 9px #303030);
-}
-
-/* Barra de progreso */
-.prog-bar-wrapper {
-  width: 205px;
-  height: 6px;
-  position: relative;
-  border-radius: 50px;
-  overflow: hidden;
-}
-.prog-bar-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #919191;
-  border-radius: 50px;
-}
-.prog-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background: linear-gradient(to right,#e300ff,#007cf0);
-  border-radius: 50px;
-  animation: loadbar var(--preloader-time) forwards;
-}
-@keyframes loadbar {
-  to { width: 100%; }
-}
-
-/* Texto + spinner */
-.preloader-extra {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  font-size: 12px;
-  gap: 8px;
-}
-
-/* Spinner */
-.spinner div {
-  width: 20px;
-  height: 20px;
-  border: 4px solid #65615F;
-  border-top-color: transparent;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-</style>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const preloader = document.getElementById("preloader");
-  const duration = getComputedStyle(document.documentElement)
-                    .getPropertyValue("--preloader-time")
-                    .trim();
-
- 
-  const ms = parseFloat(duration) * (duration.includes("ms") ? 1 : 1000);
-
-  setTimeout(() => {
-    preloader.classList.add("hide");
-  }, ms);
+  <script defer>
+  document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("preloader").classList.add("hide");
+  loadContent();
 });
-</script>
-  <script src="HOME/script.js"></script>
+
+// 🔹 Extraer datos de una película desde HTML
+function parseMovieHtml(html, urlBase, filename) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, "text/html");
+
+  const titulo = doc.querySelector("title")?.textContent.trim() || "Título desconocido";
+
+  const styleText = doc.querySelector("style")?.textContent || "";
+  const heroImage = styleText.match(/body\s*{\s*background:\s*url\(['"]([^'"]+)['"]\)/i)?.[1] || "";
+
+  let posterImage =
+    doc.querySelector(".flex.items-center.justify-center.w-\\[110px\\].h-\\[160px\\] img")?.src ||
+    doc.querySelector('img[src^="https://image.tmdb.org"]')?.src ||
+    "";
+
+  const sinopsis = doc.querySelector("#sinopsis p.text-gray-300.text-sm.leading-relaxed")?.textContent.trim() || "Sinopsis no disponible.";
+
+  const year = doc.querySelector(".year, [class*='year'], [data-year], .flex.flex-wrap.items-center.space-x-2.text-xs.text-gray-400 span:last-child")?.textContent.trim() || "2025";
+
+  return { titulo, heroImage, posterImage, sinopsis, url: `${urlBase}/${filename}`, year };
+}
+
+// 🔹 Función genérica para obtener datos de GitHub
+async function fetchMedia(apiUrl, urlBase, parserFn, fallbackData = []) {
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) throw new Error(`Error GitHub: ${response.status}`);
+    const data = await response.json();
+
+    const promises = data
+      .filter(item => item.type === "file" && item.name.endsWith(".html") && item.name !== "index.html")
+      .map(async (item) => {
+        try {
+          const html = await (await fetch(item.download_url)).text();
+          return parserFn(html, urlBase, item.name);
+        } catch (e) {
+          console.error(`Error procesando ${item.name}:`, e);
+          return null;
+        }
+      });
+
+    const result = (await Promise.all(promises)).filter(Boolean);
+    return result.length ? result : fallbackData;
+  } catch (e) {
+    console.error("Error al cargar media:", e);
+    return fallbackData;
+  }
+}
+
+// 🔹 Manejo de caché
+async function getCachedData(key, fetchFn, duration) {
+  const now = Date.now();
+  const cached = localStorage.getItem(key);
+  const timestamp = localStorage.getItem(`${key}Time`);
+
+  if (cached && timestamp && now - parseInt(timestamp, 10) < duration) {
+    return JSON.parse(cached);
+  }
+
+  const fresh = await fetchFn();
+  if (fresh.length) {
+    localStorage.setItem(key, JSON.stringify(fresh));
+    localStorage.setItem(`${key}Time`, now.toString());
+  }
+  return fresh;
+}
+
+// 🔹 Cargar contenido principal
+async function loadContent() {
+  const day = 24 * 60 * 60 * 1000;
+
+  const peliculas = await getCachedData("peliculas", () =>
+    fetchMedia("https://api.github.com/repos/lzrdrz10/sv/contents/Peliculas", "Peliculas", parseMovieHtml, [
+      { titulo: "Fallback Película", heroImage: "", posterImage: "", sinopsis: "Ejemplo", url: "Peliculas/demo.html", year: "2025" }
+    ]), day
+  );
+
+  // 🔹 Utilidad
+  const shuffle = arr => arr.sort(() => Math.random() - 0.5);
+
+  function renderList(containerId, items) {
+    document.getElementById(containerId).innerHTML = items.map(item => `
+      <div class="flex-shrink-0 flex flex-col items-center w-28 relative">
+        <a href="${item.url}" class="relative overflow-hidden w-full">
+          <img class="h-40 w-full object-cover" src="${item.posterImage}" alt="${item.titulo}" loading="lazy" />
+          <div class="absolute top-2 right-2 flex items-center space-x-1 select-none">
+            <div class="w-0.5 h-5 bg-pink-500 rounded"></div>
+            <span class="text-white text-xs font-semibold">${item.year}</span>
+          </div>
+        </a>
+        <span class="mt-1 text-white text-center text-sm font-semibold truncate w-full">${item.titulo}</span>
+      </div>
+    `).join("");
+  }
+
+  // 🔹 Hero dinámico
+  const elegida = peliculas[Math.floor(Math.random() * peliculas.length)];
+  document.getElementById("dynamicHero").innerHTML = `
+    <img src="${elegida.heroImage || 'https://image.tmdb.org/t/p/w780/zsgdVbuEwqZbnUN9qLGEMBYf2Zo.jpg'}" alt="${elegida.titulo}" class="w-full h-full object-cover" />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
+      <h2 class="text-white text-3xl md:text-4xl font-extrabold mb-6 drop-shadow-lg">${elegida.titulo}</h2>
+      <div class="flex space-x-5">
+        <a href="${elegida.url}" class="flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full shadow-lg transition duration-300 ease-in-out">
+          ▶ Play
+        </a>
+        <button id="openModal" class="flex items-center border-2 border-white hover:border-blue-600 hover:text-blue-600 text-white font-semibold px-6 py-3 rounded-full shadow-md transition duration-300 ease-in-out">
+          ℹ Info
+        </button>
+      </div>
+    </div>
+  `;
+
+  // Modal
+  const modal = document.getElementById("infoModal");
+  const modalText = document.getElementById("modalDescription");
+  document.getElementById("openModal").onclick = () => { modal.classList.remove("hidden"); modalText.textContent = elegida.sinopsis; };
+  document.getElementById("closeModal").onclick = () => modal.classList.add("hidden");
+  modal.onclick = e => { if (e.target === modal) modal.classList.add("hidden"); };
+
+  // Listas populares
+  renderList("popularMovies", shuffle(peliculas).slice(0, 6));
+
+  // Icono usuario
+  document.getElementById("iconoImg").src = localStorage.getItem("iconoUsuario") || "https://i.pinimg.com/736x/91/86/1b/91861b749841221d52122f0c2933d8a6.jpg";
+  document.getElementById("btnUsuario").onclick = () => (window.location.href = "HOME/ajustes.html");
+}
+
+  </script>
 </body>
 </html>
-
