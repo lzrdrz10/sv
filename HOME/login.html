@@ -5,6 +5,8 @@
 <title>LzPlay login</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Amazon+Ember&display=swap');
 
@@ -49,7 +51,7 @@
 <body class="min-h-screen flex flex-col justify-between relative overflow-hidden">
 
 <!-- Fondo -->
-<div class="absolute inset-0">
+<div class="absolute top-0 left-0 w-full min-h-full h-full">
   <img src="https://image.tmdb.org/t/p/original/ApRxyHFuvv5yghedxXPJSm9FEDe.jpg"
        class="w-full h-full object-cover scale-110" alt="Fondo"/>
   <div class="absolute inset-0 bg-gradient-to-b from-[#1f4e6d]/70 to-[#1a3447]/80"></div>
@@ -94,6 +96,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const iconoGuardado = localStorage.getItem('iconoUsuario');
   if (iconoGuardado) {
     avatar.src = iconoGuardado;
+  } else {
+    // Icono por defecto si no hay uno guardado
+    avatar.src = 'https://i.pinimg.com/736x/91/86/1b/91861b749841221d52122f0c2933d8a6.jpg';
   }
 
   // Botón Login
@@ -122,7 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
 
 </script>
 
