@@ -13,6 +13,16 @@
 <link rel="stylesheet" href="HOME/style.css">
 <link rel="apple-touch-icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEinLOZxc2owdDYorkfqLhG_RYF4SJ6SzpqaxeKIXh-oWMd10SIYY7wbLP9B0Sg2C8S8HHh4bqfmjEUzpMNR2TX_pMCmhLrDG1AP7UYyG29FrrSIJh4cmaA7lW8Ws9Ky2in9wBtax7H4WA8rOm26CSuhgMnP6E3QE5OeFS1rknZqKQCym2rcVSbnYIyzrLg/s1290/Imagen%20de%20WhatsApp%202025-08-27%20a%20las%2011.30.04_0601b9e6.jpg">
 <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+	<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const TOKEN_CORRECTO = btoa('UserLzPlay');
+const tokenGuardado = localStorage.getItem('accessToken');
+if (tokenGuardado !== TOKEN_CORRECTO) {
+    alert('Acceso no permitido. Serás redirigido al login.');
+    window.location.href = 'https://dlz.blogdepelis.lat/'; 
+  }
+});
+</script>
 </head>
 <body class="text-white min-h-screen overflow-x-hidden">
 	<div id="preloader">
@@ -509,6 +519,7 @@ async function loadContent() {
 
 </body>
 </html>
+
 
 
 
