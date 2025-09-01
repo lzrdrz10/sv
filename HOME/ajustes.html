@@ -474,28 +474,25 @@
       }, 2500);
     });
 
-    // Modal de cerrar sesión
-    const btnCerrarSesion = document.getElementById('cerrarSesionBtn');
-    const modal = document.getElementById('logoutModal');
-    const confirmLogout = document.getElementById('confirmLogout');
-    const cancelLogout = document.getElementById('cancelLogout');
+   // Modal de cerrar sesión
+const btnCerrarSesion = document.getElementById('cerrarSesionBtn');
+const modal = document.getElementById('logoutModal');
+const confirmLogout = document.getElementById('confirmLogout');
+const cancelLogout = document.getElementById('cancelLogout');
 
-    btnCerrarSesion.addEventListener('click', () => {
-      modal.classList.remove('hidden');
-    });
+btnCerrarSesion.addEventListener('click', () => {
+  // Mostrar modal opcional
+  modal.classList.remove('hidden');
+});
 
-    cancelLogout.addEventListener('click', () => {
-      modal.classList.add('hidden');
-    });
+cancelLogout.addEventListener('click', () => {
+  modal.classList.add('hidden');
+});
 
-    confirmLogout.addEventListener('click', () => {
-      modal.classList.add('hidden');
-      window.open('', '_self');
-      window.close();
-      setTimeout(() => {
-        window.location.href = 'about:blank';
-      }, 500);
-    });
+confirmLogout.addEventListener('click', () => {
+  // Redirigir al login en vez de intentar cerrar ventana
+  window.location.href = 'https://lz.blogdepelis.lat/HOME/login.html';
+});
 
     // Cargar icono guardado si existe
     const iconoGuardado = localStorage.getItem('iconoUsuario');
@@ -515,6 +512,7 @@
 
 </body>
 </html>
+
 
 
 
