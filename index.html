@@ -111,104 +111,98 @@
       transform: rotate(180deg);
     }
 
-    #preloader {
-      position: fixed;
-      inset: 0;
-      background: #141414;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 99999;
-      transition: opacity 0.5s ease;
-    }
+   /* ======= AJUSTA ESTE VALOR ======= */
+:root {
+  --preloader-time: 3s;  /* Cambia aquí el tiempo total (ejemplo: 3s, 5s, 10s) */
+}
 
-    #preloader.hide {
-      opacity: 0;
-      pointer-events: none;
-    }
+/* Preloader cubre toda la pantalla */
+#preloader {
+  position: fixed;
+  inset: 0;
+  background: #141414;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  transition: opacity 0.8s ease;
+}
 
-    .preloader-content {
-      text-align: center;
-      color: #65615F;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-    }
+/* Al ocultarse */
+#preloader.hide {
+  opacity: 0;
+  pointer-events: none;
+}
 
-    .preloader-content img {
-      width: 150px;
-      max-width: 80vw;
-      filter: drop-shadow(0px -2px 9px #303030);
-    }
+/* Contenido */
+.preloader-content {
+  text-align: center;
+  color: #65615F;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
 
-    .prog-bar-wrapper {
-      width: 205px;
-      height: 6px;
-      position: relative;
-      border-radius: 50px;
-      overflow: hidden;
-    }
+/* Imagen */
+.preloader-content img {
+  width: 220px;
+  max-width: 80vw;
+  filter: drop-shadow(0px -2px 9px #303030);
+}
 
-    .prog-bar-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #919191;
-      border-radius: 50px;
-    }
+/* Barra de progreso */
+.prog-bar-wrapper {
+  width: 205px;
+  height: 6px;
+  position: relative;
+  border-radius: 50px;
+  overflow: hidden;
+}
+.prog-bar-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #919191;
+  border-radius: 50px;
+}
+.prog-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(to right,#e300ff,#007cf0);
+  border-radius: 50px;
+  animation: loadbar var(--preloader-time) forwards;
+}
+@keyframes loadbar {
+  to { width: 100%; }
+}
 
-    .prog-bar {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 100%;
-      background: linear-gradient(to right, #e300ff, #007cf0);
-      border-radius: 50px;
-      animation: loadbar var(--preloader-time) forwards;
-    }
+/* Texto + spinner */
+.preloader-extra {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  font-size: 12px;
+  gap: 8px;
+}
 
-    @keyframes loadbar {
-      to { width: 100%; }
-    }
-
-    .preloader-extra {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      align-items: center;
-      font-size: 12px;
-      gap: 8px;
-    }
-
-    .spinner div {
-      width: 20px;
-      height: 20px;
-      border: 4px solid #65615F;
-      border-top-color: transparent;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    :root {
-      --preloader-time: 3s;
-    }
-
-    .animate-pulse {
-      animation: pulse 3s infinite;
-    }
-
-    @keyframes pulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.5; }
-      100% { opacity: 1; }
-    }
+/* Spinner */
+.spinner div {
+  width: 20px;
+  height: 20px;
+  border: 4px solid #65615F;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
   </style>
 </head>
 <body class="text-white min-h-screen overflow-x-hidden">
@@ -537,6 +531,7 @@ async function loadContent() {
   </script>
 </body>
 </html>
+
 
 
 
