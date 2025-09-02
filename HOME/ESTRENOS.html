@@ -7,21 +7,61 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-  <style>
-    body { font-family: "Poppins", sans-serif; }
-  </style>
-  <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+  <style> body { font-family: "Poppins", sans-serif; } </style>
 </head>
 <body class="bg-[#04143B] text-white min-h-screen">
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="preloader-content">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3dK3-XAKrEia-lWmiUqAYRfFQ1lR9eJX6ZZH8e_vHf576qf9GJjIWBW9Jg5LsilXX7WO2MOEkg5gzc4pESziaPeMJ9ws9mwtCDdp3p_17D0e0Uop_ZxavwwJeNLBvoyZJ0cxTKQpjzrJIR6LjJslB24tj-77AYrRCacQ3F2S2VPoXpPzPhM1zndxyd1Rg/s3307/B64D5386-DCA4-410B-A0A6-6ACB19D0A06F.png" alt="Logo Preloader" />
+      <div class="prog-bar-wrapper">
+        <div class="prog-bar-bg"></div>
+        <div class="prog-bar"></div>
+      </div>
+      <div class="preloader-extra">
+        <div class="spinner"><div></div></div>
+        <p>Espere, cargando nuestro contenido</p>
+      </div>
+    </div>
+  </div>
+
+  <style>
+  :root { --preloader-time: 3s; }
+  #preloader { position: fixed; inset: 0; background: #141414; display: flex; align-items: center; justify-content: center; z-index: 99999; transition: opacity 0.8s ease; }
+  #preloader.hide { opacity: 0; pointer-events: none; }
+  .preloader-content { text-align: center; color: #65615F; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+  .preloader-content img { width: 220px; max-width: 80vw; filter: drop-shadow(0px -2px 9px #303030); }
+  .prog-bar-wrapper { width: 205px; height: 6px; position: relative; border-radius: 50px; overflow: hidden; }
+  .prog-bar-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #919191; border-radius: 50px; }
+  .prog-bar { position: absolute; top: 0; left: 0; width: 0; height: 100%; background: linear-gradient(to right,#e300ff,#007cf0); border-radius: 50px; animation: loadbar var(--preloader-time) forwards; }
+  @keyframes loadbar { to { width: 100%; } }
+  .preloader-extra { display: grid; grid-template-columns: auto 1fr; align-items: center; font-size: 12px; gap: 8px; }
+  .spinner div { width: 20px; height: 20px; border: 4px solid #65615F; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const preloader = document.getElementById("preloader");
+    const duration = getComputedStyle(document.documentElement)
+                      .getPropertyValue("--preloader-time")
+                      .trim();
+    const ms = parseFloat(duration) * (duration.includes("ms") ? 1 : 1000);
+    setTimeout(() => { preloader.classList.add("hide"); }, ms);
+  });
+  </script>
+
+  <!-- Header -->
   <header class="fixed top-0 left-0 w-full z-50 bg-[#04143B] flex flex-col md:flex-row items-center justify-between px-4 py-3 max-w-[1280px] mx-auto">
     <div class="flex items-center space-x-4 w-full md:w-auto justify-between">
       <div class="flex flex-row items-center space-x-3 mb-6">
-        <button onclick="history.back()" class="bg-[#0D1B4C] rounded-full px-4 py-1.5 text-sm font-semibold text-[#4A7FFF] flex items-center space-x-1 focus:outline-none focus:ring-2 focus:ring-[#4A7FFF]">
+        <button onclick="history.back()" class="bg-[#0D1B4C] rounded-full px-4 py-1.5 text-sm font-semibold text-[#4A7FFF] flex items-center space-x-1">
           <i class="fas fa-arrow-left"></i><span>Atras</span>
         </button>
         <h1 class="text-2xl font-extrabold text-[#4A7FFF] select-none">Estrenos 2025</h1>
       </div>
-      <a href="../../SEARCH/" id="btnBuscar" aria-label="Buscar" class="md:hidden flex items-center justify-center w-10 h-10 rounded-full border-2 border-white shadow-md">
+      <a href="../../SEARCH/" id="btnBuscar" class="md:hidden flex items-center justify-center w-10 h-10 rounded-full border-2 border-white shadow-md">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -29,179 +69,98 @@
       </a>
     </div>
     <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold text-white/90 mt-2 md:mt-0">
-      <a href="../../" class="flex items-center space-x-1 text-white hover:text-[#4A7FFF]">
-        <i class="fas fa-home"></i><span>Inicio</span>
-      </a>
+      <a href="../../" class="flex items-center space-x-1 text-white hover:text-[#4A7FFF]"><i class="fas fa-home"></i><span>Inicio</span></a>
       <a href="../movie" class="hover:text-[#4A7FFF]">Películas</a>
       <a href="../serie" class="hover:text-[#4A7FFF]">Series</a>
     </nav>
-    <a href="../../SEARCH/index.html" id="btnBuscarDesktop" aria-label="Buscar" class="hidden md:flex items-center justify-center w-12 h-12 rounded-full border-2 border-white shadow-md ml-4">
+    <a href="../../SEARCH/index.html" id="btnBuscarDesktop" class="hidden md:flex items-center justify-center w-12 h-12 rounded-full border-2 border-white shadow-md ml-4">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="11" cy="11" r="8"></circle>
         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
       </svg>
     </a>
   </header>
+
+  <!-- Main -->
   <main class="max-w-[1280px] mx-auto px-4 mt-24">
     <section id="content-section" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-      <!-- Content will be dynamically inserted here -->
+      <!-- Content dynamically inserted here -->
     </section>
   </main>
-<script>
-  // Utilidad para extraer HTML de un archivo
-  async function fetchFileContent(file) {
+
+  <script>
+  const GITHUB_API = "https://api.github.com/repos/lzrdrz10/sv/contents/";
+  const GITHUB_RAW = "https://raw.githubusercontent.com/lzrdrz10/sv/main/";
+  const LOCAL_JSON_KEY = "estrenos2025";
+
+  async function fetchFileContentRaw(filePath) {
     try {
-      const res = await fetch(file.download_url);
+      const res = await fetch(GITHUB_RAW + filePath);
       if (!res.ok) return null;
       const html = await res.text();
       const parser = new DOMParser();
-      return parser.parseFromString(html, 'text/html');
-    } catch (e) {
-      console.error('Error leyendo', file.name, e);
-      return null;
-    }
+      return parser.parseFromString(html, "text/html");
+    } catch (e) { console.error("Error fetching file:", filePath, e); return null; }
   }
 
-  // ---- Películas ----
-  function extractMovieYear(doc) {
-    const meta = doc.querySelector('div.flex.flex-wrap.items-center.space-x-2.text-xs.text-gray-400.mt-1');
-    if (!meta) return null;
-    for (const span of meta.querySelectorAll('span')) {
-      const txt = (span.textContent || '').trim();
-      if (txt.startsWith('Año:')) {
-        return txt.replace('Año:', '').trim(); // devuelve "2025"
-      }
-    }
-    return null;
-  }
-
-  // ---- Series ----
-  function extractSeriesYear(doc) {
-    const meta = doc.querySelector('div.flex.flex-wrap.items-center.gap-3.text-sm.text-gray-400');
-    if (!meta) return null;
-    const spans = meta.querySelectorAll('span');
-    if (spans.length > 0) {
-      const last = spans[spans.length - 1].textContent.trim();
-      return last.match(/^\d{4}$/) ? last : null; // ejemplo "2025"
-    }
-    return null;
-  }
-
-  // ---- Utilidades para título y poster ----
-  function findTitle(doc) {
-    return doc.querySelector('h1') ||
-           doc.querySelector('.title') ||
-           doc.body.querySelector('h1');
-  }
-
-  function findPoster(doc) {
-    return doc.querySelector('img.poster') ||
-           doc.querySelector('img.w-full') ||
-           doc.querySelector('img[src*="poster"]') ||
-           doc.querySelector('img');
-  }
-
-  // ---- Función principal ----
-  async function fetchContent() {
-    const contentSection = document.getElementById('content-section');
-    const moviesUrl = 'https://api.github.com/repos/lzrdrz10/sv/contents/Peliculas';
-    const seriesUrl = 'https://api.github.com/repos/lzrdrz10/sv/contents/Series';
-
-    const items = [];
-    let movieCount = 0;
-    let seriesCount = 0;
-
-    // --- Películas ---
+  async function fetchFileList(folder) {
     try {
-      const moviesRes = await fetch(moviesUrl);
-      if (!moviesRes.ok) throw new Error('No pude listar Peliculas');
-      const moviesFiles = await moviesRes.json();
+      const res = await fetch(GITHUB_API + folder);
+      if (!res.ok) throw new Error(`Failed to fetch ${folder} contents`);
+      const files = await res.json();
+      return files.filter(file => file.name.endsWith(".html")).map(file => `${folder}/${file.name}`);
+    } catch (e) { console.error(`Error fetching file list for ${folder}:`, e); return []; }
+  }
 
-      for (const file of moviesFiles) {
-        if (!file.name.endsWith('.html')) continue;
-        movieCount++;
-        const doc = await fetchFileContent(file);
-        if (!doc) continue;
+  async function buscarEstrenos() {
+    let estrenos = JSON.parse(localStorage.getItem(LOCAL_JSON_KEY) || "[]");
 
-        const year = extractMovieYear(doc);
-        if (year !== '2025') continue;
+    const folder = "Peliculas";
+    const files = await fetchFileList(folder);
+    const archivosNuevos = files.filter(f => !estrenos.some(e => e.url === f));
 
-        const titleEl = findTitle(doc);
-        const posterEl = findPoster(doc);
-        if (!titleEl || !posterEl) continue;
-
-        items.push({
-          tipo: 'movie',
-          titulo: titleEl.textContent.trim(),
-          poster: posterEl.src,
-          year,
-          nombreArchivo: file.name
-        });
-      }
-    } catch (e) {
-      console.error('Error en películas:', e);
+    if (archivosNuevos.length > 0) {
+      const docs = await Promise.all(archivosNuevos.map(f => fetchFileContentRaw(f)));
+      docs.forEach((doc, i) => {
+        if (!doc) return;
+        const spans = [...doc.querySelectorAll("span")];
+        const año = spans.find(s => /\d{4}/.test(s.textContent))?.textContent || "";
+        if (spans.some(s => s.textContent.includes("2025") || s.textContent.includes("Año: 2025"))) {
+          const titulo = doc.querySelector("h1,h2,h3")?.textContent.trim() || archivosNuevos[i].split("/").pop();
+          const poster = doc.querySelector("img")?.src || "https://via.placeholder.com/300x450?text=No+Image";
+          estrenos.push({ tipo: "Movie", titulo, url: archivosNuevos[i], año, poster });
+        }
+      });
+      localStorage.setItem(LOCAL_JSON_KEY, JSON.stringify(estrenos));
     }
 
-    // --- Series ---
-    try {
-      const seriesRes = await fetch(seriesUrl);
-      if (!seriesRes.ok) throw new Error('No pude listar Series');
-      const seriesFiles = await seriesRes.json();
+    renderEstrenos(estrenos);
+  }
 
-      for (const file of seriesFiles) {
-        if (!file.name.endsWith('.html')) continue;
-        seriesCount++;
-        const doc = await fetchFileContent(file);
-        if (!doc) continue;
-
-        const year = extractSeriesYear(doc);
-        if (year !== '2025') continue;
-
-        const titleEl = findTitle(doc);
-        const posterEl = findPoster(doc);
-        if (!titleEl || !posterEl) continue;
-
-        items.push({
-          tipo: 'serie',
-          titulo: titleEl.textContent.trim(),
-          poster: posterEl.src,
-          year,
-          nombreArchivo: file.name
-        });
-      }
-    } catch (e) {
-      console.error('Error en series:', e);
+  function renderEstrenos(estrenos) {
+    const contenedor = document.getElementById("content-section");
+    contenedor.innerHTML = "";
+    if (estrenos.length === 0) {
+      contenedor.innerHTML = `<div class="col-span-full text-center text-white/70 py-8"><p>No se encontraron estrenos para 2025.</p></div>`;
+      return;
     }
-
-    // Ordenar y renderizar
-    items.sort((a, b) => a.titulo.localeCompare(b.titulo, 'es'));
-
-    if (items.length) {
-      contentSection.innerHTML = items.map(seleccionado => `
-        <article class="relative rounded-lg overflow-hidden cursor-pointer select-none">
-          <a href="https://lz.blogdepelis.lat/${seleccionado.tipo === 'movie' ? 'Peliculas' : 'Series'}/${seleccionado.nombreArchivo}">
-            <img src="${seleccionado.poster}" alt="${seleccionado.titulo}" class="w-full h-auto rounded-lg object-cover transition-transform duration-300 hover:scale-105" loading="lazy"/>
-            <div class="absolute top-2 right-2 bg-white/90 text-black text-xs font-semibold rounded-full px-2 py-0.5">
-              ${seleccionado.tipo === 'movie' ? 'Movie' : 'Serie'}
-            </div>
-          </a>
-          <div class="mt-2 font-semibold text-sm leading-tight truncate">${seleccionado.titulo}</div>
-          <div class="text-xs text-white/70">${seleccionado.year}</div>
-        </article>
-      `).join('');
-      console.log(`Renderizados ${items.length} estrenos 2025`);
-    } else {
-      contentSection.innerHTML = `
-        <div class="col-span-full text-center py-8">
-          <p class="text-gray-400 mb-2">No se encontraron estrenos 2025.</p>
-          <p class="text-xs text-gray-500">Archivos detectados → Películas: ${movieCount}, Series: ${seriesCount}</p>
-        </div>
+    estrenos.forEach(e => {
+      const article = document.createElement("article");
+      article.className = "relative rounded-lg overflow-hidden cursor-pointer select-none";
+      article.innerHTML = `
+        <a href="../../${e.url}">
+          <img src="${e.poster}" alt="${e.titulo}" loading="lazy" class="w-full h-auto rounded-lg object-cover transition-transform duration-300 hover:scale-105"/>
+          <div class="absolute top-2 right-2 bg-white/90 text-black text-xs font-semibold rounded-full px-2 py-0.5">${e.tipo}</div>
+        </a>
+        <div class="mt-2 font-semibold text-sm leading-tight truncate">${e.titulo}</div>
+        <div class="text-xs text-white/70">${e.año}</div>
       `;
-      console.log('No hay coincidencias 2025.');
-    }
+      contenedor.appendChild(article);
+    });
   }
 
-  window.addEventListener('load', fetchContent);
-</script>
+  buscarEstrenos();
+  </script>
+
 </body>
 </html>
