@@ -76,8 +76,15 @@
         for (const file of moviesFiles) {
           if (file.name.endsWith('.html')) {
             const doc = await fetchFileContent(file);
-            const yearElement = doc.querySelector('span:contains("Año: 2025")');
-            if (yearElement) {
+            const yearSpans = doc.querySelectorAll('span');
+            let foundYear = false;
+            for (const span of yearSpans) {
+              if (span.textContent.trim() === 'Año: 2025') {
+                foundYear = true;
+                break;
+              }
+            }
+            if (foundYear) {
               const titleElement = doc.querySelector('h1.text-2xl');
               const posterElement = doc.querySelector('img.w-full');
               if (titleElement && posterElement) {
@@ -107,18 +114,20 @@
             const metaDiv = doc.querySelector('div.flex.flex-wrap.items-center.gap-3.text-sm.text-gray-400');
             if (metaDiv) {
               const spans = metaDiv.querySelectorAll('span');
-              const yearElement = spans[spans.length - 1];
-              if (yearElement && yearElement.textContent.trim() === '2025') {
-                const titleElement = doc.querySelector('h1.text-2xl');
-                const posterElement = doc.querySelector('img.w-full');
-                if (titleElement && posterElement) {
-                  items.push({
-                    tipo: 'serie',
-                    titulo: titleElement.textContent.trim(),
-                    poster: posterElement.src,
-                    year: '2025',
-                    nombreArchivo: file.name
-                  });
+              if (spans.length > 0) {
+                const yearElement = spans[spans.length - 1];
+                if (yearElement && yearElement.textContent.trim() === '2025') {
+                  const titleElement = doc.querySelector('h1.text-2xl');
+                  const posterElement = doc.querySelector('img.w-full');
+                  if (titleElement && posterElement) {
+                    items.push({
+                      tipo: 'serie',
+                      titulo: titleElement.textContent.trim(),
+                      poster: posterElement.src,
+                      year: '2025',
+                      nombreArchivo: file.name
+                    });
+                  }
                 }
               }
             }
@@ -144,6 +153,11 @@
           <div class="text-xs text-white/70">${seleccionado.year}</div>
         </article>
       `).join('');
+
+      // If no items, show message
+      if (items.length === 0) {
+        contentSection.innerHTML = '<p class="col-span-full text-center text-gray-400 py-8">No se encontraron estrenos para 2025.</p>';
+      }
     }
 
     // Execute fetch on page load
