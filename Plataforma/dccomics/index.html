@@ -11,28 +11,6 @@
 </script>
 <style>
   body { font-family: "Poppins", sans-serif; }
-   
-.platform-logo-container {
-  position: absolute;
-  top: 0.0rem; 
-  left: 0.0rem; 
-  width: 100%;
-  max-width: 45%; 
-  min-width: 10%; 
-  aspect-ratio: 1 / 1; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  z-index: 10;
-}
-
-.platform-logo-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; 
-  display: block;
-}
 </style>
   <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
 </head>
@@ -330,22 +308,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     </section>
   </main>
-   <script>
-  const platformLogoUrl = 'https://cdn.freebiesupply.com/logos/large/2x/dc-logo-png-transparent.png'; 
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const articles = document.querySelectorAll('article');
-
-    articles.forEach(article => {
-      const anchor = article.querySelector('a');
-      if (anchor) {
-        const logoDiv = document.createElement('div');
-        logoDiv.className = 'platform-logo-container';
-        logoDiv.innerHTML = `<img src="${platformLogoUrl}" alt="Platform Logo"/>`;
-        anchor.appendChild(logoDiv);
-      }
-    });
-  });
-</script>
 </body>
 </html>
