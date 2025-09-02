@@ -47,104 +47,140 @@
       <!-- Content will be dynamically inserted here -->
     </section>
   </main>
-  <script>
-    // Function to remove accents for URL-friendly names
-    function quitarTildes(str) {
-      return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-').toLowerCase();
+<script>
+  // Utilidad para extraer HTML de un archivo
+  async function fetchFileContent(file) {
+    try {
+      const res = await fetch(file.download_url);
+      if (!res.ok) return null;
+      const html = await res.text();
+      const parser = new DOMParser();
+      return parser.parseFromString(html, 'text/html');
+    } catch (e) {
+      console.error('Error leyendo', file.name, e);
+      return null;
+    }
+  }
+
+  // ---- Películas ----
+  function extractMovieYear(doc) {
+    const meta = doc.querySelector('div.flex.flex-wrap.items-center.space-x-2.text-xs.text-gray-400.mt-1');
+    if (!meta) return null;
+    for (const span of meta.querySelectorAll('span')) {
+      const txt = (span.textContent || '').trim();
+      if (txt.startsWith('Año:')) {
+        return txt.replace('Año:', '').trim(); // devuelve "2025"
+      }
+    }
+    return null;
+  }
+
+  // ---- Series ----
+  function extractSeriesYear(doc) {
+    const meta = doc.querySelector('div.flex.flex-wrap.items-center.gap-3.text-sm.text-gray-400');
+    if (!meta) return null;
+    const spans = meta.querySelectorAll('span');
+    if (spans.length > 0) {
+      const last = spans[spans.length - 1].textContent.trim();
+      return last.match(/^\d{4}$/) ? last : null; // ejemplo "2025"
+    }
+    return null;
+  }
+
+  // ---- Utilidades para título y poster ----
+  function findTitle(doc) {
+    return doc.querySelector('h1') ||
+           doc.querySelector('.title') ||
+           doc.body.querySelector('h1');
+  }
+
+  function findPoster(doc) {
+    return doc.querySelector('img.poster') ||
+           doc.querySelector('img.w-full') ||
+           doc.querySelector('img[src*="poster"]') ||
+           doc.querySelector('img');
+  }
+
+  // ---- Función principal ----
+  async function fetchContent() {
+    const contentSection = document.getElementById('content-section');
+    const moviesUrl = 'https://api.github.com/repos/lzrdrz10/sv/contents/Peliculas';
+    const seriesUrl = 'https://api.github.com/repos/lzrdrz10/sv/contents/Series';
+
+    const items = [];
+    let movieCount = 0;
+    let seriesCount = 0;
+
+    // --- Películas ---
+    try {
+      const moviesRes = await fetch(moviesUrl);
+      if (!moviesRes.ok) throw new Error('No pude listar Peliculas');
+      const moviesFiles = await moviesRes.json();
+
+      for (const file of moviesFiles) {
+        if (!file.name.endsWith('.html')) continue;
+        movieCount++;
+        const doc = await fetchFileContent(file);
+        if (!doc) continue;
+
+        const year = extractMovieYear(doc);
+        if (year !== '2025') continue;
+
+        const titleEl = findTitle(doc);
+        const posterEl = findPoster(doc);
+        if (!titleEl || !posterEl) continue;
+
+        items.push({
+          tipo: 'movie',
+          titulo: titleEl.textContent.trim(),
+          poster: posterEl.src,
+          year,
+          nombreArchivo: file.name
+        });
+      }
+    } catch (e) {
+      console.error('Error en películas:', e);
     }
 
-    // Function to fetch and parse HTML content
-    async function fetchContent() {
-      const contentSection = document.getElementById('content-section');
-      const moviesUrl = 'https://api.github.com/repos/lzrdrz10/sv/contents/Peliculas';
-      const seriesUrl = 'https://api.github.com/repos/lzrdrz10/sv/contents/Series';
-      const items = [];
+    // --- Series ---
+    try {
+      const seriesRes = await fetch(seriesUrl);
+      if (!seriesRes.ok) throw new Error('No pude listar Series');
+      const seriesFiles = await seriesRes.json();
 
-      // Helper function to fetch file content
-      async function fetchFileContent(file) {
-        const response = await fetch(file.download_url);
-        const text = await response.text();
-        const parser = new DOMParser();
-        return parser.parseFromString(text, 'text/html');
+      for (const file of seriesFiles) {
+        if (!file.name.endsWith('.html')) continue;
+        seriesCount++;
+        const doc = await fetchFileContent(file);
+        if (!doc) continue;
+
+        const year = extractSeriesYear(doc);
+        if (year !== '2025') continue;
+
+        const titleEl = findTitle(doc);
+        const posterEl = findPoster(doc);
+        if (!titleEl || !posterEl) continue;
+
+        items.push({
+          tipo: 'serie',
+          titulo: titleEl.textContent.trim(),
+          poster: posterEl.src,
+          year,
+          nombreArchivo: file.name
+        });
       }
+    } catch (e) {
+      console.error('Error en series:', e);
+    }
 
-      // Fetch movies
-      try {
-        const moviesResponse = await fetch(moviesUrl);
-        const moviesFiles = await moviesResponse.json();
-        
-        for (const file of moviesFiles) {
-          if (file.name.endsWith('.html')) {
-            const doc = await fetchFileContent(file);
-            const yearSpans = doc.querySelectorAll('span');
-            let foundYear = false;
-            for (const span of yearSpans) {
-              if (span.textContent.trim() === 'Año: 2025') {
-                foundYear = true;
-                break;
-              }
-            }
-            if (foundYear) {
-              const titleElement = doc.querySelector('h1.text-2xl');
-              const posterElement = doc.querySelector('img.w-full');
-              if (titleElement && posterElement) {
-                items.push({
-                  tipo: 'movie',
-                  titulo: titleElement.textContent.trim(),
-                  poster: posterElement.src,
-                  year: '2025',
-                  nombreArchivo: file.name
-                });
-              }
-            }
-          }
-        }
-      } catch (error) {
-        console.error('Error fetching movies:', error);
-      }
+    // Ordenar y renderizar
+    items.sort((a, b) => a.titulo.localeCompare(b.titulo, 'es'));
 
-      // Fetch series
-      try {
-        const seriesResponse = await fetch(seriesUrl);
-        const seriesFiles = await seriesResponse.json();
-        
-        for (const file of seriesFiles) {
-          if (file.name.endsWith('.html')) {
-            const doc = await fetchFileContent(file);
-            const metaDiv = doc.querySelector('div.flex.flex-wrap.items-center.gap-3.text-sm.text-gray-400');
-            if (metaDiv) {
-              const spans = metaDiv.querySelectorAll('span');
-              if (spans.length > 0) {
-                const yearElement = spans[spans.length - 1];
-                if (yearElement && yearElement.textContent.trim() === '2025') {
-                  const titleElement = doc.querySelector('h1.text-2xl');
-                  const posterElement = doc.querySelector('img.w-full');
-                  if (titleElement && posterElement) {
-                    items.push({
-                      tipo: 'serie',
-                      titulo: titleElement.textContent.trim(),
-                      poster: posterElement.src,
-                      year: '2025',
-                      nombreArchivo: file.name
-                    });
-                  }
-                }
-              }
-            }
-          }
-        }
-      } catch (error) {
-        console.error('Error fetching series:', error);
-      }
-
-      // Sort items by title
-      items.sort((a, b) => a.titulo.localeCompare(b.titulo));
-
-      // Render items
+    if (items.length) {
       contentSection.innerHTML = items.map(seleccionado => `
         <article class="relative rounded-lg overflow-hidden cursor-pointer select-none">
           <a href="https://lz.blogdepelis.lat/${seleccionado.tipo === 'movie' ? 'Peliculas' : 'Series'}/${seleccionado.nombreArchivo}">
-            <img src="${seleccionado.poster}" alt="poster" class="w-full h-auto rounded-lg object-cover transition-transform duration-300 hover:scale-105" loading="lazy"/>
+            <img src="${seleccionado.poster}" alt="${seleccionado.titulo}" class="w-full h-auto rounded-lg object-cover transition-transform duration-300 hover:scale-105" loading="lazy"/>
             <div class="absolute top-2 right-2 bg-white/90 text-black text-xs font-semibold rounded-full px-2 py-0.5">
               ${seleccionado.tipo === 'movie' ? 'Movie' : 'Serie'}
             </div>
@@ -153,15 +189,19 @@
           <div class="text-xs text-white/70">${seleccionado.year}</div>
         </article>
       `).join('');
-
-      // If no items, show message
-      if (items.length === 0) {
-        contentSection.innerHTML = '<p class="col-span-full text-center text-gray-400 py-8">No se encontraron estrenos para 2025.</p>';
-      }
+      console.log(`Renderizados ${items.length} estrenos 2025`);
+    } else {
+      contentSection.innerHTML = `
+        <div class="col-span-full text-center py-8">
+          <p class="text-gray-400 mb-2">No se encontraron estrenos 2025.</p>
+          <p class="text-xs text-gray-500">Archivos detectados → Películas: ${movieCount}, Series: ${seriesCount}</p>
+        </div>
+      `;
+      console.log('No hay coincidencias 2025.');
     }
+  }
 
-    // Execute fetch on page load
-    window.onload = fetchContent;
-  </script>
+  window.addEventListener('load', fetchContent);
+</script>
 </body>
 </html>
