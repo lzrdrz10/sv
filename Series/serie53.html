@@ -63,7 +63,10 @@ gtag('config', 'G-622CWCXV7F');
   <div class="flex items-center gap-3">
     <label for="temporada" class="text-sm text-gray-300">Temporada:</label>
     <select id="temporada" class="bg-[#1f1f1f] text-white px-3 py-1 rounded text-sm">
-      <option value="1">Temporada 1</option><option value="2">Temporada 2</option><option value="3">Temporada 3</option><option value="4">Temporada 4</option><option value="5">Temporada 5</option><option value="6">Temporada 6</option><option value="7">Temporada 7</option><option value="8">Temporada 8</option><option value="9">Temporada 9</option><option value="10">Temporada 10</option><option value="11">Temporada 11</option><option value="12">Temporada 12</option><option value="13">Temporada 13</option><option value="14">Temporada 14</option><option value="15">Temporada 15</option><option value="16">Temporada 16</option><option value="17">Temporada 17</option><option value="18">Temporada 18</option><option value="19">Temporada 19</option><option value="20">Temporada 20</option><option value="21">Temporada 21</option><option value="22">Temporada 22</option>
+     <option value="15">Temporada 15</option>
+      <option value="16">Temporada 16</option>
+      <option value="17">Temporada 17</option>
+      
     </select>
   </div>
   <div class="flex space-x-2 overflow-x-auto scrollbar-hide pb-1" id="lista-capitulos"></div>
@@ -85,7 +88,59 @@ var serieActual = {
   poster: "https://image.tmdb.org/t/p/original/kpwjer9hgwFFc3wCVZFnwnL1dS2.jpg"
 };
 
-var videosPorCapitulo = {"1":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":""},"2":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":"","25":"","26":"","27":""},"3":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":"","25":""},"4":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":""},"5":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":""},"6":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":""},"7":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":""},"8":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":""},"9":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":""},"10":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":""},"11":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":""},"12":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":""},"13":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":""},"14":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":""},"15":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":"","25":""},"16":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":""},"17":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":""},"18":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":""},"19":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":""},"20":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":""},"21":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":""},"22":{"1":"","2":"","3":""}};
+var videosPorCapitulo = {
+  "15": {
+    "1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbyus%2Fplaylist.m3u8%3Fkey%3DHbdPTORiG7YWBErqKaRttMT53QMpaBVBPbkSxBtt_QKpjDzhwK0HEQ%26u%3D0%26b%3D0",
+    "2": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbzw0%2Fplaylist.m3u8%3Fkey%3D3HpAiHHT3apGECBvvNnF8jIfxXVh7LSyaFNpZsPA9tH2a4yileK7RQ%26u%3D0%26b%3D0",
+    "3": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbw4a%2Fplaylist.m3u8%3Fkey%3DklbBbmLVoK9CIf13rTdqT8vbYF42u8GNVFXwrX9KcmKA3IDd0uvuuA%26u%3D0%26b%3D0",
+    "4": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1Jz1UbB9UTI3D8y8qksiKDgIjs9IwXgPk",
+    "5": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1HRH9QlkxqYFdvPaBbUWPGPscBYUd6u9U",
+    "6": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1KaOwZQFQcMmLJ6fR8Arc80uDR-pvt9yY",
+    "7": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1jQpI0D3Jg6zGZKNsfmGPm4mZQinq7-pS",
+    "8": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=15DwaEsRSps6FiZ2wUYdOk1jaol_VCVHf",
+    "9": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1SBMugc6ad1N4weiwCvxqmuz_ATwSE3SF",
+    "10": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1t5IpRCTuFmzVJ-OEmf_MYjefDvEFojX1",
+    "11": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1ybZRM8cT91ad-jetXE0tWyww6NtA_6KQ",
+    "12": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1YDXQc1Dnh3zrZw_NAD7NyjXHj59j2hrx",
+    "13": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1qxjtmASI-dZABMUZvFxsrJtPLK6xVFUk",
+    "14": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1AnMouZdhs7N1u72fwh81hY5F-mwGHsc9",
+    "15": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1JFRpIbPOe6OZJJ2pOZ_PdJ2uJXrbFxZ5",
+    "16": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1PrjTE5S8aPoiy7yKYu7bLePw5vLcHZbJ",
+    "17": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1gyW_rPFyQy4Kvsm_YDEByuVbz7P2_PME",
+    "18": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1HB9IQ68weDLFRaWWeQQPeDC0XYC6I9Rr",
+    "19": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=gdrive&format=video%2Fmp4&link=1_6EYWi9edXBgdxHxRM2fsKXdG6hx88gw",
+    "20": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbz42%2Fplaylist.m3u8%3Fkey%3Dtm2Vn833bCek5xpjpZ3iQH_FWI3bWWZpyiwzgDw-9mo824PpwFCwpA%26u%3D0%26b%3D0",
+    "21": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbz4m%2Fplaylist.m3u8%3Fkey%3DVa_6OcehHuPna_nIkgL1zBJSHfhd8LqXf_5OGN6f0Qkd3EByPmQA5w%26u%3D0%26b%3D0",
+    "22": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbz56%2Fplaylist.m3u8%3Fkey%3DKgyij7FkUKlpJPbec73POp9p5Tjg74fFm9_i5yoZyynQbLJLhcF2EQ%26u%3D0%26b%3D0",
+    "23": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbzey%2Fplaylist.m3u8%3Fkey%3DU3Dc__h4Fok8-kNt9TAy8SJwJvK-B5R99emnKJlF2qW-48cAG6XtAw%26u%3D0%26b%3D0",
+    "24": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbzfo%2Fplaylist.m3u8%3Fkey%3D2wktnlunyXkCJ9J6752m7EmOvl8E4qLd0E9H1TnZjlGA2kLklLOiLA%26u%3D0%26b%3D0",
+    "25": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbzfq%2Fplaylist.m3u8%3Fkey%3DRL1QHfd2OWIxK7V_jRPDjQMYus8utnS7B2DAUr2iU65kphHH5URYbw%26u%3D0%26b%3D0"
+  },
+  {
+  "16": {
+    "1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbzr8%2Fplaylist.m3u8%3Fkey%3DmbKX7zwGZY-Q9UqTulfSJNve6resNrKCdNcwhTGm44TdXs-o20siqQ%26u%3D0%26b%3D0",
+    "2": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbw40%2Fplaylist.m3u8%3Fkey%3D3cBDXAHHaTP9ukdCHsu5vnec6lX5Gs4SFbIwoBW49JJb-8_iWcC5fw%26u%3D0%26b%3D0",
+    "3": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbzs2%2Fplaylist.m3u8%3Fkey%3DSx3CpNaxVC7LpchRpCTJ9NCANuW4zMnegur29G3bEwW4siKLmsy2Iw%26u%3D0%26b%3D0",
+    "4": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbw7o%2Fplaylist.m3u8%3Fkey%3DWm4P30nSvXs4Yp5cHLnPkRpNqZ9GVGQCqcOmQxes5sq0dmZ8hU5CoQ%26u%3D0%26b%3D0",
+    "5": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbwd2%2Fplaylist.m3u8%3Fkey%3Dk55N3s6MrtoW0ITtOiwaEIRKCUwTCwf5sWatCs1EI3IkcgR3cwya4g%26u%3D0%26b%3D0",
+    "6": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbwn0%2Fplaylist.m3u8%3Fkey%3DBasaZ-l-sem3_8hzx0QrlEQU447RvqASVmg4c_Gu8IWY8gSK0CnFBQ%26u%3D0%26b%3D0",
+    "7": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbwvs%2Fplaylist.m3u8%3Fkey%3DOqPRiSa-2me71mdlM8w1s7qRZUJRqQVY5SWwUbrPx3wvmyT1_q1i3Q%26u%3D0%26b%3D0",
+    "8": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbwxe%2Fplaylist.m3u8%3Fkey%3Dnt1LL6m7Cp29VYWMidtHyOrRiCCVl4IWNvxMbvjdIKbHznTpdhMPuw%26u%3D0%26b%3D0",
+    "9": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbwsi%2Fplaylist.m3u8%3Fkey%3DTxW_MqoCmH8f0WF3BcKsu__hl02SLb2xCkYbqiSGH0uf4RoIR998Nw%26u%3D0%26b%3D0",
+    "10": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbx6q%2Fplaylist.m3u8%3Fkey%3DuzMKmQs-RvBTeUVpMO0TbKTedKFwsfeEgUwQLjWvAh5T3gcaeSQ67A%26u%3D0%26b%3D0",
+    "11": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbx7w%2Fplaylist.m3u8%3Fkey%3DG99DmT2NmpWBPzF4ATlhUO_svK09qS8MgUO5qIcR_nKMd65q8KuALw%26u%3D0%26b%3D0",
+    "12": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbx80%2Fplaylist.m3u8%3Fkey%3D07wsiJ-Y0aWZNGeF4bcRRaPaS936tIQVrukINw1g5Y-vCL4dqkuLCQ%26u%3D0%26b%3D0",
+    "13": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbxq2%2Fplaylist.m3u8%3Fkey%3DxHIeJzaHv44kR33knIB4ovZDY57h8_uXrS45v-gNbPZV1yPSYfn5EQ%26u%3D0%26b%3D0",
+    "14": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbxr8%2Fplaylist.m3u8%3Fkey%3DjFJqxau0GikKcwftMWaVXjPfz64K2V5RwDqI9wUC43wMjJO-0xFYFw%26u%3D0%26b%3D0",
+    "15": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbxry%2Fplaylist.m3u8%3Fkey%3DxrS6elxIYgYTWawPFZIU2F2YwjWhq_t4-URdiP5rPNKN33uxxRObVw%26u%3D0%26b%3D0",
+    "16": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbxzq%2Fplaylist.m3u8%3Fkey%3DLIWinxX_uYEF_M68DAns98MnOMENVtUjGP2D_DOBmNCzRLnvxlCH_A%26u%3D0%26b%3D0",
+    "17": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wby0s%2Fplaylist.m3u8%3Fkey%3DAfYt0JkTh6DCkoLO5oebBCaj77Mu81H_yoE6ndL19syyNP9aL6EzvQ%26u%3D0%26b%3D0",
+    "18": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wby0u%2Fplaylist.m3u8%3Fkey%3DRvinG62KEHPBJ_Cnnhh7NZZfGEQ78wtO6V0RB0QsxoQMRczjRZlsvQ%26u%3D0%26b%3D0",
+    "19": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbyb4%2Fplaylist.m3u8%3Fkey%3D1yKtsslIi_Jpubn2eK4TEQBXJFDuws5qIhvoUJO9y8SyplyaCFPj6Q%26u%3D0%26b%3D0",
+    "20": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbyca%2Fplaylist.m3u8%3Fkey%3DRvL4fd3XFU_LZFRkoJYOWQ34f4G430i8VeTX9Yt08-GCkEsWtMULKg%26u%3D0%26b%3D0",
+    "21": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Frumble.com%2Fhls-vod%2F6wbycc%2Fplaylist.m3u8%3Fkey%3DiIPIm70EvM6eNxNvZrCfl7mlkJJkYuG-Gqxhho3aCmVexDhNUdDjeA%26u%3D0%26b%3D0"
+  },
+};
 
 function guardarTemporada(temporada) {
   localStorage.setItem("temporadaSeleccionada_" + serieId, temporada);
