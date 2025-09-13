@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Happiness</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+<style>
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+body, html { margin: 0; padding: 0; height: 100%; }
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: url('https://image.tmdb.org/t/p/original/7BqI6xPBdHPNQhuH9ohephIr83e.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+}
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: -1;
+}
+#iframe-principal { width: 100%; height: 220px; border: none; background: black; }
+#contenedor-video { position: fixed; top: 0; left: 0; width: 100%; z-index: 10; }
+.capitulo-seleccionado { background-color: #FF0000 !important; color: #fff !important; font-weight: bold; border-bottom: none !important; }
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-622CWCXV7F"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-622CWCXV7F');
+</script>
+<script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+</head>
+<body class="text-white font-sans leading-relaxed">
+<div id="contenedor-video" class="relative">
+  <iframe id="iframe-principal" allow="fullscreen" allowfullscreen></iframe>
+  <a href="https://lzrdrz10.github.io/sv/" aria-label="Volver" class="absolute top-3 left-3 text-white text-2xl z-20">
+    <i class="fas fa-arrow-left"></i>
+  </a>
+  <div class="absolute top-0 left-0 w-full h-full z-10" style="pointer-events: none;"></div>
+</div>
+<div class="px-4 pt-60 pb-4 space-y-4">
+  <div class="flex items-center justify-between">
+    <h1 class="text-xl sm:text-2xl font-bold">Happiness T<span id="temp-titulo">1</span></h1>
+  </div>
+  <div class="flex flex-wrap items-center gap-3 text-sm text-gray-400">
+    <span><strong class="text-[#FF7F00]">0.0</strong> / 10</span>
+    <span class="text-white">•</span>
+    <span>Drama,Action & Adventure,Misterio</span>
+    <span class="text-white">•</span>
+    <span>2025</span>
+  </div>
+  <div class="flex items-center gap-3">
+    <label for="temporada" class="text-sm text-gray-300">Temporada:</label>
+    <select id="temporada" class="bg-[#1f1f1f] text-white px-3 py-1 rounded text-sm">
+      <option value="1">Temporada 1</option>
+    </select>
+  </div>
+  <div class="flex space-x-2 overflow-x-auto scrollbar-hide pb-1" id="lista-capitulos"></div>
+  <div class="bg-[#1e1e1e] rounded-lg p-4 text-sm text-gray-300 leading-relaxed">
+    <p><span class="font-semibold text-white">Sinopsis:</span> El Condominio Heaven podría parecer un lugar fantástico para vivir, pero pronto se convierte en el escenario de una terrible tragedia. Tras contraer una extraña enfermedad que causa una afección violenta, similar a la de un zombi, las autoridades lo cierran para evitar la propagación, con sus habitantes aún dentro. Para intentar detener la epidemia, los policías Run y ​​Prat se instalan allí, pero pronto descubren que su misión es más difícil de lo que parece. A medida que la infección continúa propagándose, los residentes del condominio se vuelven agresivos entre sí, priorizando su propia supervivencia por encima de todo. ¿Podrán Run y ​​Prat encontrar la manera de calmar la situación antes de que sea demasiado tarde?</p>
+  </div>
+</div>
+<script>
+(function(_0x1f4b3a,_0x2e5c1d){var _0x4c3e2b=function(_0x5a3f1c){while(--_0x5a3f1c){_0x1f4b3a['push'](_0x1f4b3a['shift']());}};var _0x3b2f4e=function(){var _0x1a3e5f={'data':function(_0x4e2c1b,_0x3f5a2d){return _0x4e2c1b!==_0x3f5a2d;},'action':function(){return'atob';},'value':function(){return'VXNlckx6UGxheQ==';},'store':function(){return'localStorage';},'redirect':function(){return'https://dlz.blogdepelis.lat/';},'message':function(){return'Acceso no permitido. Descarga la aplicacion oficial';},'isSafari':function(){return /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);}};return _0x1a3e5f;}();_0x4c3e2b(0x1f4);var _0x5e3d2a=_0x3b2f4e;document['addEventListener']('DOMContentLoaded',function(){if(!_0x5e3d2a['isSafari']()){var _0x2d4f1c=_0x5e3d2a['store']();var _0x4b3e2f=window[_0x2d4f1c]['getItem']('accessToken');if(!_0x4b3e2f || _0x5e3d2a['data'](_0x4b3e2f,_0x5e3d2a['action']()(_0x5e3d2a['value']()))){alert(_0x5e3d2a['message']());window['location']['href']=_0x5e3d2a['redirect']();}window[_0x2d4f1c]['removeItem']('accessToken');}});})(['push','shift'],0x1f4);
+
+var serieId = "292318";
+var temporadaSelect = document.getElementById('temporada');
+var listaCapitulos = document.getElementById('lista-capitulos');
+var tempTitulo = document.getElementById('temp-titulo');
+var iframePrincipal = document.getElementById('iframe-principal');
+
+var serieActual = {
+  id: serieId,
+  titulo: "Happiness",
+  temporada: temporadaSelect.value,
+  poster: "https://image.tmdb.org/t/p/original/nybuVbXOWvB3DAAvLSEemamyVcc.jpg"
+};
+
+var videosPorCapitulo = {"1":{"1":"https://unlimplay.com/embed/?ekt2SC84b2xGMFU3c0UvMFpZZktJWTBwTlN6WUxRcDdIRzBWU1EraDh3SjhtdVJkSFIweDV5M3prTi9wK0MwcnhPMXpyaE5HQUhEdTlKc1o3N1h4a1lMRlpXUU50RS9BVmtobm1QOVorbkYwNVUyZldRTWJoYlJKSGtMeFM5Rko,","2":"https://unlimplay.com/embed/?K2RwOGRnWVlpdFoxY2p4UlMrUklsWjl5MzBRV1ZXTGVCRXRUbU5QU2FQSlpxZXRWb21TaXJJajhxLy8xYVFlRll6ZjQyY28vZXZDU054Y1JESGh1VzAwblU5SEpvWXlvNjZkMEFndTNZdWxqb29JTmxsei9XdDRFQ01aaWgxOUM,","3":"https://unlimplay.com/embed/?MzZEOFRNSEtaaXBON2d0YkF1d0FlbjVzZTk4UThpUnJhVGlvY1o5U3Q4aS9LVnhtK3JNYlB0VkZ2MEV4dlNneWRpVVZLc1lkcTRjaWM5cEZMSTlMa3h1K29YeHNBN2VzQWp0My9YYWNTVnZKTU5mOVhOazdLZFlpVS9hSGFrWmI,","4":"https://unlimplay.com/embed/?djhFTkhqK0VlcWZkandORU9pY001a1hHa25CYWgvK00zNkNoMjJmUi9IWVdaSnU0eXV0RnBGVUgreUxsVS9TWC8vdTdCVks1TGJNRzdCUlBkVFVPQ25JVmZJSHVZckZXaGxlZmpBY3ZPWWIyVjM1WXNLdVVnUEpwcE50alVsTDc,","5":"https://unlimplay.com/embed/?RWUrT1JEZTR4TStNUHpzNkVWUldwTEpvU2QxWS8rcmxhcFlnNGFDSGFoZzZoYk9zek90Q2t6UmF0cDZXNWZOMUdyV3NnOSs2Mk50N3Y1dktxTE9jb1NIL1FDeTYyVUJoK1lTL3lCTjBvd0FONUVtUU1nNExRRzhmSGszRDJKTU8,","6":"https://unlimplay.com/embed/?aDlEV0V5dDUrNnZBYTFRNGxrTnEwbi82YmJmdWxzcC9jdlRDNDhZS1pJc0lHK0VqSjg0dmMwaTd5bEhKSkx6S2VSRTMva3NRVFd4NXpzMWNrcW1ZTDVwSkhMNitZcThISG4wbjV4ZUNkSFNrczNyeFVVVDVGZ3U4SnJPTGtnTmE,","7":"https://unlimplay.com/embed/?ajJaWmVHWGh4RTFTcHM4SjgwQzNKSElDRksvaWFHQzJJUldSN3krNUEvdnlyeW9ZMTBLdHhGaldYeGFmSzlvT1Zqd0hFb3d5V292QWVPTUFCMnQvdzZHNkdUTlVYWDlSNnAyWWZhSThMMDd6aXFNZ016ZnFCdTFHdVNQVzNHMXc,","8":"https://unlimplay.com/embed/?TW94SU5RNkU1OGtxTFU0NWJuM2hER3YyblJzMXpSU1RuaHdaSFV4TStmY0lFY2o2RkI5UGlGRERwY0hhKzc2bTJaNjRYek0wYVMvSHBBOElJOS96UFE2U05GeTlteWJCeWs0OGNBMHMxQkxNMGpKQVhGU0tmeGpvTUp6ZWxuOUY,","9":"https://unlimplay.com/embed/?QjFxaUpaNjRCMWFVenRXZmhuOStrdno0MDhSQzFXZmhmazJSMk1RbFpweTM2eFhzQlh3cnNjKzQyT2U1TDNRTHI2UncrL243V21Qby9qWE53NFJkZTFtdVZiTjdxQVNkVWRrcXdzZ0pucUlnWk5DRnFIeXJOeEFpTGx5NWJRMm8,","10":"https://unlimplay.com/embed/?R2pTTkNkUEVOeDZ0b1ZSMWVmbytaL2FHU0RPdTJEd2tUbnh2eDU1TTRlTlpuVGlpQ1RQUHl0TmhpU1Uya1RhaXNHeFB3MUtEWGpZbHFXTVY2bXVrdzUzRmFsK1FscWRXaDZ5WUw5MzBKLzFLeVB1RVpLcUNlbW9jdVhpaDBTblM,","11":"https://unlimplay.com/embed/?NTdSa29VVEN6eEJaQ280Z25XbEFWOWh0SDUramZGYStxQ2I4TSs5M2RNRnZCRWhZaWpYUGYwSmtwQ1MxSWRpTWNZcUdld3JWVUViTDRIalZTZ3l5TnBHU3F3bXhBdlRRY1ZHTW1WdWVldG5PaWE1N2ZXNnJkcE1wSTNtc3VXeWg,","12":"https://unlimplay.com/embed/?UDJKcVcwNVN6K1ZaQk0xZ0I0VWxHQ1VranJLR2l2d1BPbWNPaysyY2tGeTBxeWttQ2JsUVpWeEpSTzlzWGxlRFlyNFh1TWwzenlWb0IyemJTdVRKNG9QTk1NUmJJRERiNS95UFU5aVJJVld2S3diTFY5SENFUUVrbVRvVkRCMlU,"}};
+
+function guardarTemporada(temporada) {
+  localStorage.setItem("temporadaSeleccionada_" + serieId, temporada);
+}
+
+function cargarTemporadaGuardada() {
+  var temp = localStorage.getItem("temporadaSeleccionada_" + serieId);
+  return temp ? temp : "1";
+}
+
+function guardarCapitulo(capitulo) {
+  var key = "ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada;
+  localStorage.setItem(key, capitulo);
+}
+
+function cargarCapituloGuardado() {
+  var key = "ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada;
+  var capituloGuardado = localStorage.getItem(key);
+  var botones = listaCapitulos.getElementsByClassName('capitulo-btn');
+  var encontrado = false;
+
+  for (var i = 0; i < botones.length; i++) {
+    botones[i].className = botones[i].className.replace(' capitulo-seleccionado', '');
+    if (botones[i].getAttribute('data-capitulo') === capituloGuardado) {
+      botones[i].className += ' capitulo-seleccionado';
+      botones[i].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+      cambiarVideo(capituloGuardado);
+      encontrado = true;
+    }
+  }
+  if (!encontrado) {
+    cambiarVideo("1");
+  }
+}
+
+function cambiarVideo(capitulo) {
+  var temp = serieActual.temporada;
+  var url = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
+  if (url) {
+    iframePrincipal.src = url;
+    guardarCapitulo(capitulo);
+  }
+}
+
+function generarCapitulos(temporada) {
+  listaCapitulos.innerHTML = '';
+  var capitulosObj = videosPorCapitulo[temporada] || {};
+  var total = Object.keys(capitulosObj).length;
+
+  for (var i = 1; i <= total; i++) {
+    var btn = document.createElement('button');
+    btn.className = 'capitulo-btn px-4 py-2 rounded bg-[#2a2a2a] text-white';
+    btn.setAttribute('data-capitulo', i.toString());
+    btn.textContent = i;
+    listaCapitulos.appendChild(btn);
+  }
+  agregarEventosCapitulos();
+  cargarCapituloGuardado();
+}
+
+function agregarEventosCapitulos() {
+  var botones = listaCapitulos.getElementsByClassName('capitulo-btn');
+  for (var i = 0; i < botones.length; i++) {
+    (function(index) {
+      botones[index].onclick = function() {
+        for (var j = 0; j < botones.length; j++) {
+          botones[j].className = botones[j].className.replace(' capitulo-seleccionado', '');
+        }
+        if (botones[index].className.indexOf('capitulo-seleccionado') === -1) {
+          botones[index].className += ' capitulo-seleccionado';
+        }
+        botones[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+        cambiarVideo(botones[index].getAttribute('data-capitulo'));
+      };
+    })(i);
+  }
+}
+
+temporadaSelect.onchange = function() {
+  var temp = temporadaSelect.value;
+  serieActual.temporada = temp;
+  tempTitulo.textContent = temp;
+  guardarTemporada(temp);
+  generarCapitulos(temp);
+};
+
+window.onload = function() {
+  var tempGuardada = cargarTemporadaGuardada();
+  temporadaSelect.value = tempGuardada;
+  serieActual.temporada = tempGuardada;
+  tempTitulo.textContent = tempGuardada;
+  generarCapitulos(tempGuardada);
+};
+
+</script>
+</body>
+</html>
