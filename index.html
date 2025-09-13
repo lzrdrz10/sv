@@ -410,10 +410,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     </div>
     <div id="kdramaCarousel" class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide"></div>
   </section>
-
-  <footer class="mt-8 text-xs sm:text-sm muted">
-  LzPlay (2025).
-  </footer>
 </main>
 <footer class="bg-[#081423] text-white mt-12">
   <div class="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
@@ -421,29 +417,39 @@ document.addEventListener("DOMContentLoaded", async () => {
     <!-- Logo y descripción -->
     <div class="flex flex-col items-start gap-3">
       <h2 class="text-2xl font-bold tracking-tight">LzPlay</h2>
-      <p class="text-sm text-white/70">Tu plataforma de streaming para películas, series, anime y K-Dramas.</p>
+      <p class="text-sm text-white/70">Tu plataforma de streaming para películas y series.</p>
+		 <p class="text-sm text-white/70">EL CONTENIDO MOSTRADO NO SE ALOJA EN NUESTROS DOMINIOS Y PROVIENEN DE SITIOS DE TERCEROS...</p>
     </div>
 
     <!-- Enlaces rápidos -->
     <div class="flex flex-col gap-2">
-      <h3 class="font-semibold text-sm">Enlaces</h3>
-      <a href="#" class="text-white/70 hover:text-yellow-400 transition text-sm">Inicio</a>
-      <a href="#" class="text-white/70 hover:text-yellow-400 transition text-sm">Series</a>
-      <a href="#" class="text-white/70 hover:text-yellow-400 transition text-sm">Películas</a>
-      <a href="#" class="text-white/70 hover:text-yellow-400 transition text-sm">Anime</a>
-      <a href="#" class="text-white/70 hover:text-yellow-400 transition text-sm">K-Dramas</a>
+      <h3 class="font-semibold text-sm">Enlaces de apoyo</h3>
+      <a href="https://www.paypal.com/paypalme/LzRdrgz" class="text-white/70 hover:text-yellow-400 transition text-sm">PayPal </a>
+      <a href="https://ko-fi.com/lzplay_oficial" class="text-white/70 hover:text-yellow-400 transition text-sm">Ko-Fi</a>
     </div>
 
     <!-- Redes sociales -->
-    <div class="flex flex-col gap-2">
-      <h3 class="font-semibold text-sm">Síguenos</h3>
-      <div class="flex gap-3 mt-1">
-        <a href="#" class="text-white/70 hover:text-blue-500 transition"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="text-white/70 hover:text-blue-400 transition"><i class="fab fa-twitter"></i></a>
-        <a href="#" class="text-white/70 hover:text-pink-500 transition"><i class="fab fa-instagram"></i></a>
-        <a href="#" class="text-white/70 hover:text-blue-600 transition"><i class="fab fa-linkedin-in"></i></a>
-      </div>
-    </div>
+<div class="flex flex-col gap-2">
+  <h3 class="font-semibold text-sm">Redes Sociales</h3>
+  <div class="flex gap-3 mt-1">
+	  <a href="https://www.tiktok.com/@lzplay.oficial?_t=ZM-8zgdKXGBEiU&_r=1" class="text-white/70 hover:text-black transition">
+      <i class="fab fa-tiktok"></i> TikTok
+    </a>
+	   <a href="https://chat.whatsapp.com/DvrXOjWqJTPGYDT1KhASPR?mode=ems_copy_t" class="text-white/70 hover:text-green-500 transition">
+      <i class="fab fa-whatsapp"></i> Grupo Whatsapp
+    </a>
+	  <a href="https://whatsapp.com/channel/0029Vb9UGsTH5JLv7mp1Ry37" class="text-white/70 hover:text-pink-500 transition">
+      <i class="fab fa-whatsapp"></i> Canal Whatsapp
+    </a>
+    <a href="https://www.facebook.com/share/18tPrkMCpq/?mibextid=wwXIfr" class="text-white/70 hover:text-blue-500 transition">
+      <i class="fab fa-facebook-f"></i> Facebook
+    </a>
+    <a href="https://dlz.blogdepelis.lat/" class="text-white/70 hover:text-blue-600 transition">
+      <i class="fas fa-download"></i> Descargar aplicación
+    </a>
+  </div>
+</div>
+
 
   </div>
 
@@ -712,7 +718,6 @@ async function cargarPeliculasRecientes() {
   }
 }
 
-// Ejecutar todo al cargar
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     cargarAvatar();
@@ -731,3 +736,4 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 </body>
 </html>
+
