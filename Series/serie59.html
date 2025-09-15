@@ -63,7 +63,7 @@ gtag('config', 'G-622CWCXV7F');
   <div class="flex items-center gap-3">
     <label for="temporada" class="text-sm text-gray-300">Temporada:</label>
     <select id="temporada" class="bg-[#1f1f1f] text-white px-3 py-1 rounded text-sm">
-      <option value="1">Temporada 1</option><option value="2">Temporada 2</option><option value="3">Temporada 3</option><option value="4">Temporada 4</option><option value="5">Temporada 5</option>
+      <option value="1">Temporada 1</option><option value="2">Temporada 2</option><option value="3">Temporada 3</option><option value="4">Temporada 4</option>
     </select>
   </div>
   <div class="flex space-x-2 overflow-x-auto scrollbar-hide pb-1" id="lista-capitulos"></div>
@@ -87,7 +87,48 @@ var serieActual = {
   poster: "https://image.tmdb.org/t/p/original/5kgY14oisiHcJ4zq0Xgq1e97PHm.jpg"
 };
 
-var videosPorCapitulo = {"1":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":""},"2":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":""},"3":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":""},"4":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":""},"5":{"1":""}};
+var videosPorCapitulo = {
+  "1": {
+    "1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/d4efbam8u827",
+    "2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/nvfuar5ka9m8",
+    "3": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/gioi11jqt2lk",
+    "4": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/1msqggsx8ro5",
+    "5": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/p2eqdirtszan",
+    "6": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/96wzbuvf3srt",
+    "7": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/oplzd39dtu2l",
+    "8": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/9zb21yd9tu16"
+  },
+  "2": {
+    "1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/0a04fgatab1j",
+    "2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/pgx7hcefsoxj",
+    "3": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/bomcdqyqkwb2",
+    "4": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/o8maad2a71ho",
+    "5": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/pojho8wcabes",
+    "6": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/mbezeloykp35",
+    "7": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/nbdfrx0romcu",
+    "8": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/7to79v0w93wm"
+  },
+  "3": {
+    "1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/ga59rd4n0c2g",
+    "2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/tczqpcxogb6p",
+    "3": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/piny6i0qeodw",
+    "4": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/pyrc5am5njn0",
+    "5": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/r8lofpt8lcem",
+    "6": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/3yfa60f963r0",
+    "7": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/zgdtij8x73jl",
+    "8": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/hywi8yo5r6j4"
+  },
+  "4": {
+    "1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/xuahex6orkye",
+    "2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/3kdppczprzm7",
+    "3": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/pnbzew0w8u20",
+    "4": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/bnclepaohfek",
+    "5": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/53i30o7s5k9b",
+    "6": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/xw7ca9s7hgiw",
+    "7": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/7y7ajk5d3rxk",
+    "8": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/31g5pbeoarl9"
+  }
+};
 
 function guardarTemporada(temporada) {
   localStorage.setItem("temporadaSeleccionada_" + serieId, temporada);
