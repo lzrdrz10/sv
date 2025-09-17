@@ -1,4 +1,49 @@
-<!-- Hijo de Dios -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cine Cristiano</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: "Poppins", sans-serif; }
+  </style>
+  <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+</head>
+<body class="bg-[#04143B] text-white min-h-screen">
+  <header class="fixed top-0 left-0 w-full z-50 bg-[#04143B] flex flex-col md:flex-row items-center justify-between px-4 py-3 max-w-[1280px] mx-auto">
+    <div class="flex items-center space-x-4 w-full md:w-auto justify-between">
+      <div class="flex flex-row items-center space-x-3 mb-6">
+        <button onclick="history.back()" class="bg-[#0D1B4C] rounded-full px-4 py-1.5 text-sm font-semibold text-[#4A7FFF] flex items-center space-x-1 focus:outline-none focus:ring-2 focus:ring-[#4A7FFF]">
+          <i class="fas fa-arrow-left"></i><span>Atras</span>
+        </button>
+        <h1 class="text-2xl font-extrabold text-[#4A7FFF] select-none">Religion</h1>
+      </div>
+      <a href="../../../SEARCH/" id="btnBuscar" aria-label="Buscar" class="md:hidden flex items-center justify-center w-10 h-10 rounded-full border-2 border-white shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </a>
+    </div>
+    <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold text-white/90 mt-2 md:mt-0">
+      <a href="../../../" class="flex items-center space-x-1 text-white hover:text-[#4A7FFF]">
+        <i class="fas fa-home"></i><span>Inicio</span>
+      </a>
+      <a href="../../movie" class="hover:text-[#4A7FFF]">Películas</a>
+      <a href="../../serie" class="hover:text-[#4A7FFF]">Series</a>
+    </nav>
+    <a href="../../../SEARCH/index.html" id="btnBuscarDesktop" aria-label="Buscar" class="hidden md:flex items-center justify-center w-12 h-12 rounded-full border-2 border-white shadow-md ml-4">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </a>
+</header>
+<main class="max-w-[1280px] mx-auto px-4 mt-24">
+  <section class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+    <!--PEGAR CONTENIDO AQUI ABAJO--><!-- Hijo de Dios -->
 <article class="relative rounded-lg overflow-hidden cursor-pointer select-none">
   <a href="https://lz.blogdepelis.lat/Peliculas/pelicula659.html">
     <img src="https://image.tmdb.org/t/p/original/pJ2qK5r3zqXhB0MQxkAmEPZSSXF.jpg" alt="poster" class="w-full h-auto rounded-lg object-cover transition-transform duration-300 hover:scale-105" loading="lazy"/>
@@ -9,3 +54,7 @@
   <div class="mt-2 font-semibold text-sm leading-tight truncate">Hijo de Dios</div>
   <div class="text-xs text-white/70">2014</div>
 </article>
+  </section>
+</main>
+</body>
+</html>
