@@ -1,143 +1,248 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-<meta charset="utf-8"/>
+<meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="LZPLAY">
-<title>LzPlay login</title>
+<meta name="description" content="Accede a LZPLAY, tu plataforma de entretenimiento personalizada.">
+<title>LZPLAY - Iniciar Sesión</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="apple-touch-icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEinLOZxc2owdDYorkfqLhG_RYF4SJ6SzpqaxeKIXh-oWMd10SIYY7wbLP9B0Sg2C8S8HHh4bqfmjEUzpMNR2TX_pMCmhLrDG1AP7UYyG29FrrSIJh4cmaA7lW8Ws9Ky2in9wBtax7H4WA8rOm26CSuhgMnP6E3QE5OeFS1rknZqKQCym2rcVSbnYIyzrLg/s1290/Imagen%20de%20WhatsApp%202025-08-27%20a%20las%2011.30.04_0601b9e6.jpg">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Amazon+Ember&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@400;700&display=swap');
 
-  body {
-    font-family: 'Amazon Ember', Arial, sans-serif;
-  }
+:root {
+  --primary-color: #00a8e1;
+  --primary-hover: #0077a3;
+  --accent-color: #ffc400;
+  --accent-hover: #e6ac00;
+}
 
-  /* Avatar glow */
-  .avatar-glow {
-    box-shadow: 0 0 25px rgba(31,138,109,0.7), 0 0 50px rgba(31,138,109,0.5);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .avatar-glow:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 35px rgba(31,138,109,0.9), 0 0 60px rgba(31,138,109,0.7);
-  }
+body {
+  font-family: 'Amazon Ember', Arial, sans-serif;
+  background: #0b0b0b;
+  color: #fff;
+  margin: 0;
+  overflow-x: hidden;
+}
 
-  /* Animaciones de texto tipo Prime Video */
-  .nombre-prime {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #ffffff;
-    text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
-    letter-spacing: 1px;
-    transition: transform 0.5s ease, text-shadow 0.5s ease;
-  }
-  .nombre-prime:hover {
-    transform: scale(1.05);
-    text-shadow: 3px 3px 8px rgba(0,0,0,0.7);
-  }
+/* Fondo dinámico con blur */
+.background {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+.background img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1);
+  filter: brightness(0.6) blur(2px);
+  transition: opacity 1s ease-in-out, transform 12s linear;
+}
+.background img.active {
+  opacity: 1;
+  transform: scale(1.1);
+}
 
-  .subtitulo-prime {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: #e0e0e0;
-    margin-top: 8px;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
-  }
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.9));
+  z-index: 0;
+}
 
+/* Avatar estilo Prime Video */
+.avatar-container {
+  position: relative;
+  display: inline-block;
+}
+.avatar-glow {
+  border-radius: 50%;
+  border: 4px solid #fff;
+  box-shadow: 0 0 20px rgba(0,168,225,0.7), 0 0 40px rgba(0,168,225,0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.avatar-glow:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 30px rgba(0,168,225,0.9), 0 0 60px rgba(0,168,225,0.7);
+}
+
+/* Icono editar avatar rediseñado */
+.edit-icon {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 26px;
+  height: 26px;
+  background: rgba(0,168,225,0.9);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.8);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  cursor: pointer;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+.edit-icon:hover {
+  transform: scale(1.15);
+  background: var(--primary-hover);
+}
+
+/* Nombre y saludo estilo Prime */
+.nombre-prime {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+  letter-spacing: 1px;
+}
+.subtitulo-prime {
+  font-size: 1.2rem;
+  color: #ddd;
+  margin-top: 6px;
+}
+
+/* Botones estilo Prime Video moderno */
+button {
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 14px 0;
+  font-size: 1.1rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.bg-primary {
+  background: linear-gradient(90deg, #00a8e1, #0077a3);
+  color: #fff;
+}
+.bg-primary:hover {
+  background: linear-gradient(90deg, #0077a3, #00a8e1);
+  transform: translateY(-2px);
+}
+.border-accent {
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+}
+.border-accent:hover {
+  background: var(--accent-hover);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .nombre-prime { font-size: 2rem; }
+  .subtitulo-prime { font-size: 1rem; }
+  .avatar-glow { width: 120px; height: 120px; }
+  .edit-icon { width: 22px; height: 22px; font-size: 11px; }
+}
 </style>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PC9JETB0VP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-PC9JETB0VP');
-</script>
 </head>
-<body class="min-h-screen flex flex-col justify-between relative overflow-hidden">
+<body class="flex flex-col justify-center items-center min-h-screen relative">
 
-<!-- Fondo -->
-<div class="absolute top-0 left-0 w-full min-h-full h-full">
-  <img src="https://image.tmdb.org/t/p/original/ApRxyHFuvv5yghedxXPJSm9FEDe.jpg"
-       class="w-full h-full object-cover scale-110" alt="Fondo"/>
-  <div class="absolute inset-0 bg-gradient-to-b from-[#1f4e6d]/70 to-[#1a3447]/80"></div>
+<!-- Fondo dinámico -->
+<div class="background" id="backgroundSlider" aria-hidden="true">
+  <img src="https://image.tmdb.org/t/p/original/ApRxyHFuvv5yghedxXPJSm9FEDe.jpg" class="active" alt="Fondo 1">
+  <img src="https://image.tmdb.org/t/p/original/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg" alt="Fondo 2">
+  <img src="https://image.tmdb.org/t/p/original/r7XifzvtezNt31ypvsmb6Oqxw49.jpg" alt="Fondo 3">
+  <img src="https://image.tmdb.org/t/p/original/fCayJrkfRaCRCTh8GqN30f8oyQF.jpg" alt="Fondo 4">
 </div>
+<div class="overlay" aria-hidden="true"></div>
 
-
-<div class="relative flex flex-col items-center pt-16 px-6 text-center z-10 space-y-6">
-
-  
-  <img id="avatarIcono" alt="Avatar"
-       class="w-40 h-40 md:w-56 md:h-56 object-cover rounded-full border-4 border-white avatar-glow"
-       src="https://via.placeholder.com/200" />
-
-
+<main class="flex flex-col items-center z-10 text-center space-y-6 px-6">
+  <div class="avatar-container">
+    <img id="avatarIcono" class="avatar-glow w-40 h-40 md:w-56 md:h-56 object-cover" src="https://via.placeholder.com/200" alt="Avatar del usuario">
+    <a href="iconos.html" class="edit-icon" aria-label="Editar avatar"><i class="fas fa-pencil-alt"></i></a>
+  </div>
   <h1 id="nombreUsuario" class="nombre-prime">Invitado</h1>
-  <p class="subtitulo-prime">Bienvenido de nuevo! ¿Qué veremos hoy?</p>
+  <p class="subtitulo-prime" aria-live="polite">¡Bienvenido de nuevo!</p>
 
-  <div class="mt-6 flex flex-col gap-4 w-full max-w-md">
-
-  <button id="btnLogin" class="w-full bg-[#1f8a6d] hover:bg-[#167c5e] text-white font-semibold text-lg py-3 rounded-full shadow-lg transition transform hover:-translate-y-1">
-    Ingresar
-  </button>
-
-  <button id="btnCompartir" class="w-full border border-[#b36a0a] hover:bg-[#b36a0a] hover:text-white text-[#b36a0a] font-semibold text-lg py-3 rounded-full shadow-lg transition transform hover:-translate-y-1">
-    Compartir
-  </button>
-</div>
+  <div class="flex flex-col gap-4 w-full max-w-sm mt-6">
+    <button id="btnLogin" class="bg-primary w-full" aria-label="Iniciar sesión en LZPLAY">Ingresar</button>
+    <button id="btnCompartir" class="border-accent w-full" aria-label="Compartir LZPLAY">Compartir</button>
+  </div>
+</main>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const nombreUsuario = document.getElementById('nombreUsuario');
   const avatar = document.getElementById('avatarIcono');
+  const subtitulo = document.querySelector('.subtitulo-prime');
+  const backgroundSlider = document.getElementById('backgroundSlider');
+  const btnLogin = document.getElementById('btnLogin');
+  const btnCompartir = document.getElementById('btnCompartir');
 
- 
-  const nombreGuardado = localStorage.getItem('nombrePerfil');
-  if (nombreGuardado) {
-    nombreUsuario.textContent = nombreGuardado;
-  }
-
-  const iconoGuardado = localStorage.getItem('iconoUsuario');
-  if (iconoGuardado) {
-    avatar.src = iconoGuardado;
-  } else {
-    avatar.src = 'https://i.pinimg.com/736x/91/86/1b/91861b749841221d52122f0c2933d8a6.jpg';
-  }
-
+  const DEFAULT_AVATAR = 'https://i.pinimg.com/736x/91/86/1b/91861b749841221d52122f0c2933d8a6.jpg';
+  const LOGIN_URL = 'https://lz.blogdepelis.lat/';
+  const SHARE_URL = 'https://dlz.blogdepelis.lat/';
   const TOKEN = btoa('UserLzPlay');
+  const SLIDE_INTERVAL = 4000;
 
-  document.getElementById('btnLogin').addEventListener('click', () => {
-    localStorage.setItem('accessToken', TOKEN);
-    window.location.href = 'https://lz.blogdepelis.lat/';
-  });
+  // Preload images
+  const fondos = backgroundSlider.querySelectorAll('img');
+  fondos.forEach(img => new Image().src = img.src);
 
-  document.getElementById('btnCompartir').addEventListener('click', async () => {
-    const url = 'https://dlz.blogdepelis.lat/';
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: 'LzPlay',
-          text: 'Mira este sitio genial!',
-          url: url,
-        });
-      } catch (err) {
-        console.error('Error compartiendo:', err);
-      }
-    } else {
-      navigator.clipboard.writeText(url).then(() => {
-        alert('Enlace copiado al portapapeles!');
-      });
-    }
-  });
+  let index = 0;
+  fondos[index].classList.add('active');
+
+  function changeSlide() {
+    fondos.forEach((img) => { img.classList.remove('active'); img.style.transform='scale(1)'; });
+    index = (index + 1) % fondos.length;
+    fondos[index].classList.add('active');
+  }
+
+  let sliderInterval = setInterval(changeSlide, SLIDE_INTERVAL);
+  backgroundSlider.addEventListener("mouseenter", () => clearInterval(sliderInterval));
+  backgroundSlider.addEventListener("mouseleave", () => { sliderInterval = setInterval(changeSlide, SLIDE_INTERVAL); });
+
+  function loadUserProfile() {
+    try {
+      const nombreGuardado = localStorage.getItem('nombrePerfil');
+      if (nombreGuardado?.trim()) nombreUsuario.textContent = nombreGuardado.trim();
+      avatar.src = localStorage.getItem('iconoUsuario') || DEFAULT_AVATAR;
+      avatar.onerror = () => { avatar.src = DEFAULT_AVATAR; };
+    } catch (error) { console.error(error); }
+  }
+
+  function setDynamicGreeting() {
+    const now = new Date();
+    const hour = now.getHours();
+    let greeting = '¡Buenas noches!';
+    if (hour >=5 && hour < 12) greeting='¡Buenos días!';
+    else if(hour >=12 && hour <18) greeting='¡Buenas tardes!';
+    if(subtitulo) subtitulo.textContent = `${greeting} ¿Qué veremos hoy?`;
+  }
+
+  function handleLogin() {
+    try { localStorage.setItem('accessToken', JSON.stringify({ token: TOKEN, created: Date.now() }));
+      window.location.href = LOGIN_URL; 
+    } catch (e){ console.error(e); alert('Error al iniciar sesión.'); }
+  }
+
+  async function handleShare() {
+    try {
+      if(navigator.share) await navigator.share({ title:'LZPLAY', text:'¡Mira este sitio genial!', url: SHARE_URL });
+      else { await navigator.clipboard.writeText(SHARE_URL); alert('Enlace copiado!'); }
+    } catch(e){ console.error(e); alert('Error al compartir.'); }
+  }
+
+  loadUserProfile();
+  setDynamicGreeting();
+
+  btnLogin.addEventListener('click', handleLogin);
+  btnCompartir.addEventListener('click', handleShare);
 });
 </script>
-
-
 </body>
 </html>
