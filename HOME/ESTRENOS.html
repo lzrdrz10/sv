@@ -98,7 +98,7 @@
     </section>
   </main>
 
-  <script>
+ <script>
   const GITHUB_API = "https://api.github.com/repos/lzrdrz10/sv/contents/";
   const GITHUB_RAW = "https://raw.githubusercontent.com/lzrdrz10/sv/main/";
   const LOCAL_JSON_KEY = "estrenos2025";
@@ -147,6 +147,15 @@
     renderEstrenos(estrenos);
   }
 
+  // ?? función para mezclar array (Fisher-Yates shuffle)
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
   function renderEstrenos(estrenos) {
     const contenedor = document.getElementById("content-section");
     contenedor.innerHTML = "";
@@ -154,7 +163,11 @@
       contenedor.innerHTML = `<div class="col-span-full text-center text-white/70 py-8"><p>No se encontraron estrenos para 2025.</p></div>`;
       return;
     }
-    estrenos.forEach(e => {
+
+    // ?? Aquí mezclamos el orden antes de mostrar
+    const aleatorios = shuffleArray([...estrenos]);
+
+    aleatorios.forEach(e => {
       const article = document.createElement("article");
       article.className = "relative rounded-lg overflow-hidden cursor-pointer select-none";
       article.innerHTML = `
@@ -170,7 +183,8 @@
   }
 
   buscarEstrenos();
-  </script>
+</script>
+
 
 </body>
 </html>
