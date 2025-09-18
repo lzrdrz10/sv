@@ -69,11 +69,11 @@
       let encontrados = 0;
 
       li.forEach(el => {
-        // �x� Capturamos TODO el texto del li, incluyendo los <span class="hidden">
+       Capturamos TODO el texto del li, incluyendo los <span class="hidden">
         const spans = Array.from(el.querySelectorAll("span.hidden")).map(s => s.textContent);
         const texto = normalizarTexto((el.textContent || "") + " " + spans.join(" "));
 
-        // �x� Verificamos que TODAS las palabras escritas estén en el texto
+       Verificamos que TODAS las palabras escritas estén en el texto
         const coincide = palabrasFiltro.every(palabra => texto.includes(palabra));
 
         el.style.display = coincide ? "" : "none";
@@ -255,6 +255,23 @@ document.addEventListener("DOMContentLoaded", () => {
     <ul id="busquedas" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
 
       <!--ABAJO AGREGAR NUEVO CONTENIDO -->
+			<li>
+  <a href="../Series/serie65.html" tabindex="0" class="block outline-none focus:ring-2 ring-yellow-400 rounded">
+   <img 
+  src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/al3wD1MqEfwifOBBFnBM5uOl9OT.jpg" alt="poster" class="w-full aspect-[2/3] rounded-lg object-cover mb-2 sm:mb-0" loading="lazy"/>
+    <span class="hidden">El asombroso mundo de Gumball 2011</span>
+    <span class="hidden">Narra las divertidas aventuras de Gumball y su peculiar familia en el idílico pueblecito de Elmore. Un papá conejo rosa de 1,95 metros, una madre que se gana la vida vendiendo arco iris, un gato azul muy torpe y una conejita con un cerebro superdotado componen la familia protagonista. No hay que olvidar a Darwin, un pez rojo que se convirtió en miembro del clan el día en que le crecieron piernas y pulmones. Así es el asombroso mundo de Gumball. el increible mundo de gumball</span>
+  </a>
+</li>
+		<li>
+  <a href="../Series/serie66.html" tabindex="0" class="block outline-none focus:ring-2 ring-yellow-400 rounded">
+   <img 
+  src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/q8dWfc4JwQuv3HayIZeO84jAXED.jpg" alt="poster" class="w-full aspect-[2/3] rounded-lg object-cover mb-2 sm:mb-0" loading="lazy"/>
+    <span class="hidden">Dexter 2006</span>
+    <span class="hidden">Serie de suspense que narra la historia de un hombre extraño llamado Dexter Morgan. Cuando era niño, Dexter fue maltratado y abandonado por sus padres, ahora es un exitoso e importante forense patológico... pero bajo su carismática personalidad, se esconde una terrible verdad. Dexter ha canalizado sus innatas necesidades homicidas en una segunda profesión que guarda celosamente en secreto: buscar, dar caza y asesinar brutalmente a despiadados criminales.
+</span>
+  </a>
+</li>
 <!-- Futurama -->
 <li>
   <a href="../Series/serie64.html" tabindex="0" class="block outline-none focus:ring-2 ring-yellow-400 rounded">
