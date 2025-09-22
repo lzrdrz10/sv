@@ -216,6 +216,152 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
   </div>
 </header>
+	
+<div id="lzNotifOverlay"></div>
+<div id="lzNotif" class="lz-notif">
+  <img id="lzNotifImg" src="https://image.tmdb.org/t/p/original/mkfuzOCrD4DkDJb430QUd4pYiJs.jpg" alt=" class="lz-notif-img">
+  
+  <div class="lz-notif-content">
+    <h2 id="lzNotifTitle">Nuevo capítulo de Bon Appétit</h2>
+    <p id="lzNotifText">Explora el arte de la cocina como nunca antes.</p>
+    <button id="lzNotifBtn">Ver ahora</button>
+  </div>
+
+  <span id="lzNotifClose" class="lz-close">&times;</span>
+</div>
+
+<style>
+  #lzNotifOverlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: transparent;
+    display: none;
+    z-index: 998;
+  }
+
+  .lz-notif {
+    position: fixed;
+    top: -220px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    max-width: 420px;
+    background: rgba(0, 25, 80, 0.85); 
+    backdrop-filter: blur(10px);
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+    padding: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    z-index: 999;
+    opacity: 0;
+    transition: top 0.5s ease, opacity 0.5s ease;
+    font-family: Arial, sans-serif;
+  }
+
+  .lz-notif-img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 10px;
+    flex-shrink: 0;
+    border: 2px solid rgba(255,255,255,0.2);
+  }
+
+  .lz-notif-content h2 {
+    font-size: 16px;
+    margin: 0 0 4px;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .lz-notif-content p {
+    font-size: 13px;
+    color: #ddd;
+    margin: 0 0 8px;
+  }
+
+  .lz-notif-content button {
+    background: #0066ff;
+    border: none;
+    color: #fff;
+    padding: 6px 14px;
+    font-size: 13px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+  }
+
+  .lz-notif-content button:hover {
+    background: #0052cc;
+  }
+
+  .lz-close {
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    font-weight: bold;
+    line-height: 1;
+  }
+
+  @media (max-width: 480px) {
+    .lz-notif {
+      padding: 10px;
+    }
+    .lz-notif-img {
+      width: 60px;
+      height: 60px;
+    }
+    .lz-notif-content h2 {
+      font-size: 14px;
+    }
+    .lz-notif-content p {
+      font-size: 12px;
+    }
+    .lz-notif-content button {
+      font-size: 12px;
+      padding: 5px 10px;
+    }
+  }
+</style>
+
+<script>
+  window.addEventListener("load", function() {
+    var notif = document.getElementById("lzNotif");
+    var overlay = document.getElementById("lzNotifOverlay");
+    overlay.style.display = "block";
+    notif.style.top = "15px";
+    notif.style.opacity = "1";
+
+    // Si quieres que se cierre automáticamente tras 6s:
+    // setTimeout(cerrarNotif, 6000);
+  });
+
+  // Botón "Ver ahora"
+  document.getElementById("lzNotifBtn").addEventListener("click", function() {
+    window.location.href = "Series/serie32.html";
+  });
+
+  // Botón cerrar
+  document.getElementById("lzNotifClose").addEventListener("click", cerrarNotif);
+
+  // Cerrar clic fuera
+  document.getElementById("lzNotifOverlay").addEventListener("click", cerrarNotif);
+
+  function cerrarNotif() {
+    var notif = document.getElementById("lzNotif");
+    var overlay = document.getElementById("lzNotifOverlay");
+    notif.style.top = "-220px";
+    notif.style.opacity = "0";
+    overlay.style.display = "none";
+  }
+</script>
+
 	<div id="preloader">
   <div class="preloader-content">
     <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3dK3-XAKrEia-lWmiUqAYRfFQ1lR9eJX6ZZH8e_vHf576qf9GJjIWBW9Jg5LsilXX7WO2MOEkg5gzc4pESziaPeMJ9ws9mwtCDdp3p_17D0e0Uop_ZxavwwJeNLBvoyZJ0cxTKQpjzrJIR6LjJslB24tj-77AYrRCacQ3F2S2VPoXpPzPhM1zndxyd1Rg/s3307/B64D5386-DCA4-410B-A0A6-6ACB19D0A06F.png" alt="Logo Preloader" />
