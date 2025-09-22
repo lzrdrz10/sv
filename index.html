@@ -130,28 +130,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   lazyLoadImages();
 });
 
-	 window.addEventListener("load", function() {
-    var notif = document.getElementById("lzNotif");
-    var overlay = document.getElementById("lzNotifOverlay");
-    overlay.style.display = "block";
-    notif.style.top = "15px";
-    notif.style.opacity = "1";
-  });
-
-  document.getElementById("lzNotifBtn").addEventListener("click", function() {
-    window.location.href = "Series/serie32.html";
-  });
-
-  document.getElementById("lzNotifClose").addEventListener("click", cerrarNotif);
-  document.getElementById("lzNotifOverlay").addEventListener("click", cerrarNotif);
-
-  function cerrarNotif() {
-    var notif = document.getElementById("lzNotif");
-    var overlay = document.getElementById("lzNotifOverlay");
-    notif.style.top = "-220px";
-    notif.style.opacity = "0";
-    overlay.style.display = "none";
-  }
  </script>
 
 </head>
@@ -773,6 +751,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 </body>
 </html>
+
 
 
 
