@@ -15,7 +15,7 @@
     gtag('js', new Date());
     gtag('config', 'G-PC9JETB0VP');
 
-    let itemsPorCarga = 30;
+    let itemsPorCarga = 15; // Carga inicial y por cada "ver más"
     let elementosMostrados = 0;
 
     function normalizarTexto(texto) {
@@ -25,11 +25,11 @@
     function ordenarYLimitar() {
       const ul = document.getElementById("busquedas");
       const li = Array.from(ul.querySelectorAll("li"));
+
+      li.forEach(el => el.style.display = "none"); // Ocultamos todos
+
       elementosMostrados = 0;
-
-      li.forEach(el => el.style.display = "none");
-
-      for (let i = 0; i < itemsPorCarga && i < li.length; i++) {
+      for (let i = 0; i < li.length && elementosMostrados < itemsPorCarga; i++) {
         li[i].style.display = "";
         elementosMostrados++;
       }
@@ -40,12 +40,14 @@
     function mostrarMas() {
       const ul = document.getElementById("busquedas");
       const li = Array.from(ul.querySelectorAll("li"));
-      let nuevosMostrados = 0;
 
+      let nuevosMostrados = 0;
       for (let i = elementosMostrados; i < li.length && nuevosMostrados < itemsPorCarga; i++) {
-        li[i].style.display = "";
-        nuevosMostrados++;
-        elementosMostrados++;
+        if (li[i].style.display === "none") {
+          li[i].style.display = "";
+          nuevosMostrados++;
+          elementosMostrados++;
+        }
       }
 
       if (elementosMostrados >= li.length) {
@@ -67,11 +69,8 @@
         let encontrados = 0;
 
         li.forEach(el => {
-          // Capturamos todo el texto del li, incluyendo los <span class="hidden">
           const spans = Array.from(el.querySelectorAll("span.hidden")).map(s => s.textContent);
           const texto = normalizarTexto((el.textContent || "") + " " + spans.join(" "));
-
-          // Verificamos que todas las palabras escritas estén en el texto
           const coincide = palabrasFiltro.every(palabra => texto.includes(palabra));
 
           el.style.display = coincide ? "" : "none";
@@ -79,28 +78,26 @@
         });
 
         if (palabrasFiltro.length > 0) {
-          estado.classList.remove("hidden");
           estado.innerHTML = encontrados > 0
             ? `Resultados encontrados: ${encontrados}`
             : `No se encontraron resultados.`;
-          document.getElementById("verMasBtn").classList.add("hidden");
+          document.getElementById("verMasBtn").classList.add("hidden"); // ocultamos boton
         } else {
           estado.classList.add("hidden");
-          ordenarYLimitar();
+          elementosMostrados = 0;
+          mostrarMas(); // mostramos los primeros 15
         }
-      }, 300);
+      }, 200);
     }
 
     window.addEventListener("load", () => {
-      document.getElementById("buscar").focus();
+      const input = document.getElementById("buscar");
+      input.focus();
       setTimeout(() => {
-        const input = document.getElementById("buscar");
-        input.focus();
         input.setSelectionRange(input.value.length, input.value.length);
       }, 200);
       ordenarYLimitar();
     });
-
   </script>
 </head>
 <body class="bg-[#0a0a0a] text-white min-h-screen flex flex-col">
@@ -7306,8 +7303,9 @@ Es justamente aquí donde una familia de gánsteres irlandeses de origen nómada
   </a>
 </li>
 <!--FIN-->
-  </ul>
-<div class="text-center mt-6">
+ </ul>
+
+  <div class="text-center mt-6">
     <button id="verMasBtn" onclick="mostrarMas()" 
       class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded hidden">
       Ver más...
@@ -7315,17 +7313,17 @@ Es justamente aquí donde una familia de gánsteres irlandeses de origen nómada
   </div>
 </main>
 
-  <!-- Footer -->
-  <footer class="bg-[#121212] text-[#999999] text-center py-6 text-sm">
-    <div class="mb-2 space-x-4">
-      <a href="#" class="hover:text-white">Privacidad</a>
-      <a href="#" class="hover:text-white">Terminos de Uso</a>
-      <a href="#" class="hover:text-white">DMCA</a>
-    </div>
-    <div>2025. Todos los derechos reservados. <strong>LzPlay!</strong> se usa bajo licencia.</div>
- </footer>
+<footer class="bg-[#121212] text-[#999999] text-center py-6 text-sm">
+  <div class="mb-2 space-x-4">
+    <a href="#" class="hover:text-white">Privacidad</a>
+    <a href="#" class="hover:text-white">Terminos de Uso</a>
+    <a href="#" class="hover:text-white">DMCA</a>
+  </div>
+  <div>2025. Todos los derechos reservados. <strong>LzPlay!</strong> se usa bajo licencia.</div>
+</footer>
 <script>
 (function(_0x1f4b3a,_0x2e5c1d){var _0x4c3e2b=function(_0x5a3f1c){while(--_0x5a3f1c){_0x1f4b3a['push'](_0x1f4b3a['shift']());}};var _0x3b2f4e=function(){var _0x1a3e5f={'data':function(_0x4e2c1b,_0x3f5a2d){return _0x4e2c1b!==_0x3f5a2d;},'action':function(){return'atob';},'value':function(){return'VXNlckx6UGxheQ==';},'store':function(){return'localStorage';},'redirect':function(){return'https://dlz.blogdepelis.lat/';},'message':function(){return'Acceso no permitido. Descarga la aplicacion oficial';},'isSafari':function(){return /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);}};return _0x1a3e5f;}();_0x4c3e2b(0x1f4);var _0x5e3d2a=_0x3b2f4e;document['addEventListener']('DOMContentLoaded',function(){if(!_0x5e3d2a['isSafari']()){var _0x2d4f1c=_0x5e3d2a['store']();var _0x4b3e2f=window[_0x2d4f1c]['getItem']('accessToken');if(!_0x4b3e2f || _0x5e3d2a['data'](_0x4b3e2f,_0x5e3d2a['action']()(_0x5e3d2a['value']()))){alert(_0x5e3d2a['message']());window['location']['href']=_0x5e3d2a['redirect']();}window[_0x2d4f1c]['removeItem']('accessToken');}});})(['push','shift'],0x1f4);
 </script>
 </body>
 </html>
+
