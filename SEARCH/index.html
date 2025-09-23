@@ -9,96 +9,69 @@
   <link rel="stylesheet" href="style.css">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PC9JETB0VP"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-PC9JETB0VP');
+ <script>
+  function normalizarTexto(texto) {
+    return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  }
 
-    let itemsPorCarga = 15; // Carga inicial y por cada "ver más"
-    let elementosMostrados = 0;
+  function mostrarUltimos() {
+    const ul = document.getElementById("busquedas");
+    const li = Array.from(ul.querySelectorAll("li"));
 
-    function normalizarTexto(texto) {
-      return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-    }
+    // Ocultamos todos
+    li.forEach(el => el.style.display = "none");
 
-    function ordenarYLimitar() {
-      const ul = document.getElementById("busquedas");
-      const li = Array.from(ul.querySelectorAll("li"));
+    // Mostramos solo los últimos 15
+    const ultimos = li.slice(-15);
+    ultimos.forEach(el => {
+      el.style.display = "";
+    });
+  }
 
-      li.forEach(el => el.style.display = "none"); // Ocultamos todos
+  function filtrar() {
+    const input = document.getElementById("buscar").value.trim();
+    const palabrasFiltro = normalizarTexto(input).split(/\s+/).filter(Boolean);
+    const ul = document.getElementById("busquedas");
+    const li = Array.from(ul.querySelectorAll("li"));
+    const estado = document.getElementById("estadoBusqueda");
 
-      elementosMostrados = 0;
-      for (let i = 0; i < li.length && elementosMostrados < itemsPorCarga; i++) {
-        li[i].style.display = "";
-        elementosMostrados++;
+    estado.classList.remove("hidden");
+    estado.innerHTML = `Buscando<span class="dot-1"></span><span class="dot-2"></span><span class="dot-3"></span>`;
+
+    setTimeout(() => {
+      let encontrados = 0;
+
+      li.forEach(el => {
+        const spans = Array.from(el.querySelectorAll("span.hidden")).map(s => s.textContent);
+        const texto = normalizarTexto((el.textContent || "") + " " + spans.join(" "));
+        const coincide = palabrasFiltro.every(palabra => texto.includes(palabra));
+
+        el.style.display = coincide ? "" : "none";
+        if (coincide) encontrados++;
+      });
+
+      if (palabrasFiltro.length > 0) {
+        estado.classList.remove("hidden");
+        estado.innerHTML = encontrados > 0
+          ? `Resultados encontrados: ${encontrados}`
+          : `No se encontraron resultados.`;
+      } else {
+        estado.classList.add("hidden");
+        mostrarUltimos(); // restauramos a los últimos 15
       }
+    }, 300);
+  }
 
-      document.getElementById("verMasBtn").classList.toggle("hidden", elementosMostrados >= li.length);
-    }
-
-    function mostrarMas() {
-      const ul = document.getElementById("busquedas");
-      const li = Array.from(ul.querySelectorAll("li"));
-
-      let nuevosMostrados = 0;
-      for (let i = elementosMostrados; i < li.length && nuevosMostrados < itemsPorCarga; i++) {
-        if (li[i].style.display === "none") {
-          li[i].style.display = "";
-          nuevosMostrados++;
-          elementosMostrados++;
-        }
-      }
-
-      if (elementosMostrados >= li.length) {
-        document.getElementById("verMasBtn").classList.add("hidden");
-      }
-    }
-
-    function filtrar() {
-      const input = document.getElementById("buscar").value.trim();
-      const palabrasFiltro = normalizarTexto(input).split(/\s+/).filter(Boolean);
-      const ul = document.getElementById("busquedas");
-      const li = Array.from(ul.querySelectorAll("li"));
-      const estado = document.getElementById("estadoBusqueda");
-
-      estado.classList.remove("hidden");
-      estado.innerHTML = `Buscando<span class="dot-1"></span><span class="dot-2"></span><span class="dot-3"></span>`;
-
-      setTimeout(() => {
-        let encontrados = 0;
-
-        li.forEach(el => {
-          const spans = Array.from(el.querySelectorAll("span.hidden")).map(s => s.textContent);
-          const texto = normalizarTexto((el.textContent || "") + " " + spans.join(" "));
-          const coincide = palabrasFiltro.every(palabra => texto.includes(palabra));
-
-          el.style.display = coincide ? "" : "none";
-          if (coincide) encontrados++;
-        });
-
-        if (palabrasFiltro.length > 0) {
-          estado.innerHTML = encontrados > 0
-            ? `Resultados encontrados: ${encontrados}`
-            : `No se encontraron resultados.`;
-          document.getElementById("verMasBtn").classList.add("hidden"); // ocultamos boton
-        } else {
-          estado.classList.add("hidden");
-          elementosMostrados = 0;
-          mostrarMas(); // mostramos los primeros 15
-        }
-      }, 200);
-    }
-
-    window.addEventListener("load", () => {
+  window.addEventListener("load", () => {
+    document.getElementById("buscar").focus();
+    setTimeout(() => {
       const input = document.getElementById("buscar");
       input.focus();
-      setTimeout(() => {
-        input.setSelectionRange(input.value.length, input.value.length);
-      }, 200);
-      ordenarYLimitar();
-    });
-  </script>
+      input.setSelectionRange(input.value.length, input.value.length);
+    }, 200);
+    mostrarUltimos();
+  });
+</script>
 </head>
 <body class="bg-[#0a0a0a] text-white min-h-screen flex flex-col">
 
@@ -118,13 +91,6 @@
 </header>
 
 <div id="estadoBusqueda" class="text-center text-sm text-[#bbbbbb] mt-6 hidden"></div> 
-
-  <div class="text-center mt-6">
-    <button id="verMasBtn" onclick="mostrarMas()" 
-      class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded hidden">
-      Ver más...
-    </button>
-  </div>
 <main class="flex-1 px-4 py-6 max-w-7xl mx-auto mt-16">
 	
   <ul id="busquedas" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
