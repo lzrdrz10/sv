@@ -3,19 +3,20 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Juego de Tronos</title>
+<title>Juego de tronos</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 <style>
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-body, html { margin: 0; padding: 0; height: 100%; }
+body, html { margin: 0; padding: 0; height: 100%; font-family: "Poppins", sans-serif; }
 body::before {
   content: "";
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-image: url('https://image.tmdb.org/t/p/original/2OMB0ynKlyIenMJWI2Dy9IWT4c.jpg');
+  background-image: url('https://image.tmdb.org/t/p/w1280/2OMB0ynKlyIenMJWI2Dy9IWT4c.jpg');
   background-size: cover;
   background-position: center;
   z-index: -2;
@@ -31,8 +32,10 @@ body::after {
 #iframe-principal { width: 100%; height: 220px; border: none; background: black; }
 #contenedor-video { position: fixed; top: 0; left: 0; width: 100%; z-index: 10; }
 .capitulo-seleccionado { background-color: #FF0000 !important; color: #fff !important; font-weight: bold; border-bottom: none !important; }
+.server-btn { display: none; }
+.server-seleccionado { background-color: #FF7F00 !important; color: #fff !important; }
+.error-message { display: none; color: #FF4444; font-size: 0.875rem; text-align: center; margin-top: 1rem; }
 </style>
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PC9JETB0VP"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -42,6 +45,7 @@ body::after {
   gtag('config', 'G-PC9JETB0VP');
 </script>
 <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+<script src="../access.js"></script>
 </head>
 <body class="text-white font-sans leading-relaxed">
 <div id="contenedor-video" class="relative">
@@ -53,12 +57,12 @@ body::after {
 </div>
 <div class="px-4 pt-60 pb-4 space-y-4">
   <div class="flex items-center justify-between">
-    <h1 class="text-xl sm:text-2xl font-bold">Juego de Tronos T<span id="temp-titulo">1</span></h1>
+    <h1 class="text-xl sm:text-2xl font-bold">Juego de tronos T<span id="temp-titulo">1</span></h1>
   </div>
   <div class="flex flex-wrap items-center gap-3 text-sm text-gray-400">
     <span><strong class="text-[#FF7F00]">8.5</strong> / 10</span>
     <span class="text-white">•</span>
-    <span>Sci-Fi & Fantasy,Drama,Action & Adventure</span>
+    <span>Sci-Fi & Fantasy, Drama, Action & Adventure</span>
     <span class="text-white">•</span>
     <span>2011</span>
   </div>
@@ -69,40 +73,327 @@ body::after {
     </select>
   </div>
   <div class="flex space-x-2 overflow-x-auto scrollbar-hide pb-1" id="lista-capitulos"></div>
+  <div id="servidores" class="flex space-x-2">
+    <button id="server2-btn" class="server-btn px-3 py-1 rounded bg-[#2a2a2a] text-white text-sm">Servidor 2</button>
+    <button id="server3-btn" class="server-btn px-3 py-1 rounded bg-[#2a2a2a] text-white text-sm">Servidor 3</button>
+  </div>
+  <div id="error-message" class="error-message">No hay enlaces disponibles para este episodio.</div>
   <div class="bg-[#1e1e1e] rounded-lg p-4 text-sm text-gray-300 leading-relaxed">
-    <p><span class="font-semibold text-white">Sinopsis:</span> En un mundo fantástico y en un contexto medieval varias familias, relativas a la nobleza, se disputan el poder para dominar el territorio ficticio de Poniente (Westeros) y tomar el control de los Siete Reinos desde el Trono de Hierro, lugar donde el rey ejerce el poder.</p>
+    <p><span class="font-semibold text-white">Sinopsis:</span> En una tierra donde los veranos duran décadas y los inviernos pueden durar toda una vida, los problemas acechan. Desde las maquinaciones del sur a las salvajes tierras del este, pasando por el helado norte y el milenario muro que protege el reino de las fuerzas tenebrosas, dos poderosas familias mantienen un enfrentamiento letal por gobernar los Siete Reinos de Poniente. Mientras la traición, la lujuria y las fuerzas sobrenaturales sacuden los pilares de los reinos, la sangrienta batalla por el trono de Hierro tendrá consecuencias imprevistas y trascendentales. El invierno se acerca. Que empiece 'Juego de tronos'.</p>
   </div>
 </div>
 <script>
-(function(_0x1f4b3a,_0x2e5c1d){var _0x4c3e2b=function(_0x5a3f1c){while(--_0x5a3f1c){_0x1f4b3a['push'](_0x1f4b3a['shift']());}};var _0x3b2f4e=function(){var _0x1a3e5f={'data':function(_0x4e2c1b,_0x3f5a2d){return _0x4e2c1b!==_0x3f5a2d;},'action':function(){return'atob';},'value':function(){return'VXNlckx6UGxheQ==';},'store':function(){return'localStorage';},'redirect':function(){return'https://descargar.lzplayhd.online/';},'message':function(){return'Acceso no permitido. Descarga la aplicacion oficial';},'isSafari':function(){return /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);}};return _0x1a3e5f;}();_0x4c3e2b(0x1f4);var _0x5e3d2a=_0x3b2f4e;document['addEventListener']('DOMContentLoaded',function(){if(!_0x5e3d2a['isSafari']()){var _0x2d4f1c=_0x5e3d2a['store']();var _0x4b3e2f=window[_0x2d4f1c]['getItem']('accessToken');if(!_0x4b3e2f || _0x5e3d2a['data'](_0x4b3e2f,_0x5e3d2a['action']()(_0x5e3d2a['value']()))){alert(_0x5e3d2a['message']());window['location']['href']=_0x5e3d2a['redirect']();}window[_0x2d4f1c]['removeItem']('accessToken');}});})(['push','shift'],0x1f4);
+(function(_0x1f4b3a,_0x2e5c1d){
+  var _0x4c3e2b=function(_0x5a3f1c){
+    while(--_0x5a3f1c){
+      _0x1f4b3a['push'](_0x1f4b3a['shift']());
+    }
+  };
+  var _0x3b2f4e=function(){
+    var _0x1a3e5f={
+      'data':function(_0x4e2c1b,_0x3f5a2d){
+        return _0x4e2c1b!==_0x3f5a2d;
+      },
+      'action':function(){
+        return'atob';
+      },
+      'value':function(){
+        return'VXNlckx6UGxheQ==';
+      },
+      'store':function(){
+        return'localStorage';
+      },
+      'redirect':function(){
+        return'https://dlz.blogdepelis.lat/';
+      },
+      'message':function(){
+        return'Acceso no permitido. Descarga la aplicacion oficial';
+      },
+      'isSafari':function(){
+        return /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+      }
+    };
+    return _0x1a3e5f;
+  }();
+  _0x4c3e2b(0x1f4);
+  var _0x5e3d2a=_0x3b2f4e;
+  document['addEventListener']('DOMContentLoaded',function(){
+    if(!_0x5e3d2a['isSafari']()){
+      var _0x2d4f1c=_0x5e3d2a['store']();
+      var _0x4b3e2f=window[_0x2d4f1c]['getItem']('accessToken');
+      if(!_0x4b3e2f || _0x5e3d2a['data'](_0x4b3e2f,_0x5e3d2a['action']()(_0x5e3d2a['value']()))){
+        alert(_0x5e3d2a['message']());
+        window['location']['href']=_0x5e3d2a['redirect']();
+      }
+      window[_0x2d4f1c]['removeItem']('accessToken');
+    }
+  });
+})(['push','shift'],0x1f4);
 
+var videosPorCapitulo = {
+  "1": {
+    "1": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/ae/s8/2/r/_/n/o/r_nox.aaa.mp4"
+    },
+    "2": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe2/cb/s8/2/X/3/n/o/X3nox.aaa.mp4"
+    },
+    "3": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/1a/s8/2/q/v/r/o/qvrox.aaa.mp4"
+    },
+    "4": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/70/s8/2/R/s/r/o/Rsrox.aaa.mp4"
+    },
+    "5": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe2/03/s8/2/3/G/y/o/3Gyox.aaa.mp4"
+    },
+    "6": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe1/58/s8/2/0/W/x/o/0Wxox.aaa.mp4"
+    },
+    "7": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/81/s8/2/x/K/z/o/xKzox.aaa.mp4"
+    },
+    "8": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/26/s8/2/Y/H/z/o/YHzox.aaa.mp4"
+    },
+    "9": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/55/s8/2/x/6/B/o/x6Box.aaa.mp4"
+    },
+    "10": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/06/s8/2/6/1/B/o/61Box.aaa.mp4"
+    }
+  },
+  "2": {
+    "1": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/88/s8/2/M/M/K/n/MMKnx.aaa.mp4"
+    },
+    "2": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/6c/s8/2/T/c/M/n/TcMnx.aaa.mp4"
+    },
+    "3": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe1/3b/s8/2/Q/z/N/n/QzNnx.aaa.mp4"
+    },
+    "4": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe2/a1/s8/2/7/f/Q/n/7fQnx.aaa.mp4"
+    },
+    "5": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe1/5a/s8/2/2/v/R/n/2vRnx.aaa.mp4"
+    },
+    "6": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/ad/s8/2/y/V/S/n/yVSnx.aaa.mp4"
+    },
+    "7": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/41/s8/2/O/d/2/n/Od2nx.aaa.mp4"
+    },
+    "8": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe1/5c/s8/2/b/Q/5/n/bQ5nx.aaa.mp4"
+    },
+    "9": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/85/s8/2/n/I/-/n/nI-nx.aaa.mp4"
+    },
+    "10": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/b5/s8/2/p/s/a/o/psaox.aaa.mp4"
+    }
+  },
+  "3": {
+    "1": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe2/8a/s8/2/5/U/P/o/5UPox.aaa.mp4"
+    },
+    "2": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/ae/s8/2/I/W/P/o/IWPox.aaa.mp4"
+    },
+    "3": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe1/09/s8/2/W/K/w/q/WKwqx.aaa.mp4"
+    },
+    "4": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe2/eb/s8/2/K/N/w/q/KNwqx.aaa.mp4"
+    },
+    "5": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/e2/s8/2/2/h/B/q/2hBqx.aaa.mp4"
+    },
+    "6": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/47/s8/2/S/c/B/q/ScBqx.aaa.mp4"
+    },
+    "7": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe2/da/s8/2/5/1/J/q/51Jqx.aaa.mp4"
+    },
+    "8": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe2/0e/s8/2/a/4/J/q/a4Jqx.aaa.mp4"
+    },
+    "9": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/0f/s8/2/s/D/J/q/sDJqx.aaa.mp4"
+    },
+    "10": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/9b/s8/2/p/L/K/q/pLKqx.aaa.mp4"
+    }
+  },
+  "4": {
+    "1": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/5d/s8/2/8/B/Y/p/8BYpx.aaa.mp4"
+    },
+    "2": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/b3/s8/2/N/3/X/p/N3Xpx.aaa.mp4"
+    },
+    "3": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/0c/s8/2/y/K/Y/p/yKYpx.aaa.mp4"
+    },
+    "4": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/32/s8/2/E/0/3/p/E03px.aaa.mp4"
+    },
+    "5": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe1/bc/s8/2/j/U/3/p/jU3px.aaa.mp4"
+    },
+    "6": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/0d/s8/2/z/Q/3/p/zQ3px.aaa.mp4"
+    },
+    "7": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/31/s8/2/u/U/7/p/uU7px.aaa.mp4"
+    },
+    "8": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/95/s8/2/M/X/7/p/MX7px.aaa.mp4"
+    },
+    "9": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe2/69/s8/2/a/Z/7/p/aZ7px.aaa.mp4"
+    },
+    "10": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/f1/s8/2/R/l/h/q/Rlhqx.aaa.mp4"
+    }
+  },
+  "5": {
+    "1": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/52/s8/2/S/d/7/w/Sd7wx.aaa.mp4"
+    },
+    "2": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe2/ce/s8/2/f/j/7/w/fj7wx.aaa.mp4"
+    },
+    "3": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe1/ef/s8/2/E/m/d/x/Emdxx.aaa.mp4"
+    },
+    "4": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/67/s8/2/v/L/c/x/vLcxx.aaa.mp4"
+    },
+    "5": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/84/s8/2/Q/J/e/x/QJexx.aaa.mp4"
+    },
+    "6": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe1/71/s8/2/u/H/e/x/uHexx.aaa.mp4"
+    },
+    "7": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/e1/s8/2/J/L/s/x/JLsxx.aaa.mp4"
+    },
+    "8": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/09/s8/2/W/T/s/x/WTsxx.aaa.mp4"
+    },
+    "9": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/a1/s8/2/G/t/s/x/Gtsxx.aaa.mp4"
+    },
+    "10": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/69/s8/2/Z/W/s/x/ZWsxx.aaa.mp4"
+    }
+  },
+  "6": {
+    "1": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/8b/s8/2/y/Q/y/x/yQyxx.aaa.mp4"
+    },
+    "2": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/f1/s8/2/h/U/z/x/hUzxx.aaa.mp4"
+    },
+    "3": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/fc/s8/2/E/S/z/x/ESzxx.aaa.mp4"
+    },
+    "4": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/b0/s8/2/s/n/A/x/snAxx.aaa.mp4"
+    },
+    "5": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/8c/s8/2/E/k/A/x/EkAxx.aaa.mp4"
+    },
+    "6": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/15/s8/2/v/K/K/x/vKKxx.aaa.mp4"
+    },
+    "7": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/cc/s8/2/3/J/K/x/3JKxx.aaa.mp4"
+    },
+    "8": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/94/s8/2/d/X/n/y/dXnyx.aaa.mp4"
+    },
+    "9": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe1/80/s8/2/Q/j/o/y/Qjoyx.aaa.mp4"
+    },
+    "10": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe1/a4/s8/2/C/J/o/y/CJoyx.aaa.mp4"
+    }
+  },
+  "7": {
+    "1": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/78/s8/2/T/m/o/y/Tmoyx.aaa.mp4"
+    },
+    "2": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe2/7c/s8/2/6/u/o/y/6uoyx.aaa.mp4"
+    },
+    "3": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/30/s8/2/G/I/o/y/GIoyx.aaa.mp4"
+    },
+    "4": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe1/9c/s8/2/m/7/f/z/m7fzx.aaa.mp4"
+    },
+    "5": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe1/d2/s8/2/1/P/g/z/1Pgzx.aaa.mp4"
+    },
+    "6": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/cd/s8/2/n/r/h/z/nrhzx.aaa.mp4"
+    },
+    "7": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe1/04/s8/2/g/E/h/z/gEhzx.aaa.mp4"
+    }
+  },
+  "8": {
+    "1": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe2/03/s8/2/2/x/-/z/2x-zx.aaa.mp4"
+    },
+    "2": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe2/e2/s8/2/c/c/_/z/cc_zx.aaa.mp4"
+    },
+    "3": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe1/89/s8/2/M/I/a/A/MIaAx.aaa.mp4"
+    },
+    "4": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://hugh.cdn.rumble.cloud/video/fwe2/e3/s8/2/I/u/a/A/IuaAx.aaa.mp4"
+    },
+    "5": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/b9/s8/2/c/C/a/A/cCaAx.aaa.mp4"
+    },
+    "6": {
+      "url1": "https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://1a-1791.com/video/fwe1/12/s8/2/N/_/d/A/N_dAx.aaa.mp4"
+    }
+  }
+};
 var serieId = "1399";
 var temporadaSelect = document.getElementById('temporada');
 var listaCapitulos = document.getElementById('lista-capitulos');
 var tempTitulo = document.getElementById('temp-titulo');
 var iframePrincipal = document.getElementById('iframe-principal');
+var server2Btn = document.getElementById('server2-btn');
+var server3Btn = document.getElementById('server3-btn');
+var errorMessage = document.getElementById('error-message');
 
 var serieActual = {
   id: serieId,
-  titulo: "Juego de Tronos",
+  titulo: "Juego de tronos",
   temporada: temporadaSelect.value,
-  poster: "https://image.tmdb.org/t/p/original/z9gCSwIObDOD2BEtmUwfasar3xs.jpg"
+  poster: "https://image.tmdb.org/t/p/w500/z9gCSwIObDOD2BEtmUwfasar3xs.jpg",
+  currentServer: "url1"
 };
-
-var videosPorCapitulo = {"1":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":""},"2":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":""},"3":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":""},"4":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":""},"5":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":""},"6":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":""},"7":{"1":"","2":"","3":"","4":"","5":"","6":"","7":""},"8":{"1":"","2":"","3":"","4":"","5":"","6":""}};
 
 function guardarTemporada(temporada) {
   localStorage.setItem("temporadaSeleccionada_" + serieId, temporada);
 }
 
 function cargarTemporadaGuardada() {
-  var temp = localStorage.getItem("temporadaSeleccionada_" + serieId);
-  return temp ? temp : "1";
+  return localStorage.getItem("temporadaSeleccionada_" + serieId) || "1";
 }
 
 function guardarCapitulo(capitulo) {
-  var key = "ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada;
-  localStorage.setItem(key, capitulo);
+  localStorage.setItem("ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada, capitulo);
 }
 
 function cargarCapituloGuardado() {
@@ -127,10 +418,21 @@ function cargarCapituloGuardado() {
 
 function cambiarVideo(capitulo) {
   var temp = serieActual.temporada;
-  var url = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
-  if (url) {
-    iframePrincipal.src = url;
+  var data = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
+  errorMessage.style.display = 'none';
+  serieActual.currentServer = "url1";
+  server2Btn.className = server2Btn.className.replace(' server-seleccionado', '');
+  server3Btn.className = server3Btn.className.replace(' server-seleccionado', '');
+  if (data && data.url1 && data.url1.trim() !== '') {
+    iframePrincipal.src = data.url1;
+    server2Btn.style.display = data.url2 && data.url2.trim() !== '' ? 'inline-block' : 'none';
+    server3Btn.style.display = data.url3 && data.url3.trim() !== '' ? 'inline-block' : 'none';
     guardarCapitulo(capitulo);
+  } else {
+    iframePrincipal.src = '';
+    server2Btn.style.display = 'none';
+    server3Btn.style.display = 'none';
+    errorMessage.style.display = 'block';
   }
 }
 
@@ -158,9 +460,7 @@ function agregarEventosCapitulos() {
         for (var j = 0; j < botones.length; j++) {
           botones[j].className = botones[j].className.replace(' capitulo-seleccionado', '');
         }
-        if (botones[index].className.indexOf('capitulo-seleccionado') === -1) {
-          botones[index].className += ' capitulo-seleccionado';
-        }
+        botones[index].className += ' capitulo-seleccionado';
         botones[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
         cambiarVideo(botones[index].getAttribute('data-capitulo'));
       };
@@ -168,11 +468,46 @@ function agregarEventosCapitulos() {
   }
 }
 
+server2Btn.onclick = function() {
+  var temp = serieActual.temporada;
+  var seleccionado = listaCapitulos.querySelector('.capitulo-seleccionado');
+  if (seleccionado) {
+    var capitulo = seleccionado.getAttribute('data-capitulo');
+    var data = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
+    if (data && data.url2 && data.url2.trim() !== '') {
+      serieActual.currentServer = "url2";
+      iframePrincipal.src = data.url2;
+      server2Btn.className += ' server-seleccionado';
+      server3Btn.className = server3Btn.className.replace(' server-seleccionado', '');
+    }
+  }
+};
+
+server3Btn.onclick = function() {
+  var temp = serieActual.temporada;
+  var seleccionado = listaCapitulos.querySelector('.capitulo-seleccionado');
+  if (seleccionado) {
+    var capitulo = seleccionado.getAttribute('data-capitulo');
+    var data = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
+    if (data && data.url3 && data.url3.trim() !== '') {
+      serieActual.currentServer = "url3";
+      iframePrincipal.src = data.url3;
+      server3Btn.className += ' server-seleccionado';
+      server2Btn.className = server2Btn.className.replace(' server-seleccionado', '');
+    }
+  }
+};
+
 temporadaSelect.onchange = function() {
   var temp = temporadaSelect.value;
   serieActual.temporada = temp;
   tempTitulo.textContent = temp;
   guardarTemporada(temp);
+  server2Btn.style.display = 'none';
+  server3Btn.style.display = 'none';
+  server2Btn.className = server2Btn.className.replace(' server-seleccionado', '');
+  server3Btn.className = server3Btn.className.replace(' server-seleccionado', '');
+  errorMessage.style.display = 'none';
   generarCapitulos(temp);
 };
 
@@ -183,7 +518,6 @@ window.onload = function() {
   tempTitulo.textContent = tempGuardada;
   generarCapitulos(tempGuardada);
 };
-
 </script>
 </body>
 </html>
