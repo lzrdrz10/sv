@@ -168,8 +168,8 @@
 
 .category {
   flex: 0 0 auto;           /* ?? evita que se encojan */
-  width: 140px;             /* ?? ancho fijo */
-  height: 90px;             /* ?? alto fijo */
+  width: 120px;             /* ?? ancho fijo */
+  height: 70px;             /* ?? alto fijo */
   background: rgba(0,0,0,0.6);
   border: 2px solid #fff;
   border-radius: 15px;
@@ -201,4 +201,5 @@
   scrollbar-width: none;     /* Firefox */
   scroll-behavior: smooth;   /* Scroll suave */
 }
+
 
