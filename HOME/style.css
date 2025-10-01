@@ -154,3 +154,51 @@
   -ms-overflow-style: none; /* IE 10+ */
 }
 
+ /* ===== Categorías ===== */
+   .categories-container {
+  overflow-x: auto;         /* ?? permite scroll horizontal */
+  padding: 15px 0;
+}
+
+.categories {
+  display: flex;
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.category {
+  flex: 0 0 auto;           /* ?? evita que se encojan */
+  width: 140px;             /* ?? ancho fijo */
+  height: 90px;             /* ?? alto fijo */
+  background: rgba(0,0,0,0.6);
+  border: 2px solid #fff;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.category img {
+  max-width: 80%;
+  max-height: 60%;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* logos blancos estilo Disney+ */
+}
+
+.category:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 15px rgba(255,255,255,0.6);
+}
+
+/* ?? Estilo scroll oculto y suave */
+.categories-container::-webkit-scrollbar {
+  display: none; /* Oculta la barra en Chrome */
+}
+.categories-container {
+  -ms-overflow-style: none;  /* IE y Edge */
+  scrollbar-width: none;     /* Firefox */
+  scroll-behavior: smooth;   /* Scroll suave */
+}
+
