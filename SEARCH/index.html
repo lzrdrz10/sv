@@ -254,7 +254,11 @@ body::before {
 </div>
 
 <script>
-var githubURL = "https://raw.githubusercontent.com/lzrdrz10/sv/main/HOME/Buscador.html";
+var urls = [
+  "https://raw.githubusercontent.com/lzrdrz10/sv/main/HOME/Buscador.html",
+  "https://raw.githubusercontent.com/lzrdrz10/sv/main/HOME/Buscador2.html"
+];
+
 var data = [];
 
 var messages = [
@@ -275,30 +279,31 @@ function rotateMessages() {
 }
 setInterval(rotateMessages, 4000);
 
-fetch(githubURL)
-  .then(res => res.text())
-  .then(html => {
-    var parser = new DOMParser();
-    var doc = parser.parseFromString(html, "text/html");
-    var items = doc.querySelectorAll("li");
+Promise.all(urls.map(url => fetch(url).then(res => res.text())))
+  .then(responses => {
+    responses.forEach(html => {
+      var parser = new DOMParser();
+      var doc = parser.parseFromString(html, "text/html");
+      var items = doc.querySelectorAll("li");
 
-    items.forEach(li => {
-      var a = li.querySelector("a");
-      var img = li.querySelector("img");
-      var spans = li.querySelectorAll("span.hidden");
-      if (a && img && spans.length >= 2) {
-        var title = spans[0].textContent.trim();
-        var desc = (spans[0].textContent + " " + spans[1].textContent).trim();
-        var type = a.getAttribute("href").includes("/Peliculas/") ? "Película" : "Serie";
+      items.forEach(li => {
+        var a = li.querySelector("a");
+        var img = li.querySelector("img");
+        var spans = li.querySelectorAll("span.hidden");
+        if (a && img && spans.length >= 2) {
+          var title = spans[0].textContent.trim();
+          var desc = (spans[0].textContent + " " + spans[1].textContent).trim();
+          var type = a.getAttribute("href").includes("/Peliculas/") ? "Película" : "Serie";
 
-        data.push({
-          url: a.getAttribute("href"),
-          poster: img.getAttribute("src"),
-          title: title,
-          type: type,
-          desc: desc
-        });
-      }
+          data.push({
+            url: a.getAttribute("href"),
+            poster: img.getAttribute("src"),
+            title: title,
+            type: type,
+            desc: desc
+          });
+        }
+      });
     });
   })
   .catch(err => {
@@ -341,21 +346,20 @@ function renderResults(data) {
     return;
   }
 
- data.forEach((item, index) => {
-  var card = document.createElement("div");
-  card.className = "card";
-  card.innerHTML = `
-    <img src="${item.poster}" alt="${item.title}" loading="lazy">
-    <div class="card-content">
-      <h3 title="${item.title}">${item.title}</h3>
-      <p>${item.type}</p>
-    </div>
-  `;
-  card.onclick = () => window.location.href = item.url;
-  container.appendChild(card);
-
-  setTimeout(() => card.classList.add("show"), index * 50);
-});
+  data.forEach((item, index) => {
+    var card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <img src="${item.poster}" alt="${item.title}" loading="lazy">
+      <div class="card-content">
+        <h3 title="${item.title}">${item.title}</h3>
+        <p>${item.type}</p>
+      </div>
+    `;
+    card.onclick = () => window.location.href = item.url;
+    container.appendChild(card);
+    setTimeout(() => card.classList.add("show"), index * 50);
+  });
 }
 </script>
 
