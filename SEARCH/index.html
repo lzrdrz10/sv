@@ -341,21 +341,21 @@ function renderResults(data) {
     return;
   }
 
-  data.forEach((item, index) => {
-    var card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
-      <img src="${item.poster}" alt="${item.title}">
-      <div class="card-content">
-        <h3 title="${item.title}">${item.title}</h3>
-        <p>${item.type}</p>
-      </div>
-    `;
-    card.onclick = () => window.location.href = item.url;
-    container.appendChild(card);
+ data.forEach((item, index) => {
+  var card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML = `
+    <img src="${item.poster}" alt="${item.title}" loading="lazy">
+    <div class="card-content">
+      <h3 title="${item.title}">${item.title}</h3>
+      <p>${item.type}</p>
+    </div>
+  `;
+  card.onclick = () => window.location.href = item.url;
+  container.appendChild(card);
 
-    setTimeout(() => card.classList.add("show"), index * 50);
-  });
+  setTimeout(() => card.classList.add("show"), index * 50);
+});
 }
 </script>
 
