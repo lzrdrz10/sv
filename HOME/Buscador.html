@@ -5,91 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Buscador</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-  <link rel="stylesheet" href="style.css">
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PC9JETB0VP"></script>
- <script>
-  function normalizarTexto(texto) {
-    return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-  }
-
-  function mostrarUltimos() {
-    const ul = document.getElementById("busquedas");
-    const li = Array.from(ul.querySelectorAll("li"));
-
-    // Ocultamos todos
-    li.forEach(el => el.style.display = "none");
-
-    // Mostramos solo los últimos 15
-    const ultimos = li.slice(-15);
-    ultimos.forEach(el => {
-      el.style.display = "";
-    });
-  }
-
-  function filtrar() {
-    const input = document.getElementById("buscar").value.trim();
-    const palabrasFiltro = normalizarTexto(input).split(/\s+/).filter(Boolean);
-    const ul = document.getElementById("busquedas");
-    const li = Array.from(ul.querySelectorAll("li"));
-    const estado = document.getElementById("estadoBusqueda");
-
-    estado.classList.remove("hidden");
-    estado.innerHTML = `Buscando<span class="dot-1"></span><span class="dot-2"></span><span class="dot-3"></span>`;
-
-    setTimeout(() => {
-      let encontrados = 0;
-
-      li.forEach(el => {
-        const spans = Array.from(el.querySelectorAll("span.hidden")).map(s => s.textContent);
-        const texto = normalizarTexto((el.textContent || "") + " " + spans.join(" "));
-        const coincide = palabrasFiltro.every(palabra => texto.includes(palabra));
-
-        el.style.display = coincide ? "" : "none";
-        if (coincide) encontrados++;
-      });
-
-      if (palabrasFiltro.length > 0) {
-        estado.classList.remove("hidden");
-        estado.innerHTML = encontrados > 0
-          ? `Resultados encontrados: ${encontrados}`
-          : `No se encontraron resultados.`;
-      } else {
-        estado.classList.add("hidden");
-        mostrarUltimos(); // restauramos a los últimos 15
-      }
-    }, 300);
-  }
-
-  window.addEventListener("load", () => {
-    document.getElementById("buscar").focus();
-    setTimeout(() => {
-      const input = document.getElementById("buscar");
-      input.focus();
-      input.setSelectionRange(input.value.length, input.value.length);
-    }, 200);
-    mostrarUltimos();
-  });
-</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" /
 </head>
 <body class="bg-[#0a0a0a] text-white min-h-screen flex flex-col">
-
-<header class="bg-black py-4 px-6 shadow-md fixed top-0 left-0 w-full z-50">
-  <div class="max-w-5xl mx-auto flex items-center justify-between gap-4">
-    <input id="buscar" type="text" placeholder="Que vamos a buscar ahora?"  
-      class="w-full bg-[#1a1a1a] text-white placeholder-[#bfbfbf] rounded-md px-4 py-3 text-base focus:outline-none"  
-      oninput="filtrar()" autofocus/>
-    <button id="btnRegresar" 
-      class="flex items-center text-white text-lg hover:text-yellow-400 transition ml-6" 
-      title="Regresar" 
-      type="button"
-      onclick="window.location.href='../index.html'">
-      <i class="fas fa-arrow-left text-2xl mr-3"></i> Regresar
-    </button>
-  </div>
-</header>
-
 <div id="estadoBusqueda" class="text-center text-sm text-[#bbbbbb] mt-6 hidden"></div> 
 <main class="flex-1 px-4 py-6 max-w-7xl mx-auto mt-16">
 	
@@ -9861,15 +9779,6 @@ Es justamente aquí donde una familia de gánsteres irlandeses de origen nómada
  </ul>
 
 </main>
-
-<footer class="bg-[#121212] text-[#999999] text-center py-6 text-sm">
-  <div class="mb-2 space-x-4">
-    <a href="#" class="hover:text-white">Privacidad</a>
-    <a href="#" class="hover:text-white">Terminos de Uso</a>
-    <a href="#" class="hover:text-white">DMCA</a>
-  </div>
-  <div>2025. Todos los derechos reservados. <strong>LzPlay!</strong> se usa bajo licencia.</div>
-</footer>
 <script>
 (function(_0x1f4b3a,_0x2e5c1d){var _0x4c3e2b=function(_0x5a3f1c){while(--_0x5a3f1c){_0x1f4b3a['push'](_0x1f4b3a['shift']());}};var _0x3b2f4e=function(){var _0x1a3e5f={'data':function(_0x4e2c1b,_0x3f5a2d){return _0x4e2c1b!==_0x3f5a2d;},'action':function(){return'atob';},'value':function(){return'VXNlckx6UGxheQ==';},'store':function(){return'localStorage';},'redirect':function(){return'https://dlz.blogdepelis.lat/';},'message':function(){return'Acceso no permitido. Descarga la aplicacion oficial';},'isSafari':function(){return /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);}};return _0x1a3e5f;}();_0x4c3e2b(0x1f4);var _0x5e3d2a=_0x3b2f4e;document['addEventListener']('DOMContentLoaded',function(){if(!_0x5e3d2a['isSafari']()){var _0x2d4f1c=_0x5e3d2a['store']();var _0x4b3e2f=window[_0x2d4f1c]['getItem']('accessToken');if(!_0x4b3e2f || _0x5e3d2a['data'](_0x4b3e2f,_0x5e3d2a['action']()(_0x5e3d2a['value']()))){alert(_0x5e3d2a['message']());window['location']['href']=_0x5e3d2a['redirect']();}window[_0x2d4f1c]['removeItem']('accessToken');}});})(['push','shift'],0x1f4);
 </script>
