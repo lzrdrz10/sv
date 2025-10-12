@@ -6,16 +6,17 @@
 <title>Big Time Rush</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 <style>
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-body, html { margin: 0; padding: 0; height: 100%; }
+body, html { margin: 0; padding: 0; height: 100%; font-family: "Poppins", sans-serif; }
 body::before {
   content: "";
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-image: url('https://image.tmdb.org/t/p/original/vctELFdxJdQBtgPlJFiF6aNnUcQ.jpg');
+  background-image: url('https://image.tmdb.org/t/p/w1280/vctELFdxJdQBtgPlJFiF6aNnUcQ.jpg');
   background-size: cover;
   background-position: center;
   z-index: -2;
@@ -31,8 +32,10 @@ body::after {
 #iframe-principal { width: 100%; height: 220px; border: none; background: black; }
 #contenedor-video { position: fixed; top: 0; left: 0; width: 100%; z-index: 10; }
 .capitulo-seleccionado { background-color: #FF0000 !important; color: #fff !important; font-weight: bold; border-bottom: none !important; }
+.server-btn { display: none; }
+.server-seleccionado { background-color: #FF7F00 !important; color: #fff !important; }
+.error-message { display: none; color: #FF4444; font-size: 0.875rem; text-align: center; margin-top: 1rem; }
 </style>
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PC9JETB0VP"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -42,11 +45,12 @@ body::after {
   gtag('config', 'G-PC9JETB0VP');
 </script>
 <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+<script src="../access.js"></script>
 </head>
 <body class="text-white font-sans leading-relaxed">
 <div id="contenedor-video" class="relative">
   <iframe id="iframe-principal" allow="fullscreen" allowfullscreen></iframe>
-  <a href="../index.html" aria-label="Volver" class="absolute top-3 left-3 text-white text-2xl z-20">
+  <a href="https://lzrdrz10.github.io/sv/" aria-label="Volver" class="absolute top-3 left-3 text-white text-2xl z-20">
     <i class="fas fa-arrow-left"></i>
   </a>
   <div class="absolute top-0 left-0 w-full h-full z-10" style="pointer-events: none;"></div>
@@ -58,7 +62,7 @@ body::after {
   <div class="flex flex-wrap items-center gap-3 text-sm text-gray-400">
     <span><strong class="text-[#FF7F00]">8.6</strong> / 10</span>
     <span class="text-white">•</span>
-    <span>Comedia,Kids</span>
+    <span>Comedia, Kids</span>
     <span class="text-white">•</span>
     <span>2009</span>
   </div>
@@ -69,40 +73,366 @@ body::after {
     </select>
   </div>
   <div class="flex space-x-2 overflow-x-auto scrollbar-hide pb-1" id="lista-capitulos"></div>
+  <div id="servidores" class="flex space-x-2">
+    <button id="server2-btn" class="server-btn px-3 py-1 rounded bg-[#2a2a2a] text-white text-sm">Servidor 2</button>
+    <button id="server3-btn" class="server-btn px-3 py-1 rounded bg-[#2a2a2a] text-white text-sm">Servidor 3</button>
+  </div>
+  <div id="error-message" class="error-message">No hay enlaces disponibles para este episodio.</div>
   <div class="bg-[#1e1e1e] rounded-lg p-4 text-sm text-gray-300 leading-relaxed">
     <p><span class="font-semibold text-white">Sinopsis:</span> Cuatro jugadores de hockey de Minnesota aspiran a convertirse en una banda de chicos. Kendall, Logan, Carlos y James se embarcan en un viaje que les cambia la vida y se enfrentan a desafíos en el camino.</p>
   </div>
 </div>
 <script>
-(function(_0x1f4b3a,_0x2e5c1d){var _0x4c3e2b=function(_0x5a3f1c){while(--_0x5a3f1c){_0x1f4b3a['push'](_0x1f4b3a['shift']());}};var _0x3b2f4e=function(){var _0x1a3e5f={'data':function(_0x4e2c1b,_0x3f5a2d){return _0x4e2c1b!==_0x3f5a2d;},'action':function(){return'atob';},'value':function(){return'VXNlckx6UGxheQ==';},'store':function(){return'localStorage';},'redirect':function(){return'https://descargar.lzplayhd.online/';},'message':function(){return'Acceso no permitido. Descarga la aplicacion oficial';},'isSafari':function(){return /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);}};return _0x1a3e5f;}();_0x4c3e2b(0x1f4);var _0x5e3d2a=_0x3b2f4e;document['addEventListener']('DOMContentLoaded',function(){if(!_0x5e3d2a['isSafari']()){var _0x2d4f1c=_0x5e3d2a['store']();var _0x4b3e2f=window[_0x2d4f1c]['getItem']('accessToken');if(!_0x4b3e2f || _0x5e3d2a['data'](_0x4b3e2f,_0x5e3d2a['action']()(_0x5e3d2a['value']()))){alert(_0x5e3d2a['message']());window['location']['href']=_0x5e3d2a['redirect']();}window[_0x2d4f1c]['removeItem']('accessToken');}});})(['push','shift'],0x1f4);
+(function(_0x1f4b3a,_0x2e5c1d){
+  var _0x4c3e2b=function(_0x5a3f1c){
+    while(--_0x5a3f1c){
+      _0x1f4b3a['push'](_0x1f4b3a['shift']());
+    }
+  };
+  var _0x3b2f4e=function(){
+    var _0x1a3e5f={
+      'data':function(_0x4e2c1b,_0x3f5a2d){
+        return _0x4e2c1b!==_0x3f5a2d;
+      },
+      'action':function(){
+        return'atob';
+      },
+      'value':function(){
+        return'VXNlckx6UGxheQ==';
+      },
+      'store':function(){
+        return'localStorage';
+      },
+      'redirect':function(){
+        return'https://dlz.blogdepelis.lat/';
+      },
+      'message':function(){
+        return'Acceso no permitido. Descarga la aplicacion oficial';
+      },
+      'isSafari':function(){
+        return /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+      }
+    };
+    return _0x1a3e5f;
+  }();
+  _0x4c3e2b(0x1f4);
+  var _0x5e3d2a=_0x3b2f4e;
+  document['addEventListener']('DOMContentLoaded',function(){
+    if(!_0x5e3d2a['isSafari']()){
+      var _0x2d4f1c=_0x5e3d2a['store']();
+      var _0x4b3e2f=window[_0x2d4f1c]['getItem']('accessToken');
+      if(!_0x4b3e2f || _0x5e3d2a['data'](_0x4b3e2f,_0x5e3d2a['action']()(_0x5e3d2a['value']()))){
+        alert(_0x5e3d2a['message']());
+        window['location']['href']=_0x5e3d2a['redirect']();
+      }
+      window[_0x2d4f1c]['removeItem']('accessToken');
+    }
+  });
+})(['push','shift'],0x1f4);
 
+var videosPorCapitulo = {
+  "1": {
+    "1": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/gsog285arbjy",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/mkfv4ivzx5az"
+    },
+    "2": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/a282z0ru8ef7",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/22tr9pkvd53p",
+      "url3": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/tt0a8xlqoh1u"
+    },
+    "3": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/wd2f9rbwe3nt",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/r1ifxtksimt7"
+    },
+    "4": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/4bubpgpymwz4",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/2y5y3hfffami"
+    },
+    "5": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/pdqkhipp3ed6",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/jrqiafminvqp"
+    },
+    "6": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/89c7tblohcho",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/5bsaszl6awfz"
+    },
+    "7": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/jvx27t85lfln",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/zz2ycfuyjlue"
+    },
+    "8": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/5stjd8zbism5",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/vyaswvlqhqj8"
+    },
+    "9": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/4cznheo72rhj",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/ar4p68uc7aa5"
+    },
+    "10": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/14nwf8xtu13r",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/v6djcs33o9tp"
+    },
+    "11": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/g45cc0ihzpvu"
+    },
+    "12": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/czq6dluedb73"
+    },
+    "13": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/ph33zimvh17z",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/38et7bqhv1jg"
+    },
+    "14": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/lny3b3n0zmvk",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/jh8qbgki87jd"
+    },
+    "15": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/ecorvwu6btfd",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/5okyuv12y4wm"
+    },
+    "16": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/k0ruh9wgfgte",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/u5hfea9anv7o"
+    },
+    "17": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/015svbdq16qg",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/c84w9iba1u57",
+      "url3": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/a7pxddskbt5z"
+    },
+    "18": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/0lfeu63z7wel",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/rdkcha664hzx"
+    }
+  },
+  "2": {
+    "1": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/y36nz9g297wh",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/ueuqtjdxdyt2"
+    },
+    "2": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/i705vz83oee5",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/z810pau8vphy"
+    },
+    "3": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/2l0t3bklszz2"
+    },
+    "4": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/vdctrwns1vue",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/f2f4jzzo8un7"
+    },
+    "5": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/t2oai4in0ju7",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/l0brj2o0cx8v"
+    },
+    "6": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/td94wobx25u9",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/nc1io42euszj"
+    },
+    "7": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/evms3rjnrysr",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/g94njh8kva14"
+    },
+    "8": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/3a4qj8a7bgll",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/gvxlh3ejf21f"
+    },
+    "9": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/j800e01umv9a",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/1o8pmf082y5g"
+    },
+    "10": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/2jgsk82mfnxg",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/dvqu68p4da9u",
+      "url3": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/dd8xlpjkzguv"
+    },
+    "11": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/3kdxm41r8q94"
+    },
+    "12": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/ga9kg44zq3uq",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/3xeevf4dpbnc"
+    },
+    "13": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/vdujwk0ypywt"
+    },
+    "14": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/9msmwtprsahk",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/xmljidge9nde"
+    },
+    "15": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/74xpzjum2pqd",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/lgf158ux72hx"
+    },
+    "16": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/zhtvxlckjh6r"
+    },
+    "17": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/rrc4y4v7hp2d",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/fe23sqfe2ytt"
+    },
+    "18": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/dvibyz31cpaf",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/esg2m0l0ap2a"
+    },
+    "19": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/am3v8ef4nx9i"
+    },
+    "20": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/cpgkfxh5p4cr"
+    },
+    "21": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/c6k2yy43zm1t"
+    },
+    "22": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/flg4rc46jka3",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/pypgszzecor6"
+    },
+    "23": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/gpw0cnq33umr"
+    },
+    "24": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/2h389h7pkec7",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/ktwbh3y7ztmp"
+    },
+    "25": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/rkvubekwh8rq"
+    },
+    "26": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/p8uojut5eap1",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/fza8lcris9b3"
+    },
+    "27": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/7gcoeo40eerc",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/65nwh0ss6wg7"
+    }
+  },
+  "3": {
+    "1": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/bipgemzbx97w"
+    },
+    "2": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/ig55pnc1xsqd",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/w5qpbvoswgwh"
+    },
+    "3": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/82prd13junfk",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/dzod3n0lhx8y"
+    },
+    "4": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/44s1ety6maac",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/qq1y2yg6ezrx"
+    },
+    "5": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/f8slg51rjulo",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/iq03nlps3n8m",
+      "url3": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/di2tjvek179t"
+    },
+    "6": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/d3o9c5au10iw",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/qoa6mqpmz0bi"
+    },
+    "7": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/6b8fvcp5hexw",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/r3u28btvaj6d"
+    },
+    "8": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/2ttiwps5pmk9"
+    },
+    "9": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/z8g7qxcsposn"
+    },
+    "10": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/n6rzbehhbrua",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/pp5pbqk0sm0p",
+      "url3": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/zl8zdnojnvjo"
+    },
+    "11": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/m3196ar5nc5u",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/7fqr5izhpknp",
+      "url3": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/gnkcjibgysn1"
+    },
+    "12": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/ahsjm4oyjn5h",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/x7e539csnq6x"
+    }
+  },
+  "4": {
+    "1": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/i8fincdtytu6"
+    },
+    "2": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/cls33isxb2kx",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/z1esk6ee2077"
+    },
+    "3": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/9vm57n8ephgn",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/l5vs26338zvj"
+    },
+    "4": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/4np03nqmg17h",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/889rolf20s4d"
+    },
+    "5": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/3dq42qw9qwx9"
+    },
+    "6": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/3a0uv32y3bln"
+    },
+    "7": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/2b2wr19bcspi"
+    },
+    "8": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/idi3q4o5we6z",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/q1rk40nsilkp"
+    },
+    "9": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/qmwml10epgeq",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/1nmmkjpl6oag"
+    },
+    "10": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/k6yq7liy6nih"
+    },
+    "11": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/i2ar88xxgo87",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/6wg45dpe0cqg"
+    },
+    "12": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/53ofa38dvg2e",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/6j8mqctwa4hu"
+    },
+    "13": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/g561z60vha08"
+    }
+  }
+};
 var serieId = "31356";
 var temporadaSelect = document.getElementById('temporada');
 var listaCapitulos = document.getElementById('lista-capitulos');
 var tempTitulo = document.getElementById('temp-titulo');
 var iframePrincipal = document.getElementById('iframe-principal');
+var server2Btn = document.getElementById('server2-btn');
+var server3Btn = document.getElementById('server3-btn');
+var errorMessage = document.getElementById('error-message');
 
 var serieActual = {
   id: serieId,
   titulo: "Big Time Rush",
   temporada: temporadaSelect.value,
-  poster: "https://image.tmdb.org/t/p/original/9N61wXR7FqsuByDVSEjM6qcPhKH.jpg"
+  poster: "https://image.tmdb.org/t/p/w500/9N61wXR7FqsuByDVSEjM6qcPhKH.jpg",
+  currentServer: "url1"
 };
-
-var videosPorCapitulo = {"1":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":""},"2":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":"","25":"","26":"","27":""},"3":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":""},"4":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":""}};
 
 function guardarTemporada(temporada) {
   localStorage.setItem("temporadaSeleccionada_" + serieId, temporada);
 }
 
 function cargarTemporadaGuardada() {
-  var temp = localStorage.getItem("temporadaSeleccionada_" + serieId);
-  return temp ? temp : "1";
+  return localStorage.getItem("temporadaSeleccionada_" + serieId) || "1";
 }
 
 function guardarCapitulo(capitulo) {
-  var key = "ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada;
-  localStorage.setItem(key, capitulo);
+  localStorage.setItem("ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada, capitulo);
 }
 
 function cargarCapituloGuardado() {
@@ -127,10 +457,21 @@ function cargarCapituloGuardado() {
 
 function cambiarVideo(capitulo) {
   var temp = serieActual.temporada;
-  var url = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
-  if (url) {
-    iframePrincipal.src = url;
+  var data = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
+  errorMessage.style.display = 'none';
+  serieActual.currentServer = "url1";
+  server2Btn.className = server2Btn.className.replace(' server-seleccionado', '');
+  server3Btn.className = server3Btn.className.replace(' server-seleccionado', '');
+  if (data && data.url1 && data.url1.trim() !== '') {
+    iframePrincipal.src = data.url1;
+    server2Btn.style.display = data.url2 && data.url2.trim() !== '' ? 'inline-block' : 'none';
+    server3Btn.style.display = data.url3 && data.url3.trim() !== '' ? 'inline-block' : 'none';
     guardarCapitulo(capitulo);
+  } else {
+    iframePrincipal.src = '';
+    server2Btn.style.display = 'none';
+    server3Btn.style.display = 'none';
+    errorMessage.style.display = 'block';
   }
 }
 
@@ -158,9 +499,7 @@ function agregarEventosCapitulos() {
         for (var j = 0; j < botones.length; j++) {
           botones[j].className = botones[j].className.replace(' capitulo-seleccionado', '');
         }
-        if (botones[index].className.indexOf('capitulo-seleccionado') === -1) {
-          botones[index].className += ' capitulo-seleccionado';
-        }
+        botones[index].className += ' capitulo-seleccionado';
         botones[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
         cambiarVideo(botones[index].getAttribute('data-capitulo'));
       };
@@ -168,11 +507,46 @@ function agregarEventosCapitulos() {
   }
 }
 
+server2Btn.onclick = function() {
+  var temp = serieActual.temporada;
+  var seleccionado = listaCapitulos.querySelector('.capitulo-seleccionado');
+  if (seleccionado) {
+    var capitulo = seleccionado.getAttribute('data-capitulo');
+    var data = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
+    if (data && data.url2 && data.url2.trim() !== '') {
+      serieActual.currentServer = "url2";
+      iframePrincipal.src = data.url2;
+      server2Btn.className += ' server-seleccionado';
+      server3Btn.className = server3Btn.className.replace(' server-seleccionado', '');
+    }
+  }
+};
+
+server3Btn.onclick = function() {
+  var temp = serieActual.temporada;
+  var seleccionado = listaCapitulos.querySelector('.capitulo-seleccionado');
+  if (seleccionado) {
+    var capitulo = seleccionado.getAttribute('data-capitulo');
+    var data = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
+    if (data && data.url3 && data.url3.trim() !== '') {
+      serieActual.currentServer = "url3";
+      iframePrincipal.src = data.url3;
+      server3Btn.className += ' server-seleccionado';
+      server2Btn.className = server2Btn.className.replace(' server-seleccionado', '');
+    }
+  }
+};
+
 temporadaSelect.onchange = function() {
   var temp = temporadaSelect.value;
   serieActual.temporada = temp;
   tempTitulo.textContent = temp;
   guardarTemporada(temp);
+  server2Btn.style.display = 'none';
+  server3Btn.style.display = 'none';
+  server2Btn.className = server2Btn.className.replace(' server-seleccionado', '');
+  server3Btn.className = server3Btn.className.replace(' server-seleccionado', '');
+  errorMessage.style.display = 'none';
   generarCapitulos(temp);
 };
 
@@ -183,7 +557,6 @@ window.onload = function() {
   tempTitulo.textContent = tempGuardada;
   generarCapitulos(tempGuardada);
 };
-
 </script>
 </body>
 </html>
