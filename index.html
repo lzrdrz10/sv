@@ -614,10 +614,11 @@ async function cargarSeries() {
       headers: { Accept: "application/vnd.github.v3+json" }
     });
 
-   let archivos = await res.json();
-   archivos = archivos.filter(f => f.name.endsWith(".html"))
-                      .sort(() => Math.random() - 0.5)
-                      .slice(0, 6);
+    let archivos = await res.json();
+    // 🔹 Mostrar los primeros archivos sin orden aleatorio (igual que películas)
+    archivos = archivos
+      .filter(f => f.name.endsWith(".html"))
+      .slice(0, 6);
 
     for (let file of archivos) {
       const htmlRes = await fetch(file.download_url);
@@ -682,7 +683,6 @@ async function cargarVerticales() {
     console.error("Error cargando carrusel vertical de anime:", err);
   }
 }
-
 
 async function cargarKdramas() {
   const contenedor = document.getElementById("kdramaCarousel");
@@ -782,6 +782,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 </script>
 </body>
 </html>
+
 
 
 
