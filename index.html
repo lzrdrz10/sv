@@ -611,33 +611,23 @@ async function cargarSeries() {
 
   try {
     const url = "https://raw.githubusercontent.com/lzrdrz10/sv/main/Categorias/serie/index.html";
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`Error al cargar índice de series: ${res.status}`);
+   const res = await fetch(url);
+    if (!res.ok) throw new Error(`Error al cargar K-Dramas: ${res.status}`);
+
     const htmlText = await res.text();
-
-    // Tomar solo el contenido que está después del comentario
-    const partes = htmlText.split("<!--PEGAR CONTENIDO AQUI ABAJO-->");
-    if (partes.length < 2) return;
-    const contenidoSeries = partes[1]; // después del marcador
-
-    // Extraer todos los <article> de esa parte
     const regexArticle = /<article[\s\S]*?<\/article>/gi;
-    const articulos = contenidoSeries.match(regexArticle) || [];
+    const matches = htmlText.match(regexArticle) || [];
 
-    if (!articulos.length) return;
+    const seleccionados = matches.slice(0, 6);
+    for (let html of seleccionados) {
+      const linkMatch = html.match(/<a href="(.*?)"/i);
+      const posterMatch = html.match(/<img src="(.*?)"/i);
+      const yearMatch = html.match(/<div class="text-xs text-white\/70">(.*?)<\/div>/i);
+      const tituloMatchDiv = html.match(/<div class="mt-2 font-semibold text-sm leading-tight truncate">(.*?)<\/div>/i);
 
-    // Tomar los últimos 6 (los más nuevos)
-    const recientes = articulos.slice(-6).reverse();
-
-    for (let art of recientes) {
-      const linkMatch = art.match(/<a\s+href=["'](.*?)["']/i);
-      const posterMatch = art.match(/<img\s+[^>]*src=["'](.*?)["']/i);
-      const tituloMatch = art.match(/<div[^>]*font-semibold[^>]*>(.*?)<\/div>/i);
-      const yearMatch = art.match(/<div[^>]*text-xs[^>]*text-white\/70[^>]*>(.*?)<\/div>/i);
-
-      let link = linkMatch ? linkMatch[1].replace(/\.\.\/\.\//g, "") : "#";
+      const link = linkMatch ? linkMatch[1] : "#";
       const poster = posterMatch ? posterMatch[1] : "https://via.placeholder.com/200x300?text=Sin+Poster";
-      const titulo = tituloMatch ? sanitizeHTML(tituloMatch[1]) : "Sin título";
+      const titulo = tituloMatchDiv ? sanitizeHTML(tituloMatchDiv[1]) : "Sin título";
       const year = yearMatch ? sanitizeHTML(yearMatch[1]) : "N/A";
 
       const item = document.createElement("a");
@@ -650,7 +640,6 @@ async function cargarSeries() {
       `;
       contenedor.appendChild(item);
     }
-
   } catch (err) {
     console.error("Error cargando series:", err);
   }
@@ -794,9 +783,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 </script>
-
 </body>
 </html>
+
 
 
 
