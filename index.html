@@ -609,47 +609,35 @@ async function cargarSeries() {
   const contenedor = document.getElementById("seriesContainer");
   if (!contenedor) return;
 
-  try {
-    // Archivo index.html en Categorias/serie (raw)
+    try {
     const url = "https://raw.githubusercontent.com/lzrdrz10/sv/main/Categorias/serie/index.html";
     const res = await fetch(url);
     if (!res.ok) throw new Error(`Error al cargar índice de series: ${res.status}`);
     const htmlText = await res.text();
 
-    // Buscar el marcador y extraer la sección donde se pegan los artículos
-    const marker = '<!--PEGAR CONTENIDO AQUI ABAJO-->';
-    let sectionHtml = null;
-    const markerIndex = htmlText.indexOf(marker);
-    if (markerIndex !== -1) {
-      const afterMarker = htmlText.slice(markerIndex);
-      const sectionMatch = afterMarker.match(/<section[\s\S]*?<\/section>/i);
-      sectionHtml = sectionMatch ? sectionMatch[0] : afterMarker;
-    } else {
-      // Si no encuentra marcador, fallback a todo el HTML (pero esperamos que sí exista)
-      sectionHtml = htmlText;
-    }
+    // Tomar solo el contenido que está después del comentario
+    const partes = htmlText.split("<!--PEGAR CONTENIDO AQUI ABAJO-->");
+    if (partes.length < 2) return;
+    const contenidoSeries = partes[1]; // después del marcador
 
-    // Extraer todos los <article> dentro de esa sección
+    // Extraer todos los <article> de esa parte
     const regexArticle = /<article[\s\S]*?<\/article>/gi;
-    const articles = sectionHtml.match(regexArticle) || [];
+    const articulos = contenidoSeries.match(regexArticle) || [];
 
-    if (!articles.length) return;
+    if (!articulos.length) return;
 
-    // Tomar los últimos 6 (más recientes) y mostrar de más reciente a más antiguo
-    const seleccionados = articles.slice(-6).reverse();
+    // Tomar los últimos 6 (los más nuevos)
+    const recientes = articulos.slice(-6).reverse();
 
-    for (let artHtml of seleccionados) {
-      // extraer link, poster, titulo y año
-      const linkMatch = artHtml.match(/<a\s+href=["'](.*?)["']/i);
-      const posterMatch = artHtml.match(/<img\s+[^>]*src=["'](.*?)["']/i);
-      const tituloMatchDiv = artHtml.match(/<div[^>]*class=["'][^"']*font-semibold[^"']*["'][^>]*>(.*?)<\/div>/i);
-      const yearMatch = artHtml.match(/<div[^>]*class=["'][^"']*text-xs[^"']*text-white\/70["'][^>]*>(.*?)<\/div>/i);
+    for (let art of recientes) {
+      const linkMatch = art.match(/<a\s+href=["'](.*?)["']/i);
+      const posterMatch = art.match(/<img\s+[^>]*src=["'](.*?)["']/i);
+      const tituloMatch = art.match(/<div[^>]*font-semibold[^>]*>(.*?)<\/div>/i);
+      const yearMatch = art.match(/<div[^>]*text-xs[^>]*text-white\/70[^>]*>(.*?)<\/div>/i);
 
-      let link = linkMatch ? linkMatch[1] : "#";
-      // Normalizar path: "../../Series/serie115.html" -> "Series/serie115.html"
-      link = link.replace(/\.\.\/\.\//g, "");
+      let link = linkMatch ? linkMatch[1].replace(/\.\.\/\.\//g, "") : "#";
       const poster = posterMatch ? posterMatch[1] : "https://via.placeholder.com/200x300?text=Sin+Poster";
-      const titulo = tituloMatchDiv ? sanitizeHTML(tituloMatchDiv[1]) : "Sin título";
+      const titulo = tituloMatch ? sanitizeHTML(tituloMatch[1]) : "Sin título";
       const year = yearMatch ? sanitizeHTML(yearMatch[1]) : "N/A";
 
       const item = document.createElement("a");
@@ -662,6 +650,7 @@ async function cargarSeries() {
       `;
       contenedor.appendChild(item);
     }
+
   } catch (err) {
     console.error("Error cargando series:", err);
   }
@@ -808,6 +797,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 </body>
 </html>
+
 
 
 
