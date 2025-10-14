@@ -502,16 +502,39 @@ document.addEventListener("DOMContentLoaded", async () => {
   <div class="border-t border-white/10 mt-6 pt-4 text-center text-xs text-white/50">
     &copy; 2025 LzPlay. Todos los derechos reservados.
   </div>
-<script type="text/javascript">
-	atOptions = {
-		'key' : '928fb23c16df73b9511fd9978cee9c9d',
-		'format' : 'iframe',
-		'height' : 90,
-		'width' : 728,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//www.highperformanceformat.com/928fb23c16df73b9511fd9978cee9c9d/invoke.js"></script>
+<!-- Contenedor responsivo para tu anuncio -->
+<div class="ad-responsive">
+  <script type="text/javascript">
+    atOptions = {
+      'key' : '928fb23c16df73b9511fd9978cee9c9d',
+      'format' : 'iframe',
+      'height' : 90,
+      'width' : 728,
+      'params' : {}
+    };
+  </script>
+  <script type="text/javascript" src="//www.highperformanceformat.com/928fb23c16df73b9511fd9978cee9c9d/invoke.js"></script>
+</div>
+
+<style>
+/* Contenedor que mantiene la proporción del anuncio y se hace responsivo */
+.ad-responsive {
+  position: relative;
+  width: 100%;
+  max-width: 728px; /* tamaño original máximo */
+  height: 0;
+  padding-bottom: calc(90 / 728 * 100%); /* relación de aspecto 728x90 */
+}
+
+/* Ajustamos el iframe generado por el script */
+.ad-responsive iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+</style>
 </footer>
 <script>
 // Función auxiliar para sanitizar cadenas HTML
@@ -793,6 +816,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 </script>
 </body>
 </html>
+
 
 
 
