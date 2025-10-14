@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -252,13 +253,13 @@ body::before {
 <div class="results" id="results">
   <center><p id="welcomeMessage">Empieza a escribir para buscar...</p></center>
 </div>
+
 <script>
 var urls = [
   "https://raw.githubusercontent.com/lzrdrz10/sv/main/HOME/Buscador.html",
   "https://raw.githubusercontent.com/lzrdrz10/sv/main/HOME/Buscador2.html"
 ];
 
-var apiKey = "TU_API_KEY_TMBD"; // 🔑 Pon aquí tu API key TMDB
 var data = [];
 
 var messages = [
@@ -279,7 +280,6 @@ function rotateMessages() {
 }
 setInterval(rotateMessages, 4000);
 
-// Cargar tus listas locales
 Promise.all(urls.map(url => fetch(url).then(res => res.text())))
   .then(responses => {
     responses.forEach(html => {
@@ -296,33 +296,13 @@ Promise.all(urls.map(url => fetch(url).then(res => res.text())))
           var desc = (spans[0].textContent + " " + spans[1].textContent).trim();
           var type = a.getAttribute("href").includes("/Peliculas/") ? "Película" : "Serie";
 
-          var itemObj = {
+          data.push({
             url: a.getAttribute("href"),
             poster: img.getAttribute("src"),
             title: title,
             type: type,
-            desc: desc,
-            altTitles: [] // Aquí guardaremos títulos alternativos de TMDB
-          };
-
-          // Obtener títulos alternativos de TMDB
-          fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=es-ES&query=${encodeURIComponent(title)}`)
-            .then(res => res.json())
-            .then(tmdbData => {
-              if (tmdbData.results && tmdbData.results.length > 0) {
-                var tmdbId = tmdbData.results[0].id;
-                // Pedimos los títulos alternativos
-                fetch(`https://api.themoviedb.org/3/movie/${tmdbId}/alternative_titles?api_key=${apiKey}`)
-                  .then(res2 => res2.json())
-                  .then(altData => {
-                    if (altData.titles) {
-                      itemObj.altTitles = altData.titles.map(t => t.title.toLowerCase());
-                    }
-                  });
-              }
-            }).catch(err => console.log("TMDB alt titles error:", err));
-
-          data.push(itemObj);
+            desc: desc
+          });
         }
       });
     });
@@ -332,7 +312,6 @@ Promise.all(urls.map(url => fetch(url).then(res => res.text())))
     welcomeEl.textContent = "Error al cargar el contenido.";
   });
 
-// Función debounce para búsqueda
 function debounce(func, delay) {
   var timeout;
   return function(...args) {
@@ -341,7 +320,6 @@ function debounce(func, delay) {
   };
 }
 
-// Buscar y filtrar
 document.getElementById("searchInput").addEventListener("input", debounce(function() {
   var query = this.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   var container = document.getElementById("results");
@@ -352,41 +330,35 @@ document.getElementById("searchInput").addEventListener("input", debounce(functi
   }
 
   var filtered = data.filter(item => {
-    var queryWords = query.split(/\s+/).filter(Boolean);
+  var queryWords = query.split(/\s+/).filter(Boolean);
+  var text = item.desc.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  return queryWords.every(word => text.includes(word));
+});
 
-    // Texto base: título + descripción + títulos alternativos
-    var texts = [item.title.toLowerCase(), item.desc.toLowerCase(), ...item.altTitles];
-    texts = texts.map(t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "")); // quitar tildes
+// Ordenar por coincidencia exacta y relevancia
+filtered.sort((a, b) => {
+  var qa = query.trim().toLowerCase();
+  var ta = a.title.toLowerCase();
+  var tb = b.title.toLowerCase();
 
-    // Retornar true si todos los términos de búsqueda aparecen en alguno de los textos
-    return queryWords.every(word => texts.some(t => t.includes(word)));
-  });
+  // Priorizar coincidencias exactas del título
+  if (ta === qa && tb !== qa) return -1;
+  if (tb === qa && ta !== qa) return 1;
 
-  // Ordenar por coincidencia exacta / relevancia
-  filtered.sort((a, b) => {
-    var qa = query.trim().toLowerCase();
-    var ta = a.title.toLowerCase();
-    var tb = b.title.toLowerCase();
+  // Priorizar si el título empieza con la búsqueda
+  if (ta.startsWith(qa) && !tb.startsWith(qa)) return -1;
+  if (tb.startsWith(qa) && !ta.startsWith(qa)) return 1;
 
-    // Exact match en título
-    if (ta === qa && tb !== qa) return -1;
-    if (tb === qa && ta !== qa) return 1;
-
-    // Empieza con la búsqueda
-    if (ta.startsWith(qa) && !tb.startsWith(qa)) return -1;
-    if (tb.startsWith(qa) && !ta.startsWith(qa)) return 1;
-
-    // Coincidencia por palabras
-    var words = qa.split(/\s+/);
-    var scoreA = words.reduce((s, w) => s + (ta.includes(w) ? 1 : 0), 0);
-    var scoreB = words.reduce((s, w) => s + (tb.includes(w) ? 1 : 0), 0);
-    return scoreB - scoreA;
-  });
+  // Priorizar coincidencias por número de palabras que coinciden
+  var words = qa.split(/\s+/);
+  var scoreA = words.reduce((s, w) => s + (ta.includes(w) ? 1 : 0), 0);
+  var scoreB = words.reduce((s, w) => s + (tb.includes(w) ? 1 : 0), 0);
+  return scoreB - scoreA;
+});
 
   renderResults(filtered);
 }, 200));
 
-// Renderizar resultados
 function renderResults(data) {
   var container = document.getElementById("results");
   container.innerHTML = "";
