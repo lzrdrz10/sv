@@ -329,10 +329,31 @@ document.getElementById("searchInput").addEventListener("input", debounce(functi
   }
 
   var filtered = data.filter(item => {
-    var queryWords = query.split(/\s+/).filter(Boolean);
-    var text = item.desc.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    return queryWords.every(word => text.includes(word));
-  });
+  var queryWords = query.split(/\s+/).filter(Boolean);
+  var text = item.desc.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  return queryWords.every(word => text.includes(word));
+});
+
+// Ordenar por coincidencia exacta y relevancia
+filtered.sort((a, b) => {
+  var qa = query.trim().toLowerCase();
+  var ta = a.title.toLowerCase();
+  var tb = b.title.toLowerCase();
+
+  // Priorizar coincidencias exactas del título
+  if (ta === qa && tb !== qa) return -1;
+  if (tb === qa && ta !== qa) return 1;
+
+  // Priorizar si el título empieza con la búsqueda
+  if (ta.startsWith(qa) && !tb.startsWith(qa)) return -1;
+  if (tb.startsWith(qa) && !ta.startsWith(qa)) return 1;
+
+  // Priorizar coincidencias por número de palabras que coinciden
+  var words = qa.split(/\s+/);
+  var scoreA = words.reduce((s, w) => s + (ta.includes(w) ? 1 : 0), 0);
+  var scoreB = words.reduce((s, w) => s + (tb.includes(w) ? 1 : 0), 0);
+  return scoreB - scoreA;
+});
 
   renderResults(filtered);
 }, 200));
