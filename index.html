@@ -6,6 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="LZPLAY">
+	<meta name="google-adsense-account" content="ca-pub-5488063407481298">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="HOME/style.css">
   <link rel="apple-touch-icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEinLOZxc2owdDYorkfqLhG_RYF4SJ6SzpqaxeKIXh-oWMd10SIYY7wbLP9B0Sg2C8S8HHh4bqfmjEUzpMNR2TX_pMCmhLrDG1AP7UYyG29FrrSIJh4cmaA7lW8Ws9Ky2in9wBtax7H4WA8rOm26CSuhgMnP6E3QE5OeFS1rknZqKQCym2rcVSbnYIyzrLg/s1290/Imagen%20de%20WhatsApp%202025-08-27%20a%20las%2011.30.04_0601b9e6.jpg">
@@ -317,7 +318,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 </button>
 
   </div>
-
+  <div id="moviesCarousel" class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide"></div>
+</section>
 <section class="mt-2 px-2">
   <div class="flex justify-between items-center mb-2">
     <h2 class="text-white text-base font-normal">ENTRETENIMIENTO</h2>
@@ -502,39 +504,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   <div class="border-t border-white/10 mt-6 pt-4 text-center text-xs text-white/50">
     &copy; 2025 LzPlay. Todos los derechos reservados.
   </div>
-<!-- Contenedor responsivo para tu anuncio -->
-<div class="ad-responsive">
-  <script type="text/javascript">
-    atOptions = {
-      'key' : '928fb23c16df73b9511fd9978cee9c9d',
-      'format' : 'iframe',
-      'height' : 90,
-      'width' : 728,
-      'params' : {}
-    };
-  </script>
-  <script type="text/javascript" src="//www.highperformanceformat.com/928fb23c16df73b9511fd9978cee9c9d/invoke.js"></script>
-</div>
-
-<style>
-/* Contenedor que mantiene la proporción del anuncio y se hace responsivo */
-.ad-responsive {
-  position: relative;
-  width: 100%;
-  max-width: 728px; /* tamaño original máximo */
-  height: 0;
-  padding-bottom: calc(90 / 728 * 100%); /* relación de aspecto 728x90 */
-}
-
-/* Ajustamos el iframe generado por el script */
-.ad-responsive iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100% !important;
-  height: 100% !important;
-}
-</style>
 </footer>
 <script>
 // Función auxiliar para sanitizar cadenas HTML
@@ -816,16 +785,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
 
 
 
