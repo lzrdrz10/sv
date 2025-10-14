@@ -6,7 +6,6 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="LZPLAY">
-	<meta name="google-adsense-account" content="ca-pub-5488063407481298">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="HOME/style.css">
   <link rel="apple-touch-icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEinLOZxc2owdDYorkfqLhG_RYF4SJ6SzpqaxeKIXh-oWMd10SIYY7wbLP9B0Sg2C8S8HHh4bqfmjEUzpMNR2TX_pMCmhLrDG1AP7UYyG29FrrSIJh4cmaA7lW8Ws9Ky2in9wBtax7H4WA8rOm26CSuhgMnP6E3QE5OeFS1rknZqKQCym2rcVSbnYIyzrLg/s1290/Imagen%20de%20WhatsApp%202025-08-27%20a%20las%2011.30.04_0601b9e6.jpg">
@@ -318,11 +317,65 @@ document.addEventListener("DOMContentLoaded", async () => {
 </button>
 
   </div>
+	<style>
+/* Contenedor general del carrusel */
+#adCarrusel {
+  width: 100%;
+  overflow-x: auto;
+  display: flex;
+  gap: 12px;
+  scroll-behavior: smooth;
+  padding: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: gold rgba(255,255,255,0.1);
+}
+
+/* Ocultar barra de scroll en móviles */
+#adCarrusel::-webkit-scrollbar {
+  height: 6px;
+}
+#adCarrusel::-webkit-scrollbar-thumb {
+  background: gold;
+  border-radius: 10px;
+}
+
+/* Imágenes dentro del carrusel */
+#adCarrusel img {
+  flex: 0 0 auto;
+  height: 160px;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+  object-fit: cover;
+}
+
+#adCarrusel img:hover {
+  transform: scale(1.05);
+}
+</style>
   <div id="moviesCarousel" class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide"></div>
-</section>
-	<script async="async" data-cfasync="false" src="//pl27846147.effectivegatecpm.com/e40141178b5082ef8dd01a89a8e199ec/invoke.js"></script>
-<div id="container-e40141178b5082ef8dd01a89a8e199ec"></div>
-	
+</section>	
+<!-- Contenedor del carrusel ANUNCIO -->
+	<script async data-cfasync="false" src="//pl27846147.effectivegatecpm.com/e40141178b5082ef8dd01a89a8e199ec/invoke.js"></script>
+
+<script>
+/* Este script espera a que las imágenes se carguen dentro del contenedor del anuncio
+   y las mueve dentro del carrusel para que puedan desplazarse horizontalmente */
+var checkAds = setInterval(function() {
+  var adContainer = document.getElementById("container-e40141178b5082ef8dd01a89a8e199ec");
+  var imgs = adContainer.querySelectorAll("img");
+  if (imgs.length > 0) {
+    imgs.forEach(function(img) {
+      img.style.maxWidth = "auto";
+      img.style.height = "160px";
+      img.style.marginRight = "10px";
+    });
+    clearInterval(checkAds);
+  }
+}, 1000);
+</script>
+<div id="adCarrusel">
+  <div id="container-e40141178b5082ef8dd01a89a8e199ec"></div>
+</div>
 <section class="mt-2 px-2">
   <div class="flex justify-between items-center mb-2">
     <h2 class="text-white text-base font-normal">ENTRETENIMIENTO</h2>
@@ -788,6 +841,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 </script>
 </body>
 </html>
+
 
 
 
