@@ -682,7 +682,7 @@ async function cargarSeries() {
   if (!contenedor) return;
 
   try {
-    const url = "https://raw.githubusercontent.com/lzrdrz10/sv/main/CategoriasBase/serie/index.html";
+    const url = "https://raw.githubusercontent.com/lzrdrz10/sv/main/Categorias/serie/index.html";
    const res = await fetch(url);
     if (!res.ok) throw new Error(`Error al cargar K-Dramas: ${res.status}`);
 
@@ -805,7 +805,7 @@ async function cargarPeliculasRecientes() {
   if (!contenedor) return;
 
   try {
-    const url = "https://raw.githubusercontent.com/lzrdrz10/sv/main/CategoriasBase/movie/index.html";
+    const url = "https://raw.githubusercontent.com/lzrdrz10/sv/main/Categorias/movie/index.html";
     const res = await fetch(url);
     if (!res.ok) throw new Error(`Error al cargar películas: ${res.status}`);
 
@@ -857,6 +857,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 </script>
 </body>
 </html>
+
 
 
 
