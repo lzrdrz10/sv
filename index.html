@@ -578,122 +578,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   </div>
 </footer>
 <script>
-  var notif = document.getElementById("lzNotif");
-
-  // Mostrar notificación al cargar
-  window.addEventListener("load", function() {
-    notif.style.top = "10px";
-    notif.style.opacity = "1";
-
-    // Cerrar automáticamente después de 4 segundos
-    setTimeout(function() {
-      notif.style.top = "-200px";
-      notif.style.opacity = "0";
-    }, 8000);
-  });
-
-  // Acción "Ver ahora"
-  document.getElementById("lzNotifBtn").addEventListener("click", function() {
-    window.location.href = "Series/serie18.html";
-  });
-
-  // Botón cerrar (X)
-  document.getElementById("lzNotifClose").addEventListener("click", function() {
-    notif.style.top = "-200px";
-    notif.style.opacity = "0";
-  });
-</script>
-<footer class="bg-[#081423] text-white mt-12">
-  <div class="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-    
-    <!-- Logo y descripción -->
-    <div class="flex flex-col gap-3">
-      <h2 class="text-2xl font-bold tracking-tight">LzPlay</h2>
-      <p class="text-sm text-white/70">Tu plataforma de streaming para películas y series.</p>
-      <p class="text-xs text-white/50 leading-relaxed">
-        EL CONTENIDO MOSTRADO NO SE ALOJA EN NUESTROS DOMINIOS Y PROVIENE DE SITIOS DE TERCEROS.
-      </p>
-    </div>
-
-    <!-- Enlaces rápidos -->
-    <div>
-      <h3 class="font-semibold text-sm uppercase tracking-wide mb-3">Enlaces de apoyo</h3>
-      <ul class="space-y-2 text-sm">
-        <li><a href="https://www.paypal.com/paypalme/LzRdrgz" class="text-white/70 hover:text-yellow-400 transition">PayPal</a></li>
-        <li><a href="https://ko-fi.com/lzplay_oficial" class="text-white/70 hover:text-yellow-400 transition">Ko-Fi</a></li>
-      </ul>
-    </div>
-
-     <!-- Creadores -->
-    <div>
-      <h3 class="font-semibold text-sm uppercase tracking-wide mb-4">Creador</h3>
-
-      <!-- Lista de creadores -->
-      <div class="space-y-4">
-        <!-- Creador 4 -->
-        <div>
-          <p class="text-sm font-semibold"><span class="text-white">Lz</span><span class="text-red-500">Play</span></p>
-          <div class="flex gap-3 mt-2">
-            <a href="https://www.tiktok.com/@lzplay.oficial?_t=ZM-90XDRTt7AGi&_r=1" class="text-white/70 hover:text-black transition text-lg"><i class="fab fa-tiktok"></i></a>
-            <a href="https://chat.whatsapp.com/DvrXOjWqJTPGYDT1KhASPR?mode=wwc" class="text-white/70 hover:text-green-500 transition text-lg"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.facebook.com/share/14NG7mUxQYQ/?mibextid=wwXIfr" class="text-white/70 hover:text-blue-500 transition text-lg"><i class="fab fa-facebook-f"></i></a>
-			<a href="https://t.me/LzPlayOficial" class="text-white/70 hover:text-blue-500 transition text-lg"><i class="fab fa-telegram"></i></a>
-			<a href="https://descargar.lzplayhd.online/" class="text-white/70 hover:text-blue-500 transition text-lg">
-  <i class="fas fa-download"></i>
-</a>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Creadores -->
-    <div>
-      <h3 class="font-semibold text-sm uppercase tracking-wide mb-4">Administradores</h3>
-
-      <!-- Lista de creadores -->
-      <div class="space-y-4">
-        
-        <!-- Creador 1 -->
-        <div>
-          <p class="text-green-400 font-semibold text-sm">Jose Lagos</p>
-          <div class="flex gap-3 mt-2">
-            <a href="https://t.me/+EHjLSVQb4PgyYTMx" class="text-white/70 hover:text-black transition text-lg"><i class="fab fa-telegram"></i></a>
-            <a href="https://chat.whatsapp.com/HTe7AtJHL6tKExmLfge4oB?mode=wwc" class="text-white/70 hover:text-green-500 transition text-lg"><i class="fab fa-whatsapp"></i></a>
-          </div>
-        </div>
-
-        <!-- Creador 2 -->
-        <div>
-          <p class="text-yellow-400 font-semibold text-sm">Leoshin</p>
-          <div class="flex gap-3 mt-2">
-            <a href="https://www.tiktok.com/@coronel777_?_t=ZM-90XCjMI0gaB&_r=1" class="text-white/70 hover:text-black transition text-lg"><i class="fab fa-tiktok"></i></a>
-            <a href="https://chat.whatsapp.com/J6KzzejSB8BLF3Fy3E6qY1" class="text-white/70 hover:text-pink-500 transition text-lg"><i class="fab fa-whatsapp"></i></a>
-          
-          </div>
-        </div>
-
-        <!-- Creador 3 -->
-        <div>
-          <p class="text-purple-400 font-semibold text-sm">Blogdepelis</p>
-          <div class="flex gap-3 mt-2">
-            <a href="https://www.tiktok.com/@blogdepelis.lat?_t=ZM-90XCo4OcqOR&_r=1" class="text-white/70 hover:text-black transition text-lg"><i class="fab fa-tiktok"></i></a>
-            
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Línea inferior -->
-  <div class="border-t border-white/10 mt-8 pt-4 text-center text-xs text-white/50">
-    &copy; 2025 LzPlay. Todos los derechos reservados.
-  </div>
-</footer>
-<script>
 // Función auxiliar para sanitizar cadenas HTML
 function sanitizeHTML(str) {
   const div = document.createElement('div');
@@ -973,6 +857,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 </script>
 </body>
 </html>
+
 
 
 
