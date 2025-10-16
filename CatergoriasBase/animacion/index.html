@@ -103,7 +103,7 @@ const itemsPerPage = 15;
 async function fetchMovies() {
   loader.classList.remove("fade-out");
 
-  const response = await fetch("https://raw.githubusercontent.com/lzrdrz10/sv/main/Categorias/animacion/index.html");
+  const response = await fetch(`https://raw.githubusercontent.com/lzrdrz10/sv/main/Categorias/animacion/index.html?nocache=${Date.now()}`); 
   const html = await response.text();
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, "text/html");
