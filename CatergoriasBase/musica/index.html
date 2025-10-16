@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Movies</title>
+  <title>Musica</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
@@ -57,7 +57,7 @@
         <span>Atrás</span>
       </button>
       <h1 class="text-2xl font-extrabold text-[#4A7FFF] select-none">
-        musica
+        Musica
         <span id="contadorPublicaciones" class="text-sm font-normal text-white/70 ml-2">(0)</span>
       </h1>
     </div>
@@ -103,7 +103,7 @@ const itemsPerPage = 15;
 async function fetchMovies() {
   loader.classList.remove("fade-out");
 
-  const response = await fetch("https://raw.githubusercontent.com/lzrdrz10/sv/main/Categorias/musica/index.html");
+  const response = await fetch(`https://raw.githubusercontent.com/lzrdrz10/sv/main/Categorias/musica/index.html?nocache=${Date.now()}`); 
   const html = await response.text();
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, "text/html");
