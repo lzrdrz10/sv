@@ -7,61 +7,116 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-  <style> body { font-family: "Poppins", sans-serif; } </style>  <script>
-(function(_0x1f4b3a,_0x2e5c1d){var _0x4c3e2b=function(_0x5a3f1c){while(--_0x5a3f1c){_0x1f4b3a['push'](_0x1f4b3a['shift']());}};var _0x3b2f4e=function(){var _0x1a3e5f={'data':function(_0x4e2c1b,_0x3f5a2d){return _0x4e2c1b!==_0x3f5a2d;},'action':function(){return'atob';},'value':function(){return'VXNlckx6UGxheQ==';},'store':function(){return'localStorage';},'redirect':function(){return'https://dlz.blogdepelis.lat/';},'message':function(){return'Acceso no permitido. Descarga la aplicacion oficial';},'isSafari':function(){return /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);}};return _0x1a3e5f;}();_0x4c3e2b(0x1f4);var _0x5e3d2a=_0x3b2f4e;document['addEventListener']('DOMContentLoaded',function(){if(!_0x5e3d2a['isSafari']()){var _0x2d4f1c=_0x5e3d2a['store']();var _0x4b3e2f=window[_0x2d4f1c]['getItem']('accessToken');if(!_0x4b3e2f || _0x5e3d2a['data'](_0x4b3e2f,_0x5e3d2a['action']()(_0x5e3d2a['value']()))){alert(_0x5e3d2a['message']());window['location']['href']=_0x5e3d2a['redirect']();}window[_0x2d4f1c]['removeItem']('accessToken');}});})(['push','shift'],0x1f4);
-</script><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PC9JETB0VP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <style> body { font-family: "Poppins", sans-serif; }
+  /* ======= AJUSTA ESTE VALOR ======= */
+:root {
+  --preloader-time: 3s;  /* Cambia aquí el tiempo total (ejemplo: 3s, 5s, 10s) */
+}
 
-  gtag('config', 'G-PC9JETB0VP');
-</script>
+/* Preloader cubre toda la pantalla */
+#preloader {
+  position: fixed;
+  inset: 0;
+  background: #141414;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  transition: opacity 0.8s ease;
+}
+
+/* Al ocultarse */
+#preloader.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Contenido */
+.preloader-content {
+  text-align: center;
+  color: #65615F;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Imagen */
+.preloader-content img {
+  width: 220px;
+  max-width: 80vw;
+  filter: drop-shadow(0px -2px 9px #303030);
+}
+
+/* Barra de progreso */
+.prog-bar-wrapper {
+  width: 205px;
+  height: 6px;
+  position: relative;
+  border-radius: 50px;
+  overflow: hidden;
+}
+.prog-bar-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #919191;
+  border-radius: 50px;
+}
+.prog-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(to right,#e300ff,#007cf0);
+  border-radius: 50px;
+  animation: loadbar var(--preloader-time) forwards;
+}
+@keyframes loadbar {
+  to { width: 100%; }
+}
+
+/* Texto + spinner */
+.preloader-extra {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  font-size: 12px;
+  gap: 8px;
+}
+
+/* Spinner */
+.spinner div {
+  width: 20px;
+  height: 20px;
+  border: 4px solid #65615F;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}</style>
 </head>
 <body class="bg-[#04143B] text-white min-h-screen">
-
-  <!-- Preloader -->
-  <div id="preloader">
-    <div class="preloader-content">
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3dK3-XAKrEia-lWmiUqAYRfFQ1lR9eJX6ZZH8e_vHf576qf9GJjIWBW9Jg5LsilXX7WO2MOEkg5gzc4pESziaPeMJ9ws9mwtCDdp3p_17D0e0Uop_ZxavwwJeNLBvoyZJ0cxTKQpjzrJIR6LjJslB24tj-77AYrRCacQ3F2S2VPoXpPzPhM1zndxyd1Rg/s3307/B64D5386-DCA4-410B-A0A6-6ACB19D0A06F.png" alt="Logo Preloader" />
-      <div class="prog-bar-wrapper">
-        <div class="prog-bar-bg"></div>
-        <div class="prog-bar"></div>
-      </div>
-      <div class="preloader-extra">
-        <div class="spinner"><div></div></div>
-        <p>Espere, cargando nuestro contenido</p>
-      </div>
+	<div id="preloader">
+  <div class="preloader-content">
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3dK3-XAKrEia-lWmiUqAYRfFQ1lR9eJX6ZZH8e_vHf576qf9GJjIWBW9Jg5LsilXX7WO2MOEkg5gzc4pESziaPeMJ9ws9mwtCDdp3p_17D0e0Uop_ZxavwwJeNLBvoyZJ0cxTKQpjzrJIR6LjJslB24tj-77AYrRCacQ3F2S2VPoXpPzPhM1zndxyd1Rg/s3307/B64D5386-DCA4-410B-A0A6-6ACB19D0A06F.png" alt="Logo Preloader" />
+    
+    <div class="prog-bar-wrapper">
+      <div class="prog-bar-bg"></div>
+      <div class="prog-bar"></div>
+    </div>
+    
+    <div class="preloader-extra">
+      <div class="spinner"><div></div></div>
+      <p>Espere, cargando nuestro contenido</p>
     </div>
   </div>
-
-  <style>
-  :root { --preloader-time: 3s; }
-  #preloader { position: fixed; inset: 0; background: #141414; display: flex; align-items: center; justify-content: center; z-index: 99999; transition: opacity 0.8s ease; }
-  #preloader.hide { opacity: 0; pointer-events: none; }
-  .preloader-content { text-align: center; color: #65615F; display: flex; flex-direction: column; align-items: center; gap: 15px; }
-  .preloader-content img { width: 220px; max-width: 80vw; filter: drop-shadow(0px -2px 9px #303030); }
-  .prog-bar-wrapper { width: 205px; height: 6px; position: relative; border-radius: 50px; overflow: hidden; }
-  .prog-bar-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #919191; border-radius: 50px; }
-  .prog-bar { position: absolute; top: 0; left: 0; width: 0; height: 100%; background: linear-gradient(to right,#e300ff,#007cf0); border-radius: 50px; animation: loadbar var(--preloader-time) forwards; }
-  @keyframes loadbar { to { width: 100%; } }
-  .preloader-extra { display: grid; grid-template-columns: auto 1fr; align-items: center; font-size: 12px; gap: 8px; }
-  .spinner div { width: 20px; height: 20px; border: 4px solid #65615F; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  </style>
-
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const preloader = document.getElementById("preloader");
-    const duration = getComputedStyle(document.documentElement)
-                      .getPropertyValue("--preloader-time")
-                      .trim();
-    const ms = parseFloat(duration) * (duration.includes("ms") ? 1 : 1000);
-    setTimeout(() => { preloader.classList.add("hide"); }, ms);
-  });
-  </script>
-
+</div>
   <!-- Header -->
   <header class="fixed top-0 left-0 w-full z-50 bg-[#04143B] flex flex-col md:flex-row items-center justify-between px-4 py-3 max-w-[1280px] mx-auto">
     <div class="flex items-center space-x-4 w-full md:w-auto justify-between">
@@ -71,120 +126,153 @@
         </button>
         <h1 class="text-2xl font-extrabold text-[#4A7FFF] select-none">Estrenos 2025</h1>
       </div>
-      <a href="../../SEARCH/" id="btnBuscar" class="md:hidden flex items-center justify-center w-10 h-10 rounded-full border-2 border-white shadow-md">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-      </a>
     </div>
-    <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold text-white/90 mt-2 md:mt-0">
-      <a href="../../" class="flex items-center space-x-1 text-white hover:text-[#4A7FFF]"><i class="fas fa-home"></i><span>Inicio</span></a>
-      <a href="../movie" class="hover:text-[#4A7FFF]">Películas</a>
-      <a href="../serie" class="hover:text-[#4A7FFF]">Series</a>
-    </nav>
-    <a href="../../SEARCH/index.html" id="btnBuscarDesktop" class="hidden md:flex items-center justify-center w-12 h-12 rounded-full border-2 border-white shadow-md ml-4">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="8"></circle>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-      </svg>
-    </a>
   </header>
 
   <!-- Main -->
   <main class="max-w-[1280px] mx-auto px-4 mt-24">
-    <section id="content-section" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-      <!-- Content dynamically inserted here -->
+    <section id="content-section" class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      <!-- Contenido cargado dinámicamente -->
     </section>
+
+    <!-- Paginación -->
+    <div class="flex justify-center items-center gap-4 mt-6 mb-10">
+      <button id="prevPage" class="bg-[#0D1B4C] text-white px-4 py-2 rounded hover:bg-[#1A2A6C] disabled:opacity-50" disabled>Atrás</button>
+      <button id="nextPage" class="bg-[#0D1B4C] text-white px-4 py-2 rounded hover:bg-[#1A2A6C]" disabled>Siguiente</button>
+    </div>
   </main>
 
- <script>
-  const GITHUB_API = "https://api.github.com/repos/lzrdrz10/sv/contents/";
-  const GITHUB_RAW = "https://raw.githubusercontent.com/lzrdrz10/sv/main/";
-  const LOCAL_JSON_KEY = "estrenos2025";
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const preloader = document.getElementById("preloader");
+  const duration = getComputedStyle(document.documentElement)
+                    .getPropertyValue("--preloader-time")
+                    .trim();
 
-  async function fetchFileContentRaw(filePath) {
-    try {
-      const res = await fetch(GITHUB_RAW + filePath);
-      if (!res.ok) return null;
-      const html = await res.text();
-      const parser = new DOMParser();
-      return parser.parseFromString(html, "text/html");
-    } catch (e) { console.error("Error fetching file:", filePath, e); return null; }
-  }
+  // Convierte el valor de CSS (ej: "4s") a milisegundos
+  const ms = parseFloat(duration) * (duration.includes("ms") ? 1 : 1000);
 
-  async function fetchFileList(folder) {
-    try {
-      const res = await fetch(GITHUB_API + folder);
-      if (!res.ok) throw new Error(`Failed to fetch ${folder} contents`);
-      const files = await res.json();
-      return files.filter(file => file.name.endsWith(".html")).map(file => `${folder}/${file.name}`);
-    } catch (e) { console.error(`Error fetching file list for ${folder}:`, e); return []; }
-  }
+  setTimeout(() => {
+    preloader.classList.add("hide");
+  }, ms);
+});
+    
+    const GITHUB_API = "https://api.github.com/repos/lzrdrz10/sv/contents/";
+    const GITHUB_RAW = "https://raw.githubusercontent.com/lzrdrz10/sv/main/";
+    const LOCAL_JSON_KEY = "estrenos2025";
+    const ITEMS_PER_PAGE = 15; // Cantidad de estrenos por página
 
-  async function buscarEstrenos() {
-    let estrenos = JSON.parse(localStorage.getItem(LOCAL_JSON_KEY) || "[]");
+    let estrenos = [];
+    let currentPage = 1;
 
-    const folder = "Peliculas";
-    const files = await fetchFileList(folder);
-    const archivosNuevos = files.filter(f => !estrenos.some(e => e.url === f));
+    async function fetchFileContentRaw(filePath) {
+      try {
+        const res = await fetch(GITHUB_RAW + filePath);
+        if (!res.ok) return null;
+        const html = await res.text();
+        const parser = new DOMParser();
+        return parser.parseFromString(html, "text/html");
+      } catch (e) { console.error("Error fetching file:", filePath, e); return null; }
+    }
 
-    if (archivosNuevos.length > 0) {
-      const docs = await Promise.all(archivosNuevos.map(f => fetchFileContentRaw(f)));
-      docs.forEach((doc, i) => {
-        if (!doc) return;
-        const spans = [...doc.querySelectorAll("span")];
-        const año = spans.find(s => /\d{4}/.test(s.textContent))?.textContent || "";
-        if (spans.some(s => s.textContent.includes("2025") || s.textContent.includes("Año: 2025"))) {
-          const titulo = doc.querySelector("h1,h2,h3")?.textContent.trim() || archivosNuevos[i].split("/").pop();
-          const poster = doc.querySelector("img")?.src || "https://via.placeholder.com/300x450?text=No+Image";
-          estrenos.push({ tipo: "Movie", titulo, url: archivosNuevos[i], año, poster });
-        }
+    async function fetchFileList(folder) {
+      try {
+        const res = await fetch(GITHUB_API + folder);
+        if (!res.ok) throw new Error(`Failed to fetch ${folder} contents`);
+        const files = await res.json();
+        return files.filter(file => file.name.endsWith(".html")).map(file => `${folder}/${file.name}`);
+      } catch (e) { console.error(`Error fetching file list for ${folder}:`, e); return []; }
+    }
+
+    async function buscarEstrenos() {
+      estrenos = JSON.parse(localStorage.getItem(LOCAL_JSON_KEY) || "[]");
+
+      const folder = "Peliculas";
+      const files = await fetchFileList(folder);
+      const archivosNuevos = files.filter(f => !estrenos.some(e => e.url === f));
+
+      if (archivosNuevos.length > 0) {
+        const docs = await Promise.all(archivosNuevos.map(f => fetchFileContentRaw(f)));
+        docs.forEach((doc, i) => {
+          if (!doc) return;
+          const spans = [...doc.querySelectorAll("span")];
+          const año = spans.find(s => /\d{4}/.test(s.textContent))?.textContent || "";
+          if (spans.some(s => s.textContent.includes("2025") || s.textContent.includes("Año: 2025"))) {
+            const titulo = doc.querySelector("h1,h2,h3")?.textContent.trim() || archivosNuevos[i].split("/").pop();
+            const poster = doc.querySelector("img")?.src || "https://via.placeholder.com/300x450?text=No+Image";
+            estrenos.push({ tipo: "Movie", titulo, url: archivosNuevos[i], año, poster });
+          }
+        });
+        localStorage.setItem(LOCAL_JSON_KEY, JSON.stringify(estrenos));
+      }
+
+      renderPage(currentPage);
+      actualizarBotones();
+    }
+
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function renderPage(page) {
+      const contenedor = document.getElementById("content-section");
+      contenedor.innerHTML = "";
+      if (estrenos.length === 0) {
+        contenedor.innerHTML = `<div class="col-span-full text-center text-white/70 py-8"><p>No se encontraron estrenos para 2025.</p></div>`;
+        return;
+      }
+
+      const aleatorios = shuffleArray([...estrenos]);
+      const startIndex = (page - 1) * ITEMS_PER_PAGE;
+      const pageItems = aleatorios.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+      pageItems.forEach(e => {
+        const article = document.createElement("article");
+        article.className = "relative rounded-lg overflow-hidden cursor-pointer select-none";
+        article.innerHTML = `
+          <a href="../../${e.url}">
+            <img src="${e.poster}" alt="${e.titulo}" loading="lazy"
+                 class="w-full h-auto rounded-lg object-cover transition-transform duration-300 hover:scale-105"/>
+            <div class="absolute top-2 right-2 bg-white/90 text-black text-xs font-semibold rounded-full px-2 py-0.5">
+              ${e.tipo}
+            </div>
+          </a>
+          <div class="mt-2 font-semibold text-sm leading-tight truncate">${e.titulo}</div>
+          <div class="text-xs text-white/70">${e.año}</div>
+        `;
+        contenedor.appendChild(article);
       });
-      localStorage.setItem(LOCAL_JSON_KEY, JSON.stringify(estrenos));
+
+      actualizarBotones();
     }
 
-    renderEstrenos(estrenos);
-  }
-
-  // ?? función para mezclar array (Fisher-Yates shuffle)
-  function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
-
-  function renderEstrenos(estrenos) {
-    const contenedor = document.getElementById("content-section");
-    contenedor.innerHTML = "";
-    if (estrenos.length === 0) {
-      contenedor.innerHTML = `<div class="col-span-full text-center text-white/70 py-8"><p>No se encontraron estrenos para 2025.</p></div>`;
-      return;
+    function actualizarBotones() {
+      const totalPages = Math.ceil(estrenos.length / ITEMS_PER_PAGE);
+      document.getElementById("prevPage").disabled = currentPage === 1;
+      document.getElementById("nextPage").disabled = currentPage >= totalPages;
     }
 
-    // ?? Aquí mezclamos el orden antes de mostrar
-    const aleatorios = shuffleArray([...estrenos]);
-
-    aleatorios.forEach(e => {
-      const article = document.createElement("article");
-      article.className = "relative rounded-lg overflow-hidden cursor-pointer select-none";
-      article.innerHTML = `
-        <a href="../../${e.url}">
-          <img src="${e.poster}" alt="${e.titulo}" loading="lazy" class="w-full h-auto rounded-lg object-cover transition-transform duration-300 hover:scale-105"/>
-          <div class="absolute top-2 right-2 bg-white/90 text-black text-xs font-semibold rounded-full px-2 py-0.5">${e.tipo}</div>
-        </a>
-        <div class="mt-2 font-semibold text-sm leading-tight truncate">${e.titulo}</div>
-        <div class="text-xs text-white/70">${e.año}</div>
-      `;
-      contenedor.appendChild(article);
+    document.getElementById("prevPage").addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderPage(currentPage);
+      }
     });
-  }
 
-  buscarEstrenos();
-</script>
+    document.getElementById("nextPage").addEventListener("click", () => {
+      const totalPages = Math.ceil(estrenos.length / ITEMS_PER_PAGE);
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderPage(currentPage);
+      }
+    });
 
+    buscarEstrenos();
+  </script>
 
 </body>
 </html>
