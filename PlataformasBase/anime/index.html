@@ -13,7 +13,6 @@
       font-family: "Poppins", sans-serif;
     }
 
-    /* Spinner */
     #loader {
       position: fixed;
       inset: 0;
@@ -48,7 +47,6 @@
 
 <body class="bg-[#04143B] text-white min-h-screen">
 
-<!-- Spinner -->
 <div id="loader"><div class="spinner"></div></div>
 
 <header class="fixed top-0 left-0 w-full z-50 bg-[#04143B] flex flex-col md:flex-row items-center justify-between px-4 py-3 max-w-[1280px] mx-auto shadow-md">
@@ -59,7 +57,7 @@
         <span>Atrás</span>
       </button>
       <h1 class="text-2xl font-extrabold text-[#4A7FFF] select-none">
-        Anime 
+        Anime
         <span id="contadorPublicaciones" class="text-sm font-normal text-white/70 ml-2">(0)</span>
       </h1>
     </div>
@@ -70,12 +68,12 @@
   </div>
 
   <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold text-white/90 mt-2 md:mt-0">
-    <a href="https://lzrdrz10.github.io/sv/" class="flex items-center space-x-1 hover:text-[#4A7FFF]">
+    <a href="../../index.html" class="flex items-center space-x-1 hover:text-[#4A7FFF]">
       <i class="fas fa-home"></i>
       <span>Inicio</span>
     </a>
-    <a href="../movie" class="hover:text-[#4A7FFF]">Películas</a>
-    <a href="../serie" class="hover:text-[#4A7FFF]">Series</a>
+    <a href="../Categorias/movie/index.html" class="hover:text-[#4A7FFF]">Películas</a>
+    <a href="../Categorias/serie/index.html" class="hover:text-[#4A7FFF]">Series</a>
   </nav>
 
   <a href="../../SEARCH/index.html" class="hidden md:flex items-center justify-center w-12 h-12 rounded-full border-2 border-white shadow-md ml-4">
@@ -85,7 +83,6 @@
 
 <main id="mainContainer" class="max-w-[1280px] mx-auto px-4 mt-24 overflow-hidden">
   <section id="movies" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3 sm:gap-4 transition-all duration-300">
-    <!-- Aquí se cargarán las películas -->
   </section>
 
   <div class="flex justify-center items-center space-x-4 mt-10 mb-10">
@@ -148,9 +145,8 @@ async function renderPage() {
   document.getElementById("prev").disabled = currentPage === 1;
   document.getElementById("next").disabled = end >= allMovies.length;
 
-  // 🔥 Desplazamiento interno sin que se vea el scroll
   mainContainer.scrollTop = 0;
-  window.scrollTo({ top: 0, behavior: "auto" }); // Sin animación visible
+  window.scrollTo({ top: 0, behavior: "auto" });
 }
 
 document.getElementById("prev").addEventListener("click", async () => {
