@@ -15,58 +15,6 @@
     .spinner { border: 5px solid rgba(255, 255, 255, 0.2); border-top: 5px solid #4a7fff; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
   </style>
-  <script>
-(function(){
-
-  const allowed = [
-    'https://lzplayhd.online/HOME/login.html',
-    'https://githuapp.github.io/de/'
-  ];
-  const redirectTo = 'https://descargar.lzplayhd.online/';
-
-
-  function normalize(urlString){
-    try {
-      const u = new URL(urlString);
-      let path = u.pathname || '/';
-     
-      if (!path.endsWith('/')) {
-        const lastSegment = path.split('/').pop();
-        if (!lastSegment.includes('.')) path = path + '/';
-      }
-      return u.origin + path;
-    } catch(e){
-      return null;
-    }
-  }
-
-
-  const allowedNorm = allowed.map(normalize).filter(x => x);
-
-
-  const ref = document.referrer || '';
-  const refNorm = normalize(ref);
-
-  
-  const permitted = refNorm && allowedNorm.includes(refNorm);
-
-  if (!permitted) {
-
-    setTimeout(function(){
-      try {
-    
-        window.open('','_self');
-        window.close();
-      } catch(e){}
-    }, 60);
-
-    setTimeout(function(){
-      window.location.replace(redirectTo);
-    }, 300);
-  }
-})();
-</script>
-
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PC9JETB0VP"></script>
 <script>
