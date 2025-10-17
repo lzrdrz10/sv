@@ -148,45 +148,57 @@
     }
   </style>
 	<script>
-/* CONFIGURACIÓN */
-const destino = "https://lzplayhd.online/CatergoriasBase/movie/index.html"; 
-const accesoClave = "LzAccess2025";
+(function(){
+  // URLs permitidas — exactas (origen + ruta). Se normalizan abajo.
+  const allowed = [
+    'https://lzplayhd.online/HOME/login.html',
+    'https://githuapp.github.io/de/'
+  ];
 
-// URLs permitidas exactas
-const allowed = [
-  'https://lzplayhd.online/HOME/login.html',
-  'https://githuapp.github.io/de/'
-];
+  // URL a la que se redirige si se activa el "cierre"
+  const redirectTo = 'https://descargar.lzplayhd.online/';
 
-// Comprobar si el referer es permitido
-const ref = document.referrer || '';
-const refIsAllowed = allowed.some(url => url === ref);
-
-// Comprobar si el acceso fue guardado en sessionStorage
-const accesoPermitido = sessionStorage.getItem("accesoLzPlay") === "true";
-
-(function() {
-  if (!refIsAllowed || !accesoPermitido) {
-    // Si el acceso no es permitido o el referer no coincide, cerrar/redirigir
+  // Normaliza una URL: crea "origin + pathname", asegura la barra final cuando corresponde
+  function normalize(urlString){
     try {
-      window.open('','_self'); 
-      window.close();
-    } catch(e) {}
+      const u = new URL(urlString);
+      let path = u.pathname || '/';
+      // Normalizamos barra final: si la ruta no tiene extensión y no termina en '/', añadimos '/'
+      // (esto hace que '/de' y '/de/' empaten)
+      if (!path.endsWith('/')) {
+        const lastSegment = path.split('/').pop();
+        if (!lastSegment.includes('.')) path = path + '/';
+      }
+      return u.origin + path;
+    } catch(e){
+      return null;
+    }
+  }
 
-    try { document.documentElement.innerHTML = ''; document.documentElement.style.background = '#000'; } catch(e){}
-    try { location.replace('about:blank'); } catch(e){}
-    setTimeout(() => { try { location.href = 'about:blank'; } catch(e){} }, 100);
-    try { if (document.body) document.body.style.display = 'none'; } catch(e){}
-    
-    // También redirigir al destino opcional
-    requestAnimationFrame(() => {
-      window.location.replace(destino);
-    });
-  } else {
-    // Acceso permitido
-    const loader = document.getElementById("proteccion-loader");
-    if (loader) loader.style.display = "none";
-    console.log("Acceso permitido desde: " + ref);
+  // Construye la lista normalizada de permitidos
+  const allowedNorm = allowed.map(normalize).filter(x => x);
+
+  // Normaliza el referrer (puede venir vacío)
+  const ref = document.referrer || '';
+  const refNorm = normalize(ref);
+
+  // Comprueba si el referrer NORMALIZADO está EXACTAMENTE en la lista permitida
+  const permitted = refNorm && allowedNorm.includes(refNorm);
+
+  if (!permitted) {
+    // Pequeño timeout para no interferir con cargas; intenta cerrar y si falla, redirige.
+    setTimeout(function(){
+      try {
+        // Intento de cerrar (la mayoría de navegadores lo bloquearán si la pestaña no fue abierta por script)
+        window.open('','_self');
+        window.close();
+      } catch(e){}
+    }, 60);
+
+    // Redirección definitiva (replace evita dejar rastro en historial)
+    setTimeout(function(){
+      window.location.replace(redirectTo);
+    }, 300);
   }
 })();
 </script>
