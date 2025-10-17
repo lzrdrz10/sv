@@ -147,6 +147,50 @@
       .banner{height:140px}
     }
   </style>
+	<script>
+/* CONFIGURACIÓN */
+const destino = "https://lzplayhd.online/CatergoriasBase/movie/index.html"; 
+const accesoClave = "LzAccess2025";
+
+// URLs permitidas exactas
+const allowed = [
+  'https://lzplayhd.online/HOME/login.html',
+  'https://githuapp.github.io/de/'
+];
+
+// Comprobar si el referer es permitido
+const ref = document.referrer || '';
+const refIsAllowed = allowed.some(url => url === ref);
+
+// Comprobar si el acceso fue guardado en sessionStorage
+const accesoPermitido = sessionStorage.getItem("accesoLzPlay") === "true";
+
+(function() {
+  if (!refIsAllowed || !accesoPermitido) {
+    // Si el acceso no es permitido o el referer no coincide, cerrar/redirigir
+    try {
+      window.open('','_self'); 
+      window.close();
+    } catch(e) {}
+
+    try { document.documentElement.innerHTML = ''; document.documentElement.style.background = '#000'; } catch(e){}
+    try { location.replace('about:blank'); } catch(e){}
+    setTimeout(() => { try { location.href = 'about:blank'; } catch(e){} }, 100);
+    try { if (document.body) document.body.style.display = 'none'; } catch(e){}
+    
+    // También redirigir al destino opcional
+    requestAnimationFrame(() => {
+      window.location.replace(destino);
+    });
+  } else {
+    // Acceso permitido
+    const loader = document.getElementById("proteccion-loader");
+    if (loader) loader.style.display = "none";
+    console.log("Acceso permitido desde: " + ref);
+  }
+})();
+</script>
+
 </head>
 <body>
 
