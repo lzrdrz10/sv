@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Los dueños de la calle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: url('https://image.tmdb.org/t/p/original/6N2aaG46UYcgef7Vg8aUKp59poe.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .overlay {
+            min-height: 100vh;
+            background-color: rgba(18, 18, 18, 0.85);
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PC9JETB0VP"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'G-PC9JETB0VP');
+        if (!navigator.onLine) {
+            window.location.href = "sin-conexion.html";
+        }
+    </script><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PC9JETB0VP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PC9JETB0VP');
+</script>
+    <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+</head>
+<body class="text-white font-sans">
+    <div class="overlay min-h-screen">
+        <div class="max-w-4xl mx-auto p-4 pb-24">
+            <div class="rounded-md overflow-hidden relative aspect-video bg-black">
+                <iframe class="w-full h-full" src="https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Fhugh.cdn.rumble.cloud%2Fvideo%2Ffwe2%2F6c%2Fs8%2F2%2Fs%2Fk%2F4%2Fq%2Fsk4qz.aaa.mp4" data-alternativo="https://lzfreeplayer.blogspot.com/?player=jwpl&provider=rand&format=video%2Fmp4&link=https%3A%2F%2Fhugh.cdn.rumble.cloud%2Fvideo%2Ffwe2%2F6c%2Fs8%2F2%2Fs%2Fk%2F4%2Fq%2Fsk4qz.aaa.mp4" title="" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="flex space-x-4 mt-4 bg-[#1a1a1a] p-4 rounded-md items-center">
+                <div class="flex items-center justify-center w-[110px] h-[160px] flex-shrink-0">
+                    <img alt="Los dueños de la calle" class="rounded-lg w-full h-full object-cover" src="https://image.tmdb.org/t/p/original/wcHEyW05V0PH4b1bLo47nTIp1oX.jpg" />
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-xl font-semibold">Los dueños de la calle</h3>
+                    <p class="text-gray-300 italic text-sm">Publicado por: LeoshinFilms</p>
+                    <div class="flex flex-wrap items-center space-x-2 text-xs text-gray-400 mt-1">
+                        <span>United States of America</span>
+                        <span>Duración: 112 Minutos</span>
+                        <span>Año: 1991</span>
+                    </div>
+                    <div class="flex items-center mt-3 space-x-3">
+                        <div id="rating-value" class="bg-[#2a2a2a] rounded-md px-3 py-1 text-lg font-semibold text-white">7.6</div>
+                        <div id="star-container" class="flex space-x-1 text-yellow-400 text-lg"></div>
+                    </div>
+                    <div class="flex space-x-6 text-xs text-gray-400 mt-3">
+                        <span>Crimen, Drama</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-wrap space-x-2 mt-4 relative">
+                <button id="info-btn" class="bg-red-600 text-white px-4 py-2 rounded text-sm font-semibold flex items-center space-x-1" type="button">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Info</span>
+                </button>
+                <button id="cast-btn" class="bg-gray-700 text-gray-400 px-4 py-2 rounded text-sm font-semibold" title="Transmitir Pantalla">
+                    <i class="fas fa-tv"></i>
+                </button>
+                <button id="download-btn" class="bg-gray-700 text-gray-400 px-4 py-2 rounded text-sm font-semibold" title="Descargar">
+                    <i class="fas fa-download"></i>
+                </button>
+            </div>
+            <div id="sinopsis" class="mt-4 bg-[#1a1a1a] p-4 rounded-md">
+                <h4 class="text-white text-lg font-semibold mb-2">Sinopsis</h4>
+                <p class="text-gray-300 text-sm leading-relaxed">Sorprendente debut del jovencísimo John Singleton -nominado al Oscar al mejor director con sólo 24 años- en un drama que cuenta la historia de tres amigos de la infancia que viven en un peligroso barrio de Los Ángeles. Los tres deberán enfrentarse a difíciles dilemas para abrirse camino en la vida.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+  var rating = 7.6;
+  var starContainer = document.getElementById('star-container');
+  var fullStars = Math.floor(rating / 2);
+  var halfStar = rating % 2 >= 1;
+  for (var i = 0; i < 5; i++) {
+    var star = document.createElement('i');
+    if (i < fullStars) star.className = 'fas fa-star text-yellow-400';
+    else if (i === fullStars && halfStar) star.className = 'fas fa-star-half-alt text-yellow-400';
+    else star.className = 'fas fa-star text-gray-400';
+    starContainer.appendChild(star);
+  }
+  document.getElementById('rating-value').innerText = rating.toFixed(1);
+
+  var infoBtn = document.getElementById('info-btn');
+  var sinopsis = document.getElementById('sinopsis');
+  var castBtn = document.getElementById('cast-btn');
+  var downloadBtn = document.getElementById('download-btn');
+  var iframe = document.querySelector('iframe');
+  var altURL = iframe.getAttribute('data-alternativo') || iframe.src;
+  var cleanAltURL = altURL.replace('https://', '').replace('http://', '');
+
+  infoBtn.addEventListener('click', function () {
+    sinopsis.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  castBtn.addEventListener('click', function () {
+    window.open('intent://' + cleanAltURL + '#Intent;package=com.instantbits.cast.webvideo;scheme=https;end', '_blank');
+  });
+
+  downloadBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    var plusIntent = 'intent://' + cleanAltURL + '#Intent;package=idm.internet.download.manager.plus;scheme=https;end';
+    var normalIntent = 'intent://' + cleanAltURL + '#Intent;package=idm.internet.download.manager;scheme=https;end';
+
+    // Intentar abrir 1DM+ primero
+    window.location.href = plusIntent;
+
+    // Si falla, intentar con 1DM normal (después de 1 segundo)
+    setTimeout(function () {
+      window.location.href = normalIntent;
+    }, 1000);
+  });
+</script>
+    <nav class="fixed bottom-0 left-0 w-full bg-[#1E1E1E] flex justify-around items-center py-3 rounded-b-3xl text-white text-xs font-semibold z-50">
+        <a href="../index.html" class="flex flex-col items-center space-y-1">
+            <i class="fas fa-arrow-left text-xl"></i>
+            <span>Regresar</span>
+        </a>
+        <a href="../Categorias/movie/index.html" class="flex flex-col items-center space-y-1">
+            <i class="fas fa-film text-xl"></i>
+            <span>Movies</span>
+        </a>
+        <a href="../Categorias/serie/index.html" class="flex flex-col items-center space-y-1">
+            <i class="fas fa-tv text-xl"></i>
+            <span>Series</span>
+        </a>
+        <a href="../SEARCH/index.html" class="flex flex-col items-center space-y-1">
+            <i class="fas fa-search text-xl"></i>
+            <span>Buscar</span>
+        </a>
+    </nav>
+</body>
+</html>
+
