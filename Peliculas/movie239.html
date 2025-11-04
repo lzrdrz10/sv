@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+  <title>Demon Slayer: Kimetsu no Yaiba Castillo infinito</title>
+  <link href="https://fonts.googleapis.com/css2?family=Netflix+Sans:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:#000;color:#fff;font-family:'Netflix Sans',sans-serif;overflow-x:hidden;line-height:1.5;}
+    .backdrop{position:fixed;top:0;left:0;right:0;bottom:0;
+      background:linear-gradient(to bottom,rgba(0,0,0,0.7),rgba(0,0,0,0.9)),url('https://image.tmdb.org/t/p/original/1RgPyOhN4DRs225BGTlHJqCudII.jpg') center/cover no-repeat;
+      filter:blur(8px) brightness(0.6);z-index:-1;transform:scale(1.1);}
+    .container{max-width:480px;margin:0 auto;padding:0 16px;}
+    .header{padding-top:60px;text-align:center;}
+    .poster{width:160px;height:240px;border-radius:8px;overflow:hidden;margin:0 auto 16px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.1);}
+    .poster img{width:100%;height:100%;object-fit:cover;}
+    .title{font-size:28px;font-weight:900;margin-bottom:8px;text-shadow:0 2px 4px rgba(0,0,0,0.8);}
+    .meta{font-size:14px;color:#aaa;margin-bottom:16px;}
+    .meta span{margin-right:12px;}
+    .match{color:#46d369;font-weight:700;}
+    .actions{display:flex;justify-content:center;gap:16px;margin:24px 0;}
+    .btn{display:flex;flex-direction:column;align-items:center;gap:6px;
+      background:none;border:none;color:#fff;font-size:12px;font-weight:500;cursor:pointer;transition:transform .2s;}
+    .btn:active{transform:scale(0.92);}
+    .btn-icon{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,0.15);
+      display:flex;align-items:center;justify-content:center;font-size:20px;transition:all .2s;}
+    .btn-play .btn-icon{background:#fff;color:#000;font-size:24px;}
+    .btn:hover .btn-icon{background:rgba(255,255,255,0.3);}
+    .btn-play:hover .btn-icon{background:#e6e6e6;}
+    .btn-download{margin-top:16px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);
+      color:#fff;padding:12px 24px;border-radius:4px;font-weight:600;width:100%;font-size:15px;
+      display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;}
+    .btn-download:active{background:rgba(255,255,255,0.2);transform:scale(0.98);}
+    .synopsis{font-size:15px;color:#ccc;line-height:1.6;margin:24px 0;}
+    .synopsis-title{color:#fff;font-weight:700;margin-bottom:8px;font-size:16px;}
+    .btn-cast{position:fixed;top:18px;right:18px;background:rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.25);color:#fff;width:46px;height:46px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;
+      z-index:10000;backdrop-filter:blur(8px);transition:all 0.25s;}
+    .btn-cast:hover{background:rgba(255,255,255,0.3);transform:scale(1.1);}
+    .btn-cast:active{transform:scale(0.9);}
+    @media(max-width:380px){
+      .title{font-size:24px;}
+      .poster{width:140px;height:210px;}
+      .btn-cast{width:40px;height:40px;font-size:18px;top:10px;right:3px;}
+    }
+    .modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);z-index:9999;align-items:center;justify-content:center;}
+    .modal-card{background:#111;padding:24px;border-radius:14px;max-width:480px;width:90%;position:relative;color:#eee;}
+    .close-btn{position:absolute;top:12px;right:12px;background:none;border:none;color:#fff;font-size:20px;cursor:pointer;}
+    .close-btn:hover{transform:scale(1.2);color:#ffd700;}
+    .info-grid{display:grid;grid-template-columns:1fr;gap:8px;margin-top:28px;}
+    .info-grid p{margin:0;font-size:15px;line-height:1.5;}
+    @keyframes fadeInUp{from{transform:translateY(25px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+    .modal-overlay.active{display:flex;opacity:1;}
+    .modal-card{animation:fadeInUp 0.3s ease;}
+    #videoModal > div{padding:0;}
+    .video-container{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;}
+    .video-container iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
+  </style>
+  <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+</head>
+<body>
+  <button id="btnCast" class="btn-cast" title="Transmitir"><i class="fas fa-tv"></i></button>
+  <div class="backdrop"></div>
+  <div class="container">
+    <div class="header">
+      <div class="poster"><img src="https://image.tmdb.org/t/p/w500/6N21gcFbhT4ocdTU4MGREAaM5Vz.jpg" alt="Demon Slayer: Kimetsu no Yaiba Castillo infinito"></div>
+      <h1 class="title">Demon Slayer: Kimetsu no Yaiba Castillo infinito</h1>
+      <div class="meta">
+        <span>Año: 2025</span>
+        <span class="match">78% para ti</span>
+        <span>155 min</span>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn btn-play" id="btnReproducir"><div class="btn-icon"><i class="fas fa-play"></i></div><span>Reproducir</span></button>
+      <button class="btn" id="btnLista"><div class="btn-icon"><i class="fas fa-plus"></i></div><span>Mi lista</span></button>
+      <button class="btn" id="btnInfo"><div class="btn-icon"><i class="fas fa-info"></i></div><span>Info</span></button>
+    </div>
+    <button class="btn-download" id="download-btn"><i class="fas fa-download"></i> Descargar</button>
+    <div class="synopsis">
+      <div class="synopsis-title">Sinopsis</div>
+      <p id="synopsisText">Tanjirō Kamado es un chico que se unió a una organización dedicada a cazar demonios después de que su hermana menor, Nezuko, fuera convertida. Mientras los miembros de la organización y los Pilares participaban en un programa de entrenamiento grupal, como preparación para la inminente batalla contra los demonios, Muzan Kibutsuji aparece en la Mansión Ubuyashiki. Con el jefe de la organización en peligro, Tanjirō y los Pilares corren hacia la mansión, pero son arrastrados a un espacio misterioso por obra de Kibutsuji. El lugar al que han caído Tanjirō y los cazadores es el bastión de los demonios: el Castillo Infinito. Así, el campo de batalla queda establecido para dar fin a la guerra entre humanos y demonios.</p>
+      <button id="toggleSynopsis" style="display:none;background:none;border:none;color:#46d369;font-weight:700;cursor:pointer;margin-top:8px;">Ver más</button>
+    </div>
+  </div>
+
+  <div id="infoModal" class="modal-overlay">
+    <div class="modal-card">
+      <button id="closeModal" class="close-btn"><i class="fas fa-times"></i></button>
+      <div class="info-grid">
+        <p><strong>Género:</strong> Animación, Acción, Fantasía, Suspense</p>
+        <p><strong>País:</strong> Japan</p>
+        <p><strong>Calificación:</strong> 7.8 / 10</p>
+        <p><strong>Duración:</strong> 155 min</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="videoModal" class="modal-overlay">
+    <div class="modal-card">
+      <button id="closeVideoModal" class="close-btn"><i class="fas fa-times"></i></button>
+      <div class="video-container">
+        <iframe id="videoFrameModal" src="" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const VIDEO_URL = "ddddddddddddddddddd";
+      const DOWNLOAD_URL = "ddddddddddddddddddd";
+      const elements = {
+        reproducir: document.getElementById('btnReproducir'),
+        videoModal: document.getElementById('videoModal'),
+        videoFrame: document.getElementById('videoFrameModal'),
+        closeVideo: document.getElementById('closeVideoModal'),
+        download: document.getElementById('download-btn'),
+        cast: document.getElementById('btnCast'),
+        lista: document.getElementById('btnLista'),
+        info: document.getElementById('btnInfo'),
+        synopsis: document.getElementById('synopsisText'),
+        toggle: document.getElementById('toggleSynopsis'),
+        infoModal: document.getElementById('infoModal'),
+        closeInfo: document.getElementById('closeModal')
+      };
+
+      elements.reproducir.onclick = () => {
+        if (!VIDEO_URL) return alert('No hay video');
+        elements.videoFrame.src = VIDEO_URL;
+        elements.videoModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      };
+
+      elements.closeVideo.onclick = () => {
+        elements.videoModal.classList.remove('active');
+        elements.videoFrame.src = '';
+        document.body.style.overflow = '';
+      };
+      elements.videoModal.onclick = (e) => e.target === elements.videoModal && elements.closeVideo.click();
+
+      elements.download.onclick = (e) => {
+        e.preventDefault();
+        if (!DOWNLOAD_URL) return alert('No hay enlace');
+        const clean = DOWNLOAD_URL.replace(/^https?:\/\//, '');
+        window.location.href = 'intent://' + clean + '#Intent;package=idm.internet.download.manager.plus;scheme=https;end';
+        setTimeout(() => {
+          window.location.href = 'intent://' + clean + '#Intent;package=idm.internet.download.manager;scheme=https;end';
+        }, 1000);
+      };
+
+      elements.cast.onclick = () => {
+        if (!DOWNLOAD_URL) return alert('No hay video');
+        const clean = DOWNLOAD_URL.replace(/^https?:\/\//, '');
+        window.open('intent://' + clean + '#Intent;package=com.instantbits.cast.webvideo;scheme=https;end', '_blank');
+      };
+
+      elements.lista.onclick = () => {
+        let lista = JSON.parse(localStorage.getItem('miLista') || '[]');
+        const url = location.href;
+        const existe = lista.some(m => m.pageUrl === url);
+        if (existe) {
+          lista = lista.filter(m => m.pageUrl !== url);
+          elements.lista.querySelector('i').classList.replace('fa-check', 'fa-plus');
+          elements.lista.querySelector('span').textContent = 'Mi lista';
+        } else {
+          lista.push({ titulo: "Demon Slayer: Kimetsu no Yaiba Castillo infinito", year: "2025", poster: "https://image.tmdb.org/t/p/w500/6N21gcFbhT4ocdTU4MGREAaM5Vz.jpg", pageUrl: url });
+          elements.lista.querySelector('i').classList.replace('fa-plus', 'fa-check');
+          elements.lista.querySelector('span').textContent = 'Añadido';
+        }
+        localStorage.setItem('miLista', JSON.stringify(lista));
+      };
+
+      elements.info.onclick = () => {
+        elements.infoModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      };
+      elements.closeInfo.onclick = () => {
+        elements.infoModal.classList.remove('active');
+        document.body.style.overflow = '';
+      };
+      elements.infoModal.onclick = (e) => e.target === elements.infoModal && elements.closeInfo.click();
+
+      const max = 200;
+      if (elements.synopsis.textContent.length > max) {
+        const full = elements.synopsis.textContent;
+        const short = full.slice(0, max) + '...';
+        elements.synopsis.textContent = short;
+        elements.toggle.style.display = 'inline-block';
+        let expanded = false;
+        elements.toggle.onclick = () => {
+          elements.synopsis.textContent = expanded ? short : full;
+          elements.toggle.textContent = expanded ? 'Ver más' : 'Ver menos';
+          expanded = !expanded;
+        };
+      }
+
+      if (JSON.parse(localStorage.getItem('miLista') || '[]').some(m => m.pageUrl === location.href)) {
+        elements.lista.querySelector('i').classList.replace('fa-plus', 'fa-check');
+        elements.lista.querySelector('span').textContent = 'Añadido';
+      }
+    });
+  </script>
+</body>
+</html>
