@@ -1,156 +1,448 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>La Paradoja Cloverfield</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            background: url('https://image.tmdb.org/t/p/original/2cnUCcNmmj79hGmimvWlUo5P2K8.jpg') no-repeat center center fixed;
-            background-size: cover;
-        }
-        .overlay {
-            min-height: 100vh;
-            background-color: rgba(18, 18, 18, 0.85);
-            display: flex;
-            flex-direction: column;
-        }
-    </style>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PC9JETB0VP"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'G-PC9JETB0VP');
-        if (!navigator.onLine) {
-            window.location.href = "sin-conexion.html";
-        }
-    </script><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PC9JETB0VP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-PC9JETB0VP');
-</script>
-    <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+  <title>The Cloverfield Paradox</title>
+  <link href="https://fonts.googleapis.com/css2?family=Netflix+Sans:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:#000;color:#fff;font-family:'Netflix Sans',sans-serif;overflow-x:hidden;line-height:1.5;}
+    .backdrop{position:fixed;top:0;left:0;right:0;bottom:0;
+      background:linear-gradient(to bottom,rgba(0,0,0,0.7),rgba(0,0,0,0.9)),url('https://image.tmdb.org/t/p/original/2cnUCcNmmj79hGmimvWlUo5P2K8.jpg') center/cover no-repeat;
+      filter:blur(8px) brightness(0.6);z-index:-1;transform:scale(1.1);}
+    .container{max-width:480px;margin:0 auto;padding:0 16px;}
+    .header{padding-top:60px;text-align:center;}
+    .poster{width:160px;height:240px;border-radius:8px;overflow:hidden;margin:0 auto 16px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.1);}
+    .poster img{width:100%;height:100%;object-fit:cover;}
+    .movie-logo{margin:12px auto;max-width:200px;max-height:60px;object-fit:contain;
+      filter:drop-shadow(0 2px 4px rgba(0,0,0,0.8));display:block;}
+    .title{font-size:28px;font-weight:900;margin-bottom:8px;text-shadow:0 2px 4px rgba(0,0,0,0.8);}
+    .meta{font-size:14px;color:#aaa;margin-bottom:16px;}
+    .meta span{margin-right:12px;}
+    .match{color:#46d369;font-weight:700;}
+    .actions{display:flex;justify-content:center;gap:16px;margin:24px 0;}
+    .btn{display:flex;flex-direction:column;align-items:center;gap:6px;
+      background:none;border:none;color:#fff;font-size:12px;font-weight:500;cursor:pointer;transition:transform .2s;}
+    .btn:active{transform:scale(0.92);}
+    .btn-icon{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,0.15);
+      display:flex;align-items:center;justify-content:center;font-size:20px;transition:all .2s;}
+    .btn-play .btn-icon{background:#fff;color:#000;font-size:24px;}
+    .btn:hover .btn-icon{background:rgba(255,255,255,0.3);}
+    .btn-play:hover .btn-icon{background:#e6e6e6;}
+    .btn-download{margin-top:16px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);
+      color:#fff;padding:12px 24px;border-radius:4px;font-weight:600;width:100%;font-size:15px;
+      display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;}
+    .btn-download:active{background:rgba(255,255,255,0.2);transform:scale(0.98);}
+    .synopsis{font-size:15px;color:#ccc;line-height:1.6;margin:24px 0;}
+    .synopsis-title{color:#fff;font-weight:700;margin-bottom:8px;font-size:16px;}
+    .btn-cast{position:fixed;top:18px;right:18px;background:rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.25);color:#fff;width:46px;height:46px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;
+      z-index:10000;backdrop-filter:blur(8px);transition:all 0.25s;}
+    .btn-cast:hover{background:rgba(255,255,255,0.3);transform:scale(1.1);}
+    .btn-cast:active{transform:scale(0.9);}
+    @media(max-width:380px){
+      .title{font-size:24px;}
+      .poster{width:140px;height:210px;}
+      .btn-cast{width:40px;height:40px;font-size:18px;top:10px;right:3px;}
+    }
+    /* simple modal styles */
+    .modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);z-index:9999;align-items:center;justify-content:center;}
+    .modal-card{background:#000;padding:16px;border-radius:12px;max-width:900px;width:94%;position:relative;}
+    .close-btn{position:absolute;top:12px;right:12px;background:none;border:none;color:#fff;font-size:20px;cursor:pointer;}
+ /* === MODAL INFO ESTILO === */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.modal-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+.modal-card {
+  background: #111;
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+  max-width: 480px;
+  width: 90%;
+  animation: fadeInUp 0.3s ease;
+  position: relative;
+  color: #eee;
+}
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.close-btn:hover {
+  transform: scale(1.2);
+  color: #ffd700;
+}
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-top: 28px;
+}
+.info-grid p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+@keyframes fadeInUp {
+  from { transform: translateY(25px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+/* === MODAL VIDEO === */
+#videoModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+#videoModal.active {
+  display: flex;
+  opacity: 1;
+}
+#videoModal > div {
+  background: #111;
+  padding: 0;
+  border-radius: 14px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+  width: 90%;
+  max-width: 800px;
+  animation: fadeInUp 0.3s ease;
+  position: relative;
+}
+#closeVideoModal {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  z-index: 10;
+}
+#closeVideoModal:hover {
+  transform: scale(1.2);
+  color: #ffd700;
+}
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* proporción 16:9 */
+  border-radius: 12px;
+  overflow: hidden;
+}
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 12px;
+}
+@keyframes fadeInUp {
+  from { transform: translateY(25px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+ </style>
 </head>
-<body class="text-white font-sans">
-    <div class="overlay min-h-screen">
-        <div class="max-w-4xl mx-auto p-4 pb-24">
-            <div class="rounded-md overflow-hidden relative aspect-video bg-black">
-                <iframe class="w-full h-full" src="https://lzrdrz10.github.io/repro/player.html?video=aHR0cHM6Ly8xYS0xNzkxLmNvbS92aWRlby9md2UyLzg1L3M4LzIvNi8yL0svcS82Mktxei5hYWEubXA0&poster=aHR0cHM6Ly9pbWFnZS50bWRiLm9yZy90L3Avb3JpZ2luYWwvMmNuVUNjTm1tajc5aEdtaW12V2xVbzVQMks4LmpwZw==&title=TGEgUGFyYWRvamEgQ2xvdmVyZmllbGQ=" data-alternativo="https://streamwish.to/e/x3myij8kjtji" title="" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div class="flex space-x-4 mt-4 bg-[#1a1a1a] p-4 rounded-md items-center">
-                <div class="flex items-center justify-center w-[110px] h-[160px] flex-shrink-0">
-                    <img alt="La Paradoja Cloverfield" class="rounded-lg w-full h-full object-cover" src="https://image.tmdb.org/t/p/original/hyeJDZxsXatr2XoPtH46NRrQ6aW.jpg" />
-                </div>
-                <div class="flex-1">
-                    <h3 class="text-xl font-semibold">La Paradoja Cloverfield</h3>
-                    <p class="text-gray-300 italic text-sm">Publicado por: Lz-1</p>
-                    <div class="flex flex-wrap items-center space-x-2 text-xs text-gray-400 mt-1">
-                        <span>United States of America</span>
-                        <span>Duración: 102 Minutos</span>
-                        <span>Año: 2018</span>
-                    </div>
-                    <div class="flex items-center mt-3 space-x-3">
-                        <div id="rating-value" class="bg-[#2a2a2a] rounded-md px-3 py-1 text-lg font-semibold text-white">5.6</div>
-                        <div id="star-container" class="flex space-x-1 text-yellow-400 text-lg"></div>
-                    </div>
-                    <div class="flex space-x-6 text-xs text-gray-400 mt-3">
-                        <span>Terror, Suspense, Ciencia ficción</span>
-                    </div>
-                </div>
-            </div>
-            <div class="flex flex-wrap space-x-2 mt-4 relative">
-                <button id="info-btn" class="bg-red-600 text-white px-4 py-2 rounded text-sm font-semibold flex items-center space-x-1" type="button">
-                    <i class="fas fa-info-circle"></i>
-                    <span>Info</span>
-                </button>
-                <button id="cast-btn" class="bg-gray-700 text-gray-400 px-4 py-2 rounded text-sm font-semibold" title="Transmitir Pantalla">
-                    <i class="fas fa-tv"></i>
-                </button>
-                <button id="download-btn" class="bg-gray-700 text-gray-400 px-4 py-2 rounded text-sm font-semibold" title="Descargar">
-                    <i class="fas fa-download"></i>
-                </button>
-            </div>
-            <div id="sinopsis" class="mt-4 bg-[#1a1a1a] p-4 rounded-md">
-                <h4 class="text-white text-lg font-semibold mb-2">Sinopsis</h4>
-                <p class="text-gray-300 text-sm leading-relaxed">Un grupo de científicos que orbita un planeta al borde de la guerra prueba un dispositivo para superar una crisis energética, pero acaba enfrentando una realidad sombría.</p>
-            </div>
-        </div>
+<body>
+  <button id="btnCast" class="btn-cast" title="Transmitir"><i class="fas fa-tv"></i></button>
+  <div class="backdrop"></div>
+  <div class="container">
+    <div class="header">
+      <div class="poster"><img src="https://image.tmdb.org/t/p/w500/hyeJDZxsXatr2XoPtH46NRrQ6aW.jpg" alt="The Cloverfield Paradox"></div>
+      <img src="https://image.tmdb.org/t/p/w300/pa7qShs8YSMQvQTpeiaJD2YYU5q.png" class="movie-logo" alt="logo">
+      <h1 class="title">The Cloverfield Paradox</h1>
+      <div class="meta">
+        <span>Año: 2018</span>
+        <span class="match">56% para ti</span>
+        <span>102 min</span>
+      </div>
     </div>
-    <script>
-  var rating = 5.6;
-  var starContainer = document.getElementById('star-container');
-  var fullStars = Math.floor(rating / 2);
-  var halfStar = rating % 2 >= 1;
-  for (var i = 0; i < 5; i++) {
-    var star = document.createElement('i');
-    if (i < fullStars) star.className = 'fas fa-star text-yellow-400';
-    else if (i === fullStars && halfStar) star.className = 'fas fa-star-half-alt text-yellow-400';
-    else star.className = 'fas fa-star text-gray-400';
-    starContainer.appendChild(star);
-  }
-  document.getElementById('rating-value').innerText = rating.toFixed(1);
-
-  var infoBtn = document.getElementById('info-btn');
-  var sinopsis = document.getElementById('sinopsis');
-  var castBtn = document.getElementById('cast-btn');
+    <div class="actions">
+      <button class="btn btn-play" id="btnReproducir" title="Reproducir">
+        <div class="btn-icon"><i class="fas fa-play"></i></div><span>Reproducir</span>
+      </button>
+      <button class="btn" id="btnLista" title="Agregar a mi lista">
+        <div class="btn-icon"><i class="fas fa-plus"></i></div><span>Mi lista</span>
+      </button>
+      <button class="btn" id="btnInfo" title="Más información">
+        <div class="btn-icon"><i class="fas fa-info"></i></div><span>Info</span>
+      </button>
+    </div>
+    <button class="btn-download" id="download-btn" data-url="">
+      <i class="fas fa-download"></i> Descargar
+    </button>
+    <div class="synopsis">
+      <div class="synopsis-title">Sinopsis</div>
+      <p id="synopsisText">Con la Tierra en guerra y en mitad de una crisis energética, un equipo de astronautas se encuentra en el espacio tratando de dar con una solución a los problemas del planeta. Pero durante una maniobra fallida, quedan flotando sin saber muy bien qué o cómo volver a su lugar de origen, y las cosas dentro de la nave ocultan una realidad mucho más terrorífica.</p>
+      <button id="toggleSynopsis" style="display:none;background:none;border:none;color:#46d369;font-weight:700;cursor:pointer;margin-top:8px;">Ver más</button>
+    </div>
+  </div>
+<!-- MODAL INFO -->
+<div id="infoModal" class="modal-overlay" aria-hidden="true">
+  <div class="modal-card">
+    <button id="closeModal" class="close-btn"><i class="fas fa-times"></i></button>
+    <div class="info-grid">
+      <p><strong>Director:</strong> Julius Onah</p>
+      <p><strong>Género:</strong> Terror, Suspense, Ciencia ficción</p>
+      <p><strong>País:</strong> United States of America</p>
+      <p><strong>Título Original:</strong> The Cloverfield Paradox</p>
+      <p><strong>Eslogan:</strong> El futuro lo desató todo.</p>
+      <p><strong>Presupuesto:</strong> $45.000.000</p>
+      <p><strong>Ingresos:</strong> N/A</p>
+      <p><strong>Calificación:</strong> 5.6 / 10</p>
+      <p><strong>Duración:</strong> 102 min</p>
+    </div>
+  </div>
+</div>
+  <!-- Video modal -->
+  <div id="videoModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true">
+      <button id="closeVideoModal" class="close-btn" aria-label="Cerrar"><i class="fas fa-times"></i></button>
+      <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+        <iframe id="videoFrameModal" src="" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"></iframe>
+      </div>
+    </div>
+  </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  console.clear();
+  console.log('[DEBUG] DOMContentLoaded - inicializando script');
+  // Variables
+  var VIDEO_URL = "https://lzrdrz10.github.io/repro/player.html?video=aHR0cHM6Ly8xYS0xNzkxLmNvbS92aWRlby9md2UyLzg1L3M4LzIvNi8yL0svcS82Mktxei5hYWEubXA0&poster=aHR0cHM6Ly9pbWFnZS50bWRiLm9yZy90L3Avb3JpZ2luYWwvMmNuVUNjTm1tajc5aEdtaW12V2xVbzVQMks4LmpwZw==&title=TGEgUGFyYWRvamEgQ2xvdmVyZmllbGQ=";
+  var videodescargador = "https://1a-1791.com/video/fwe2/85/s8/2/6/2/K/q/62Kqz.aaa.mp4";
+  // Elementos
+  var btnReproducir = document.getElementById('btnReproducir');
+  var videoModal = document.getElementById('videoModal');
+  var videoFrameModal = document.getElementById('videoFrameModal');
+  var closeVideoModal = document.getElementById('closeVideoModal');
   var downloadBtn = document.getElementById('download-btn');
-  var iframe = document.querySelector('iframe');
-  var altURL = iframe.getAttribute('data-alternativo') || iframe.src;
-  var cleanAltURL = altURL.replace('https://', '').replace('http://', '');
-
-  infoBtn.addEventListener('click', function () {
-    sinopsis.scrollIntoView({ behavior: 'smooth' });
+  var castBtn = document.getElementById('btnCast');
+  var btnLista = document.getElementById('btnLista');
+  var btnInfo = document.getElementById('btnInfo');
+  var synopsisText = document.getElementById('synopsisText');
+  var toggleSynopsis = document.getElementById('toggleSynopsis');
+  var maxLength = 200;
+  // Seguridad: chequear que los elementos existen
+  if (!btnReproducir || !videoModal || !videoFrameModal || !closeVideoModal || !downloadBtn || !castBtn || !btnLista || !btnInfo || !synopsisText) {
+    console.error('[ERROR] Falta algún elemento del DOM. Comprueba que los IDs en el HTML coinciden con los usados en el script.');
+    alert('Error interno: faltan elementos del DOM. Abre la consola (F12) y revisa los logs.');
+    return;
+  }
+  console.log('[DEBUG] Todos los elementos necesarios encontrados');
+  // === MODAL VIDEO ===
+  btnReproducir.addEventListener('click', function(e) {
+    try {
+      console.log('[ACTION] Reproducir pulsado');
+      if (!VIDEO_URL || VIDEO_URL.includes('VIDEO_URL')) {
+        alert('No hay video disponible para reproducir');
+        return;
+      }
+      videoFrameModal.src = VIDEO_URL;
+      videoModal.classList.add('active');
+      videoModal.style.display = 'flex';
+      videoModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    } catch (err) {
+      console.error('[ERROR] Reproducir:', err);
+      alert('Error al intentar reproducir. Revisa la consola.');
+    }
   });
-
-  castBtn.addEventListener('click', function () {
-    window.open('intent://' + cleanAltURL + '#Intent;package=com.instantbits.cast.webvideo;scheme=https;end', '_blank');
+  function closeVideo() {
+    try {
+      console.log('[ACTION] Cerrar modal video');
+      videoModal.classList.remove('active');
+      videoModal.style.display = 'none';
+      videoFrameModal.src = '';
+      videoModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    } catch (err) {
+      console.error('[ERROR] closeVideo:', err);
+    }
+  }
+  closeVideoModal.addEventListener('click', closeVideo);
+  videoModal.addEventListener('click', function(e) {
+    if (e.target === videoModal) {
+      console.log('[ACTION] Click en overlay - cerrando modal');
+      closeVideo();
+    }
   });
-
-  downloadBtn.addEventListener('click', function (e) {
+  window.addEventListener('beforeunload', function() {
+    try { videoFrameModal.src = ''; } catch(e) {}
+  });
+  // === Descargar ===
+  downloadBtn.addEventListener('click', function(e) {
     e.preventDefault();
-    var plusIntent = 'intent://' + cleanAltURL + '#Intent;package=idm.internet.download.manager.plus;scheme=https;end';
-    var normalIntent = 'intent://' + cleanAltURL + '#Intent;package=idm.internet.download.manager;scheme=https;end';
-
-    // Intentar abrir 1DM+ primero
-    window.location.href = plusIntent;
-
-    // Si falla, intentar con 1DM normal (después de 1 segundo)
-    setTimeout(function () {
-      window.location.href = normalIntent;
-    }, 1000);
+    try {
+      console.log('[ACTION] Descargar pulsado');
+      var url = videodescargador;
+      if (!url || url.includes('example.com')) {
+        alert('No hay enlace de descarga disponible');
+        return;
+      }
+      var clean = url.replace(/^https?:\/\//, '');
+      var intentPlus = 'intent://' + clean + '#Intent;package=idm.internet.download.manager.plus;scheme=https;end';
+      var intentNormal = 'intent://' + clean + '#Intent;package=idm.internet.download.manager;scheme=https;end';
+      window.location.href = intentPlus;
+      setTimeout(function() { window.location.href = intentNormal; }, 1000);
+    } catch (err) {
+      console.error('[ERROR] Descargar:', err);
+      alert('Error al intentar descargar. Revisa la consola.');
+    }
   });
+  // === Cast ===
+  castBtn.addEventListener('click', function() {
+    try {
+      console.log('[ACTION] Cast pulsado');
+      var castUrl = videodescargador;
+      if (!castUrl || castUrl.includes('example.com')) {
+        alert('No hay video para transmitir');
+        return;
+      }
+      var cleanCast = castUrl.replace(/^https?:\/\//, '');
+      var castIntent = 'intent://' + cleanCast + '#Intent;package=com.instantbits.cast.webvideo;scheme=https;end';
+      window.open(castIntent, '_blank');
+    } catch (err) {
+      console.error('[ERROR] Cast:', err);
+      alert('Error al intentar transmitir. Revisa la consola.');
+    }
+  });
+  // === Mi lista ===
+  btnLista.addEventListener('click', function() {
+    try {
+      console.log('[ACTION] Mi lista pulsado');
+      var lista = JSON.parse(localStorage.getItem('miLista')) || [];
+      var pageUrl = window.location.href;
+      var exists = lista.some(function(m){ return m.pageUrl === pageUrl; });
+      if (!exists) {
+        lista.push({
+          titulo: "The Cloverfield Paradox",
+          year: "2018",
+          poster: "https://image.tmdb.org/t/p/w500/hyeJDZxsXatr2XoPtH46NRrQ6aW.jpg",
+          backdrop: "https://image.tmdb.org/t/p/original/2cnUCcNmmj79hGmimvWlUo5P2K8.jpg",
+          sinopsis: synopsisText.textContent.trim(),
+          pageUrl: pageUrl,
+          addedAt: new Date().toISOString()
+        });
+        localStorage.setItem('miLista', JSON.stringify(lista));
+        var icon = btnLista.querySelector('i');
+        var text = btnLista.querySelector('span');
+        if (icon) icon.classList.replace('fa-plus','fa-check');
+        if (text) text.textContent = 'Añadido';
+        console.log('[DEBUG] Añadido a miLista', lista);
+      } else {
+        lista = lista.filter(function(m){ return m.pageUrl !== pageUrl; });
+        localStorage.setItem('miLista', JSON.stringify(lista));
+        var icon2 = btnLista.querySelector('i');
+        var text2 = btnLista.querySelector('span');
+        if (icon2) icon2.classList.replace('fa-check','fa-plus');
+        if (text2) text2.textContent = 'Mi lista';
+        console.log('[DEBUG] Eliminado de miLista', lista);
+      }
+    } catch (err) {
+      console.error('[ERROR] Mi lista:', err);
+      alert('Error al guardar en Mi lista. Revisa la consola.');
+    }
+  });
+  // Inicializar estado de Mi lista
+  try {
+    var listaInit = JSON.parse(localStorage.getItem('miLista')) || [];
+    if (listaInit.some(function(m){ return m.pageUrl === window.location.href; })) {
+      var icon = btnLista.querySelector('i');
+      var text = btnLista.querySelector('span');
+      if (icon) icon.classList.replace('fa-plus','fa-check');
+      if (text) text.textContent = 'Añadido';
+      console.log('[DEBUG] Estado inicial: ya estaba añadido');
+    }
+  } catch (e) {
+    console.warn('[WARN] No se pudo inicializar Mi lista:', e);
+  }
+  // === Ver más / Ver menos ===
+  try {
+    if (synopsisText.textContent.length > maxLength) {
+      var full = synopsisText.textContent.trim();
+      var short = full.slice(0, maxLength) + '...';
+      synopsisText.textContent = short;
+      toggleSynopsis.style.display = 'inline-block';
+      var expanded = false;
+      toggleSynopsis.addEventListener('click', function() {
+        try {
+          synopsisText.textContent = expanded ? short : full;
+          toggleSynopsis.textContent = expanded ? 'Ver más' : 'Ver menos';
+          expanded = !expanded;
+        } catch (err) {
+          console.error('[ERROR] Toggle sinopsis:', err);
+        }
+      });
+      toggleSynopsis.textContent = 'Ver más';
+    } else {
+      toggleSynopsis.style.display = 'none';
+    }
+  } catch (err) {
+    console.error('[ERROR] Preparar sinopsis:', err);
+  }
+  // === MODAL INFO LOGIC ===
+  var infoModal = document.getElementById('infoModal');
+  var closeModal = document.getElementById('closeModal');
+  btnInfo.addEventListener('click', function() {
+    infoModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+  closeModal.addEventListener('click', function() {
+    infoModal.classList.remove('active');
+    document.body.style.overflow = '';
+  });
+  infoModal.addEventListener('click', function(e) {
+    if (e.target === infoModal) {
+      infoModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+  console.log('[DEBUG] Script inicializado correctamente — prueba pulsando botones');
+});
 </script>
-    <nav class="fixed bottom-0 left-0 w-full bg-[#1E1E1E] flex justify-around items-center py-3 rounded-b-3xl text-white text-xs font-semibold z-50">
-        <a href="../index.html" class="flex flex-col items-center space-y-1">
-            <i class="fas fa-arrow-left text-xl"></i>
-            <span>Regresar</span>
-        </a>
-        <a href="../Categorias/movie/index.html" class="flex flex-col items-center space-y-1">
-            <i class="fas fa-film text-xl"></i>
-            <span>Movies</span>
-        </a>
-        <a href="../Categorias/serie/index.html" class="flex flex-col items-center space-y-1">
-            <i class="fas fa-tv text-xl"></i>
-            <span>Series</span>
-        </a>
-        <a href="../SEARCH/index.html" class="flex flex-col items-center space-y-1">
-            <i class="fas fa-search text-xl"></i>
-            <span>Buscar</span>
-        </a>
-    </nav>
+  <!-- Datos
+   Poster Backdrop: https://image.tmdb.org/t/p/original/2cnUCcNmmj79hGmimvWlUo5P2K8.jpg
+   Año: 2018
+   Titulo: The Cloverfield Paradox
+   Poster: https://image.tmdb.org/t/p/w500/hyeJDZxsXatr2XoPtH46NRrQ6aW.jpg
+   Generos: Terror, Suspense, Ciencia ficción
+   calificacion: 56%
+   Sinopsis: Con la Tierra en guerra y en mitad de una crisis energética, un equipo de astronautas se encuentra en el espacio tratando de dar con una solución a los problemas del planeta. Pero durante una maniobra fallida, quedan flotando sin saber muy bien qué o cómo volver a su lugar de origen, y las cosas dentro de la nave ocultan una realidad mucho más terrorífica.
+   Tiempo: 102
+   Logo: https://image.tmdb.org/t/p/w300/pa7qShs8YSMQvQTpeiaJD2YYU5q.png
+   -->
 </body>
 </html>
