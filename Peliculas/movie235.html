@@ -3,22 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
-  <title>El retorno de los muertos vivientes</title>
+  <title>The Thing Behind the Door</title>
   <link href="https://fonts.googleapis.com/css2?family=Netflix+Sans:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     *{margin:0;padding:0;box-sizing:border-box;}
     body{background:#000;color:#fff;font-family:'Netflix Sans',sans-serif;overflow-x:hidden;line-height:1.5;}
     .backdrop{position:fixed;top:0;left:0;right:0;bottom:0;
-      background:linear-gradient(to bottom,rgba(0,0,0,0.7),rgba(0,0,0,0.9)),url('https://image.tmdb.org/t/p/original/2cnUCcNmmj79hGmimvWlUo5P2K8.jpg') center/cover no-repeat;
+      background:linear-gradient(to bottom,rgba(0,0,0,0.7),rgba(0,0,0,0.9)),url('https://image.tmdb.org/t/p/original/7FTOVQO3pndOuswVS3iNt3odVq5.jpg') center/cover no-repeat;
       filter:blur(8px) brightness(0.6);z-index:-1;transform:scale(1.1);}
     .container{max-width:480px;margin:0 auto;padding:0 16px;}
     .header{padding-top:60px;text-align:center;}
     .poster{width:160px;height:240px;border-radius:8px;overflow:hidden;margin:0 auto 16px;
       box-shadow:0 8px 24px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.1);}
     .poster img{width:100%;height:100%;object-fit:cover;}
-    .movie-logo{margin:12px auto;max-width:200px;max-height:60px;object-fit:contain;
-      filter:drop-shadow(0 2px 4px rgba(0,0,0,0.8));display:block;}
     .title{font-size:28px;font-weight:900;margin-bottom:8px;text-shadow:0 2px 4px rgba(0,0,0,0.8);}
     .meta{font-size:14px;color:#aaa;margin-bottom:16px;}
     .meta span{margin-right:12px;}
@@ -43,186 +41,38 @@
       display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;
       z-index:10000;backdrop-filter:blur(8px);transition:all 0.25s;}
     .btn-cast:hover{background:rgba(255,255,255,0.3);transform:scale(1.1);}
-    .btn-cast:active{transform:scale(0.9);}
-    @media(max-width:380px){
-      .title{font-size:24px;}
-      .poster{width:140px;height:210px;}
-      .btn-cast{width:40px;height:40px;font-size:18px;top:10px;right:3px;}
-    }
-    /* simple modal styles */
-    .modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);z-index:9999;align-items:center;justify-content:center;}
-    .modal-card{background:#000;padding:16px;border-radius:12px;max-width:900px;width:94%;position:relative;}
+    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);
+      justify-content:center;align-items:center;z-index:9999;opacity:0;transition:opacity .3s;}
+    .modal-overlay.active{display:flex;opacity:1;}
+    .modal-card{background:#111;padding:24px;border-radius:14px;max-width:480px;width:90%;position:relative;
+      color:#eee;animation:fadeInUp .3s;}
     .close-btn{position:absolute;top:12px;right:12px;background:none;border:none;color:#fff;font-size:20px;cursor:pointer;}
- /* === MODAL INFO ESTILO === */
-.modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(8px);
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.modal-overlay.active {
-  display: flex;
-  opacity: 1;
-}
-
-.modal-card {
-  background: #111;
-  padding: 24px;
-  border-radius: 14px;
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
-  max-width: 480px;
-  width: 90%;
-  animation: fadeInUp 0.3s ease;
-  position: relative;
-  color: #eee;
-}
-
-.close-btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 20px;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-.close-btn:hover {
-  transform: scale(1.2);
-  color: #ffd700;
-}
-
-.info-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 8px;
-  margin-top: 28px;
-}
-
-.info-grid p {
-  margin: 0;
-  font-size: 15px;
-  line-height: 1.5;
-}
-
-@keyframes fadeInUp {
-  from { transform: translateY(25px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-/* === MODAL VIDEO === */
-#videoModal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(8px);
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-#videoModal.active {
-  display: flex;
-  opacity: 1;
-}
-
-#videoModal > div {
-  background: #111;
-  padding: 0;
-  border-radius: 14px;
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
-  width: 90%;
-  max-width: 800px;
-  animation: fadeInUp 0.3s ease;
-  position: relative;
-}
-
-#closeVideoModal {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 22px;
-  cursor: pointer;
-  transition: transform 0.2s;
-  z-index: 10;
-}
-#closeVideoModal:hover {
-  transform: scale(1.2);
-  color: #ffd700;
-}
-
-.video-container {
-  position: relative;
-  width: 100%;
-  padding-top: 56.25%; /* proporción 16:9 */
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: 12px;
-}
-
-@keyframes fadeInUp {
-  from { transform: translateY(25px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
- </style>
+    .close-btn:hover{transform:scale(1.2);color:#ffd700;}
+    .info-grid{display:grid;grid-template-columns:1fr;gap:8px;margin-top:28px;}
+    .info-grid p{margin:0;font-size:15px;line-height:1.5;}
+    @keyframes fadeInUp{from{transform:translateY(25px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+    @media(max-width:380px){.title{font-size:24px;}.poster{width:140px;height:210px;}}
+  </style>
 </head>
 <body>
   <button id="btnCast" class="btn-cast" title="Transmitir"><i class="fas fa-tv"></i></button>
   <div class="backdrop"></div>
-
   <div class="container">
     <div class="header">
-      <div class="poster"><img src="https://image.tmdb.org/t/p/w500/lGlYPD5AVINwSbTroS3mOltp2nk.jpg" alt="The Cloverfield Paradox"></div>
-      <img src="https://image.tmdb.org/t/p/original/md48cv52pT2cdcKi21JiQKiJ13y.png" class="movie-logo" alt="logo">
-      <h1 class="title">El retorno de los muertos vivientes</h1>
+      <div class="poster"><img src="https://image.tmdb.org/t/p/w500/lGlYPD5AVINwSbTroS3mOltp2nk.jpg" alt="The Thing Behind the Door"></div>
+      <h1 class="title">The Thing Behind the Door</h1>
       <div class="meta">
         <span>Año: 2023</span>
         <span class="match">57% para ti</span>
         <span>81 min</span>
       </div>
     </div>
-
     <div class="actions">
-      <button class="btn btn-play" id="btnReproducir" title="Reproducir">
-        <div class="btn-icon"><i class="fas fa-play"></i></div><span>Reproducir</span>
-      </button>
-
-      <button class="btn" id="btnLista" title="Agregar a mi lista">
-        <div class="btn-icon"><i class="fas fa-plus"></i></div><span>Mi lista</span>
-      </button>
-
-      <button class="btn" id="btnInfo" title="Más información">
-        <div class="btn-icon"><i class="fas fa-info"></i></div><span>Info</span>
-      </button>
+      <button class="btn btn-play" id="btnReproducir"><div class="btn-icon"><i class="fas fa-play"></i></div><span>Reproducir</span></button>
+      <button class="btn" id="btnLista"><div class="btn-icon"><i class="fas fa-plus"></i></div><span>Mi lista</span></button>
+      <button class="btn" id="btnInfo"><div class="btn-icon"><i class="fas fa-info"></i></div><span>Info</span></button>
     </div>
-
-    <button class="btn-download" id="download-btn" data-url="">
-      <i class="fas fa-download"></i> Descargar
-    </button>
-
+    <button class="btn-download" id="download-btn"><i class="fas fa-download"></i> Descargar</button>
     <div class="synopsis">
       <div class="synopsis-title">Sinopsis</div>
       <p id="synopsisText">Una joven, Adèle, está literalmente atormentada por la muerte de su marido, Jean, asesinado en una trinchera durante la Primera Guerra Mundial. Desesperada e incapaz de afrontar esta trágica pérdida, Adèle recurre a la magia negra con la esperanza de recuperar a su amante.</p>
@@ -230,231 +80,126 @@
     </div>
   </div>
 
-<!-- Modal de información -->
-<div id="infoModal" class="info-modal">
-  <div class="info-content">
-    <span class="close-info">&times;</span>
-    <div class="info-grid">
-      <div class="info-image">
-        <img id="infoPoster" src="" alt="Poster">
-      </div>
-      <div class="info-details">
-        <h2 id="infoTitle"></h2>
-        <p id="infoTagline"></p>
-        <ul class="info-list">
-          <li><strong>Director:</strong> <span id="infoDirector"></span></li>
-          <li><strong>País de origen:</strong> <span id="infoPais"></span></li>
-          <li><strong>Título original:</strong> <span id="infoTituloOriginal"></span></li>
-          <li><strong>Eslogan:</strong> <span id="infoEslogan"></span></li>
-          <li><strong>Presupuesto:</strong> <span id="infoPresupuesto"></span></li>
-          <li><strong>Recaudación:</strong> <span id="infoRecaudacion"></span></li>
-          <li><strong>Calificación:</strong> <span id="infoCalificacion"></span></li>
-          <li><strong>Duración:</strong> <span id="infoDuracion"></span></li>
-        </ul>
+  <!-- MODAL INFO -->
+  <div id="infoModal" class="modal-overlay">
+    <div class="modal-card">
+      <button id="closeModal" class="close-btn"><i class="fas fa-times"></i></button>
+      <div class="info-grid">
+        <p><strong>Director:</strong> Desconocido</p>
+        <p><strong>Género:</strong> Terror</p>
+        <p><strong>País:</strong> France</p>
+        <p><strong>Título Original:</strong> La Chose derrière la porte</p>
+        <p><strong>Eslogan:</strong> N/A</p>
+        <p><strong>Presupuesto:</strong> Desconocido</p>
+        <p><strong>Ingresos:</strong> N/A</p>
+        <p><strong>Calificación:</strong> 5.7 / 10</p>
+        <p><strong>Duración:</strong> 81 min</p>
       </div>
     </div>
   </div>
-</div>
 
-  <!-- Video modal -->
-  <div id="videoModal" class="modal-overlay" aria-hidden="true">
-    <div class="modal-card" role="dialog" aria-modal="true">
-      <button id="closeVideoModal" class="close-btn" aria-label="Cerrar"><i class="fas fa-times"></i></button>
+  <!-- Video Modal -->
+  <div id="videoModal" class="modal-overlay">
+    <div class="modal-card">
+      <button id="closeVideoModal" class="close-btn"><i class="fas fa-times"></i></button>
       <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
         <iframe id="videoFrameModal" src="" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"></iframe>
       </div>
     </div>
   </div>
 
-<script>
-  // Esperar a que todo el contenido esté disponible
-  window.addEventListener('load', function() {
-    console.clear();
-    console.log('[DEBUG] ✅ Página completamente cargada. Iniciando script...');
+  <script>
+    window.addEventListener('load', () => setTimeout(() => {
+      const VIDEO_URL = "https://lzrdrz10.github.io/repro/player.html?video=aHR0cHM6Ly8xYS0xNzkxLmNvbS92aWRlby9md2UyLzIyL3M4LzIvZy9KL1ovbC9nSlpsei5hYWEubXA0&poster=aHR0cHM6Ly9pbWFnZS50bWRiLm9yZy90L3Avb3JpZ2luYWwvN0ZUT1ZRTzNwbmRPdXN3VlMzaU50M29kVnE1LmpwZw==&title=RWwgcmV0b3JubyBkZSBsb3MgbXVlcnRvcyB2aXZpZW50ZXM=";
+      const DOWNLOAD_CAST_URL = "https://1a-1791.com/video/fwe2/22/s8/2/g/J/Z/l/gJZlz.aaa.mp4";
+      const btnReproducir = document.getElementById('btnReproducir');
+      const videoModal = document.getElementById('videoModal');
+      const videoFrameModal = document.getElementById('videoFrameModal');
+      const closeVideoModal = document.getElementById('closeVideoModal');
+      const downloadBtn = document.getElementById('download-btn');
+      const castBtn = document.getElementById('btnCast');
+      const btnLista = document.getElementById('btnLista');
+      const btnInfo = document.getElementById('btnInfo');
+      const synopsisText = document.getElementById('synopsisText');
+      const toggleSynopsis = document.getElementById('toggleSynopsis');
+      const infoModal = document.getElementById('infoModal');
+      const closeModal = document.getElementById('closeModal');
+      const maxLength = 200;
 
-    setTimeout(function() {
-      // Variables base
-      var VIDEO_URL = "https://lzrdrz10.github.io/repro/player.html?video=aHR0cHM6Ly8xYS0xNzkxLmNvbS92aWRlby9md2UyLzIyL3M4LzIvZy9KL1ovbC9nSlpsei5hYWEubXA0&poster=aHR0cHM6Ly9pbWFnZS50bWRiLm9yZy90L3Avb3JpZ2luYWwvN0ZUT1ZRTzNwbmRPdXN3VlMzaU50M29kVnE1LmpwZw==&title=RWwgcmV0b3JubyBkZSBsb3MgbXVlcnRvcyB2aXZpZW50ZXM=";
-      var videodescargador = "https://1a-1791.com/video/fwe2/22/s8/2/g/J/Z/l/gJZlz.aaa.mp4";
-
-      // Obtener elementos
-      var btnReproducir = document.getElementById('btnReproducir');
-      var videoModal = document.getElementById('videoModal');
-      var videoFrameModal = document.getElementById('videoFrameModal');
-      var closeVideoModal = document.getElementById('closeVideoModal');
-      var downloadBtn = document.getElementById('download-btn');
-      var castBtn = document.getElementById('btnCast');
-      var btnLista = document.getElementById('btnLista');
-      var btnInfo = document.getElementById('btnInfo');
-      var synopsisText = document.getElementById('synopsisText');
-      var toggleSynopsis = document.getElementById('toggleSynopsis');
-      var infoModal = document.getElementById('infoModal');
-      var closeModal = document.getElementById('closeModal');
-      var maxLength = 200;
-
-      // Verificación
-      var elementos = [btnReproducir, videoModal, videoFrameModal, closeVideoModal, downloadBtn, castBtn, btnLista, btnInfo, synopsisText, infoModal, closeModal];
-      if (elementos.some(function(e){ return !e; })) {
-        console.error('[ERROR] 🚫 Faltan elementos del DOM — revisa los IDs.');
-        alert('No se pudieron cargar correctamente los controles.');
-        return;
-      }
-
-      console.log('[DEBUG] ✔ Todos los elementos del DOM detectados.');
-
-      // === MODAL VIDEO ===
-      btnReproducir.addEventListener('click', function() {
-        if (!VIDEO_URL || VIDEO_URL.includes('VIDEO_URL')) {
-          alert('No hay video disponible.');
-          return;
-        }
+      // === REPRODUCIR (iframeUrl) ===
+      btnReproducir.onclick = () => {
         videoFrameModal.src = VIDEO_URL;
         videoModal.classList.add('active');
-        videoModal.style.display = 'flex';
-        videoModal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
-      });
-
-      function closeVideo() {
+      };
+      const closeVideo = () => {
         videoModal.classList.remove('active');
-        videoModal.style.display = 'none';
         videoFrameModal.src = '';
-        videoModal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
-      }
+      };
+      closeVideoModal.onclick = closeVideo;
+      videoModal.onclick = e => e.target === videoModal && closeVideo();
 
-      closeVideoModal.addEventListener('click', closeVideo);
-      videoModal.addEventListener('click', function(e) {
-        if (e.target === videoModal) closeVideo();
-      });
-
-      // === DESCARGAR ===
-      downloadBtn.addEventListener('click', function(e) {
+      // === DESCARGAR (mismo enlace que Cast) ===
+      downloadBtn.onclick = e => {
         e.preventDefault();
-        var url = videodescargador;
-        if (!url) {
-          alert('No hay enlace de descarga.');
-          return;
-        }
-        var clean = url.replace(/^https?:///, '');
-        var intentPlus = 'intent://' + clean + '#Intent;package=idm.internet.download.manager.plus;scheme=https;end';
-        var intentNormal = 'intent://' + clean + '#Intent;package=idm.internet.download.manager;scheme=https;end';
-        window.location.href = intentPlus;
-        setTimeout(function() { window.location.href = intentNormal; }, 1000);
-      });
+        const clean = DOWNLOAD_CAST_URL.replace(/^https?:\/\//, '');
+        const intentPlus = 'intent://' + clean + '#Intent;package=idm.internet.download.manager.plus;scheme=https;end';
+        const intentNormal = 'intent://' + clean + '#Intent;package=idm.internet.download.manager;scheme=https;end';
+        location.href = intentPlus;
+        setTimeout(() => location.href = intentNormal, 1000);
+      };
 
-      // === CAST ===
-      castBtn.addEventListener('click', function() {
-        var castUrl = videodescargador;
-        if (!castUrl) {
-          alert('No hay video para transmitir.');
-          return;
-        }
-        var cleanCast = castUrl.replace(/^https?:///, '');
-        var castIntent = 'intent://' + cleanCast + '#Intent;package=com.instantbits.cast.webvideo;scheme=https;end';
-        window.open(castIntent, '_blank');
-      });
+      // === CAST (mismo enlace que Descargar) ===
+      castBtn.onclick = () => {
+        const clean = DOWNLOAD_CAST_URL.replace(/^https?:\/\//, '');
+        const castIntent = 'intent://' + clean + '#Intent;package=com.instantbits.cast.webvideo;scheme=https;end';
+        open(castIntent, '_blank');
+      };
 
       // === MI LISTA ===
-      btnLista.addEventListener('click', function() {
-        var lista = JSON.parse(localStorage.getItem('miLista')) || [];
-        var pageUrl = window.location.href;
-        var exists = lista.some(function(m){ return m.pageUrl === pageUrl; });
-
-        var icon = btnLista.querySelector('i');
-        var text = btnLista.querySelector('span');
-
+      btnLista.onclick = () => {
+        let lista = JSON.parse(localStorage.getItem('miLista') || '[]');
+        const pageUrl = location.href;
+        const exists = lista.some(m => m.pageUrl === pageUrl);
+        const icon = btnLista.querySelector('i');
+        const text = btnLista.querySelector('span');
         if (!exists) {
-          lista.push({
-            titulo: "El retorno de los muertos vivientes",
-            year: "2023",
-            poster: "https://image.tmdb.org/t/p/w500/lGlYPD5AVINwSbTroS3mOltp2nk.jpg",
-            backdrop: "https://image.tmdb.org/t/p/original/7FTOVQO3pndOuswVS3iNt3odVq5.jpg",
-            sinopsis: synopsisText.textContent.trim(),
-            pageUrl: pageUrl,
-            addedAt: new Date().toISOString()
-          });
+          lista.push({titulo: "The Thing Behind the Door", year: "2023", poster: "https://image.tmdb.org/t/p/w500/lGlYPD5AVINwSbTroS3mOltp2nk.jpg", pageUrl, addedAt: new Date().toISOString()});
           localStorage.setItem('miLista', JSON.stringify(lista));
-          if (icon) icon.classList.replace('fa-plus','fa-check');
-          if (text) text.textContent = 'Añadido';
+          icon.classList.replace('fa-plus', 'fa-check');
+          text.textContent = 'Añadido';
         } else {
-          lista = lista.filter(function(m){ return m.pageUrl !== pageUrl; });
+          lista = lista.filter(m => m.pageUrl !== pageUrl);
           localStorage.setItem('miLista', JSON.stringify(lista));
-          if (icon) icon.classList.replace('fa-check','fa-plus');
-          if (text) text.textContent = 'Mi lista';
+          icon.classList.replace('fa-check', 'fa-plus');
+          text.textContent = 'Mi lista';
         }
-      });
-
-      // Estado inicial lista
-      var listaInit = JSON.parse(localStorage.getItem('miLista')) || [];
-      if (listaInit.some(function(m){ return m.pageUrl === window.location.href; })) {
-        var icon = btnLista.querySelector('i');
-        var text = btnLista.querySelector('span');
-        if (icon) icon.classList.replace('fa-plus','fa-check');
-        if (text) text.textContent = 'Añadido';
+      };
+      if (JSON.parse(localStorage.getItem('miLista') || '[]').some(m => m.pageUrl === location.href)) {
+        btnLista.querySelector('i').classList.replace('fa-plus', 'fa-check');
+        btnLista.querySelector('span').textContent = 'Añadido';
       }
 
       // === SINOPSIS VER MÁS ===
       if (synopsisText.textContent.length > maxLength) {
-        var full = synopsisText.textContent.trim();
-        var short = full.slice(0, maxLength) + '...';
+        const full = synopsisText.textContent.trim();
+        const short = full.slice(0, maxLength) + '...';
         synopsisText.textContent = short;
         toggleSynopsis.style.display = 'inline-block';
-        var expanded = false;
-        toggleSynopsis.addEventListener('click', function() {
+        let expanded = false;
+        toggleSynopsis.onclick = () => {
           synopsisText.textContent = expanded ? short : full;
           toggleSynopsis.textContent = expanded ? 'Ver más' : 'Ver menos';
           expanded = !expanded;
-        });
-        toggleSynopsis.textContent = 'Ver más';
+        };
       }
 
-      function mostrarInfo(o) {
-    var modal = document.getElementById("infoModal");
-    modal.style.display = "block";
-
-    // Carga de datos dinámicos
-    document.getElementById("infoPoster").src = o.poster || "";
-    document.getElementById("infoTitle").textContent = o.titulo || "Sin título";
-    document.getElementById("infoTagline").textContent = o.eslogan || "N/A";
-    document.getElementById("infoDirector").textContent = o.director || "Desconocido";
-    document.getElementById("infoPais").textContent = o.pais || "Sin información";
-    document.getElementById("infoTituloOriginal").textContent = o.titulo_original || "N/A";
-    document.getElementById("infoEslogan").textContent = o.eslogan || "N/A";
-    document.getElementById("infoPresupuesto").textContent = o.presupuesto ? "$" + o.presupuesto.toLocaleString() : "Desconocido";
-    document.getElementById("infoRecaudacion").textContent = o.ingresos ? "$" + o.ingresos.toLocaleString() : "N/A";
-    document.getElementById("infoCalificacion").textContent = o.calificacion || "Sin datos";
-    document.getElementById("infoDuracion").textContent = o.duracion || (o.duracion_total ? o.duracion_total + " min" : "N/A");
-  }
-
-  // === Cerrar modal ===
-  var closeInfo = document.querySelector(".close-info");
-  closeInfo.onclick = function() {
-    document.getElementById("infoModal").style.display = "none";
-  };
-
-  // Cerrar si se hace clic fuera del contenido
-  window.onclick = function(event) {
-    var modal = document.getElementById("infoModal");
-    if (event.target === modal) {
-      modal.style.display = "none";
-    }
-  };
-
-      console.log('[DEBUG] 🎬 Script inicializado correctamente — todos los botones operativos.');
-    }, 100); // Pequeño delay para asegurar carga total del DOM
-  });
-</script>
-  <!-- Datos
-   Poster Backdrop: https://image.tmdb.org/t/p/original/7FTOVQO3pndOuswVS3iNt3odVq5.jpg
-   Año: 2023
-   Titulo: El retorno de los muertos vivientes
-   Poster: https://image.tmdb.org/t/p/w500/lGlYPD5AVINwSbTroS3mOltp2nk.jpg
-   Generos: Terror
-   calificacion: 57%
-   Sinopsis: Una joven, Adèle, está literalmente atormentada por la muerte de su marido, Jean, asesinado en una trinchera durante la Primera Guerra Mundial. Desesperada e incapaz de afrontar esta trágica pérdida, Adèle recurre a la magia negra con la esperanza de recuperar a su amante.
-   Tiempo: 81
-   Logo: https://image.tmdb.org/t/p/original/md48cv52pT2cdcKi21JiQKiJ13y.png
-   -->
+      // === MODAL INFO ===
+      btnInfo.onclick = () => { infoModal.classList.add('active'); document.body.style.overflow = 'hidden'; };
+      closeModal.onclick = () => { infoModal.classList.remove('active'); document.body.style.overflow = ''; };
+      infoModal.onclick = e => e.target === infoModal && (infoModal.classList.remove('active'), document.body.style.overflow = '');
+    }, 100));
+  </script>
 </body>
 </html>
