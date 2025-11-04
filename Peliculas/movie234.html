@@ -258,222 +258,166 @@
   </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  console.clear();
-  console.log('[DEBUG] DOMContentLoaded ✔ — inicializando script');
+ window.addEventListener('load', function() {
+    console.clear();
+    console.log('[DEBUG] ✅ Página completamente cargada. Iniciando script...');
 
-  // Variables
+    setTimeout(function() {
   var VIDEO_URL = "https://lzrdrz10.github.io/repro/player.html?video=aHR0cHM6Ly8xYS0xNzkxLmNvbS92aWRlby9md3cxL2VkL3M4LzIvWS85L2QvaC9ZOWRoei5hYWEubXA0&poster=aHR0cHM6Ly9pbWFnZS50bWRiLm9yZy90L3Avb3JpZ2luYWwvN1ExU0dUdUlEa1RuS1JvbkVobVlVZWZRUDc5LmpwZw==&title=RG9zIFRvbnRvcyBlbiBGdWdh";
   var videodescargador = "https://1a-1791.com/video/fww1/ed/s8/2/Y/9/d/h/Y9dhz.aaa.mp4";
+ var btnReproducir = document.getElementById('btnReproducir');
+      var videoModal = document.getElementById('videoModal');
+      var videoFrameModal = document.getElementById('videoFrameModal');
+      var closeVideoModal = document.getElementById('closeVideoModal');
+      var downloadBtn = document.getElementById('download-btn');
+      var castBtn = document.getElementById('btnCast');
+      var btnLista = document.getElementById('btnLista');
+      var btnInfo = document.getElementById('btnInfo');
+      var synopsisText = document.getElementById('synopsisText');
+      var toggleSynopsis = document.getElementById('toggleSynopsis');
+      var infoModal = document.getElementById('infoModal');
+      var closeModal = document.getElementById('closeModal');
+      var maxLength = 200;
 
-  // Elementos
-  var btnReproducir = document.getElementById('btnReproducir');
-  var videoModal = document.getElementById('videoModal');
-  var videoFrameModal = document.getElementById('videoFrameModal');
-  var closeVideoModal = document.getElementById('closeVideoModal');
-  var downloadBtn = document.getElementById('download-btn');
-  var castBtn = document.getElementById('btnCast');
-  var btnLista = document.getElementById('btnLista');
-  var btnInfo = document.getElementById('btnInfo');
-  var synopsisText = document.getElementById('synopsisText');
-  var toggleSynopsis = document.getElementById('toggleSynopsis');
-  var maxLength = 200;
-
-  // Seguridad: chequear que los elementos existen
-  if (!btnReproducir || !videoModal || !videoFrameModal || !closeVideoModal || !downloadBtn || !castBtn || !btnLista || !btnInfo || !synopsisText) {
-    console.error('[ERROR] Falta algún elemento del DOM. Comprueba que los IDs en el HTML coinciden con los usados en el script.');
-    alert('Error interno: faltan elementos del DOM. Abre la consola (F12) y revisa los logs.');
-    return;
-  }
-  console.log('[DEBUG] Todos los elementos necesarios encontrados ✔');
-
-  // === MODAL VIDEO ===
-  btnReproducir.addEventListener('click', function(e) {
-    try {
-      console.log('[ACTION] Reproducir pulsado');
-      if (!VIDEO_URL || VIDEO_URL.includes('VIDEO_URL')) {
-        alert('No hay video disponible para reproducir');
+      // Verificación
+      var elementos = [btnReproducir, videoModal, videoFrameModal, closeVideoModal, downloadBtn, castBtn, btnLista, btnInfo, synopsisText, infoModal, closeModal];
+      if (elementos.some(function(e){ return !e; })) {
+        console.error('[ERROR] 🚫 Faltan elementos del DOM — revisa los IDs.');
+        alert('No se pudieron cargar correctamente los controles.');
         return;
       }
-      videoFrameModal.src = VIDEO_URL;
-      videoModal.classList.add('active');
-      videoModal.style.display = 'flex';
-      videoModal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    } catch (err) {
-      console.error('[ERROR] Reproducir:', err);
-      alert('Error al intentar reproducir. Revisa la consola.');
-    }
-  });
 
-  function closeVideo() {
-    try {
-      console.log('[ACTION] Cerrar modal video');
-      videoModal.classList.remove('active');
-      videoModal.style.display = 'none';
-      videoFrameModal.src = '';
-      videoModal.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    } catch (err) {
-      console.error('[ERROR] closeVideo:', err);
-    }
-  }
+      console.log('[DEBUG] ✔ Todos los elementos del DOM detectados.');
 
-  closeVideoModal.addEventListener('click', closeVideo);
+      // === MODAL VIDEO ===
+      btnReproducir.addEventListener('click', function() {
+        if (!VIDEO_URL || VIDEO_URL.includes('VIDEO_URL')) {
+          alert('No hay video disponible.');
+          return;
+        }
+        videoFrameModal.src = VIDEO_URL;
+        videoModal.classList.add('active');
+        videoModal.style.display = 'flex';
+        videoModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      });
 
-  // Cerrar al hacer click en el overlay
-  videoModal.addEventListener('click', function(e) {
-    if (e.target === videoModal) {
-      console.log('[ACTION] Click en overlay - cerrando modal');
-      closeVideo();
-    }
-  });
-
-  // Limpieza antes de salir de la página
-  window.addEventListener('beforeunload', function() {
-    try { videoFrameModal.src = ''; } catch(e) {}
-  });
-
-  // === Descargar ===
-  downloadBtn.addEventListener('click', function(e) {
-    e.preventDefault();
-    try {
-      console.log('[ACTION] Descargar pulsado');
-      var url = videodescargador;
-      if (!url || url.includes('example.com')) {
-        alert('No hay enlace de descarga disponible');
-        return;
+      function closeVideo() {
+        videoModal.classList.remove('active');
+        videoModal.style.display = 'none';
+        videoFrameModal.src = '';
+        videoModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
       }
-      var clean = url.replace(/^https?:///, '');
-      var intentPlus = 'intent://' + clean + '#Intent;package=idm.internet.download.manager.plus;scheme=https;end';
-      var intentNormal = 'intent://' + clean + '#Intent;package=idm.internet.download.manager;scheme=https;end';
-      window.location.href = intentPlus;
-      setTimeout(function() { window.location.href = intentNormal; }, 1000);
-    } catch (err) {
-      console.error('[ERROR] Descargar:', err);
-      alert('Error al intentar descargar. Revisa la consola.');
-    }
-  });
 
-  // === Cast ===
-  castBtn.addEventListener('click', function() {
-    try {
-      console.log('[ACTION] Cast pulsado');
-      var castUrl = videodescargador;
-      if (!castUrl || castUrl.includes('example.com')) {
-        alert('No hay video para transmitir');
-        return;
-      }
-      var cleanCast = castUrl.replace(/^https?:///, '');
-      var castIntent = 'intent://' + cleanCast + '#Intent;package=com.instantbits.cast.webvideo;scheme=https;end';
-      window.open(castIntent, '_blank');
-    } catch (err) {
-      console.error('[ERROR] Cast:', err);
-      alert('Error al intentar transmitir. Revisa la consola.');
-    }
-  });
+      closeVideoModal.addEventListener('click', closeVideo);
+      videoModal.addEventListener('click', function(e) {
+        if (e.target === videoModal) closeVideo();
+      });
 
-  // === Mi lista ===
-  btnLista.addEventListener('click', function() {
-    try {
-      console.log('[ACTION] Mi lista pulsado');
-      var lista = JSON.parse(localStorage.getItem('miLista')) || [];
-      var pageUrl = window.location.href;
-      var exists = lista.some(function(m){ return m.pageUrl === pageUrl; });
-      if (!exists) {
-        lista.push({
-          titulo: "Dos Tontos en Fuga",
-          year: "2008",
-          poster: "https://image.tmdb.org/t/p/w500/cbhQ8cHJ8MGc8NdWZN371ZZoWU6.jpg",
-          backdrop: "https://image.tmdb.org/t/p/original/7Q1SGTuIDkTnKRonEhmYUefQP79.jpg",
-          sinopsis: synopsisText.textContent.trim(),
-          pageUrl: pageUrl,
-          addedAt: new Date().toISOString()
-        });
-        localStorage.setItem('miLista', JSON.stringify(lista));
+      // === DESCARGAR ===
+      downloadBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        var url = videodescargador;
+        if (!url) {
+          alert('No hay enlace de descarga.');
+          return;
+        }
+        var clean = url.replace(/^https?:\/\//, '');
+        var intentPlus = 'intent://' + clean + '#Intent;package=idm.internet.download.manager.plus;scheme=https;end';
+        var intentNormal = 'intent://' + clean + '#Intent;package=idm.internet.download.manager;scheme=https;end';
+        window.location.href = intentPlus;
+        setTimeout(function() { window.location.href = intentNormal; }, 1000);
+      });
+
+      // === CAST ===
+      castBtn.addEventListener('click', function() {
+        var castUrl = videodescargador;
+        if (!castUrl) {
+          alert('No hay video para transmitir.');
+          return;
+        }
+        var cleanCast = castUrl.replace(/^https?:\/\//, '');
+        var castIntent = 'intent://' + cleanCast + '#Intent;package=com.instantbits.cast.webvideo;scheme=https;end';
+        window.open(castIntent, '_blank');
+      });
+
+      // === MI LISTA ===
+      btnLista.addEventListener('click', function() {
+        var lista = JSON.parse(localStorage.getItem('miLista')) || [];
+        var pageUrl = window.location.href;
+        var exists = lista.some(function(m){ return m.pageUrl === pageUrl; });
+
+        var icon = btnLista.querySelector('i');
+        var text = btnLista.querySelector('span');
+
+        if (!exists) {
+          lista.push({
+            titulo: "${o.titulo}",
+            year: "${o.year}",
+            poster: "${o.poster}",
+            backdrop: "${o.backdrop}",
+            sinopsis: synopsisText.textContent.trim(),
+            pageUrl: pageUrl,
+            addedAt: new Date().toISOString()
+          });
+          localStorage.setItem('miLista', JSON.stringify(lista));
+          if (icon) icon.classList.replace('fa-plus','fa-check');
+          if (text) text.textContent = 'Añadido';
+        } else {
+          lista = lista.filter(function(m){ return m.pageUrl !== pageUrl; });
+          localStorage.setItem('miLista', JSON.stringify(lista));
+          if (icon) icon.classList.replace('fa-check','fa-plus');
+          if (text) text.textContent = 'Mi lista';
+        }
+      });
+
+      // Estado inicial lista
+      var listaInit = JSON.parse(localStorage.getItem('miLista')) || [];
+      if (listaInit.some(function(m){ return m.pageUrl === window.location.href; })) {
         var icon = btnLista.querySelector('i');
         var text = btnLista.querySelector('span');
         if (icon) icon.classList.replace('fa-plus','fa-check');
         if (text) text.textContent = 'Añadido';
-        console.log('[DEBUG] Añadido a miLista ✅', lista);
-      } else {
-        lista = lista.filter(function(m){ return m.pageUrl !== pageUrl; });
-        localStorage.setItem('miLista', JSON.stringify(lista));
-        var icon2 = btnLista.querySelector('i');
-        var text2 = btnLista.querySelector('span');
-        if (icon2) icon2.classList.replace('fa-check','fa-plus');
-        if (text2) text2.textContent = 'Mi lista';
-        console.log('[DEBUG] Eliminado de miLista ✅', lista);
       }
-    } catch (err) {
-      console.error('[ERROR] Mi lista:', err);
-      alert('Error al guardar en Mi lista. Revisa la consola.');
-    }
-  });
 
-  // Inicializar estado de Mi lista
-  try {
-    var listaInit = JSON.parse(localStorage.getItem('miLista')) || [];
-    if (listaInit.some(function(m){ return m.pageUrl === window.location.href; })) {
-      var icon = btnLista.querySelector('i');
-      var text = btnLista.querySelector('span');
-      if (icon) icon.classList.replace('fa-plus','fa-check');
-      if (text) text.textContent = 'Añadido';
-      console.log('[DEBUG] Estado inicial: ya estaba añadido');
-    }
-  } catch (e) {
-    console.warn('[WARN] No se pudo inicializar Mi lista:', e);
-  }
-
-  // === Ver más / Ver menos ===
-  try {
-    if (synopsisText.textContent.length > maxLength) {
-      var full = synopsisText.textContent.trim();
-      var short = full.slice(0, maxLength) + '...';
-      synopsisText.textContent = short;
-      toggleSynopsis.style.display = 'inline-block';
-      var expanded = false;
-      toggleSynopsis.addEventListener('click', function() {
-        try {
+      // === SINOPSIS VER MÁS ===
+      if (synopsisText.textContent.length > maxLength) {
+        var full = synopsisText.textContent.trim();
+        var short = full.slice(0, maxLength) + '...';
+        synopsisText.textContent = short;
+        toggleSynopsis.style.display = 'inline-block';
+        var expanded = false;
+        toggleSynopsis.addEventListener('click', function() {
           synopsisText.textContent = expanded ? short : full;
           toggleSynopsis.textContent = expanded ? 'Ver más' : 'Ver menos';
           expanded = !expanded;
-        } catch (err) {
-          console.error('[ERROR] Toggle sinopsis:', err);
+        });
+        toggleSynopsis.textContent = 'Ver más';
+      }
+
+      // === MODAL INFO ===
+      btnInfo.addEventListener('click', function() {
+        infoModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+
+      closeModal.addEventListener('click', function() {
+        infoModal.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+
+      infoModal.addEventListener('click', function(e) {
+        if (e.target === infoModal) {
+          infoModal.classList.remove('active');
+          document.body.style.overflow = '';
         }
       });
-      toggleSynopsis.textContent = 'Ver más';
-    } else {
-      toggleSynopsis.style.display = 'none';
-    }
-  } catch (err) {
-    console.error('[ERROR] Preparar sinopsis:', err);
-  }
 
-  // === MODAL INFO LOGIC ===
-  var infoModal = document.getElementById('infoModal');
-  var closeModal = document.getElementById('closeModal');
-
-  btnInfo.addEventListener('click', function() {
-    infoModal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+      console.log('[DEBUG] 🎬 Script inicializado correctamente — todos los botones operativos.');
+    }, 100); // Pequeño delay para asegurar carga total del DOM
   });
-
-  closeModal.addEventListener('click', function() {
-    infoModal.classList.remove('active');
-    document.body.style.overflow = '';
-  });
-
-  infoModal.addEventListener('click', function(e) {
-    if (e.target === infoModal) {
-      infoModal.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-  });
-
-  console.log('[DEBUG] Script inicializado correctamente — prueba pulsando botones');
-});
-</script>
+  </script>
   <!-- Datos
    Poster Backdrop: https://image.tmdb.org/t/p/original/7Q1SGTuIDkTnKRonEhmYUefQP79.jpg
    Año: 2008
