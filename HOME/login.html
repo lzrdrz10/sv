@@ -173,6 +173,19 @@ button {
 <div class="overlay" aria-hidden="true"></div>
 
 <main class="flex flex-col items-center z-10 text-center space-y-6 px-6">
+<!-- 🟡 Modal de Encuesta LzPlay -->
+<div id="lzvote_modal" class="fixed inset-0 bg-black/60 hidden justify-center items-center z-[9999]">
+  <div class="bg-gray-800 rounded-2xl p-6 shadow-xl w-80 text-center">
+    <h2 class="text-lg font-semibold mb-2">¿Qué tanto te gusta la app LzPlay?</h2>
+    <p class="text-sm text-gray-400 mb-4">¡Tu opinión nos ayuda a mejorar!</p>
+    <div class="flex flex-col gap-2">
+      <button id="lzvote_btnSi" class="bg-yellow-500 hover:bg-yellow-600 text-black py-2 rounded-xl">Sí, me gusta mucho</button>
+      <button id="lzvote_btnNo" class="bg-gray-600 hover:bg-gray-700 text-white py-2 rounded-xl">No, no me gusta</button>
+    </div>
+    <p id="lzvote_resultado" class="text-sm mt-4 text-gray-400"></p>
+  </div>
+</div>
+
   <div class="avatar-container">
     <img id="avatarIcono" class="avatar-glow w-40 h-40 md:w-56 md:h-56 object-cover" src="https://via.placeholder.com/200" alt="Avatar del usuario">
     <a href="iconos.html" class="edit-icon" aria-label="Editar avatar"><i class="fas fa-pencil-alt"></i></a>
@@ -197,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const DEFAULT_AVATAR = 'https://i.pinimg.com/736x/91/86/1b/91861b749841221d52122f0c2933d8a6.jpg';
   const LOGIN_URL = '../index.html';
-  const SHARE_URL = 'https://dlz.blogdepelis.lat/';
+  const SHARE_URL = 'https://escargar.lzplayhd.online/';
   const TOKEN = btoa('UserLzPlay');
   const SLIDE_INTERVAL = 4000;
 
@@ -255,6 +268,71 @@ document.addEventListener('DOMContentLoaded', () => {
   btnLogin.addEventListener('click', handleLogin);
   btnCompartir.addEventListener('click', handleShare);
 });
+
+(function(){
+  var WORKER_URL = "lzplayvotos.thexxx880.workers.dev/"; // <- reemplaza por tu URL exacta
+  var modal = document.getElementById("lzvote_modal");
+  var btnSi = document.getElementById("lzvote_btnSi");
+  var btnNo = document.getElementById("lzvote_btnNo");
+  var resultado = document.getElementById("lzvote_resultado");
+  var LS_KEY = "lzvote_usuarioVoto";
+
+  // Mostrar modal si no ha votado
+  if (!localStorage.getItem(LS_KEY)) {
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+  } else {
+    // si ya votó, opcional: mostrar resultados al cargar
+    fetchResultados();
+  }
+
+  btnSi.addEventListener("click", function(){ votar("si"); });
+  btnNo.addEventListener("click", function(){ votar("no"); });
+
+  async function votar(opcion) {
+    if (localStorage.getItem(LS_KEY)) return; // doble seguridad
+
+    try {
+      // llamar al worker (CORS ya habilitado)
+      var r = await fetch(WORKER_URL + "?opcion=" + opcion, { method: "GET" });
+      var j = await r.json();
+      if (j.ok) {
+        localStorage.setItem(LS_KEY, opcion);
+        actualizarUI(j.votos);
+        cerrarModal();
+      } else {
+        console.error("Error voto:", j);
+        alert("Ocurrió un error al registrar tu voto. Intenta de nuevo.");
+      }
+    } catch (e) {
+      console.error(e);
+      alert("Error de conexión. Intenta más tarde.");
+    }
+  }
+
+  async function fetchResultados() {
+    try {
+      var r = await fetch(WORKER_URL + "?opcion=si", { method: "OPTIONS" }); // preflight no necesario, mejor hacemos GET de lectura
+      // mejor hacer GET para leer: pero worker no tiene endpoint solo-lectura; usamos la misma ruta sin modificar contadores
+      // Para leer sin incrementar, hacemos una llamada especial: ?opcion=leer (si quieres), pero ahora no la implementamos.
+      // En este script haremos una petición GET simulando lectura: mejor llamar al Worker con opcion=si y no incrementar no es posible.
+      // Por eso, para obtener resultados sin votar, te recomiendo crear un endpoint de solo lectura en el Worker.
+    } catch(e) {
+      // no hacemos nada; la lectura se maneja al votar
+      console.log("No se obtuvo resultados de lectura (aún).");
+    }
+  }
+
+  function actualizarUI(votos) {
+    resultado.innerText = `Resultados actuales: 👍 ${votos.si} votos | 👎 ${votos.no} votos`;
+  }
+
+  function cerrarModal() {
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+  }
+
+})();
 </script>
 </body>
 </html>
