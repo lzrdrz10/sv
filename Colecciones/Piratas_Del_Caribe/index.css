@@ -230,4 +230,12 @@
   pointer-events: none;
   filter: drop-shadow(0 5px 10px rgba(0,0,0,0.6));
 }
-
+.hero-sinopsis {
+  margin-top: 15px;
+  font-size: 14px;
+  max-width: 600px;
+  line-height: 1.5;
+  color: #ccc;
+  text-align: left;
+  padding-left: 10px;
+}
