@@ -202,6 +202,125 @@
   scroll-behavior: smooth;   /* Scroll suave */
 }
 
+/* Contenedor general */
+  #sesionAdulto {
+    padding: 0 1rem;
+    margin-bottom: 2rem;
+  }
 
+  /* Fila del carrusel */
+  #sesionAdulto .sesionAdultoRow {
+    display:flex;
+    gap:0.75rem;
+    overflow-x:auto;
+    padding-bottom:0.75rem;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+  }
 
+  /* Esconder scrollbar si quieres (opcional, compatible) */
+  #sesionAdulto .sesionAdultoRow::-webkit-scrollbar { height:8px; }
+  #sesionAdulto .sesionAdultoRow::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius:8px; }
 
+  /* Tarjeta: ancho responsivo controlado (usa min entre 75vw y 300px) */
+  #sesionAdulto .sesionAdultoTarjeta {
+    flex: 0 0 auto; /* evita que el flex cambie su tamaño */
+    width: min(75vw, 300px); /* en móviles ocupa ~75vw, en pantalla grande máximo 300px */
+    aspect-ratio: 16 / 9; /* controla la altura y evita que la imagen empuje el layout */
+    border-radius: 12px;
+    overflow: hidden; /* IMPORTANT - evita que la imagen "salga" al escalar */
+    position: relative;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    scroll-snap-align: center;
+    background: #060606;
+  }
+
+  /* Imagen de poster: cubre exactamente el contenedor */
+  #sesionAdulto .sesionAdultoPoster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;      /* mantiene proporción y recorta lo necesario */
+    object-position: center;
+    display: block;
+    transition: transform 350ms ease;
+    -webkit-transform-origin: center center;
+            transform-origin: center center;
+    will-change: transform;
+  }
+
+  /* Efecto hover / focus: escala sin romper layout (porque overflow:hidden en la tarjeta) */
+  #sesionAdulto .sesionAdultoTarjeta:hover .sesionAdultoPoster,
+  #sesionAdulto .sesionAdultoTarjeta:focus .sesionAdultoPoster {
+    transform: scale(1.06);
+  }
+
+  /* Capa overlay (oscurecer al hover) */
+  #sesionAdulto .sesionAdultoOverlay {
+    position:absolute;
+    inset:0;
+    background: rgba(0,0,0,0.28);
+    opacity: 0;
+    transition: opacity 250ms ease;
+    pointer-events: none;
+  }
+  #sesionAdulto .sesionAdultoTarjeta:hover .sesionAdultoOverlay { opacity: 1; }
+
+  /* Badges y logos interiores (ajustar tamaño con vw/pixels) */
+  #sesionAdulto .sesionAdultoBadge {
+    position:absolute;
+    top:10px;
+    left:10px;
+    background: rgba(124,58,237,0.85); /* púrpura parecido al tuyo */
+    color:#fff;
+    font-weight:600;
+    font-size:11px;
+    padding:6px 8px;
+    border-radius:8px;
+    backdrop-filter: blur(6px);
+  }
+
+  #sesionAdulto .sesionAdultoLogo {
+    position:absolute;
+    top:10px;
+    right:10px;
+    width: 60px;
+    height: auto;
+    opacity:0.95;
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.45));
+  }
+
+  #sesionAdulto .sesionAdultoBrand {
+    position:absolute;
+    left:10px;
+    bottom:10px;
+    width: 110px;
+    height:auto;
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.5));
+  }
+
+  /* Ajustes para pantallas muy grandes (opcional) */
+  @media (min-width: 1024px) {
+    #sesionAdulto .sesionAdultoTarjeta { width: 300px; }
+    #sesionAdulto .sesionAdultoLogo { width: 80px; }
+    #sesionAdulto .sesionAdultoBrand { width: 140px; }
+  }
+
+  /* Evita que imágenes SVG o transparentes cambien layout */
+  #sesionAdulto img { display:block; max-width:100%; height:auto; }
+
+/* Ajuste perfecto de posters */
+#adultoCarrusel img.adultoPoster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Mantener proporción limpia en móviles */
+#adultoCarrusel .adultoTarjeta {
+  aspect-ratio: 16 / 9;
+  height: auto;
+}
