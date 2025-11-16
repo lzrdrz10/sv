@@ -361,7 +361,7 @@ header.scrolled {
 
 /* ======= LOADER AJUSTA ESTE VALOR ======= */
 :root {
-  --preloader-time: 3s;  /* Cambia aquí el tiempo total (ejemplo: 3s, 5s, 10s) */
+  --preloader-time: 5s;  /* Cambia aquí el tiempo total (ejemplo: 3s, 5s, 10s) */
 }
 
 /* Preloader cubre toda la pantalla */
