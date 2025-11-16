@@ -1,4 +1,3 @@
-// Preloader
 document.addEventListener("DOMContentLoaded", () => {
   const preloader = document.getElementById("preloader");
   const duration = getComputedStyle(document.documentElement).getPropertyValue("--preloader-time").trim();
@@ -13,12 +12,12 @@ const CACHE_KEYS = {
   series: "cache_monsterhigh_series"
 };
 
-// === URLs Y CONTENEDORES ===
 const URLs = {
   animacion: "https://raw.githubusercontent.com/lzrdrz10/sv/main/Categorias/animacion/index.html",
   peliculas: "https://raw.githubusercontent.com/lzrdrz10/sv/main/Categorias/movie/index.html",
   series: "https://raw.githubusercontent.com/lzrdrz10/sv/main/Categorias/serie/index.html"
 };
+
 const filtroNombre = "Monster High";
 const contenedores = {
   animacion: document.getElementById("contenedorAnimacion"),
@@ -31,13 +30,12 @@ const secciones = {
   series: contenedores.series.closest(".sesionAdulto")
 };
 
-// === CACHÉ PERSISTENTE ===
+// === CACHÉ ===
 function getCachedData(key) {
   try {
     const data = localStorage.getItem(key);
     return data ? JSON.parse(data) : null;
   } catch (e) {
-    console.warn("Error leyendo caché:", e);
     return null;
   }
 }
@@ -45,15 +43,13 @@ function getCachedData(key) {
 function setCachedData(key, data) {
   try {
     localStorage.setItem(key, JSON.stringify(data));
-  } catch (e) {
-    console.warn("Error guardando caché:", e);
-  }
+  } catch (e) {}
 }
 
-// === CONJUNTO GLOBAL DE TÍTULOS USADOS (PRIORIDAD: ANIMACIÓN > PELÍCULAS > SERIES) ===
-let titulosBloqueados = new Set(); // Títulos ya asignados (evita duplicados entre categorías)
+// === CONJUNTO GLOBAL DE TÍTULOS BLOQUEADOS (PRIORIDAD) ===
+let titulosBloqueados = new Set();
 
-// === PROCESAR HTML Y EXTRAER ITEMS ===
+// === PROCESAR HTML ===
 function procesarHTML(html, tipo) {
   const temp = document.createElement("div");
   temp.innerHTML = html;
@@ -71,36 +67,30 @@ function procesarHTML(html, tipo) {
     const titulo = tituloDiv.innerText.trim();
     if (!titulo.toLowerCase().includes(filtroNombre.toLowerCase())) return;
 
-    const tituloNormalizado = titulo.toLowerCase().trim();
-    if (titulosBloqueados.has(tituloNormalizado)) return; // Ya usado en categoría superior
+    const tituloNorm = titulo.toLowerCase().trim();
+    if (titulosBloqueados.has(tituloNorm)) return;
 
     const yearDiv = article.querySelector("div.text-xs.text-white\\/70");
     if (!yearDiv) return;
     const year = yearDiv.innerText.trim().match(/\d{4}/)?.[0];
     if (!year) return;
 
-    lista.push({
-      year: parseInt(year),
-      titulo,
-      link,
-      poster,
-      categoria: tipo
-    });
-    titulosBloqueados.add(tituloNormalizado); // Bloquear para categorías inferiores
+    lista.push({ year: parseInt(year), titulo, link, poster, categoria: tipo });
+    titulosBloqueados.add(tituloNorm);
   });
 
   return lista.sort((a, b) => a.year - b.year);
 }
 
-// === RENDERIZAR LISTA ===
+// === RENDERIZAR ===
 function renderizarLista(lista, contenedor, seccionElement) {
   if (lista.length === 0) {
     seccionElement.style.display = "none";
     return;
   }
   seccionElement.style.display = "block";
-
   contenedor.innerHTML = "";
+
   lista.forEach((item, i) => {
     const wrapper = document.createElement("div");
     wrapper.className = "sesionAdultoTarjetaWrapper";
@@ -122,49 +112,56 @@ function renderizarLista(lista, contenedor, seccionElement) {
   });
 }
 
-// === CARGAR COLECCIÓN CON CACHÉ + PRIORIDAD ===
+// === CARGAR CON CACHÉ RÁPIDO (solo fetch si no hay caché) ===
 async function cargarColeccion(categoria, url, contenedor, seccionElement, cacheKey) {
-  let listaFinal = [];
-
-  // 1. Cargar caché
   const cached = getCachedData(cacheKey);
+
+  // SI HAY CACHÉ → CARGA INMEDIATA
   if (cached && Array.isArray(cached)) {
-    listaFinal = cached;
-    console.log(`Caché cargado: ${categoria} (${listaFinal.length} ítems)`);
+    console.log(`Cargado desde caché: ${categoria}`);
+    renderizarLista(cached, contenedor, seccionElement);
+    return;
   }
 
-  // 2. Descargar contenido actual
-  console.log(`Buscando nuevos ítems en ${categoria}...`);
+  // SI NO HAY CACHÉ → DESCARGAR Y GUARDAR
+  console.log(`Descargando ${categoria} (primera vez)...`);
   const html = await fetch(url).then(r => r.text()).catch(() => "");
-  const nuevosItems = procesarHTML(html, categoria === "Movie" ? "Movie" : categoria === "Serie" ? "Serie" : "Animación");
+  const lista = procesarHTML(html, categoria === "Movie" ? "Movie" : categoria === "Serie" ? "Serie" : "Animación");
 
-  // 3. Agregar solo ítems nuevos (por link)
-  const linksExistentes = new Set(listaFinal.map(i => i.link));
-  const itemsNuevos = nuevosItems.filter(item => !linksExistentes.has(item.link));
-
-  if (itemsNuevos.length > 0) {
-    listaFinal.push(...itemsNuevos);
-    listaFinal.sort((a, b) => a.year - b.year);
-    setCachedData(cacheKey, listaFinal);
-    console.log(`+${itemsNuevos.length} nuevos en ${categoria}`);
-  } else {
-    console.log(`Sin cambios en ${categoria}`);
-  }
-
-  // 4. Renderizar
-  renderizarLista(listaFinal, contenedor, seccionElement);
+  setCachedData(cacheKey, lista);
+  renderizarLista(lista, contenedor, seccionElement);
 }
 
-// === EJECUCIÓN EN ORDEN DE PRIORIDAD ===
+// === BOTÓN DE ACTUALIZACIÓN MANUAL (opcional, recomendado) ===
+function crearBotonActualizar() {
+  const btn = document.createElement("button");
+  btn.textContent = "Actualizar Contenido";
+  btn.style.cssText = `
+    position: fixed; bottom: 20px; right: 20px; z-index: 9999;
+    background: #e300ff; color: white; border: none; padding: 12px 16px;
+    border-radius: 50px; font-size: 14px; font-weight: 600;
+    box-shadow: 0 4px 12px rgba(227,0,255,0.4);
+    cursor: pointer; transition: all 0.3s;
+  `;
+  btn.onmouseover = () => btn.style.transform = "scale(1.05)";
+  btn.onmouseout = () => btn.style.transform = "scale(1)";
+  btn.onclick = async () => {
+    btn.disabled = true;
+    btn.textContent = "Actualizando...";
+    localStorage.removeItem(CACHE_KEYS.animacion);
+    localStorage.removeItem(CACHE_KEYS.peliculas);
+    localStorage.removeItem(CACHE_KEYS.series);
+    location.reload();
+  };
+  document.body.appendChild(btn);
+}
+
+// === EJECUCIÓN ===
 (async () => {
   titulosBloqueados.clear();
+  crearBotonActualizar(); // Botón flotante
 
-  // 1. ANIMACIÓN (máxima prioridad)
   await cargarColeccion("Animación", URLs.animacion, contenedores.animacion, secciones.animacion, CACHE_KEYS.animacion);
-
-  // 2. PELÍCULAS (solo si no está en Animación)
   await cargarColeccion("Movie", URLs.peliculas, contenedores.peliculas, secciones.peliculas, CACHE_KEYS.peliculas);
-
-  // 3. SERIES (solo si no está en ninguna otra)
   await cargarColeccion("Serie", URLs.series, contenedores.series, secciones.series, CACHE_KEYS.series);
 })();
