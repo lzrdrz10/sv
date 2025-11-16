@@ -215,13 +215,21 @@ header.scrolled {
         <a href="https://lzplayhd.online/CatergoriasBase/serie/index.html"><li><i class="fa-solid fa-tv"></i> Series</li></a>
         <a href="https://lzplayhd.online/CatergoriasBase/movie/index.html"><li><i class="fa-solid fa-film"></i> Películas</li></a>
       </ul>
-      <div class="right-icons">
-        <a href="https://lzplayhd.online/index.html"><i class="fa-solid fa-house" style="font-size: 30px; color: white;"></i></a>
-        <a href="https://lzplayhd.online/HOME/ajustes.html">
-          <i class="fa-solid fa-user-circle" style="font-size: 32px; color: white;"></i>
-          <img id="avatar" class="avatar" src="" alt="Perfil" style="display:none;">
-        </a>
-      </div>
+     <div class="right-icons">
+  <a href="https://lzplayhd.online/index.html">
+    <i class="fa-solid fa-house" style="font-size: 30px; color: white;"></i>
+  </a>
+
+  <a href="https://lzplayhd.online/HOME/ajustes.html" class="avatar-link">
+    <i id="iconoDefault" class="fa-solid fa-user-circle" style="font-size: 32px; color: white;"></i>
+
+    <!-- IMPORTANTE: este ID debe coincidir EXACTO -->
+    <img id="avatar" class="avatar" src="" alt="Perfil"
+    style="display:none; width:32px; height:32px; border-radius:50%;">
+  </a>
+</div>
+
+
     </div>
   </header>
 
@@ -492,6 +500,25 @@ renderizarLista = function(lista, contenedor, seccionElement) {
   originalRender(lista, contenedor, seccionElement);
   setTimeout(forzarTamanoUniforme, 100); // Pequeño delay por imágenes
 };
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    var iconoGuardado = localStorage.getItem("iconoUsuario");
+
+    var imgAvatar = document.getElementById("avatar");
+    var iconoDefault = document.getElementById("iconoDefault");
+
+    // Si existe icono guardado, se muestra
+    if (iconoGuardado && imgAvatar) {
+        imgAvatar.src = iconoGuardado + "?v=" + Date.now(); // fuerza actualización
+        imgAvatar.style.display = "block";
+
+        if (iconoDefault) {
+            iconoDefault.style.display = "none";
+        }
+    }
+});
 </script>
+
 </body>
 </html>
