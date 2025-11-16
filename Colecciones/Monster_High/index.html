@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>COLECCION</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const preloader = document.getElementById("preloader");
+  const duration = getComputedStyle(document.documentElement)
+                    .getPropertyValue("--preloader-time")
+                    .trim();
+
+  // Convierte el valor de CSS (ej: "4s") a milisegundos
+  const ms = parseFloat(duration) * (duration.includes("ms") ? 1 : 1000);
+
+  setTimeout(() => {
+    preloader.classList.add("hide");
+  }, ms);
+});
+</script>
+</head>
+<body>
+	<div id="preloader">
+  <div class="preloader-content">
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3dK3-XAKrEia-lWmiUqAYRfFQ1lR9eJX6ZZH8e_vHf576qf9GJjIWBW9Jg5LsilXX7WO2MOEkg5gzc4pESziaPeMJ9ws9mwtCDdp3p_17D0e0Uop_ZxavwwJeNLBvoyZJ0cxTKQpjzrJIR6LjJslB24tj-77AYrRCacQ3F2S2VPoXpPzPhM1zndxyd1Rg/s3307/B64D5386-DCA4-410B-A0A6-6ACB19D0A06F.png" alt="Logo Preloader" />
+    
+    <div class="prog-bar-wrapper">
+      <div class="prog-bar-bg"></div>
+      <div class="prog-bar"></div>
+    </div>
+    
+    <div class="preloader-extra">
+      <div class="spinner"><div></div></div>
+      <p>Espere, cargando nuestro contenido</p>
+    </div>
+  </div>
+</div>
+  <!-- HEADER -->
+  <header id="header">
+  <div class="container header-content">
+
+  <!-- LOGO -->
+  <div class="logo">
+    <a href="https://lzplayhd.online/">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3dK3-XAKrEia-lWmiUqAYRfFQ1lR9eJX6ZZH8e_vHf576qf9GJjIWBW9Jg5LsilXX7WO2MOEkg5gzc4pESziaPeMJ9ws9mwtCDdp3p_17D0e0Uop_ZxavwwJeNLBvoyZJ0cxTKQpjzrJIR6LjJslB24tj-77AYrRCacQ3F2S2VPoXpPzPhM1zndxyd1Rg/s3307/B64D5386-DCA4-410B-A0A6-6ACB19D0A06F.png" alt="LzPlay Logo">
+    </a>
+  </div>
+
+  <!-- NAV -->
+  <ul class="nav">
+    <a href="https://lzplayhd.online/index.html">
+      <li class="active"><i class="fa-solid fa-house"></i> Inicio</li>
+    </a>
+
+    <a href="https://lzplayhd.online/CatergoriasBase/serie/index.html">
+      <li><i class="fa-solid fa-tv"></i> Series</li>
+    </a>
+
+    <a href="https://lzplayhd.online/CatergoriasBase/movie/index.html">
+      <li><i class="fa-solid fa-film"></i> Películas</li>
+    </a>
+  </ul>
+
+  <!-- PERFIL -->
+  <div class="right-icons">
+
+  <!-- ICONO HOME -->
+  <a href="https://lzplayhd.online/index.html" class="home-link">
+    <i class="fa-solid fa-house" style="font-size: 30px; color: white;"></i>
+  </a>
+
+  <!-- ICONO PERFIL -->
+  <a href="https://lzplayhd.online/HOME/ajustes.html" class="avatar-link">
+    <i class="fa-solid fa-user-circle" style="font-size: 32px; color: white;"></i>
+    <img id="avatar" class="avatar" src="" alt="Perfil" style="display:none;">
+  </a>
+
+</div>
+
+
+</div>
+
+  </header>
+
+  <!-- HERO (BANNER) -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-logo">
+          <img src="https://image.tmdb.org/t/p/original/n7cxYUepbUmV4vEa1AqI6HYgP03.png" alt="Pirates of the Caribbean">
+        </div>
+		<p class="hero-info">Coleccion • Monster High  </p>
+       <p class="hero-sinopsis">
+Monster High cuenta las aventuras de un grupo de amigas que son hijas de monstruos famosos. En su escuela, viven retos mágicos, amistades, viajes y misterios mientras aprenden a aceptarse tal como son y celebrar lo que las hace únicas. Cada historia combina diversión, fantasía y un mundo lleno de criaturas increíbles.
+</p>
+
+  </div>
+    </div>
+  </section>
+ 
+    <div class="container">
+  <section id="sesionAdulto">
+    <div class="flex items-center justify-between mb-4 px-1">
+      <h2 class="text-lg sm:text-xl md:text-2xl font-semibold">Colección Peliculas</h2>
+    </div>
+
+    <div class="sesionAdultoRow" id="contenedorColeccion"></div>
+  </section>
+</div>
+
+ 
+	    <script src="script.js"></script>
+		
+</body>
+</html>
