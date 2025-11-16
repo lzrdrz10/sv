@@ -1,4 +1,4 @@
-// Preloader
+
 document.addEventListener("DOMContentLoaded", () => {
   const preloader = document.getElementById("preloader");
   const duration = getComputedStyle(document.documentElement).getPropertyValue("--preloader-time").trim();
