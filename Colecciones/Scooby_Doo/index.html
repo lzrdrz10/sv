@@ -81,16 +81,48 @@ header.scrolled {
   background: rgba(255,255,255,0.08); border-radius: 8px;
 }
 
-/* === TARJETA WRAPPER === */
+/* === TARJETA WRAPPER - TAMAÑO FIJO Y UNIFORME === */
 .sesionAdulto .sesionAdultoTarjetaWrapper {
-  display: flex; flex-direction: column; align-items: center;
-  width: min(45vw, 200px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 auto;
+  width: 160px !important;           /* MÓVIL: 160px fijo */
+  scroll-snap-align: center;
 }
+
+/* === TARJETA === */
 .sesionAdulto .sesionAdultoTarjeta {
-  flex: 0 0 auto; width: 100%; aspect-ratio: 2 / 3;
-  border-radius: 12px; overflow: hidden; position: relative;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.45); scroll-snap-align: center;
-  background: #060606; transition: transform 0.3s ease;
+  flex: 0 0 auto;
+  width: 100% !important;
+  aspect-ratio: 2 / 3;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  background: #060606;
+  transition: transform 0.3s ease;
+}
+
+/* === RESPONSIVE: TABLET Y ESCRITORIO === */
+@media (min-width: 768px) {
+  .sesionAdulto .sesionAdultoTarjetaWrapper {
+    width: 200px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sesionAdulto .sesionAdultoTarjetaWrapper,
+  .sesionAdulto .sesionAdultoTarjeta {
+    width: 220px !important;
+  }
+}
+
+/* === MÓVIL PEQUEÑO (opcional, si quieres más pequeño) === */
+@media (max-width: 480px) {
+  .sesionAdulto .sesionAdultoTarjetaWrapper {
+    width: 150px !important;
+  }
 }
 .sesionAdulto .sesionAdultoTarjeta:hover { transform: translateY(-8px); }
 .sesionAdulto .sesionAdultoPoster {
@@ -207,7 +239,7 @@ header.scrolled {
       </div>
     </div>
   </section>
-
+<br>
   <!-- CONTENIDO PRINCIPAL -->
   <div class="container content-over-hero">
 
@@ -433,6 +465,33 @@ function crearBotonActualizar() {
   await cargarColeccion("Serie", URLs.series, contenedores.series, secciones.series, CACHE_KEYS.series);
 })();
 
+// === FORZAR TAMAÑO UNIFORME DESPUÉS DE CARGAR ===
+function forzarTamanoUniforme() {
+  const wrappers = document.querySelectorAll('.sesionAdultoTarjetaWrapper');
+  wrappers.forEach(wrapper => {
+    wrapper.style.flex = '0 0 auto';
+    wrapper.style.width = ''; // Reset
+  });
+
+  // Forzar reflow
+  void wrappers[0]?.offsetHeight;
+
+  // Aplicar ancho según pantalla
+  const isMobile = window.innerWidth < 768;
+  const isTablet = window.innerWidth < 1024;
+  const width = isMobile ? '160px' : isTablet ? '200px' : '220px';
+
+  wrappers.forEach(wrapper => {
+    wrapper.style.width = width;
+  });
+}
+
+// Ejecutar después de cada carga
+const originalRender = renderizarLista;
+renderizarLista = function(lista, contenedor, seccionElement) {
+  originalRender(lista, contenedor, seccionElement);
+  setTimeout(forzarTamanoUniforme, 100); // Pequeño delay por imágenes
+};
 </script>
 </body>
 </html>
