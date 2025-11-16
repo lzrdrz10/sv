@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>COLECCIÓN MONSTER HIGH</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* === RESET & BASE === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+*::-webkit-scrollbar { display: none; }
+body, html {
+  background: #141414;
+  color: white;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+img { display: block; }
+.container { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 2%; }
+
+/* === HEADER === */
+header {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 20px 0;
+  transition: all 0.4s ease;
+}
+header.scrolled {
+  background: #141414;
+  padding: 10px 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+.header-content { display: flex; justify-content: space-between; align-items: center; }
+.logo { width: 100px; }
+.logo img { width: 100%; height: auto; }
+.nav { display: flex; gap: 20px; list-style: none; }
+.nav li { font-size: 14px; font-weight: 500; color: #e5e5e5; cursor: pointer; transition: color 0.3s; }
+.nav li:hover, .nav li.active { color: #ffffff; }
+.right-icons { display: flex; align-items: center; gap: 18px; }
+.right-icons i { font-size: 24px; color: white; cursor: pointer; }
+.avatar { width: 32px; height: 32px; border-radius: 4px; cursor: pointer; }
+
+/* === HERO === */
+.hero {
+  position: relative;
+  height: 80vh;
+  min-height: 500px;
+  background: linear-gradient(to right, rgba(0,0,0,0.8), transparent 60%),
+              url('https://image.tmdb.org/t/p/original/crBcWcmfSwM1FaFr7s3dOyzSF9m.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 200px; background: linear-gradient(transparent, #141414 100%); z-index: 1;
+}
+.hero-content { max-width: 50%; padding-left: 4%; z-index: 2; position: relative; }
+.hero-logo { max-width: 500px; margin-bottom: 20px; }
+.hero-logo img { width: 100%; height: auto; }
+.hero-info { font-size: 1.2rem; font-weight: 600; margin-bottom: 24px; color: #46d369; }
+.hero-sinopsis { margin-top: 15px; font-size: 14px; max-width: 600px; line-height: 1.5; color: #ccc; }
+
+/* === CONTENIDO SOBRE HERO === */
+.content-over-hero { position: relative; margin-top: -120px; z-index: 10; padding-top: 2rem; }
+
+/* === SECCIONES === */
+.sesionAdulto { padding: 0 1rem; margin-bottom: 2rem; }
+.sesionAdulto .sesionAdultoRow {
+  display: flex; gap: 0.75rem; overflow-x: auto; padding-bottom: 0.75rem;
+  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+}
+.sesionAdulto .sesionAdultoRow::-webkit-scrollbar { height: 8px; }
+.sesionAdulto .sesionAdultoRow::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.08); border-radius: 8px;
+}
+
+/* === TARJETA WRAPPER === */
+.sesionAdulto .sesionAdultoTarjetaWrapper {
+  display: flex; flex-direction: column; align-items: center;
+  width: min(45vw, 200px);
+}
+.sesionAdulto .sesionAdultoTarjeta {
+  flex: 0 0 auto; width: 100%; aspect-ratio: 2 / 3;
+  border-radius: 12px; overflow: hidden; position: relative;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45); scroll-snap-align: center;
+  background: #060606; transition: transform 0.3s ease;
+}
+.sesionAdulto .sesionAdultoTarjeta:hover { transform: translateY(-8px); }
+.sesionAdulto .sesionAdultoPoster {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center; transition: transform 350ms ease;
+}
+.sesionAdulto .sesionAdultoTarjeta:hover .sesionAdultoPoster { transform: scale(1.06); }
+.sesionAdulto .sesionAdultoOverlay {
+  position: absolute; inset: 0; background: rgba(0,0,0,0.28);
+  opacity: 0; transition: opacity 250ms ease; pointer-events: none;
+}
+.sesionAdulto .sesionAdultoTarjeta:hover .sesionAdultoOverlay { opacity: 1; }
+.sesionAdulto .sesionAdultoBadge {
+  position: absolute; top: 10px; left: 10px;
+  background: rgba(124,58,237,0.85); color: #fff; font-weight: 600;
+  font-size: 11px; padding: 6px 8px; border-radius: 8px; backdrop-filter: blur(6px);
+}
+
+/* === TÍTULO DEBAJO === */
+.sesionAdulto .sesionAdultoTitle {
+  margin-top: 8px; font-size: 13px; font-weight: 600; color: #fff;
+  text-align: center; white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; max-width: 100%; display: block;
+}
+
+/* === RESPONSIVE === */
+@media (min-width: 1024px) {
+  .sesionAdulto .sesionAdultoTarjetaWrapper, .sesionAdulto .sesionAdultoTarjeta { width: 220px; }
+}
+@media (max-width: 768px) {
+  .nav { display: none; }
+  .hero { height: 60vh; align-items: flex-end; padding-bottom: 40px; }
+  .hero-content { max-width: 100%; padding: 0 5%; }
+  .hero-logo { max-width: 300px; }
+  .sesionAdulto .sesionAdultoTarjetaWrapper { width: min(60vw, 180px); }
+}
+@media (max-width: 480px) {
+  .logo { width: 80px; }
+  .hero-logo { max-width: 220px; }
+  .content-over-hero { margin-top: -80px; }
+  .sesionAdulto .sesionAdultoTarjetaWrapper { width: min(55vw, 160px); }
+}
+
+/* === PRELOADER === */
+:root { --preloader-time: 1s; }
+#preloader {
+  position: fixed; inset: 0; background: #141414;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 99999; transition: opacity 0.8s ease;
+}
+#preloader.hide { opacity: 0; pointer-events: none; }
+.preloader-content { text-align: center; color: #65615F; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+.preloader-content img { width: 220px; max-width: 80vw; filter: drop-shadow(0px -2px 9px #303030); }
+.prog-bar-wrapper { width: 205px; height: 6px; position: relative; border-radius: 50px; overflow: hidden; }
+.prog-bar-bg { position: absolute; inset: 0; background: #919191; border-radius: 50px; }
+.prog-bar { position: absolute; top: 0; left: 0; width: 0; height: 100%; background: linear-gradient(to right, #e300ff, #007cf0); border-radius: 50px; animation: loadbar var(--preloader-time) forwards; }
+@keyframes loadbar { to { width: 100%; } }
+.spinner div { width: 20px; height: 20px; border: 4px solid #65615F; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+ 
+  </style>
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div id="preloader">
+    <div class="preloader-content">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3dK3-XAKrEia-lWmiUqAYRfFQ1lR9eJX6ZZH8e_vHf576qf9GJjIWBW9Jg5LsilXX7WO2MOEkg5gzc4pESziaPeMJ9ws9mwtCDdp3p_17D0e0Uop_ZxavwwJeNLBvoyZJ0cxTKQpjzrJIR6LjJslB24tj-77AYrRCacQ3F2S2VPoXpPzPhM1zndxyd1Rg/s3307/B64D5386-DCA4-410B-A0A6-6ACB19D0A06F.png" alt="Logo">
+      <div class="prog-bar-wrapper">
+        <div class="prog-bar-bg"></div>
+        <div class="prog-bar"></div>
+      </div>
+      <div class="preloader-extra">
+        <div class="spinner"><div></div></div>
+        <p>Espere, cargando nuestro contenido</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header id="header">
+    <div class="container header-content">
+      <div class="logo">
+        <a href="https://lzplayhd.online/">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3dK3-XAKrEia-lWmiUqAYRfFQ1lR9eJX6ZZH8e_vHf576qf9GJjIWBW9Jg5LsilXX7WO2MOEkg5gzc4pESziaPeMJ9ws9mwtCDdp3p_17D0e0Uop_ZxavwwJeNLBvoyZJ0cxTKQpjzrJIR6LjJslB24tj-77AYrRCacQ3F2S2VPoXpPzPhM1zndxyd1Rg/s3307/B64D5386-DCA4-410B-A0A6-6ACB19D0A06F.png" alt="LzPlay Logo">
+        </a>
+      </div>
+      <ul class="nav">
+        <a href="https://lzplayhd.online/index.html"><li class="active"><i class="fa-solid fa-house"></i> Inicio</li></a>
+        <a href="https://lzplayhd.online/CatergoriasBase/serie/index.html"><li><i class="fa-solid fa-tv"></i> Series</li></a>
+        <a href="https://lzplayhd.online/CatergoriasBase/movie/index.html"><li><i class="fa-solid fa-film"></i> Películas</li></a>
+      </ul>
+      <div class="right-icons">
+        <a href="https://lzplayhd.online/index.html"><i class="fa-solid fa-house" style="font-size: 30px; color: white;"></i></a>
+        <a href="https://lzplayhd.online/HOME/ajustes.html">
+          <i class="fa-solid fa-user-circle" style="font-size: 32px; color: white;"></i>
+          <img id="avatar" class="avatar" src="" alt="Perfil" style="display:none;">
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-logo">
+          <img src="https://image.tmdb.org/t/p/original/7CZc2nw33Q0g9cHfVsJGoNuLSo3.png" alt="Monster High">
+        </div>
+        <p class="hero-info">Colección • Scooby-Doo</p>
+        <p class="hero-sinopsis">
+         un grupo de cuatro adolescentes y su gran danés parlante, llamado Scooby-Doo, que resuelven misterios con temática sobrenatural. Viajan en una furgoneta llamada "La Máquina del Misterio" y, a través de una serie de travesuras, descubren que detrás de los fantasmas y monstruos casi siempre hay un criminal enmascarado.
+		 </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="container content-over-hero">
+
+    <!-- PELÍCULAS -->
+    <section class="sesionAdulto">
+      <div class="flex items-center justify-between mb-4 px-1">
+        <h2 class="text-lg sm:text-xl md:text-2xl font-semibold">Colección Películas</h2>
+      </div>
+      <div class="sesionAdultoRow" id="contenedorPeliculas"></div>
+    </section>
+
+    <!-- ANIMACIÓN -->
+    <section class="sesionAdulto mt-12">
+      <div class="flex items-center justify-between mb-4 px-1">
+        <h2 class="text-lg sm:text-xl md:text-2xl font-semibold">Colección Animación</h2>
+      </div>
+      <div class="sesionAdultoRow" id="contenedorAnimacion"></div>
+    </section>
+
+    <!-- SERIES -->
+    <section class="sesionAdulto mt-12">
+      <div class="flex items-center justify-between mb-4 px-1">
+        <h2 class="text-lg sm:text-xl md:text-2xl font-semibold">Colección Series</h2>
+      </div>
+      <div class="sesionAdultoRow" id="contenedorSeries"></div>
+    </section>
+
+  </div>
+
+<script>
+
+// Preloader
+document.addEventListener("DOMContentLoaded", () => {
+  const preloader = document.getElementById("preloader");
+  const duration = getComputedStyle(document.documentElement).getPropertyValue("--preloader-time").trim();
+  const ms = parseFloat(duration) * (duration.includes("ms") ? 1 : 1000);
+  setTimeout(() => preloader.classList.add("hide"), ms);
+});
+
+// === CONFIGURACIÓN AUTOMÁTICA ===
+const filtroNombre = "Scooby-Doo"; // CAMBIA ESTO POR CUALQUIER COLECCIÓN
+
+// Genera el prefijo del caché automáticamente
+const CACHE_PREFIX = "cache_" + filtroNombre
+  .toLowerCase()
+  .replace(/[^a-z0-9]+/g, '')   // Elimina espacios, guiones, etc.
+  .replace(/^[^a-z]+/, '');     // Asegura que empiece con letra
+
+const CACHE_KEYS = {
+  animacion: `${CACHE_PREFIX}_animacion`,
+  peliculas: `${CACHE_PREFIX}_peliculas`,
+  series:    `${CACHE_PREFIX}_series`
+};
+
+const URLs = {
+  animacion: "https://raw.githubusercontent.com/lzrdrz10/sv/main/Categorias/animacion/index.html",
+  peliculas: "https://raw.githubusercontent.com/lzrdrz10/sv/main/Categorias/movie/index.html",
+  series: "https://raw.githubusercontent.com/lzrdrz10/sv/main/Categorias/serie/index.html"
+};
+
+const contenedores = {
+  animacion: document.getElementById("contenedorAnimacion"),
+  peliculas: document.getElementById("contenedorPeliculas"),
+  series: document.getElementById("contenedorSeries")
+};
+const secciones = {
+  animacion: contenedores.animacion.closest(".sesionAdulto"),
+  peliculas: contenedores.peliculas.closest(".sesionAdulto"),
+  series: contenedores.series.closest(".sesionAdulto")
+};
+
+// === CACHÉ ===
+function getCachedData(key) {
+  try {
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+function setCachedData(key, data) {
+  try {
+    localStorage.setItem(key, JSON.stringify(data));
+  } catch (e) {}
+}
+
+// === SIN DUPLICADOS (PRIORIDAD: ANIMACIÓN > PELÍCULAS > SERIES) ===
+let titulosBloqueados = new Set();
+
+// === FUNCIÓN PARA CORREGIR ENLACES (FUERA DE TODO) ===
+function corregirEnlace(href) {
+  if (!href) return "#";
+  if (href.startsWith("http")) return href;
+  
+  // Quitar todos los ../ o ../../
+  href = href.replace(/^(\.\.\/)+/, "");
+  
+  // Asegurar que siempre apunte a la raíz correcta
+  return "https://lzplayhd.online/" + href;
+}
+
+// === PROCESAR HTML (AHORA SÍ FUNCIONA) ===
+function procesarHTML(html, tipo) {
+  const temp = document.createElement("div");
+  temp.innerHTML = html;
+  const lista = [];
+
+  temp.querySelectorAll("article").forEach(article => {
+    const a = article.querySelector("a");
+    if (!a) return;
+
+    // USAR LA FUNCIÓN CORREGIDA
+    const link = corregirEnlace(a.getAttribute("href"));
+
+    const img = article.querySelector("img");
+    if (!img) return;
+    const poster = img.src;
+
+    const tituloDiv = article.querySelector("div.mt-2.font-semibold");
+    if (!tituloDiv) return;
+    const titulo = tituloDiv.innerText.trim();
+    if (!titulo.toLowerCase().includes(filtroNombre.toLowerCase())) return;
+
+    const tituloNorm = titulo.toLowerCase().trim();
+    if (titulosBloqueados.has(tituloNorm)) return;
+
+    const yearDiv = article.querySelector("div.text-xs.text-white\\/70");
+    if (!yearDiv) return;
+    const year = yearDiv.innerText.trim().match(/\d{4}/)?.[0];
+    if (!year) return;
+
+    lista.push({
+      year: parseInt(year),
+      titulo,
+      link,
+      poster,
+      categoria: tipo
+    });
+    titulosBloqueados.add(tituloNorm);
+  });
+
+  return lista.sort((a, b) => a.year - b.year);
+}
+
+// === RENDERIZAR ===
+function renderizarLista(lista, contenedor, seccionElement) {
+  if (lista.length === 0) {
+    seccionElement.style.display = "none";
+    return;
+  }
+  seccionElement.style.display = "block";
+  contenedor.innerHTML = "";
+
+  lista.forEach((item, i) => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "sesionAdultoTarjetaWrapper";
+    const enlace = document.createElement("a");
+    enlace.className = "sesionAdultoTarjeta";
+    enlace.href = item.link;
+    enlace.setAttribute("aria-label", item.titulo);
+    enlace.innerHTML = `
+      <img class="sesionAdultoPoster" src="${item.poster}" loading="lazy" decoding="async">
+      <div class="sesionAdultoOverlay"></div>
+      <span class="sesionAdultoBadge">${item.categoria} ${i + 1}</span>
+    `;
+    const titulo = document.createElement("div");
+    titulo.className = "sesionAdultoTitle";
+    titulo.textContent = item.titulo;
+    wrapper.appendChild(enlace);
+    wrapper.appendChild(titulo);
+    contenedor.appendChild(wrapper);
+  });
+}
+
+// === CARGAR (solo fetch si no hay caché) ===
+async function cargarColeccion(categoria, url, contenedor, seccionElement, cacheKey) {
+  const cached = getCachedData(cacheKey);
+
+  if (cached && Array.isArray(cached)) {
+    console.log(`Caché: ${categoria} (${cached.length} ítems)`);
+    renderizarLista(cached, contenedor, seccionElement);
+    return;
+  }
+
+  console.log(`Descargando ${categoria}...`);
+  const html = await fetch(url).then(r => r.text()).catch(() => "");
+  const lista = procesarHTML(html, categoria === "Movie" ? "Movie" : categoria === "Serie" ? "Serie" : "Animación");
+
+  setCachedData(cacheKey, lista);
+  renderizarLista(lista, contenedor, seccionElement);
+}
+
+// === BOTÓN DE ACTUALIZAR (con nombre de colección) ===
+function crearBotonActualizar() {
+  const btn = document.createElement("button");
+  btn.textContent = `Actualizar ${filtroNombre}`;
+  btn.style.cssText = `
+    position: fixed; bottom: 20px; right: 20px; z-index: 9999;
+    background: #e300ff; color: white; border: none; padding: 12px 16px;
+    border-radius: 50px; font-size: 14px; font-weight: 600;
+    box-shadow: 0 4px 12px rgba(227,0,255,0.4);
+    cursor: pointer; transition: all 0.3s;
+  `;
+  btn.onmouseover = () => btn.style.transform = "scale(1.05)";
+  btn.onmouseout = () => btn.style.transform = "scale(1)";
+  btn.onclick = () => {
+    btn.disabled = true;
+    btn.textContent = "Actualizando...";
+    Object.values(CACHE_KEYS).forEach(key => localStorage.removeItem(key));
+    location.reload();
+  };
+  document.body.appendChild(btn);
+}
+
+// === EJECUCIÓN ===
+(async () => {
+  titulosBloqueados.clear();
+  crearBotonActualizar();
+
+  await cargarColeccion("Animación", URLs.animacion, contenedores.animacion, secciones.animacion, CACHE_KEYS.animacion);
+  await cargarColeccion("Movie", URLs.peliculas, contenedores.peliculas, secciones.peliculas, CACHE_KEYS.peliculas);
+  await cargarColeccion("Serie", URLs.series, contenedores.series, secciones.series, CACHE_KEYS.series);
+})();
+
+</script>
+</body>
+</html>
