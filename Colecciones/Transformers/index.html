@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>COLECCIÓN Transformers
+  </title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    
+* { margin: 0; padding: 0; box-sizing: border-box; }
+*::-webkit-scrollbar { display: none; }
+body, html {
+  background: #141414;
+  color: white;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+img { display: block; }
+.container { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 2%; }
+
+/* === HEADER === */
+header {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 20px 0;
+  transition: all 0.4s ease;
+}
+header.scrolled {
+  background: #141414;
+  padding: 10px 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+.header-content { display: flex; justify-content: space-between; align-items: center; }
+.logo { width: 100px; }
+.logo img { width: 100%; height: auto; }
+.nav { display: flex; gap: 20px; list-style: none; }
+.nav li { font-size: 14px; font-weight: 500; color: #e5e5e5; cursor: pointer; transition: color 0.3s; }
+.nav li:hover, .nav li.active { color: #ffffff; }
+.right-icons { display: flex; align-items: center; gap: 18px; }
+.right-icons i { font-size: 24px; color: white; cursor: pointer; }
+.avatar { width: 32px; height: 32px; border-radius: 4px; cursor: pointer; }
+
+/* === HERO === */
+.hero {
+  position: relative;
+  height: 80vh;
+  min-height: 500px;
+  background: linear-gradient(to right, rgba(0,0,0,0.8), transparent 60%),
+              url('https://image.tmdb.org/t/p/original/77P56ZcL8M9Cw7FIptMIGjhNJoj.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 200px; background: linear-gradient(transparent, #141414 100%); z-index: 1;
+}
+.hero-content { max-width: 50%; padding-left: 4%; z-index: 2; position: relative; }
+.hero-logo { max-width: 500px; margin-bottom: 20px; }
+.hero-logo img { width: 100%; height: auto; }
+.hero-info { font-size: 1.2rem; font-weight: 600; margin-bottom: 24px; color: #46d369; }
+.hero-sinopsis { margin-top: 15px; font-size: 14px; max-width: 600px; line-height: 1.5; color: #ccc; }
+
+/* === CONTENIDO SOBRE HERO === */
+.content-over-hero { position: relative; margin-top: -120px; z-index: 10; padding-top: 2rem; }
+
+/* === SECCIONES === */
+.sesionAdulto { padding: 0 1rem; margin-bottom: 2rem; }
+.sesionAdulto .sesionAdultoRow {
+  display: flex; gap: 0.75rem; overflow-x: auto; padding-bottom: 0.75rem;
+  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+}
+.sesionAdulto .sesionAdultoRow::-webkit-scrollbar { height: 8px; }
+.sesionAdulto .sesionAdultoRow::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.08); border-radius: 8px;
+}
+
+/* === TARJETA WRAPPER - TAMAÑO FIJO Y UNIFORME === */
+.sesionAdulto .sesionAdultoTarjetaWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 auto;
+  width: 160px !important;           /* MÓVIL: 160px fijo */
+  scroll-snap-align: center;
+}
+
+/* === TARJETA === */
+.sesionAdulto .sesionAdultoTarjeta {
+  flex: 0 0 auto;
+  width: 100% !important;
+  aspect-ratio: 2 / 3;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  background: #060606;
+  transition: transform 0.3s ease;
+}
+
+/* === RESPONSIVE: TABLET Y ESCRITORIO === */
+@media (min-width: 768px) {
+  .sesionAdulto .sesionAdultoTarjetaWrapper {
+    width: 200px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sesionAdulto .sesionAdultoTarjetaWrapper,
+  .sesionAdulto .sesionAdultoTarjeta {
+    width: 220px !important;
+  }
+}
+
+/* === MÓVIL PEQUEÑO (opcional, si quieres más pequeño) === */
+@media (max-width: 480px) {
+  .sesionAdulto .sesionAdultoTarjetaWrapper {
+    width: 150px !important;
+  }
+}
+.sesionAdulto .sesionAdultoTarjeta:hover { transform: translateY(-8px); }
+.sesionAdulto .sesionAdultoPoster {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center; transition: transform 350ms ease;
+}
+.sesionAdulto .sesionAdultoTarjeta:hover .sesionAdultoPoster { transform: scale(1.06); }
+.sesionAdulto .sesionAdultoOverlay {
+  position: absolute; inset: 0; background: rgba(0,0,0,0.28);
+  opacity: 0; transition: opacity 250ms ease; pointer-events: none;
+}
+.sesionAdulto .sesionAdultoTarjeta:hover .sesionAdultoOverlay { opacity: 1; }
+.sesionAdulto .sesionAdultoBadge {
+  position: absolute; top: 10px; left: 10px;
+  background: rgba(124,58,237,0.85); color: #fff; font-weight: 600;
+  font-size: 11px; padding: 6px 8px; border-radius: 8px; backdrop-filter: blur(6px);
+}
+
+/* === TÍTULO DEBAJO === */
+.sesionAdulto .sesionAdultoTitle {
+  margin-top: 8px; font-size: 13px; font-weight: 600; color: #fff;
+  text-align: center; white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; max-width: 100%; display: block;
+}
+
+/* === RESPONSIVE === */
+@media (min-width: 1024px) {
+  .sesionAdulto .sesionAdultoTarjetaWrapper, .sesionAdulto .sesionAdultoTarjeta { width: 220px; }
+}
+@media (max-width: 768px) {
+  .nav { display: none; }
+  .hero { height: 60vh; align-items: flex-end; padding-bottom: 40px; }
+  .hero-content { max-width: 100%; padding: 0 5%; }
+  .hero-logo { max-width: 300px; }
+  .sesionAdulto .sesionAdultoTarjetaWrapper { width: min(60vw, 180px); }
+}
+@media (max-width: 480px) {
+  .logo { width: 80px; }
+  .hero-logo { max-width: 220px; }
+  .content-over-hero { margin-top: -80px; }
+  .sesionAdulto .sesionAdultoTarjetaWrapper { width: min(55vw, 160px); }
+}
+
+/* === PRELOADER === */
+:root { --preloader-time: 7s; }
+#preloader {
+  position: fixed; inset: 0; background: #141414;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 99999; transition: opacity 0.8s ease;
+}
+#preloader.hide { opacity: 0; pointer-events: none; }
+.preloader-content { text-align: center; color: #65615F; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+.preloader-content img { width: 220px; max-width: 80vw; filter: drop-shadow(0px -2px 9px #303030); }
+.prog-bar-wrapper { width: 205px; height: 6px; position: relative; border-radius: 50px; overflow: hidden; }
+.prog-bar-bg { position: absolute; inset: 0; background: #919191; border-radius: 50px; }
+.prog-bar { position: absolute; top: 0; left: 0; width: 0; height: 100%; background: linear-gradient(to right, #e300ff, #007cf0); border-radius: 50px; animation: loadbar var(--preloader-time) forwards; }
+@keyframes loadbar { to { width: 100%; } }
+.spinner div { width: 20px; height: 20px; border: 4px solid #65615F; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+ 
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PC9JETB0VP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PC9JETB0VP');
+</script>
+<script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div id="preloader">
+    <div class="preloader-content">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3dK3-XAKrEia-lWmiUqAYRfFQ1lR9eJX6ZZH8e_vHf576qf9GJjIWBW9Jg5LsilXX7WO2MOEkg5gzc4pESziaPeMJ9ws9mwtCDdp3p_17D0e0Uop_ZxavwwJeNLBvoyZJ0cxTKQpjzrJIR6LjJslB24tj-77AYrRCacQ3F2S2VPoXpPzPhM1zndxyd1Rg/s3307/B64D5386-DCA4-410B-A0A6-6ACB19D0A06F.png" alt="Logo">
+      <div class="prog-bar-wrapper">
+        <div class="prog-bar-bg"></div>
+        <div class="prog-bar"></div>
+      </div>
+      <div class="preloader-extra">
+        <div class="spinner"><div></div></div>
+        <p>El contenido podria tardar si es primera vez</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header id="header">
+    <div class="container header-content">
+      <div class="logo">
+        <a href="https://lzplayhd.online/">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3dK3-XAKrEia-lWmiUqAYRfFQ1lR9eJX6ZZH8e_vHf576qf9GJjIWBW9Jg5LsilXX7WO2MOEkg5gzc4pESziaPeMJ9ws9mwtCDdp3p_17D0e0Uop_ZxavwwJeNLBvoyZJ0cxTKQpjzrJIR6LjJslB24tj-77AYrRCacQ3F2S2VPoXpPzPhM1zndxyd1Rg/s3307/B64D5386-DCA4-410B-A0A6-6ACB19D0A06F.png" alt="LzPlay Logo">
+        </a>
+      </div>
+      <ul class="nav">
+        <a href="https://lzplayhd.online/index.html"><li class="active"><i class="fa-solid fa-house"></i> Inicio</li></a>
+        <a href="https://lzplayhd.online/CatergoriasBase/serie/index.html"><li><i class="fa-solid fa-tv"></i> Series</li></a>
+        <a href="https://lzplayhd.online/CatergoriasBase/movie/index.html"><li><i class="fa-solid fa-film"></i> Películas</li></a>
+      </ul>
+     <div class="right-icons">
+  <a href="https://lzplayhd.online/index.html">
+    <i class="fa-solid fa-house" style="font-size: 30px; color: white;"></i>
+  </a>
+
+  <a href="https://lzplayhd.online/HOME/ajustes.html" class="avatar-link">
+    <i id="iconoDefault" class="fa-solid fa-user-circle" style="font-size: 32px; color: white;"></i>
+
+    <!-- IMPORTANTE: este ID debe coincidir EXACTO -->
+    <img id="avatar" class="avatar" src="" alt="Perfil"
+    style="display:none; width:32px; height:32px; border-radius:50%;">
+  </a>
+</div>
+
+
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-logo">
+          <img src="https://image.tmdb.org/t/p/original/f8SuuGbyWSJxvxVOwtBgTP4955O.png" alt="Monster High">
+        </div>
+        <p class="hero-info">Colección • Transformers</p>
+        <p class="hero-sinopsis">
+          una guerra entre robots alienígenas del planeta Cybertron, los heroicos Autobots y los malvados Decepticons. Estas dos facciones se pueden transformar en maquinaria cotidiana, como vehículos, y su conflicto a menudo se desarrolla en la Tierra, donde luchan por el control del planeta y sus recursos. 
+		  
+		  </p>
+      </div>
+    </div>
+  </section>
+<br>
+
+  <div class="container content-over-hero">
+  <!-- PELÍCULAS -->
+  <section class="sesionAdulto">
+    <div class="flex items-center justify-between mb-4 px-1">
+      <h2 class="text-lg sm:text-xl md:text-2xl font-semibold">Colección Películas</h2>
+    </div>
+    <div class="sesionAdultoRow" id="contenedorPeliculas"></div>
+  </section>
+
+<!-- RELACIONADAS -->
+  <section class="sesionAdulto mt-12" id="seccionRelacionadas" style="display: none;">
+    <div class="flex items-center justify-between mb-4 px-1">
+      <h2 class="text-lg sm:text-xl md:text-2xl font-semibold">Relacionadas con Transformers</h2>
+    </div>
+    <div class="sesionAdultoRow" id="contenedorRelacionadas"></div>
+  </section>
+  
+  <!-- ANIMACIÓN -->
+  <section class="sesionAdulto mt-12">
+    <div class="flex items-center justify-between mb-4 px-1">
+      <h2 class="text-lg sm:text-xl md:text-2xl font-semibold">Colección Animación</h2>
+    </div>
+    <div class="sesionAdultoRow" id="contenedorAnimacion"></div>
+  </section>
+
+  <!-- SERIES -->
+  <section class="sesionAdulto mt-12">
+    <div class="flex items-center justify-between mb-4 px-1">
+      <h2 class="text-lg sm:text-xl md:text-2xl font-semibold">Colección Series</h2>
+    </div>
+    <div class="sesionAdultoRow" id="contenedorSeries"></div>
+  </section>
+
+  
+</div>
+<br>
+<br>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const preloader = document.getElementById("preloader");
+  const duration = getComputedStyle(document.documentElement).getPropertyValue("--preloader-time").trim();
+  const ms = parseFloat(duration) * (duration.includes("ms") ? 1 : 1000);
+  setTimeout(() => preloader.classList.add("hide"), ms);
+});
+
+const filtroNombre = "Transformers"; // CAMBIA ESTO POR CUALQUIER COLECCIÓN
+
+const palabrasClave = [
+  "bumblebee"
+];
+
+const CACHE_PREFIX = "cache_" + filtroNombre
+  .toLowerCase()
+  .replace(/[^a-z0-9]+/g, '')
+  .replace(/^[^a-z]+/, '');
+
+const CACHE_KEYS = {
+  animacion: `${CACHE_PREFIX}_animacion`,
+  peliculas: `${CACHE_PREFIX}_peliculas`,
+  series: `${CACHE_PREFIX}_series`,
+  relacionadas: `${CACHE_PREFIX}_relacionadas` // ← NUEVO
+};
+
+const URLs = {
+  animacion: "https://raw.githubusercontent.com/lzrdrz10/sv/main/Categorias/animacion/index.html",
+  peliculas: "https://raw.githubusercontent.com/lzrdrz10/sv/main/Categorias/movie/index.html",
+  series: "https://raw.githubusercontent.com/lzrdrz10/sv/main/Categorias/serie/index.html"
+};
+
+const contenedores = {
+  animacion: document.getElementById("contenedorAnimacion"),
+  peliculas: document.getElementById("contenedorPeliculas"),
+  series: document.getElementById("contenedorSeries"),
+  relacionadas: document.getElementById("contenedorRelacionadas") // ← NUEVO
+};
+
+const secciones = {
+  animacion: contenedores.animacion.closest(".sesionAdulto"),
+  peliculas: contenedores.peliculas.closest(".sesionAdulto"),
+  series: contenedores.series.closest(".sesionAdulto"),
+  relacionadas: document.getElementById("seccionRelacionadas") // ← NUEVO
+};
+
+// === CACHÉ ===
+function getCachedData(key) {
+  try {
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+function setCachedData(key, data) {
+  try {
+    localStorage.setItem(key, JSON.stringify(data));
+  } catch (e) {}
+}
+
+// === SIN DUPLICADOS ===
+let titulosBloqueados = new Set();
+
+// === CORREGIR ENLACES ===
+function corregirEnlace(href) {
+  if (!href) return "#";
+  if (href.startsWith("http")) return href;
+  href = href.replace(/^(\.\.\/)+/, "");
+  return "https://lzplayhd.online/" + href;
+}
+
+// === PROCESAR HTML: SEPARAR PRINCIPAL Y RELACIONADAS ===
+function procesarHTML(html, tipo) {
+  const temp = document.createElement("div");
+  temp.innerHTML = html;
+  const principal = [];
+  const relacionadas = [];
+
+  temp.querySelectorAll("article").forEach(article => {
+    const a = article.querySelector("a");
+    if (!a) return;
+    const link = corregirEnlace(a.getAttribute("href"));
+    const img = article.querySelector("img");
+    if (!img) return;
+    const poster = img.src;
+    const tituloDiv = article.querySelector("div.mt-2.font-semibold");
+    if (!tituloDiv) return;
+    const titulo = tituloDiv.innerText.trim();
+
+    const tituloLower = titulo.toLowerCase().trim();
+    const esPrincipal = tituloLower.includes(filtroNombre.toLowerCase());
+    const esRelacionada = !esPrincipal && palabrasClave.some(palabra => 
+      tituloLower.includes(palabra.toLowerCase())
+    );
+
+    if (!esPrincipal && !esRelacionada) return;
+
+    const tituloNorm = tituloLower;
+    if (titulosBloqueados.has(tituloNorm)) return;
+
+    const yearDiv = article.querySelector("div.text-xs.text-white\\/70");
+    if (!yearDiv) return;
+    const year = yearDiv.innerText.trim().match(/\d{4}/)?.[0];
+    if (!year) return;
+
+    const item = {
+      year: parseInt(year),
+      titulo,
+      link,
+      poster,
+      categoria: tipo
+    };
+
+    if (esPrincipal) {
+      principal.push(item);
+    } else if (esRelacionada) {
+      relacionadas.push(item);
+    }
+
+    titulosBloqueados.add(tituloNorm);
+  });
+
+  return {
+    principal: principal.sort((a, b) => a.year - b.year),
+    relacionadas: relacionadas.sort((a, b) => a.year - b.year)
+  };
+}
+
+// === RENDERIZAR (MUESTRA AÑO) ===
+function renderizarLista(lista, contenedor, seccionElement) {
+  if (lista.length === 0) {
+    if (seccionElement) seccionElement.style.display = "none";
+    return;
+  }
+  if (seccionElement) seccionElement.style.display = "block";
+  contenedor.innerHTML = "";
+  lista.forEach((item) => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "sesionAdultoTarjetaWrapper";
+    const enlace = document.createElement("a");
+    enlace.className = "sesionAdultoTarjeta";
+    enlace.href = item.link;
+    enlace.setAttribute("aria-label", item.titulo);
+    enlace.innerHTML = `
+      <img class="sesionAdultoPoster" src="${item.poster}" loading="lazy" decoding="async">
+      <div class="sesionAdultoOverlay"></div>
+      <span class="sesionAdultoBadge">${item.year}</span>
+    `;
+    const titulo = document.createElement("div");
+    titulo.className = "sesionAdultoTitle";
+    titulo.textContent = item.titulo;
+    wrapper.appendChild(enlace);
+    wrapper.appendChild(titulo);
+    contenedor.appendChild(wrapper);
+  });
+}
+
+// === CARGAR COLECCIÓN (PRINCIPAL + RELACIONADAS) ===
+async function cargarColeccion(categoria, url, contenedor, seccionElement, cacheKey) {
+  const cached = getCachedData(cacheKey);
+  if (cached && cached.principal) {
+    console.log(`Caché: ${categoria} (principal: ${cached.principal.length}, relacionadas: ${cached.relacionadas.length})`);
+    renderizarLista(cached.principal, contenedor, seccionElement);
+    
+    // Acumular relacionadas
+    const todas = getCachedData(CACHE_KEYS.relacionadas) || [];
+    const nuevas = cached.relacionadas.filter(r => !todas.some(ex => ex.titulo === r.titulo));
+    if (nuevas.length > 0) {
+      const actualizadas = [...todas, ...nuevas];
+      setCachedData(CACHE_KEYS.relacionadas, actualizadas);
+      renderizarLista(actualizadas, contenedores.relacionadas, secciones.relacionadas);
+    }
+    return;
+  }
+
+  console.log(`Descargando ${categoria}...`);
+  const html = await fetch(url).then(r => r.text()).catch(() => "");
+  const { principal, relacionadas } = procesarHTML(html, categoria === "Movie" ? "Movie" : categoria === "Serie" ? "Serie" : "Animación");
+
+  setCachedData(cacheKey, { principal, relacionadas });
+  renderizarLista(principal, contenedor, seccionElement);
+
+  // Acumular relacionadas
+  const todas = getCachedData(CACHE_KEYS.relacionadas) || [];
+  const unicas = relacionadas.filter(r => !todas.some(ex => ex.titulo === r.titulo));
+  if (unicas.length > 0) {
+    const actualizadas = [...todas, ...unicas];
+    setCachedData(CACHE_KEYS.relacionadas, actualizadas);
+    renderizarLista(actualizadas, contenedores.relacionadas, secciones.relacionadas);
+  }
+}
+
+// === BOTÓN ACTUALIZAR ===
+function crearBotonActualizar() {
+  const btn = document.createElement("button");
+  btn.textContent = `Actualizar ${filtroNombre}`;
+  btn.style.cssText = `
+    position: fixed; bottom: 20px; right: 20px; z-index: 9999;
+    background: #e300ff; color: white; border: none; padding: 12px 16px;
+    border-radius: 50px; font-size: 14px; font-weight: 600;
+    box-shadow: 0 4px 12px rgba(227,0,255,0.4);
+    cursor: pointer; transition: all 0.3s;
+  `;
+  btn.onmouseover = () => btn.style.transform = "scale(1.05)";
+  btn.onmouseout = () => btn.style.transform = "scale(1)";
+  btn.onclick = () => {
+    btn.disabled = true;
+    btn.textContent = "Actualizando...";
+    Object.values(CACHE_KEYS).forEach(key => localStorage.removeItem(key));
+    location.reload();
+  };
+  document.body.appendChild(btn);
+}
+
+// === EJECUCIÓN ===
+(async () => {
+  titulosBloqueados.clear();
+  crearBotonActualizar();
+
+  await cargarColeccion("Animación", URLs.animacion, contenedores.animacion, secciones.animacion, CACHE_KEYS.animacion);
+  await cargarColeccion("Movie", URLs.peliculas, contenedores.peliculas, secciones.peliculas, CACHE_KEYS.peliculas);
+  await cargarColeccion("Serie", URLs.series, contenedores.series, secciones.series, CACHE_KEYS.series);
+
+  // Mostrar sección relacionadas si hay contenido
+  const relacionadas = getCachedData(CACHE_KEYS.relacionadas);
+  if (relacionadas && relacionadas.length > 0) {
+    secciones.relacionadas.style.display = "block";
+  }
+})();
+
+// === FORZAR TAMAÑO UNIFORME ===
+function forzarTamanoUniforme() {
+  const wrappers = document.querySelectorAll('.sesionAdultoTarjetaWrapper');
+  wrappers.forEach(wrapper => {
+    wrapper.style.flex = '0 0 auto';
+    wrapper.style.width = '';
+  });
+  void wrappers[0]?.offsetHeight;
+  const isMobile = window.innerWidth < 768;
+  const isTablet = window.innerWidth < 1024;
+  const width = isMobile ? '160px' : isTablet ? '200px' : '220px';
+  wrappers.forEach(wrapper => {
+    wrapper.style.width = width;
+  });
+}
+
+const originalRender = renderizarLista;
+renderizarLista = function(lista, contenedor, seccionElement) {
+  originalRender(lista, contenedor, seccionElement);
+  setTimeout(forzarTamanoUniforme, 100);
+};
+
+// === AVATAR ===
+document.addEventListener("DOMContentLoaded", function () {
+    var iconoGuardado = localStorage.getItem("iconoUsuario");
+    var imgAvatar = document.getElementById("avatar");
+    var iconoDefault = document.getElementById("iconoDefault");
+    if (iconoGuardado && imgAvatar) {
+        imgAvatar.src = iconoGuardado + "?v=" + Date.now();
+        imgAvatar.style.display = "block";
+        if (iconoDefault) {
+            iconoDefault.style.display = "none";
+        }
+    }
+});
+</script>
+
+</body>
+</html>
