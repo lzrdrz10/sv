@@ -6,16 +6,17 @@
 <title>Ojitos de huevo</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 <style>
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-body, html { margin: 0; padding: 0; height: 100%; }
+body, html { margin: 0; padding: 0; height: 100%; font-family: "Poppins", sans-serif; }
 body::before {
   content: "";
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-image: url('https://image.tmdb.org/t/p/original/9u6F70NmSxb5TmphXkiYVtN8PDh.jpg');
+  background-image: url('https://image.tmdb.org/t/p/w1280/9u6F70NmSxb5TmphXkiYVtN8PDh.jpg');
   background-size: cover;
   background-position: center;
   z-index: -2;
@@ -31,8 +32,10 @@ body::after {
 #iframe-principal { width: 100%; height: 220px; border: none; background: black; }
 #contenedor-video { position: fixed; top: 0; left: 0; width: 100%; z-index: 10; }
 .capitulo-seleccionado { background-color: #FF0000 !important; color: #fff !important; font-weight: bold; border-bottom: none !important; }
+.server-btn { display: none; }
+.server-seleccionado { background-color: #FF7F00 !important; color: #fff !important; }
+.error-message { display: none; color: #FF4444; font-size: 0.875rem; text-align: center; margin-top: 1rem; }
 </style>
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PC9JETB0VP"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -42,11 +45,12 @@ body::after {
   gtag('config', 'G-PC9JETB0VP');
 </script>
 <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+<script src="../access.js"></script>
 </head>
 <body class="text-white font-sans leading-relaxed">
 <div id="contenedor-video" class="relative">
   <iframe id="iframe-principal" allow="fullscreen" allowfullscreen></iframe>
-  <a href="../index.html" aria-label="Volver" class="absolute top-3 left-3 text-white text-2xl z-20">
+  <a href="https://lzrdrz10.github.io/sv/" aria-label="Volver" class="absolute top-3 left-3 text-white text-2xl z-20">
     <i class="fas fa-arrow-left"></i>
   </a>
   <div class="absolute top-0 left-0 w-full h-full z-10" style="pointer-events: none;"></div>
@@ -69,40 +73,159 @@ body::after {
     </select>
   </div>
   <div class="flex space-x-2 overflow-x-auto scrollbar-hide pb-1" id="lista-capitulos"></div>
+  <div id="servidores" class="flex space-x-2">
+    <button id="server2-btn" class="server-btn px-3 py-1 rounded bg-[#2a2a2a] text-white text-sm">Servidor 2</button>
+    <button id="server3-btn" class="server-btn px-3 py-1 rounded bg-[#2a2a2a] text-white text-sm">Servidor 3</button>
+  </div>
+  <div id="error-message" class="error-message">No hay enlaces disponibles para este episodio.</div>
   <div class="bg-[#1e1e1e] rounded-lg p-4 text-sm text-gray-300 leading-relaxed">
-    <p><span class="font-semibold text-white">Sinopsis:</span> Cuando un chico ciego que aspira a ser comediante decide seguir sus sueños, él y su mejor amigo con parálisis cerebral deberán enfrentarse al mundo, sin importar qué se interponga.</p>
+    <p><span class="font-semibold text-white">Sinopsis:</span> Acompañado por su mejor amigo, que tiene parálisis cerebral, un invidente aspirante a humorista se lanza a cumplir su gran sueño... caiga quien caiga.</p>
   </div>
 </div>
 <script>
-(function(_0x1f4b3a,_0x2e5c1d){var _0x4c3e2b=function(_0x5a3f1c){while(--_0x5a3f1c){_0x1f4b3a['push'](_0x1f4b3a['shift']());}};var _0x3b2f4e=function(){var _0x1a3e5f={'data':function(_0x4e2c1b,_0x3f5a2d){return _0x4e2c1b!==_0x3f5a2d;},'action':function(){return'atob';},'value':function(){return'VXNlckx6UGxheQ==';},'store':function(){return'localStorage';},'redirect':function(){return'https://descargar.lzplayhd.online/';},'message':function(){return'Acceso no permitido. Descarga la aplicacion oficial';},'isSafari':function(){return /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);}};return _0x1a3e5f;}();_0x4c3e2b(0x1f4);var _0x5e3d2a=_0x3b2f4e;document['addEventListener']('DOMContentLoaded',function(){if(!_0x5e3d2a['isSafari']()){var _0x2d4f1c=_0x5e3d2a['store']();var _0x4b3e2f=window[_0x2d4f1c]['getItem']('accessToken');if(!_0x4b3e2f || _0x5e3d2a['data'](_0x4b3e2f,_0x5e3d2a['action']()(_0x5e3d2a['value']()))){alert(_0x5e3d2a['message']());window['location']['href']=_0x5e3d2a['redirect']();}window[_0x2d4f1c]['removeItem']('accessToken');}});})(['push','shift'],0x1f4);
+(function(_0x1f4b3a,_0x2e5c1d){
+  var _0x4c3e2b=function(_0x5a3f1c){
+    while(--_0x5a3f1c){
+      _0x1f4b3a['push'](_0x1f4b3a['shift']());
+    }
+  };
+  var _0x3b2f4e=function(){
+    var _0x1a3e5f={
+      'data':function(_0x4e2c1b,_0x3f5a2d){
+        return _0x4e2c1b!==_0x3f5a2d;
+      },
+      'action':function(){
+        return'atob';
+      },
+      'value':function(){
+        return'VXNlckx6UGxheQ==';
+      },
+      'store':function(){
+        return'localStorage';
+      },
+      'redirect':function(){
+        return'https://dlz.blogdepelis.lat/';
+      },
+      'message':function(){
+        return'Acceso no permitido. Descarga la aplicacion oficial';
+      },
+      'isSafari':function(){
+        return /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+      }
+    };
+    return _0x1a3e5f;
+  }();
+  _0x4c3e2b(0x1f4);
+  var _0x5e3d2a=_0x3b2f4e;
+  document['addEventListener']('DOMContentLoaded',function(){
+    if(!_0x5e3d2a['isSafari']()){
+      var _0x2d4f1c=_0x5e3d2a['store']();
+      var _0x4b3e2f=window[_0x2d4f1c]['getItem']('accessToken');
+      if(!_0x4b3e2f || _0x5e3d2a['data'](_0x4b3e2f,_0x5e3d2a['action']()(_0x5e3d2a['value']()))){
+        alert(_0x5e3d2a['message']());
+        window['location']['href']=_0x5e3d2a['redirect']();
+      }
+      window[_0x2d4f1c]['removeItem']('accessToken');
+    }
+  });
+})(['push','shift'],0x1f4);
 
+var videosPorCapitulo = {
+  "1": {
+    "1": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/0a99mp7wyd1e",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/wj87fjxclyk5"
+    },
+    "2": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/sg8qjh58u5s0",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/3mqz88cevhmk"
+    },
+    "3": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/ddlvbtrfzdjv",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/ftezl53ele2w"
+    },
+    "4": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/74eqa5986xdd",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/8cklk2dcp4f9"
+    },
+    "5": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/luzl0mcqlftp",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/06mb2kdxj4f4"
+    },
+    "6": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/thpoa3nngj29",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/9m3wnnouuv8o"
+    },
+    "7": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/0hj70w7nigmq",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/ckg4l5fg86z0"
+    },
+    "8": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/kg9ttr09dfnr",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/9d4le3p0egzo"
+    }
+  },
+  "2": {
+    "1": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/58eccmzay8my"
+    },
+    "2": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/vorr65or1j9q",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/pwmwrwqsj3e6"
+    },
+    "3": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/wrsneekid9u4",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/ktwd7fetywsm"
+    },
+    "4": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/qau04xiv3yub",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/o1l2140gqoil"
+    },
+    "5": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/7bmkt2buefec",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/orvb34ar1y0p"
+    },
+    "6": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/p487md46nas0",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/26e3jd9d3gr5"
+    },
+    "7": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/uu883qxpzwj6",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/3lrsd6mnsccu"
+    },
+    "8": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/58mx5sq5vj56",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/2hdhm22cztew"
+    }
+  }
+};
 var serieId = "237983";
 var temporadaSelect = document.getElementById('temporada');
 var listaCapitulos = document.getElementById('lista-capitulos');
 var tempTitulo = document.getElementById('temp-titulo');
 var iframePrincipal = document.getElementById('iframe-principal');
+var server2Btn = document.getElementById('server2-btn');
+var server3Btn = document.getElementById('server3-btn');
+var errorMessage = document.getElementById('error-message');
 
 var serieActual = {
   id: serieId,
   titulo: "Ojitos de huevo",
   temporada: temporadaSelect.value,
-  poster: "https://image.tmdb.org/t/p/original/c70GJ8dVQg0TosyaVwQYoGCZoMY.jpg"
+  poster: "https://image.tmdb.org/t/p/w500/c70GJ8dVQg0TosyaVwQYoGCZoMY.jpg",
+  currentServer: "url1"
 };
-
-var videosPorCapitulo = {"1":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":""},"2":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":""}};
 
 function guardarTemporada(temporada) {
   localStorage.setItem("temporadaSeleccionada_" + serieId, temporada);
 }
 
 function cargarTemporadaGuardada() {
-  var temp = localStorage.getItem("temporadaSeleccionada_" + serieId);
-  return temp ? temp : "1";
+  return localStorage.getItem("temporadaSeleccionada_" + serieId) || "1";
 }
 
 function guardarCapitulo(capitulo) {
-  var key = "ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada;
-  localStorage.setItem(key, capitulo);
+  localStorage.setItem("ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada, capitulo);
 }
 
 function cargarCapituloGuardado() {
@@ -127,10 +250,21 @@ function cargarCapituloGuardado() {
 
 function cambiarVideo(capitulo) {
   var temp = serieActual.temporada;
-  var url = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
-  if (url) {
-    iframePrincipal.src = url;
+  var data = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
+  errorMessage.style.display = 'none';
+  serieActual.currentServer = "url1";
+  server2Btn.className = server2Btn.className.replace(' server-seleccionado', '');
+  server3Btn.className = server3Btn.className.replace(' server-seleccionado', '');
+  if (data && data.url1 && data.url1.trim() !== '') {
+    iframePrincipal.src = data.url1;
+    server2Btn.style.display = data.url2 && data.url2.trim() !== '' ? 'inline-block' : 'none';
+    server3Btn.style.display = data.url3 && data.url3.trim() !== '' ? 'inline-block' : 'none';
     guardarCapitulo(capitulo);
+  } else {
+    iframePrincipal.src = '';
+    server2Btn.style.display = 'none';
+    server3Btn.style.display = 'none';
+    errorMessage.style.display = 'block';
   }
 }
 
@@ -158,9 +292,7 @@ function agregarEventosCapitulos() {
         for (var j = 0; j < botones.length; j++) {
           botones[j].className = botones[j].className.replace(' capitulo-seleccionado', '');
         }
-        if (botones[index].className.indexOf('capitulo-seleccionado') === -1) {
-          botones[index].className += ' capitulo-seleccionado';
-        }
+        botones[index].className += ' capitulo-seleccionado';
         botones[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
         cambiarVideo(botones[index].getAttribute('data-capitulo'));
       };
@@ -168,11 +300,46 @@ function agregarEventosCapitulos() {
   }
 }
 
+server2Btn.onclick = function() {
+  var temp = serieActual.temporada;
+  var seleccionado = listaCapitulos.querySelector('.capitulo-seleccionado');
+  if (seleccionado) {
+    var capitulo = seleccionado.getAttribute('data-capitulo');
+    var data = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
+    if (data && data.url2 && data.url2.trim() !== '') {
+      serieActual.currentServer = "url2";
+      iframePrincipal.src = data.url2;
+      server2Btn.className += ' server-seleccionado';
+      server3Btn.className = server3Btn.className.replace(' server-seleccionado', '');
+    }
+  }
+};
+
+server3Btn.onclick = function() {
+  var temp = serieActual.temporada;
+  var seleccionado = listaCapitulos.querySelector('.capitulo-seleccionado');
+  if (seleccionado) {
+    var capitulo = seleccionado.getAttribute('data-capitulo');
+    var data = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
+    if (data && data.url3 && data.url3.trim() !== '') {
+      serieActual.currentServer = "url3";
+      iframePrincipal.src = data.url3;
+      server3Btn.className += ' server-seleccionado';
+      server2Btn.className = server2Btn.className.replace(' server-seleccionado', '');
+    }
+  }
+};
+
 temporadaSelect.onchange = function() {
   var temp = temporadaSelect.value;
   serieActual.temporada = temp;
   tempTitulo.textContent = temp;
   guardarTemporada(temp);
+  server2Btn.style.display = 'none';
+  server3Btn.style.display = 'none';
+  server2Btn.className = server2Btn.className.replace(' server-seleccionado', '');
+  server3Btn.className = server3Btn.className.replace(' server-seleccionado', '');
+  errorMessage.style.display = 'none';
   generarCapitulos(temp);
 };
 
@@ -183,7 +350,6 @@ window.onload = function() {
   tempTitulo.textContent = tempGuardada;
   generarCapitulos(tempGuardada);
 };
-
 </script>
 </body>
 </html>
