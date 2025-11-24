@@ -6,16 +6,17 @@
 <title>Bob Esponja</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 <style>
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-body, html { margin: 0; padding: 0; height: 100%; }
+body, html { margin: 0; padding: 0; height: 100%; font-family: "Poppins", sans-serif; }
 body::before {
   content: "";
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-image: url('https://image.tmdb.org/t/p/original/61u5BENargOxT5FtHPZDOlEqtHB.jpg');
+  background-image: url('https://image.tmdb.org/t/p/w1280/61u5BENargOxT5FtHPZDOlEqtHB.jpg');
   background-size: cover;
   background-position: center;
   z-index: -2;
@@ -31,8 +32,10 @@ body::after {
 #iframe-principal { width: 100%; height: 220px; border: none; background: black; }
 #contenedor-video { position: fixed; top: 0; left: 0; width: 100%; z-index: 10; }
 .capitulo-seleccionado { background-color: #FF0000 !important; color: #fff !important; font-weight: bold; border-bottom: none !important; }
+.server-btn { display: none; }
+.server-seleccionado { background-color: #FF7F00 !important; color: #fff !important; }
+.error-message { display: none; color: #FF4444; font-size: 0.875rem; text-align: center; margin-top: 1rem; }
 </style>
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PC9JETB0VP"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -42,11 +45,12 @@ body::after {
   gtag('config', 'G-PC9JETB0VP');
 </script>
 <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+<script src="../access.js"></script>
 </head>
 <body class="text-white font-sans leading-relaxed">
 <div id="contenedor-video" class="relative">
   <iframe id="iframe-principal" allow="fullscreen" allowfullscreen></iframe>
-  <a href="../index.html" aria-label="Volver" class="absolute top-3 left-3 text-white text-2xl z-20">
+  <a href="https://lzrdrz10.github.io/sv/" aria-label="Volver" class="absolute top-3 left-3 text-white text-2xl z-20">
     <i class="fas fa-arrow-left"></i>
   </a>
   <div class="absolute top-0 left-0 w-full h-full z-10" style="pointer-events: none;"></div>
@@ -58,51 +62,229 @@ body::after {
   <div class="flex flex-wrap items-center gap-3 text-sm text-gray-400">
     <span><strong class="text-[#FF7F00]">7.7</strong> / 10</span>
     <span class="text-white">•</span>
-    <span>Animación,Comedia,Familia</span>
+    <span>Animación, Comedia, Familia</span>
     <span class="text-white">•</span>
     <span>1999</span>
   </div>
   <div class="flex items-center gap-3">
     <label for="temporada" class="text-sm text-gray-300">Temporada:</label>
     <select id="temporada" class="bg-[#1f1f1f] text-white px-3 py-1 rounded text-sm">
-      <option value="1">Temporada 1</option><option value="2">Temporada 2</option><option value="3">Temporada 3</option><option value="4">Temporada 4</option><option value="5">Temporada 5</option><option value="6">Temporada 6</option><option value="7">Temporada 7</option><option value="8">Temporada 8</option><option value="9">Temporada 9</option><option value="10">Temporada 10</option><option value="11">Temporada 11</option><option value="12">Temporada 12</option><option value="13">Temporada 13</option><option value="14">Temporada 14</option><option value="15">Temporada 15</option><option value="16">Temporada 16</option><option value="17">Temporada 17</option>
-    </select>
+      <option value="1">Temporada 1</option>
+      <!--<option value="2">Temporada 2</option><option value="3">Temporada 3</option><option value="4">Temporada 4</option><option value="5">Temporada 5</option><option value="6">Temporada 6</option><option value="7">Temporada 7</option><option value="8">Temporada 8</option><option value="9">Temporada 9</option><option value="10">Temporada 10</option><option value="11">Temporada 11</option><option value="12">Temporada 12</option><option value="13">Temporada 13</option><option value="14">Temporada 14</option><option value="15">Temporada 15</option><option value="16">Temporada 16</option><option value="17">Temporada 17</option>
+   --> </select>
   </div>
   <div class="flex space-x-2 overflow-x-auto scrollbar-hide pb-1" id="lista-capitulos"></div>
+  <div id="servidores" class="flex space-x-2">
+    <button id="server2-btn" class="server-btn px-3 py-1 rounded bg-[#2a2a2a] text-white text-sm">Servidor 2</button>
+    <button id="server3-btn" class="server-btn px-3 py-1 rounded bg-[#2a2a2a] text-white text-sm">Servidor 3</button>
+  </div>
+  <div id="error-message" class="error-message">No hay enlaces disponibles para este episodio.</div>
   <div class="bg-[#1e1e1e] rounded-lg p-4 text-sm text-gray-300 leading-relaxed">
-    <p><span class="font-semibold text-white">Sinopsis:</span> Serie animada que se desarrolla en el fondo del océano Pacífico, en la ciudad submarina de Fondo de Bikini, donde vive una esponja de mar rectangular y de color amarillo, llamada Bob Esponja.</p>
+    <p><span class="font-semibold text-white">Sinopsis:</span> Cerca del Atolón Bikini, a algunas leguas bajo el mar, en una ciudad submarina llamada Fondo de Bikini, vive Bob Esponja. No tiene un modo lógico de actuar en la vida, todo lo hace de una manera poco convencional. Sus buenas intenciones y sus ansias de hacer el bien suelen crear bastantes problemas. Bob Esponja ha sido producida en los estudios de Burbank, en California. Fue creado por Steve Hillenburg, el guionista de la serie de culto "La vida moderna de Rocko".</p>
   </div>
 </div>
 <script>
-(function(_0x1f4b3a,_0x2e5c1d){var _0x4c3e2b=function(_0x5a3f1c){while(--_0x5a3f1c){_0x1f4b3a['push'](_0x1f4b3a['shift']());}};var _0x3b2f4e=function(){var _0x1a3e5f={'data':function(_0x4e2c1b,_0x3f5a2d){return _0x4e2c1b!==_0x3f5a2d;},'action':function(){return'atob';},'value':function(){return'VXNlckx6UGxheQ==';},'store':function(){return'localStorage';},'redirect':function(){return'https://descargar.lzplayhd.online/';},'message':function(){return'Acceso no permitido. Descarga la aplicacion oficial';},'isSafari':function(){return /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);}};return _0x1a3e5f;}();_0x4c3e2b(0x1f4);var _0x5e3d2a=_0x3b2f4e;document['addEventListener']('DOMContentLoaded',function(){if(!_0x5e3d2a['isSafari']()){var _0x2d4f1c=_0x5e3d2a['store']();var _0x4b3e2f=window[_0x2d4f1c]['getItem']('accessToken');if(!_0x4b3e2f || _0x5e3d2a['data'](_0x4b3e2f,_0x5e3d2a['action']()(_0x5e3d2a['value']()))){alert(_0x5e3d2a['message']());window['location']['href']=_0x5e3d2a['redirect']();}window[_0x2d4f1c]['removeItem']('accessToken');}});})(['push','shift'],0x1f4);
+(function(_0x1f4b3a,_0x2e5c1d){
+  var _0x4c3e2b=function(_0x5a3f1c){
+    while(--_0x5a3f1c){
+      _0x1f4b3a['push'](_0x1f4b3a['shift']());
+    }
+  };
+  var _0x3b2f4e=function(){
+    var _0x1a3e5f={
+      'data':function(_0x4e2c1b,_0x3f5a2d){
+        return _0x4e2c1b!==_0x3f5a2d;
+      },
+      'action':function(){
+        return'atob';
+      },
+      'value':function(){
+        return'VXNlckx6UGxheQ==';
+      },
+      'store':function(){
+        return'localStorage';
+      },
+      'redirect':function(){
+        return'https://dlz.blogdepelis.lat/';
+      },
+      'message':function(){
+        return'Acceso no permitido. Descarga la aplicacion oficial';
+      },
+      'isSafari':function(){
+        return /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+      }
+    };
+    return _0x1a3e5f;
+  }();
+  _0x4c3e2b(0x1f4);
+  var _0x5e3d2a=_0x3b2f4e;
+  document['addEventListener']('DOMContentLoaded',function(){
+    if(!_0x5e3d2a['isSafari']()){
+      var _0x2d4f1c=_0x5e3d2a['store']();
+      var _0x4b3e2f=window[_0x2d4f1c]['getItem']('accessToken');
+      if(!_0x4b3e2f || _0x5e3d2a['data'](_0x4b3e2f,_0x5e3d2a['action']()(_0x5e3d2a['value']()))){
+        alert(_0x5e3d2a['message']());
+        window['location']['href']=_0x5e3d2a['redirect']();
+      }
+      window[_0x2d4f1c]['removeItem']('accessToken');
+    }
+  });
+})(['push','shift'],0x1f4);
 
+var videosPorCapitulo = {
+  "1": {
+    "1": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/zrh41ji0kycd"
+    },
+    "2": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/881vm5smd9l9"
+    },
+    "3": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/67gzgiz24fga"
+    },
+    "4": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/hmoko795mco1"
+    },
+    "5": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/64bmyohycuvt"
+    },
+    "6": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/ht15fmgymcp0"
+    },
+    "7": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/bpqm9gu7smk3"
+    },
+    "8": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/2gxpxfeid97m"
+    },
+    "9": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/hzav2o8i41w9"
+    },
+    "10": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/th5zfp3995cb"
+    },
+    "11": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/cae39zgkm06s"
+    },
+    "12": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/tzapkiklll95"
+    },
+    "13": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/0to2dsce3d6x"
+    },
+    "14": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/5i77p1b4feg9"
+    },
+    "15": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/3bmtu5gng5vx"
+    },
+    "16": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/6w2cpiblx4ty"
+    },
+    "17": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/pxtl8pps0woh"
+    },
+    "18": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/bzk0l6nzipqd"
+    },
+    "19": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/a13nofnstj7c"
+    },
+    "20": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/qxpgvhj3n5ol"
+    },
+    "21": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/7zcst93cckx3"
+    },
+    "22": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/g9zjegr7hb6x"
+    },
+    "23": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/9nbw08o3w8rq"
+    },
+    "24": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/u8b5xeplbn6m"
+    },
+    "25": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/tgx1lcw3dwi3"
+    },
+    "26": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/8i6u2200m2eh"
+    },
+    "27": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/t6rojtqz9yqt"
+    },
+    "28": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/xzuckysi632b"
+    },
+    "29": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/v07dq2ibqazw"
+    },
+    "30": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/pe957lhpifvm"
+    },
+    "31": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/hjpmedp2jhq0"
+    },
+    "32": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/uerw6kb8qps3"
+    },
+    "33": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/7hygak6rpl2h"
+    },
+    "34": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/tsq1u2fr2j1j"
+    },
+    "35": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/itka0owhzzmn"
+    },
+    "36": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/qxf7mraphxx8"
+    },
+    "37": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/byytgx6tzbbn"
+    },
+    "38": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/m72fzznq43lw"
+    },
+    "39": {
+      "url1": "https://lzrdrz10.github.io/player/?player=jwpl&provider=rand&format=video%2Fmp4&link=https://rumble.com/hls-vod/6zzvbq/playlist.m3u8?key=mlmGBhn7ws-7DQwGu3GCFtBhkaPRC0L3HTTYstjHNcTgsYB9yOlfVA&u=0&b=0"
+    },
+    "40": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/kg9nlnti2w2w"
+    },
+    "41": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://filelions.to/v/efr5inysqal5"
+    }
+  }
+};
 var serieId = "387";
 var temporadaSelect = document.getElementById('temporada');
 var listaCapitulos = document.getElementById('lista-capitulos');
 var tempTitulo = document.getElementById('temp-titulo');
 var iframePrincipal = document.getElementById('iframe-principal');
+var server2Btn = document.getElementById('server2-btn');
+var server3Btn = document.getElementById('server3-btn');
+var errorMessage = document.getElementById('error-message');
 
 var serieActual = {
   id: serieId,
   titulo: "Bob Esponja",
   temporada: temporadaSelect.value,
-  poster: "https://image.tmdb.org/t/p/original/7nCFpzcQ6pQttxCdvcKfjHkY9bE.jpg"
+  poster: "https://image.tmdb.org/t/p/w500/7nCFpzcQ6pQttxCdvcKfjHkY9bE.jpg",
+  currentServer: "url1"
 };
-
-var videosPorCapitulo = {"1":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":"","25":"","26":"","27":"","28":"","29":"","30":"","31":"","32":"","33":"","34":"","35":"","36":"","37":"","38":"","39":"","40":"","41":""},"2":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":"","25":"","26":"","27":"","28":"","29":"","30":"","31":"","32":"","33":"","34":"","35":"","36":""},"3":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":"","25":"","26":"","27":"","28":"","29":"","30":"","31":"","32":"","33":"","34":"","35":"","36":"","37":"","38":"","39":"","40":""},"4":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":"","25":"","26":"","27":"","28":"","29":"","30":"","31":"","32":"","33":"","34":"","35":"","36":"","37":"","38":"","39":"","40":""},"5":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":"","25":"","26":"","27":"","28":"","29":"","30":"","31":"","32":"","33":"","34":"","35":"","36":""},"6":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":"","25":"","26":"","27":"","28":"","29":"","30":"","31":"","32":"","33":"","34":"","35":"","36":"","37":"","38":"","39":"","40":"","41":"","42":"","43":"","44":"","45":"","46":"","47":""},"7":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":"","25":"","26":"","27":"","28":"","29":"","30":"","31":"","32":"","33":"","34":"","35":"","36":"","37":"","38":"","39":"","40":"","41":"","42":"","43":"","44":"","45":"","46":"","47":"","48":"","49":"","50":"","51":"","52":""},"8":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":"","25":"","26":"","27":"","28":"","29":"","30":"","31":"","32":"","33":"","34":"","35":"","36":"","37":"","38":"","39":"","40":"","41":"","42":"","43":"","44":"","45":"","46":"","47":"","48":"","49":"","50":"","51":"","52":""},"9":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":"","25":"","26":"","27":"","28":"","29":"","30":"","31":"","32":"","33":"","34":"","35":"","36":"","37":"","38":"","39":"","40":"","41":"","42":"","43":"","44":"","45":"","46":"","47":""},"10":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":""},"11":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":"","25":"","26":"","27":"","28":"","29":"","30":"","31":"","32":"","33":"","34":"","35":"","36":"","37":"","38":"","39":"","40":"","41":"","42":"","43":"","44":"","45":"","46":"","47":"","48":"","49":"","50":"","51":""},"12":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":"","25":"","26":"","27":"","28":"","29":"","30":"","31":"","32":"","33":"","34":"","35":""},"13":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":"","25":"","26":"","27":"","28":"","29":"","30":"","31":"","32":"","33":"","34":"","35":"","36":"","37":"","38":"","39":"","40":"","41":"","42":"","43":"","44":"","45":"","46":"","47":"","48":"","49":"","50":"","51":"","52":"","53":"","54":"","55":"","56":"","57":"","58":"","59":"","60":"","61":"","62":"","63":"","64":""},"14":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":""},"15":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":""},"16":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":""},"17":{"1":"","2":"","3":"","4":""}};
 
 function guardarTemporada(temporada) {
   localStorage.setItem("temporadaSeleccionada_" + serieId, temporada);
 }
 
 function cargarTemporadaGuardada() {
-  var temp = localStorage.getItem("temporadaSeleccionada_" + serieId);
-  return temp ? temp : "1";
+  return localStorage.getItem("temporadaSeleccionada_" + serieId) || "1";
 }
 
 function guardarCapitulo(capitulo) {
-  var key = "ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada;
-  localStorage.setItem(key, capitulo);
+  localStorage.setItem("ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada, capitulo);
 }
 
 function cargarCapituloGuardado() {
@@ -127,10 +309,21 @@ function cargarCapituloGuardado() {
 
 function cambiarVideo(capitulo) {
   var temp = serieActual.temporada;
-  var url = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
-  if (url) {
-    iframePrincipal.src = url;
+  var data = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
+  errorMessage.style.display = 'none';
+  serieActual.currentServer = "url1";
+  server2Btn.className = server2Btn.className.replace(' server-seleccionado', '');
+  server3Btn.className = server3Btn.className.replace(' server-seleccionado', '');
+  if (data && data.url1 && data.url1.trim() !== '') {
+    iframePrincipal.src = data.url1;
+    server2Btn.style.display = data.url2 && data.url2.trim() !== '' ? 'inline-block' : 'none';
+    server3Btn.style.display = data.url3 && data.url3.trim() !== '' ? 'inline-block' : 'none';
     guardarCapitulo(capitulo);
+  } else {
+    iframePrincipal.src = '';
+    server2Btn.style.display = 'none';
+    server3Btn.style.display = 'none';
+    errorMessage.style.display = 'block';
   }
 }
 
@@ -158,9 +351,7 @@ function agregarEventosCapitulos() {
         for (var j = 0; j < botones.length; j++) {
           botones[j].className = botones[j].className.replace(' capitulo-seleccionado', '');
         }
-        if (botones[index].className.indexOf('capitulo-seleccionado') === -1) {
-          botones[index].className += ' capitulo-seleccionado';
-        }
+        botones[index].className += ' capitulo-seleccionado';
         botones[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
         cambiarVideo(botones[index].getAttribute('data-capitulo'));
       };
@@ -168,11 +359,46 @@ function agregarEventosCapitulos() {
   }
 }
 
+server2Btn.onclick = function() {
+  var temp = serieActual.temporada;
+  var seleccionado = listaCapitulos.querySelector('.capitulo-seleccionado');
+  if (seleccionado) {
+    var capitulo = seleccionado.getAttribute('data-capitulo');
+    var data = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
+    if (data && data.url2 && data.url2.trim() !== '') {
+      serieActual.currentServer = "url2";
+      iframePrincipal.src = data.url2;
+      server2Btn.className += ' server-seleccionado';
+      server3Btn.className = server3Btn.className.replace(' server-seleccionado', '');
+    }
+  }
+};
+
+server3Btn.onclick = function() {
+  var temp = serieActual.temporada;
+  var seleccionado = listaCapitulos.querySelector('.capitulo-seleccionado');
+  if (seleccionado) {
+    var capitulo = seleccionado.getAttribute('data-capitulo');
+    var data = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
+    if (data && data.url3 && data.url3.trim() !== '') {
+      serieActual.currentServer = "url3";
+      iframePrincipal.src = data.url3;
+      server3Btn.className += ' server-seleccionado';
+      server2Btn.className = server2Btn.className.replace(' server-seleccionado', '');
+    }
+  }
+};
+
 temporadaSelect.onchange = function() {
   var temp = temporadaSelect.value;
   serieActual.temporada = temp;
   tempTitulo.textContent = temp;
   guardarTemporada(temp);
+  server2Btn.style.display = 'none';
+  server3Btn.style.display = 'none';
+  server2Btn.className = server2Btn.className.replace(' server-seleccionado', '');
+  server3Btn.className = server3Btn.className.replace(' server-seleccionado', '');
+  errorMessage.style.display = 'none';
   generarCapitulos(temp);
 };
 
@@ -183,7 +409,6 @@ window.onload = function() {
   tempTitulo.textContent = tempGuardada;
   generarCapitulos(tempGuardada);
 };
-
 </script>
 </body>
 </html>
