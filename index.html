@@ -23,7 +23,6 @@
 
   gtag('config', 'G-PC9JETB0VP');
 </script>
-	<script src="HOME/script.js"></script>
  <script>
 (function(_0x1f4b3a,_0x2e5c1d){var _0x4c3e2b=function(_0x5a3f1c){while(--_0x5a3f1c){_0x1f4b3a['push'](_0x1f4b3a['shift']());}};var _0x3b2f4e=function(){var _0x1a3e5f={'data':function(_0x4e2c1b,_0x3f5a2d){return _0x4e2c1b!==_0x3f5a2d;},'action':function(){return'atob';},'value':function(){return'VXNlckx6UGxheQ==';},'store':function(){return'localStorage';},'redirect':function(){return'https://dlz.blogdepelis.lat/';},'message':function(){return'Acceso no permitido. Descarga la aplicacion oficial';},'isSafari':function(){return /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);}};return _0x1a3e5f;}();_0x4c3e2b(0x1f4);var _0x5e3d2a=_0x3b2f4e;document['addEventListener']('DOMContentLoaded',function(){if(!_0x5e3d2a['isSafari']()){var _0x2d4f1c=_0x5e3d2a['store']();var _0x4b3e2f=window[_0x2d4f1c]['getItem']('accessToken');if(!_0x4b3e2f || _0x5e3d2a['data'](_0x4b3e2f,_0x5e3d2a['action']()(_0x5e3d2a['value']()))){alert(_0x5e3d2a['message']());window['location']['href']=_0x5e3d2a['redirect']();}window[_0x2d4f1c]['removeItem']('accessToken');}});})(['push','shift'],0x1f4);
 
@@ -136,6 +135,10 @@ document.addEventListener("DOMContentLoaded", async () => {
  </script>
 </head>
 <body class="antialiased">
+	
+<div class="snow-ground"></div>
+<div id="snow-overlay" class="snow-overlay"></div>
+
 <header class="w-full fixed top-0 left-0 z-40">
   <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between" style="background:var(--nav-bg); box-shadow: 0 6px 18px rgba(2,6,10,0.6);">
     <div class="flex items-center gap-4">
@@ -184,10 +187,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 </div>
 
 <main class="pt-20 max-w-6xl mx-auto px-4 pb-12">
-		
-<div class="snow-ground"></div>
-<div id="snow-overlay" class="snow-overlay"></div>
-
   <section class="hero glass mb-8">
     <img src="" alt="Hero poster">
     <div class="absolute left-4 sm:left-6 bottom-4 sm:bottom-6 text-white max-w-[85%] sm:max-w-[70%]">
@@ -1054,6 +1053,156 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 </script>
+
+	<style>
+    .snow-overlay{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:9999;
+    }
+    .snowflake{
+      position:absolute;
+      top:-10vh;
+      will-change:transform,opacity;
+      font-size:12px;
+      opacity:0.9;
+      filter:drop-shadow(0 1px 0 rgba(0,0,0,0.05));
+    }
+    @keyframes fall{
+      0%{ transform:translate3d(0,-10vh,0) rotate(0deg); opacity:0; }
+      10%{ opacity:0.9; }
+      100%{ transform:translate3d(var(--x-end,0px),110vh,0) rotate(var(--rotation,360deg)); opacity:1; }
+    }
+    @media (prefers-reduced-motion:reduce){
+      .snowflake{ animation:none !important; }
+    }
+    .snow-ground{
+      position:fixed;
+      bottom:0;
+      left:0;
+      width:100%;
+      height:60px;
+      pointer-events:none;
+      z-index:9998;
+      background:linear-gradient(to top,#ffffff 0%,#ffffffd9 40%,#ffffff80 70%,transparent 100%);
+      filter:blur(1.2px);
+    }
+  </style>
+
+<script>
+(function(){
+  const DEFAULTS = {
+    numFlakes:50,
+    colors:['#FFFFFF','#E6F0FF','#F3F6FF'],
+    minSize:8,
+    maxSize:26,
+    speedRange:[6,16],
+    windRange:[-120,120],
+    useEmoji:true,
+    emojiList:['❄','❅','❆'],
+    containerId:'snow-overlay'
+  };
+
+  let running=false;
+  let flakes=[];
+  let cfg={};
+  let snowIdCounter=0;
+
+  function rand(min,max){ return Math.random()*(max-min)+min; }
+  function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
+
+  function createFlake(){
+    const el=document.createElement('div');
+    el.className='snowflake';
+    el.id="nieve-"+(snowIdCounter++);
+
+    const size=Math.round(rand(cfg.minSize,cfg.maxSize));
+    el.style.fontSize=size+'px';
+    el.textContent=pick(cfg.emojiList);
+    el.style.color=pick(cfg.colors);
+
+    const vw=Math.max(document.documentElement.clientWidth||0,window.innerWidth||0);
+    const startLeft=rand(0,vw);
+    el.style.left=startLeft+'px';
+
+    const wind=Math.round(rand(cfg.windRange[0],cfg.windRange[1]));
+    el.style.setProperty('--x-end',wind+'px');
+
+    const rot=Math.round(rand(-720,720));
+    el.style.setProperty('--rotation',rot+'deg');
+
+    const duration=rand(cfg.speedRange[0],cfg.speedRange[1]);
+    el.style.animation=`fall ${duration}s linear forwards`;
+
+    const delay=rand(0,cfg.speedRange[1]);
+    el.style.animationDelay=delay+'s';
+
+    el.style.opacity=(rand(0.5,1)).toFixed(2);
+
+    return {el};
+  }
+
+  function cleanup(){
+    flakes=flakes.filter(f=>{
+      if(f._done){
+        if(f.el.parentNode) f.el.parentNode.removeChild(f.el);
+        return false;
+      }
+      return true;
+    });
+  }
+
+  function startSnowfall(userCfg){
+    if(running) return;
+    cfg=Object.assign({},DEFAULTS,userCfg||{});
+    running=true;
+
+    const container=document.getElementById(cfg.containerId)||document.body;
+    container.style.pointerEvents='none';
+
+    const frag=document.createDocumentFragment();
+
+    for(let i=0;i<cfg.numFlakes;i++){
+      const f=createFlake();
+      frag.appendChild(f.el);
+      f.el.addEventListener('animationend',()=>{f._done=true;});
+      flakes.push(f);
+    }
+
+    container.appendChild(frag);
+
+    const interval=setInterval(()=>{
+      cleanup();
+      while(running && flakes.length<cfg.numFlakes){
+        const f=createFlake();
+        f.el.addEventListener('animationend',()=>{f._done=true;});
+        container.appendChild(f.el);
+        flakes.push(f);
+      }
+      if(!running) clearInterval(interval);
+    },2000);
+
+    window.__snow_internal__={stop:stopSnowfall};
+  }
+
+  function stopSnowfall(){
+    running=false;
+    flakes.forEach(f=>{ if(f.el.parentNode) f.el.parentNode.removeChild(f.el); });
+    flakes=[];
+  }
+
+  window.startSnowfall=startSnowfall;
+  window.stopSnowfall=stopSnowfall;
+
+})();
+</script>
+
+<script>
+startSnowfall({ numFlakes:70, minSize:10, maxSize:32, speedRange:[8,18], windRange:[-180,180] });
+</script>
 </body>
 </html>
+
 
