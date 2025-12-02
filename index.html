@@ -135,8 +135,7 @@ document.addEventListener("DOMContentLoaded", async () => {
  </script>
 </head>
 <body class="antialiased">
-	
-<div class="snow-ground"></div>
+
 <div id="snow-overlay" class="snow-overlay"></div>
 
 <header class="w-full fixed top-0 left-0 z-40">
@@ -1055,7 +1054,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 </script>
 
 	<style>
-    .snow-overlay{
+   .snow-overlay{
       position:fixed;
       inset:0;
       pointer-events:none;
@@ -1078,36 +1077,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     @media (prefers-reduced-motion:reduce){
       .snowflake{ animation:none !important; }
     }
-    .snow-ground{
-      position:fixed;
-      bottom:0;
-      left:0;
-      width:100%;
-      height:60px;
-      pointer-events:none;
-      z-index:9998;
-      background:linear-gradient(to top,#ffffff 0%,#ffffffd9 40%,#ffffff80 70%,transparent 100%);
-      filter:blur(1.2px);
-    }
   </style>
 
 <script>
 (function(){
   const DEFAULTS = {
-    numFlakes:50,
+    spawnRate:150,
     colors:['#FFFFFF','#E6F0FF','#F3F6FF'],
     minSize:8,
     maxSize:26,
     speedRange:[6,16],
     windRange:[-120,120],
-    useEmoji:true,
     emojiList:['❄','❅','❆'],
     containerId:'snow-overlay'
   };
 
-  let running=false;
-  let flakes=[];
   let cfg={};
+  let running=false;
   let snowIdCounter=0;
 
   function rand(min,max){ return Math.random()*(max-min)+min; }
@@ -1124,8 +1110,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     el.style.color=pick(cfg.colors);
 
     const vw=Math.max(document.documentElement.clientWidth||0,window.innerWidth||0);
-    const startLeft=rand(0,vw);
-    el.style.left=startLeft+'px';
+    el.style.left=rand(0,vw)+'px';
 
     const wind=Math.round(rand(cfg.windRange[0],cfg.windRange[1]));
     el.style.setProperty('--x-end',wind+'px');
@@ -1135,23 +1120,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const duration=rand(cfg.speedRange[0],cfg.speedRange[1]);
     el.style.animation=`fall ${duration}s linear forwards`;
+    el.style.animationDelay=rand(0,duration)+'s';
 
-    const delay=rand(0,cfg.speedRange[1]);
-    el.style.animationDelay=delay+'s';
-
-    el.style.opacity=(rand(0.5,1)).toFixed(2);
-
-    return {el};
-  }
-
-  function cleanup(){
-    flakes=flakes.filter(f=>{
-      if(f._done){
-        if(f.el.parentNode) f.el.parentNode.removeChild(f.el);
-        return false;
-      }
-      return true;
+    el.addEventListener("animationend",()=>{ 
+      if(el.parentNode) el.parentNode.removeChild(el);
     });
+
+    return el;
   }
 
   function startSnowfall(userCfg){
@@ -1162,47 +1137,33 @@ document.addEventListener("DOMContentLoaded", async () => {
     const container=document.getElementById(cfg.containerId)||document.body;
     container.style.pointerEvents='none';
 
-    const frag=document.createDocumentFragment();
-
-    for(let i=0;i<cfg.numFlakes;i++){
-      const f=createFlake();
-      frag.appendChild(f.el);
-      f.el.addEventListener('animationend',()=>{f._done=true;});
-      flakes.push(f);
+    function spawn(){
+      if(!running) return;
+      const flake=createFlake();
+      container.appendChild(flake);
+      setTimeout(spawn,cfg.spawnRate);
     }
-
-    container.appendChild(frag);
-
-    const interval=setInterval(()=>{
-      cleanup();
-      while(running && flakes.length<cfg.numFlakes){
-        const f=createFlake();
-        f.el.addEventListener('animationend',()=>{f._done=true;});
-        container.appendChild(f.el);
-        flakes.push(f);
-      }
-      if(!running) clearInterval(interval);
-    },2000);
-
-    window.__snow_internal__={stop:stopSnowfall};
+    spawn();
   }
 
-  function stopSnowfall(){
-    running=false;
-    flakes.forEach(f=>{ if(f.el.parentNode) f.el.parentNode.removeChild(f.el); });
-    flakes=[];
-  }
+  function stopSnowfall(){ running=false; }
 
   window.startSnowfall=startSnowfall;
   window.stopSnowfall=stopSnowfall;
-
 })();
 </script>
 
 <script>
-startSnowfall({ numFlakes:70, minSize:10, maxSize:32, speedRange:[8,18], windRange:[-180,180] });
+startSnowfall({
+  spawnRate:120,
+  minSize:10,
+  maxSize:32,
+  speedRange:[8,18],
+  windRange:[-180,180]
+});
 </script>
 </body>
 </html>
+
 
 
