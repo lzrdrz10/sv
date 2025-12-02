@@ -160,10 +160,9 @@ button {
 </script>
 
 </head>
-    
-<div id="snow-overlay" class="snow-overlay"></div>
 
 <body class="flex flex-col justify-center items-center min-h-screen relative">
+<div id="snow-overlay" class="snow-overlay"></div>
 
 <!-- Fondo dinámico -->
 <div class="background" id="backgroundSlider" aria-hidden="true">
@@ -314,41 +313,54 @@ document.getElementById("lzvote_btnNo").addEventListener("click", function() {
   
 </script>
 
+<style>
+  .snow-overlay{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:9999;
+  }
+  .snowflake{
+    position:absolute;
+    top:-10vh;
+    will-change:transform,opacity;
+    font-size:12px;
+    opacity:0.9;
+    filter:drop-shadow(0 1px 0 rgba(0,0,0,0.05));
+  }
 
-   <style>
-    .snow-overlay{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      overflow:hidden;
-      z-index:9999;
+  /* ANIMACIÓN CON FADE-OUT AL FINAL */
+  @keyframes fall{
+    0%{
+      transform:translate3d(0,-10vh,0) rotate(0deg);
+      opacity:0;
     }
-    .snowflake{
-      position:absolute;
-      top:-10vh;
-      will-change:transform,opacity;
-      font-size:12px;
+    15%{
       opacity:0.9;
-      filter:drop-shadow(0 1px 0 rgba(0,0,0,0.05));
     }
-    @keyframes fall{
-      0%{ transform:translate3d(0,-10vh,0) rotate(0deg); opacity:0; }
-      10%{ opacity:0.9; }
-      100%{ transform:translate3d(var(--x-end,0px),110vh,0) rotate(var(--rotation,360deg)); opacity:1; }
+    85%{
+      opacity:0.9;
     }
-    @media (prefers-reduced-motion:reduce){
-      .snowflake{ animation:none !important; }
+    100%{
+      transform:translate3d(var(--x-end,0px),110vh,0) rotate(var(--rotation,360deg));
+      opacity:0; /* fade-out suave */
     }
-  </style>
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .snowflake{ animation:none !important; }
+  }
+</style>
 
 <script>
 (function(){
   const DEFAULTS = {
-    spawnRate:150,
+    spawnRate:350,  // ← COPOS MODERADOS
     colors:['#FFFFFF','#E6F0FF','#F3F6FF'],
     minSize:8,
-    maxSize:26,
-    speedRange:[6,16],
+    maxSize:22,
+    speedRange:[7,14],
     windRange:[-120,120],
     emojiList:['❄','❅','❆'],
     containerId:'snow-overlay'
@@ -403,7 +415,9 @@ document.getElementById("lzvote_btnNo").addEventListener("click", function() {
       if(!running) return;
       const flake=createFlake();
       container.appendChild(flake);
-      setTimeout(spawn,cfg.spawnRate);
+
+      // ↓ Generación más estable y controlada ↓
+      setTimeout(spawn, cfg.spawnRate + rand(50,140));
     }
     spawn();
   }
@@ -417,12 +431,13 @@ document.getElementById("lzvote_btnNo").addEventListener("click", function() {
 
 <script>
 startSnowfall({
-  spawnRate:120,
+  spawnRate:350,        // menos copos
   minSize:10,
-  maxSize:32,
+  maxSize:26,
   speedRange:[8,18],
   windRange:[-180,180]
 });
 </script>
+
 </body>
 </html>
