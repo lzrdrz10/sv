@@ -325,3 +325,41 @@
   height: auto;
 }
 
+
+.snow-overlay{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:9999;
+  }
+  .snowflake{
+    position:absolute;
+    top:-10vh;
+    will-change:transform,opacity;
+    font-size:12px;
+    opacity:0.9;
+    filter:drop-shadow(0 1px 0 rgba(0,0,0,0.05));
+  }
+
+  /* ANIMACIÓN CON FADE-OUT AL FINAL */
+  @keyframes fall{
+    0%{
+      transform:translate3d(0,-10vh,0) rotate(0deg);
+      opacity:0;
+    }
+    15%{
+      opacity:0.9;
+    }
+    85%{
+      opacity:0.9;
+    }
+    100%{
+      transform:translate3d(var(--x-end,0px),110vh,0) rotate(var(--rotation,360deg));
+      opacity:0; /* fade-out suave */
+    }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .snowflake{ animation:none !important; }
+  }
