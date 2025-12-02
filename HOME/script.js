@@ -1,6 +1,6 @@
 (function(){
   const DEFAULTS = {
-    spawnRate:350,  // ← COPOS MODERADOS
+    spawnRate:350,  
     colors:['#FFFFFF','#E6F0FF','#F3F6FF'],
     minSize:8,
     maxSize:22,
