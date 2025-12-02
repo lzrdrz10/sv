@@ -1,10 +1,10 @@
 (function(){
   const DEFAULTS = {
-    spawnRate:150,
+    spawnRate:350,  // ← COPOS MODERADOS
     colors:['#FFFFFF','#E6F0FF','#F3F6FF'],
     minSize:8,
-    maxSize:26,
-    speedRange:[6,16],
+    maxSize:22,
+    speedRange:[7,14],
     windRange:[-120,120],
     emojiList:['❄','❅','❆'],
     containerId:'snow-overlay'
@@ -59,7 +59,9 @@
       if(!running) return;
       const flake=createFlake();
       container.appendChild(flake);
-      setTimeout(spawn,cfg.spawnRate);
+
+      // ↓ Generación más estable y controlada ↓
+      setTimeout(spawn, cfg.spawnRate + rand(50,140));
     }
     spawn();
   }
@@ -69,11 +71,3 @@
   window.startSnowfall=startSnowfall;
   window.stopSnowfall=stopSnowfall;
 })();
-
-startSnowfall({
-  spawnRate:120,
-  minSize:10,
-  maxSize:32,
-  speedRange:[8,18],
-  windRange:[-180,180]
-});
