@@ -158,16 +158,18 @@ button {
 
   gtag('config', 'G-PC9JETB0VP');
 </script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5488063407481298"
-     crossorigin="anonymous"></script>
+
 </head>
+    
+<div id="snow-overlay" class="snow-overlay"></div>
+
 <body class="flex flex-col justify-center items-center min-h-screen relative">
 
 <!-- Fondo dinámico -->
 <div class="background" id="backgroundSlider" aria-hidden="true">
-  <img src="https://image.tmdb.org/t/p/original/ApRxyHFuvv5yghedxXPJSm9FEDe.jpg" class="active" alt="Fondo 1">
-  <img src="https://image.tmdb.org/t/p/original/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg" alt="Fondo 2">
-  <img src="https://image.tmdb.org/t/p/original/r7XifzvtezNt31ypvsmb6Oqxw49.jpg" alt="Fondo 3">
+  <img src="https://image.tmdb.org/t/p/original/kPmE7vEwQWSvhQt5P0ZR8NIwNRN.jpg" class="active" alt="Fondo 1">
+  <img src="https://image.tmdb.org/t/p/original/hXc9jZuIfJ3lCrKJsZVwJM4anRf.jpg" alt="Fondo 2">
+  <img src="https://image.tmdb.org/t/p/original/y6PLMIoHOP365rNDflD9VgnoALU.jpg" alt="Fondo 3">
   <img src="https://image.tmdb.org/t/p/original/fCayJrkfRaCRCTh8GqN30f8oyQF.jpg" alt="Fondo 4">
 </div>
 <div class="overlay" aria-hidden="true"></div>
@@ -308,6 +310,118 @@ document.getElementById("lzvote_btnSi").addEventListener("click", function() {
 });
 document.getElementById("lzvote_btnNo").addEventListener("click", function() {
   enviarVoto("no");
+});
+  
+</script>
+
+
+   <style>
+    .snow-overlay{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:9999;
+    }
+    .snowflake{
+      position:absolute;
+      top:-10vh;
+      will-change:transform,opacity;
+      font-size:12px;
+      opacity:0.9;
+      filter:drop-shadow(0 1px 0 rgba(0,0,0,0.05));
+    }
+    @keyframes fall{
+      0%{ transform:translate3d(0,-10vh,0) rotate(0deg); opacity:0; }
+      10%{ opacity:0.9; }
+      100%{ transform:translate3d(var(--x-end,0px),110vh,0) rotate(var(--rotation,360deg)); opacity:1; }
+    }
+    @media (prefers-reduced-motion:reduce){
+      .snowflake{ animation:none !important; }
+    }
+  </style>
+
+<script>
+(function(){
+  const DEFAULTS = {
+    spawnRate:150,
+    colors:['#FFFFFF','#E6F0FF','#F3F6FF'],
+    minSize:8,
+    maxSize:26,
+    speedRange:[6,16],
+    windRange:[-120,120],
+    emojiList:['❄','❅','❆'],
+    containerId:'snow-overlay'
+  };
+
+  let cfg={};
+  let running=false;
+  let snowIdCounter=0;
+
+  function rand(min,max){ return Math.random()*(max-min)+min; }
+  function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
+
+  function createFlake(){
+    const el=document.createElement('div');
+    el.className='snowflake';
+    el.id="nieve-"+(snowIdCounter++);
+
+    const size=Math.round(rand(cfg.minSize,cfg.maxSize));
+    el.style.fontSize=size+'px';
+    el.textContent=pick(cfg.emojiList);
+    el.style.color=pick(cfg.colors);
+
+    const vw=Math.max(document.documentElement.clientWidth||0,window.innerWidth||0);
+    el.style.left=rand(0,vw)+'px';
+
+    const wind=Math.round(rand(cfg.windRange[0],cfg.windRange[1]));
+    el.style.setProperty('--x-end',wind+'px');
+
+    const rot=Math.round(rand(-720,720));
+    el.style.setProperty('--rotation',rot+'deg');
+
+    const duration=rand(cfg.speedRange[0],cfg.speedRange[1]);
+    el.style.animation=`fall ${duration}s linear forwards`;
+    el.style.animationDelay=rand(0,duration)+'s';
+
+    el.addEventListener("animationend",()=>{ 
+      if(el.parentNode) el.parentNode.removeChild(el);
+    });
+
+    return el;
+  }
+
+  function startSnowfall(userCfg){
+    if(running) return;
+    cfg=Object.assign({},DEFAULTS,userCfg||{});
+    running=true;
+
+    const container=document.getElementById(cfg.containerId)||document.body;
+    container.style.pointerEvents='none';
+
+    function spawn(){
+      if(!running) return;
+      const flake=createFlake();
+      container.appendChild(flake);
+      setTimeout(spawn,cfg.spawnRate);
+    }
+    spawn();
+  }
+
+  function stopSnowfall(){ running=false; }
+
+  window.startSnowfall=startSnowfall;
+  window.stopSnowfall=stopSnowfall;
+})();
+</script>
+
+<script>
+startSnowfall({
+  spawnRate:120,
+  minSize:10,
+  maxSize:32,
+  speedRange:[8,18],
+  windRange:[-180,180]
 });
 </script>
 </body>
