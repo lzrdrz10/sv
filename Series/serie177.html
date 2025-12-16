@@ -3,19 +3,20 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>El Show de los Looney Tunes</title>
+<title>The Looney Tunes Show</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 <style>
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-body, html { margin: 0; padding: 0; height: 100%; }
+body, html { margin: 0; padding: 0; height: 100%; font-family: "Poppins", sans-serif; }
 body::before {
   content: "";
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-image: url('https://image.tmdb.org/t/p/original/fAYIAFe8EOF2trdI2tpNk2dL5z4.jpg');
+  background-image: url('https://image.tmdb.org/t/p/w1280/fAYIAFe8EOF2trdI2tpNk2dL5z4.jpg');
   background-size: cover;
   background-position: center;
   z-index: -2;
@@ -31,8 +32,10 @@ body::after {
 #iframe-principal { width: 100%; height: 220px; border: none; background: black; }
 #contenedor-video { position: fixed; top: 0; left: 0; width: 100%; z-index: 10; }
 .capitulo-seleccionado { background-color: #FF0000 !important; color: #fff !important; font-weight: bold; border-bottom: none !important; }
+.server-btn { display: none; }
+.server-seleccionado { background-color: #FF7F00 !important; color: #fff !important; }
+.error-message { display: none; color: #FF4444; font-size: 0.875rem; text-align: center; margin-top: 1rem; }
 </style>
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PC9JETB0VP"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -42,23 +45,24 @@ body::after {
   gtag('config', 'G-PC9JETB0VP');
 </script>
 <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+<script src="../access.js"></script>
 </head>
 <body class="text-white font-sans leading-relaxed">
 <div id="contenedor-video" class="relative">
   <iframe id="iframe-principal" allow="fullscreen" allowfullscreen></iframe>
-  <a href="../index.html" aria-label="Volver" class="absolute top-3 left-3 text-white text-2xl z-20">
+  <a href="https://lzrdrz10.github.io/sv/" aria-label="Volver" class="absolute top-3 left-3 text-white text-2xl z-20">
     <i class="fas fa-arrow-left"></i>
   </a>
   <div class="absolute top-0 left-0 w-full h-full z-10" style="pointer-events: none;"></div>
 </div>
 <div class="px-4 pt-60 pb-4 space-y-4">
   <div class="flex items-center justify-between">
-    <h1 class="text-xl sm:text-2xl font-bold">El Show de los Looney Tunes T<span id="temp-titulo">1</span></h1>
+    <h1 class="text-xl sm:text-2xl font-bold">The Looney Tunes Show T<span id="temp-titulo">1</span></h1>
   </div>
   <div class="flex flex-wrap items-center gap-3 text-sm text-gray-400">
     <span><strong class="text-[#FF7F00]">8.1</strong> / 10</span>
     <span class="text-white">•</span>
-    <span>Animación,Comedia,Familia,Kids</span>
+    <span>Animación, Comedia, Familia, Kids</span>
     <span class="text-white">•</span>
     <span>2011</span>
   </div>
@@ -69,40 +73,304 @@ body::after {
     </select>
   </div>
   <div class="flex space-x-2 overflow-x-auto scrollbar-hide pb-1" id="lista-capitulos"></div>
+  <div id="servidores" class="flex space-x-2">
+    <button id="server2-btn" class="server-btn px-3 py-1 rounded bg-[#2a2a2a] text-white text-sm">Servidor 2</button>
+    <button id="server3-btn" class="server-btn px-3 py-1 rounded bg-[#2a2a2a] text-white text-sm">Servidor 3</button>
+  </div>
+  <div id="error-message" class="error-message">No hay enlaces disponibles para este episodio.</div>
   <div class="bg-[#1e1e1e] rounded-lg p-4 text-sm text-gray-300 leading-relaxed">
-    <p><span class="font-semibold text-white">Sinopsis:</span> Los entrañables personajes de la Warner: Bugs Bunny, el Pato Lucas, Porky, Silvestre, Piolín, el Correcaminos y el Coyote viven nuevas aventuras.</p>
+    <p><span class="font-semibold text-white">Sinopsis:</span> Nueva serie protagonizada por dos de los más famosos Looney Tunes, el pato Lucas y el conejo Bugs Bunny. Tanto ellos dos como otros personajes famosos (Yosemite Sam, la abuela, Piolín y Silvestre) vivirán juntos en una urbanización y se verán involucrados en varias aventuras en episodios de treinta minutos de duración. Paralelamente la serie incluirá cortos para amenizar la historia, protagonizados por secundarios como El diablo de Tasmania (Taz), Speedy González o Marvin el marciano, mientras que el Correcaminos y el Coyote protagonizarán cortometrajes de animación por ordenador.</p>
   </div>
 </div>
 <script>
-(function(_0x1f4b3a,_0x2e5c1d){var _0x4c3e2b=function(_0x5a3f1c){while(--_0x5a3f1c){_0x1f4b3a['push'](_0x1f4b3a['shift']());}};var _0x3b2f4e=function(){var _0x1a3e5f={'data':function(_0x4e2c1b,_0x3f5a2d){return _0x4e2c1b!==_0x3f5a2d;},'action':function(){return'atob';},'value':function(){return'VXNlckx6UGxheQ==';},'store':function(){return'localStorage';},'redirect':function(){return'https://descargar.lzplayhd.online/';},'message':function(){return'Acceso no permitido. Descarga la aplicacion oficial';},'isSafari':function(){return /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);}};return _0x1a3e5f;}();_0x4c3e2b(0x1f4);var _0x5e3d2a=_0x3b2f4e;document['addEventListener']('DOMContentLoaded',function(){if(!_0x5e3d2a['isSafari']()){var _0x2d4f1c=_0x5e3d2a['store']();var _0x4b3e2f=window[_0x2d4f1c]['getItem']('accessToken');if(!_0x4b3e2f || _0x5e3d2a['data'](_0x4b3e2f,_0x5e3d2a['action']()(_0x5e3d2a['value']()))){alert(_0x5e3d2a['message']());window['location']['href']=_0x5e3d2a['redirect']();}window[_0x2d4f1c]['removeItem']('accessToken');}});})(['push','shift'],0x1f4);
+(function(_0x1f4b3a,_0x2e5c1d){
+  var _0x4c3e2b=function(_0x5a3f1c){
+    while(--_0x5a3f1c){
+      _0x1f4b3a['push'](_0x1f4b3a['shift']());
+    }
+  };
+  var _0x3b2f4e=function(){
+    var _0x1a3e5f={
+      'data':function(_0x4e2c1b,_0x3f5a2d){
+        return _0x4e2c1b!==_0x3f5a2d;
+      },
+      'action':function(){
+        return'atob';
+      },
+      'value':function(){
+        return'VXNlckx6UGxheQ==';
+      },
+      'store':function(){
+        return'localStorage';
+      },
+      'redirect':function(){
+        return'https://dlz.blogdepelis.lat/';
+      },
+      'message':function(){
+        return'Acceso no permitido. Descarga la aplicacion oficial';
+      },
+      'isSafari':function(){
+        return /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+      }
+    };
+    return _0x1a3e5f;
+  }();
+  _0x4c3e2b(0x1f4);
+  var _0x5e3d2a=_0x3b2f4e;
+  document['addEventListener']('DOMContentLoaded',function(){
+    if(!_0x5e3d2a['isSafari']()){
+      var _0x2d4f1c=_0x5e3d2a['store']();
+      var _0x4b3e2f=window[_0x2d4f1c]['getItem']('accessToken');
+      if(!_0x4b3e2f || _0x5e3d2a['data'](_0x4b3e2f,_0x5e3d2a['action']()(_0x5e3d2a['value']()))){
+        alert(_0x5e3d2a['message']());
+        window['location']['href']=_0x5e3d2a['redirect']();
+      }
+      window[_0x2d4f1c]['removeItem']('accessToken');
+    }
+  });
+})(['push','shift'],0x1f4);
 
+var videosPorCapitulo = {
+  "1": {
+    "1": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/2crziscaubyw",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/ekhcqz0aws7i"
+    },
+    "2": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/0y00wkcblms2",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/6peyy6mr59u8"
+    },
+    "3": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/z3nmii5yqnbe",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/172x19yjw7s2"
+    },
+    "4": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/yiiw61cf7yft",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/iljbwbdz8f3a"
+    },
+    "5": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/itt24shoqmm9",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/l5uynn4xcixw"
+    },
+    "6": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/xu60wu5p42jq",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/vjzunujw2n80"
+    },
+    "7": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/4vnlvtdxocuw",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/89ydwz21sx3q"
+    },
+    "8": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/g3x3f7czz2hb",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/nb32yf0x318h"
+    },
+    "9": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/ue5jrfq0t2il",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/5zu2rthunh7v"
+    },
+    "10": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/k0e0tphpd2rw",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/o6uostqqu8wl"
+    },
+    "11": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/g49oa5y02zmv",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/a4onhyymc90d"
+    },
+    "12": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/pvx1mlcmrzq5",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/4j0t5rbhzhxm"
+    },
+    "13": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/rog8tteswi9b",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/1wb70io31ozw"
+    },
+    "14": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/5y7asyo5ca31",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/z3s08eolycxe"
+    },
+    "15": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/f27k3fdo94ca",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/jpg4kefrzd2s"
+    },
+    "16": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/257apgi4if0k",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/jgrby4ah3gow"
+    },
+    "17": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/5k7hxmjj8c2b",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/tkave51lp1vo"
+    },
+    "18": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/7no6hnnc1357",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/5vexijnd8eh3"
+    },
+    "19": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/rz2qa7xdvlgg",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/fmfetdv39i5v"
+    },
+    "20": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/w9mw6quvukp2",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/pfwp46ebr98y"
+    },
+    "21": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/1w921ikhx63j",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/yz7kvbdt7ysf"
+    },
+    "22": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/3vdugs6dx5wc",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/wigafjcohwyy"
+    },
+    "23": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/kdvc3nt38jt3",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/fs3ox7a8mqal"
+    },
+    "24": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/m948r635pqkn",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/enu69etemkvh"
+    },
+    "25": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/stsnwblor3ek",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/ffxka7ns3y67"
+    },
+    "26": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/75qvb39mddig",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/ynkyvpqkam32"
+    }
+  },
+  "2": {
+    "1": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/c8kbflzqiojy",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/8ivx6xtn17lp"
+    },
+    "2": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/m8pz0j790jkb",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/h8z6av8trogh"
+    },
+    "3": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/ak1yb7ahhaqm",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/ag9vq9g2z7yu"
+    },
+    "4": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/bydir5j8qn95",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/7eovrfld6oao"
+    },
+    "5": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/gtkeqc498otp",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/s6yasmrdlcji"
+    },
+    "6": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/g86cmuqxtejj",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/k2dl9sw8kv3o"
+    },
+    "7": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/3y4o6cgcbmpf",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/01kyimuynk72"
+    },
+    "8": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/qi5rbz6qtuct",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/qmdhkrnmh3ed"
+    },
+    "9": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/9jjoa32j8ry5",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/k3k15iwzend7"
+    },
+    "10": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/h3gy8sl4o6o5",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/n93i0otszxyg"
+    },
+    "11": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/ouuila9e2pvf",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/v5tkpp7oq4ii"
+    },
+    "12": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/e8wd2rroab8y",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/28zqcuisbfoa"
+    },
+    "13": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/2yq3o22stbly",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/a4mc89djkesd"
+    },
+    "14": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/2xpkgb0c7yvm",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/s69flj2os6p4"
+    },
+    "15": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/wkgp30j6gh6b",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/32bq42q42xxf"
+    },
+    "16": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/6fc4txq3o430",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/qz44f9odv7ix"
+    },
+    "17": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/ko1yky08u39c",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/dgglzwpof0z7"
+    },
+    "18": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/cat3r5hqd027",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/j5hc2qlhxpui"
+    },
+    "19": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/xl9acatt8tvz",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/cl087ij5sr9b"
+    },
+    "20": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/sxgqpvysrrzb",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/1bcitmqv9ibt"
+    },
+    "21": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/g9c4xlmu2nbf",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/btquanrax5hf"
+    },
+    "22": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/cwnycbvcsigm",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/3otigl0vkhux"
+    },
+    "23": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/b7b9tcua1h3p",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/am8sdlah82x4"
+    },
+    "24": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/bgq6j5ijgu4w",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/iqo2zc3rcfvd"
+    },
+    "25": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/06ha5564qa9k",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/kvuaxg2s6ccc"
+    },
+    "26": {
+      "url1": "https://pelixplay.com/url/vast.php?url=https://streamwish.to/e/rf027g4o9hi5",
+      "url2": "https://pelixplay.com/url/vast.php?url=https://filemoon.sx/e/vvwf5f6phf3b"
+    }
+  }
+};
 var serieId = "32605";
 var temporadaSelect = document.getElementById('temporada');
 var listaCapitulos = document.getElementById('lista-capitulos');
 var tempTitulo = document.getElementById('temp-titulo');
 var iframePrincipal = document.getElementById('iframe-principal');
+var server2Btn = document.getElementById('server2-btn');
+var server3Btn = document.getElementById('server3-btn');
+var errorMessage = document.getElementById('error-message');
 
 var serieActual = {
   id: serieId,
-  titulo: "El Show de los Looney Tunes",
+  titulo: "The Looney Tunes Show",
   temporada: temporadaSelect.value,
-  poster: "https://image.tmdb.org/t/p/original/qXsqTd3geO9c58bBQ7LCNQkhZNV.jpg"
+  poster: "https://image.tmdb.org/t/p/w500/qXsqTd3geO9c58bBQ7LCNQkhZNV.jpg",
+  currentServer: "url1"
 };
-
-var videosPorCapitulo = {"1":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":"","25":"","26":""},"2":{"1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"","12":"","13":"","14":"","15":"","16":"","17":"","18":"","19":"","20":"","21":"","22":"","23":"","24":"","25":"","26":""}};
 
 function guardarTemporada(temporada) {
   localStorage.setItem("temporadaSeleccionada_" + serieId, temporada);
 }
 
 function cargarTemporadaGuardada() {
-  var temp = localStorage.getItem("temporadaSeleccionada_" + serieId);
-  return temp ? temp : "1";
+  return localStorage.getItem("temporadaSeleccionada_" + serieId) || "1";
 }
 
 function guardarCapitulo(capitulo) {
-  var key = "ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada;
-  localStorage.setItem(key, capitulo);
+  localStorage.setItem("ultimoCapituloVisto_" + serieId + "_T" + serieActual.temporada, capitulo);
 }
 
 function cargarCapituloGuardado() {
@@ -127,10 +395,21 @@ function cargarCapituloGuardado() {
 
 function cambiarVideo(capitulo) {
   var temp = serieActual.temporada;
-  var url = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
-  if (url) {
-    iframePrincipal.src = url;
+  var data = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
+  errorMessage.style.display = 'none';
+  serieActual.currentServer = "url1";
+  server2Btn.className = server2Btn.className.replace(' server-seleccionado', '');
+  server3Btn.className = server3Btn.className.replace(' server-seleccionado', '');
+  if (data && data.url1 && data.url1.trim() !== '') {
+    iframePrincipal.src = data.url1;
+    server2Btn.style.display = data.url2 && data.url2.trim() !== '' ? 'inline-block' : 'none';
+    server3Btn.style.display = data.url3 && data.url3.trim() !== '' ? 'inline-block' : 'none';
     guardarCapitulo(capitulo);
+  } else {
+    iframePrincipal.src = '';
+    server2Btn.style.display = 'none';
+    server3Btn.style.display = 'none';
+    errorMessage.style.display = 'block';
   }
 }
 
@@ -158,9 +437,7 @@ function agregarEventosCapitulos() {
         for (var j = 0; j < botones.length; j++) {
           botones[j].className = botones[j].className.replace(' capitulo-seleccionado', '');
         }
-        if (botones[index].className.indexOf('capitulo-seleccionado') === -1) {
-          botones[index].className += ' capitulo-seleccionado';
-        }
+        botones[index].className += ' capitulo-seleccionado';
         botones[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
         cambiarVideo(botones[index].getAttribute('data-capitulo'));
       };
@@ -168,11 +445,46 @@ function agregarEventosCapitulos() {
   }
 }
 
+server2Btn.onclick = function() {
+  var temp = serieActual.temporada;
+  var seleccionado = listaCapitulos.querySelector('.capitulo-seleccionado');
+  if (seleccionado) {
+    var capitulo = seleccionado.getAttribute('data-capitulo');
+    var data = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
+    if (data && data.url2 && data.url2.trim() !== '') {
+      serieActual.currentServer = "url2";
+      iframePrincipal.src = data.url2;
+      server2Btn.className += ' server-seleccionado';
+      server3Btn.className = server3Btn.className.replace(' server-seleccionado', '');
+    }
+  }
+};
+
+server3Btn.onclick = function() {
+  var temp = serieActual.temporada;
+  var seleccionado = listaCapitulos.querySelector('.capitulo-seleccionado');
+  if (seleccionado) {
+    var capitulo = seleccionado.getAttribute('data-capitulo');
+    var data = videosPorCapitulo[temp] && videosPorCapitulo[temp][capitulo];
+    if (data && data.url3 && data.url3.trim() !== '') {
+      serieActual.currentServer = "url3";
+      iframePrincipal.src = data.url3;
+      server3Btn.className += ' server-seleccionado';
+      server2Btn.className = server2Btn.className.replace(' server-seleccionado', '');
+    }
+  }
+};
+
 temporadaSelect.onchange = function() {
   var temp = temporadaSelect.value;
   serieActual.temporada = temp;
   tempTitulo.textContent = temp;
   guardarTemporada(temp);
+  server2Btn.style.display = 'none';
+  server3Btn.style.display = 'none';
+  server2Btn.className = server2Btn.className.replace(' server-seleccionado', '');
+  server3Btn.className = server3Btn.className.replace(' server-seleccionado', '');
+  errorMessage.style.display = 'none';
   generarCapitulos(temp);
 };
 
@@ -183,7 +495,6 @@ window.onload = function() {
   tempTitulo.textContent = tempGuardada;
   generarCapitulos(tempGuardada);
 };
-
 </script>
 </body>
 </html>
